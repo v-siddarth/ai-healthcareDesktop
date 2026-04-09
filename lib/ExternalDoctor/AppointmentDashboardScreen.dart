@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:doctordesktop/constants/HospitalTheme.dart';
 
 class AppointmentsScreen extends StatefulWidget {
-  const AppointmentsScreen({Key? key}) : super(key: key);
+  const AppointmentsScreen({super.key});
 
   @override
   _AppointmentsScreenState createState() => _AppointmentsScreenState();
@@ -69,7 +69,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
       // Build the URL with proper parameters
       String baseUrl =
-          '${KVM_URL}/doctors/getDoctorAppointments?page=$_currentPage&limit=$_limit';
+          '$KVM_URL/doctors/getDoctorAppointments?page=$_currentPage&limit=$_limit';
 
       // Only add date parameter if we want to filter by date
       if (_filterByDate && _selectedDate != null) {
@@ -160,13 +160,13 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
       final token = await _getToken();
       if (token == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Authentication token not found')),
+          const SnackBar(content: Text('Authentication token not found')),
         );
         return;
       }
 
       final url = Uri.parse(
-          '${KVM_URL}/doctors/updateAppointmentStatus/${appointment.patientId}/${appointment.appointmentId}');
+          '$KVM_URL/doctors/updateAppointmentStatus/${appointment.patientId}/${appointment.appointmentId}');
 
       Map<String, dynamic> body = {
         'status': newStatus,
@@ -193,7 +193,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
         if (responseData['success'] == true) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Appointment status updated successfully')),
+            const SnackBar(content: Text('Appointment status updated successfully')),
           );
 
           // Update local appointment data
@@ -240,7 +240,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -279,7 +279,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     // Use DateTime.now() as initial date if no selected date
     DateTime selectedDate = DateTime.now();
     // For time, default to a TimeOfDay value (6:00 PM)
-    TimeOfDay selectedTime = TimeOfDay(hour: 18, minute: 0);
+    TimeOfDay selectedTime = const TimeOfDay(hour: 18, minute: 0);
 
     // Format for display
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
@@ -288,28 +288,28 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          title: Text('Reschedule Appointment'),
+          title: const Text('Reschedule Appointment'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Patient: ${appointment.patientName}'),
               Text('Current Date: ${appointment.date}'),
               Text('Current Time: ${appointment.time}'),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 children: [
-                  Text('New Date: '),
+                  const Text('New Date: '),
                   TextButton(
                     onPressed: () async {
                       final DateTime? picked = await showDatePicker(
                         context: context,
                         initialDate: selectedDate,
                         firstDate: DateTime.now(),
-                        lastDate: DateTime.now().add(Duration(days: 90)),
+                        lastDate: DateTime.now().add(const Duration(days: 90)),
                         builder: (BuildContext context, Widget? child) {
                           return Theme(
                             data: ThemeData.light().copyWith(
-                              colorScheme: ColorScheme.light(
+                              colorScheme: const ColorScheme.light(
                                 primary: HospitalTheme.primary,
                               ),
                             ),
@@ -327,14 +327,14 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                     },
                     child: Text(
                       formattedDate,
-                      style: TextStyle(color: HospitalTheme.primary),
+                      style: const TextStyle(color: HospitalTheme.primary),
                     ),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  Text('New Time: '),
+                  const Text('New Time: '),
                   TextButton(
                     onPressed: () async {
                       final TimeOfDay? picked = await showTimePicker(
@@ -343,7 +343,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                         builder: (BuildContext context, Widget? child) {
                           return Theme(
                             data: ThemeData.light().copyWith(
-                              colorScheme: ColorScheme.light(
+                              colorScheme: const ColorScheme.light(
                                 primary: HospitalTheme.primary,
                               ),
                             ),
@@ -359,7 +359,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                     },
                     child: Text(
                       _formatTimeOfDay(selectedTime),
-                      style: TextStyle(color: HospitalTheme.primary),
+                      style: const TextStyle(color: HospitalTheme.primary),
                     ),
                   ),
                 ],
@@ -369,7 +369,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -384,7 +384,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: HospitalTheme.warning,
               ),
-              child: Text('Proceed'),
+              child: const Text('Proceed'),
             ),
           ],
         ),
@@ -410,30 +410,30 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Confirm Reschedule'),
+        title: const Text('Confirm Reschedule'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Are you sure you want to reschedule this appointment?'),
-            SizedBox(height: 16),
+            const Text('Are you sure you want to reschedule this appointment?'),
+            const SizedBox(height: 16),
             Text('Current Date: ${appointment.date}',
-                style: TextStyle(fontWeight: FontWeight.bold)),
+                style: const TextStyle(fontWeight: FontWeight.bold)),
             Text('Current Time: ${appointment.time}',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
             Text('New Date: $newDate',
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold, color: HospitalTheme.warning)),
             Text('New Time: $newTime',
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold, color: HospitalTheme.warning)),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -448,7 +448,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             style: ElevatedButton.styleFrom(
               backgroundColor: HospitalTheme.warning,
             ),
-            child: Text('Confirm Reschedule'),
+            child: const Text('Confirm Reschedule'),
           ),
         ],
       ),
@@ -490,7 +490,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: badgeColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
@@ -500,7 +500,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(badgeIcon, size: 16, color: badgeColor),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Text(
             status.toUpperCase(),
             style: TextStyle(
@@ -518,10 +518,10 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Doctor Appointments'),
+        title: const Text('Doctor Appointments'),
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: _fetchAppointments,
             tooltip: 'Refresh',
           ),
@@ -530,9 +530,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
       body: Column(
         children: [
           _buildFiltersSection(),
-          Divider(),
+          const Divider(),
           _isLoading
-              ? Expanded(
+              ? const Expanded(
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),
@@ -541,11 +541,11 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   ? Expanded(
                       child: Center(
                         child: Text(_errorMessage,
-                            style: TextStyle(color: Colors.red)),
+                            style: const TextStyle(color: Colors.red)),
                       ),
                     )
                   : _filteredAppointments.isEmpty
-                      ? Expanded(
+                      ? const Expanded(
                           child: Center(
                             child: Text('No appointments found'),
                           ),
@@ -574,7 +574,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   controller: _searchController,
                   decoration: InputDecoration(
                     labelText: 'Search patients',
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -587,7 +587,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   },
                 ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               // Date filter row with toggle
               Row(
                 children: [
@@ -622,7 +622,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                     borderRadius: BorderRadius.circular(8),
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                          const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey.shade400),
                         borderRadius: BorderRadius.circular(8),
@@ -636,7 +636,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                               color: _filterByDate
                                   ? HospitalTheme.primary
                                   : Colors.grey.shade700),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text(
                             _filterByDate
                                 ? DateFormat('yyyy-MM-dd')
@@ -656,7 +656,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               ),
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Latest Only and Group By Patient filters
           Row(
@@ -664,9 +664,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               Expanded(
                 child: Row(
                   children: [
-                    Text('Latest Only:',
+                    const Text('Latest Only:',
                         style: TextStyle(fontWeight: FontWeight.bold)),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Switch(
                       value: _latestOnly,
                       activeColor: HospitalTheme.primary,
@@ -698,9 +698,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               Expanded(
                 child: Row(
                   children: [
-                    Text('Group By Patient:',
+                    const Text('Group By Patient:',
                         style: TextStyle(fontWeight: FontWeight.bold)),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Switch(
                       value: _groupByPatient,
                       activeColor: HospitalTheme.primary,
@@ -730,13 +730,13 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             ],
           ),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
-          Text(
+          const Text(
             'Filter by Status:',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -762,9 +762,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
   Widget _buildAppointmentsList() {
     return ListView.separated(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       itemCount: _filteredAppointments.length,
-      separatorBuilder: (context, index) => SizedBox(height: 16),
+      separatorBuilder: (context, index) => const SizedBox(height: 16),
       itemBuilder: (context, index) {
         final appointment = _filteredAppointments[index];
         return _buildAppointmentCard(appointment);
@@ -796,9 +796,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
     List<String> patientIds = groupedAppointments.keys.toList();
 
     return ListView.separated(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       itemCount: patientIds.length,
-      separatorBuilder: (context, index) => SizedBox(height: 24),
+      separatorBuilder: (context, index) => const SizedBox(height: 24),
       itemBuilder: (context, index) {
         String patientId = patientIds[index];
         List<Appointment> appointments = groupedAppointments[patientId]!;
@@ -817,7 +817,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
           children: [
             // Patient header
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: HospitalTheme.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
@@ -835,36 +835,36 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                               .substring(0, 1)
                               .toUpperCase()
                           : '?',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         latestAppointment.patientName,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         'Patient ID: ${latestAppointment.patientId}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: HospitalTheme.textMedium,
                         ),
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     'Total: ${appointments.length} appointment${appointments.length > 1 ? 's' : ''}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
@@ -873,14 +873,14 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
               ),
             ),
 
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
 
             // Latest appointment
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, bottom: 8),
+                const Padding(
+                  padding: EdgeInsets.only(left: 16, bottom: 8),
                   child: Text(
                     'CURRENT APPOINTMENT',
                     style: TextStyle(
@@ -896,7 +896,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
             // Historical appointments if any
             if (historicalAppointments.isNotEmpty) ...[
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
 
               // Expandable history section
               Theme(
@@ -905,10 +905,10 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 child: ExpansionTile(
                   initiallyExpanded: false,
                   tilePadding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
                   title: Text(
                     'APPOINTMENT HISTORY (${historicalAppointments.length})',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: HospitalTheme.textMedium,
                       fontSize: 12,
@@ -917,10 +917,10 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   children: [
                     ListView.separated(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: historicalAppointments.length,
                       separatorBuilder: (context, index) =>
-                          SizedBox(height: 12),
+                          const SizedBox(height: 12),
                       itemBuilder: (context, index) {
                         return _buildAppointmentCard(
                             historicalAppointments[index],
@@ -953,12 +953,12 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
         children: [
           // Header with badge
           Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: isHistorical
                   ? Colors.grey.shade200
                   : HospitalTheme.surfaceLight,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
@@ -989,7 +989,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 12),
+                      const SizedBox(width: 12),
                     ],
 
                     Column(
@@ -1036,9 +1036,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   children: [
                     if (isHistorical)
                       Container(
-                        margin: EdgeInsets.only(right: 8),
+                        margin: const EdgeInsets.only(right: 8),
                         padding:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: Colors.grey.shade300,
                           borderRadius: BorderRadius.circular(12),
@@ -1062,7 +1062,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
           // Appointment details
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -1072,21 +1072,21 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                   value: appointment.date,
                   isHistorical: isHistorical,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 _buildDetailRow(
                   icon: Icons.access_time,
                   label: 'Time',
                   value: appointment.time,
                   isHistorical: isHistorical,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 _buildDetailRow(
                   icon: Icons.medical_services,
                   label: 'Symptoms',
                   value: appointment.symptoms,
                   isHistorical: isHistorical,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 _buildDetailRow(
                   icon: appointment.appointmentType.toLowerCase() == 'online'
                       ? Icons.videocam_outlined
@@ -1097,7 +1097,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 ),
                 if (appointment.status == 'rescheduled' &&
                     appointment.rescheduledTo != null) ...[
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   _buildDetailRow(
                     icon: Icons.event_repeat,
                     label: 'Rescheduled To',
@@ -1109,7 +1109,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
                 // Creation date for historical appointments
                 if (isHistorical) ...[
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   _buildDetailRow(
                     icon: Icons.history,
                     label: 'Created',
@@ -1120,83 +1120,83 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
 
                 // Action buttons - only show on current (non-historical) appointments
                 if (!isHistorical) ...[
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       if (appointment.status == 'waiting') ...[
                         OutlinedButton.icon(
-                          icon: Icon(Icons.check, size: 18),
-                          label: Text('Accept'),
+                          icon: const Icon(Icons.check, size: 18),
+                          label: const Text('Accept'),
                           onPressed: () => _showStatusConfirmationDialog(
                               appointment, 'accepted', 'Accept'),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: HospitalTheme.success,
-                            side: BorderSide(color: HospitalTheme.success),
+                            side: const BorderSide(color: HospitalTheme.success),
                           ),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         OutlinedButton.icon(
-                          icon: Icon(Icons.event_repeat, size: 18),
-                          label: Text('Reschedule'),
+                          icon: const Icon(Icons.event_repeat, size: 18),
+                          label: const Text('Reschedule'),
                           onPressed: () => _showRescheduleDialog(appointment),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: HospitalTheme.warning,
-                            side: BorderSide(color: HospitalTheme.warning),
+                            side: const BorderSide(color: HospitalTheme.warning),
                           ),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         OutlinedButton.icon(
-                          icon: Icon(Icons.cancel, size: 18),
-                          label: Text('Cancel'),
+                          icon: const Icon(Icons.cancel, size: 18),
+                          label: const Text('Cancel'),
                           onPressed: () => _showStatusConfirmationDialog(
                               appointment, 'canceled', 'Cancel'),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: HospitalTheme.error,
-                            side: BorderSide(color: HospitalTheme.error),
+                            side: const BorderSide(color: HospitalTheme.error),
                           ),
                         ),
                       ] else if (appointment.status == 'accepted') ...[
                         OutlinedButton.icon(
-                          icon: Icon(Icons.done_all, size: 18),
-                          label: Text('Complete'),
+                          icon: const Icon(Icons.done_all, size: 18),
+                          label: const Text('Complete'),
                           onPressed: () => _showStatusConfirmationDialog(
                               appointment, 'completed', 'Complete'),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: HospitalTheme.success,
-                            side: BorderSide(color: HospitalTheme.success),
+                            side: const BorderSide(color: HospitalTheme.success),
                           ),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         OutlinedButton.icon(
-                          icon: Icon(Icons.person_off, size: 18),
-                          label: Text('No Show'),
+                          icon: const Icon(Icons.person_off, size: 18),
+                          label: const Text('No Show'),
                           onPressed: () => _showStatusConfirmationDialog(
                               appointment, 'no-show', 'Mark as No-Show'),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: HospitalTheme.textMedium,
-                            side: BorderSide(color: HospitalTheme.textMedium),
+                            side: const BorderSide(color: HospitalTheme.textMedium),
                           ),
                         ),
                       ] else if (appointment.status == 'canceled' ||
                           appointment.status == 'no-show') ...[
                         OutlinedButton.icon(
-                          icon: Icon(Icons.event_repeat, size: 18),
-                          label: Text('Reschedule'),
+                          icon: const Icon(Icons.event_repeat, size: 18),
+                          label: const Text('Reschedule'),
                           onPressed: () => _showRescheduleDialog(appointment),
                           style: OutlinedButton.styleFrom(
                             foregroundColor: HospitalTheme.warning,
-                            side: BorderSide(color: HospitalTheme.warning),
+                            side: const BorderSide(color: HospitalTheme.warning),
                           ),
                         ),
                       ],
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       HospitalTheme.buildFloatingActionButton(
                         icon: Icons.visibility,
                         onPressed: () {
                           // View patient details
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 content: Text(
                                     'View patient details not implemented')),
                           );
@@ -1228,7 +1228,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             size: 16,
             color:
                 isHistorical ? Colors.grey.shade500 : HospitalTheme.textMedium),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Text(
           '$label: ',
           style: TextStyle(
@@ -1241,9 +1241,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
           child: Text(
             value,
             style: TextStyle(
-              color: valueColor != null
-                  ? valueColor
-                  : (isHistorical
+              color: valueColor ?? (isHistorical
                       ? Colors.grey.shade700
                       : HospitalTheme.textDark),
               fontWeight:
@@ -1273,7 +1271,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           IconButton(
-            icon: Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios),
             onPressed: _currentPage > 1
                 ? () {
                     setState(() {
@@ -1285,17 +1283,17 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             color: HospitalTheme.primary,
             disabledColor: Colors.grey.shade400,
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Text(
             'Page $_currentPage of $_totalPages',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           IconButton(
-            icon: Icon(Icons.arrow_forward_ios),
+            icon: const Icon(Icons.arrow_forward_ios),
             onPressed: _currentPage < _totalPages
                 ? () {
                     setState(() {

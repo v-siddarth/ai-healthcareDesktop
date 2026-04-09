@@ -340,7 +340,7 @@ class MedicalRecordNotifier extends StateNotifier<MedicalRecordState> {
 
       final response = await http.post(
         Uri.parse(
-            '${KVM_URL}/reception/generatePatientRecordPDFs/${state.currentPatientId}'),
+            '$KVM_URL/reception/generatePatientRecordPDFs/${state.currentPatientId}'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'reportTypes': state.selectedReportTypes.toList(),
@@ -777,11 +777,11 @@ class _MedicalRecordSummaryScreenState
           borderRadius: HospitalTheme.radiusSmall,
           border: Border.all(color: HospitalTheme.warning),
         ),
-        child: Row(
+        child: const Row(
           children: [
             Icon(Icons.info_outline, color: HospitalTheme.warning, size: 16),
-            const SizedBox(width: 8),
-            const Expanded(
+            SizedBox(width: 8),
+            Expanded(
                 child: Text('Please select at least one report type')),
           ],
         ),
@@ -797,7 +797,7 @@ class _MedicalRecordSummaryScreenState
       ),
       child: Row(
         children: [
-          Icon(Icons.check_circle_outline,
+          const Icon(Icons.check_circle_outline,
               color: HospitalTheme.success, size: 16),
           const SizedBox(width: 8),
           Expanded(
@@ -855,14 +855,14 @@ class _MedicalRecordSummaryScreenState
       ),
       child: Row(
         children: [
-          Icon(Icons.error_outline, color: HospitalTheme.error, size: 16),
+          const Icon(Icons.error_outline, color: HospitalTheme.error, size: 16),
           const SizedBox(width: 8),
           Expanded(
-              child: Text(error, style: TextStyle(color: HospitalTheme.error))),
+              child: Text(error, style: const TextStyle(color: HospitalTheme.error))),
           IconButton(
             onPressed: () =>
                 ref.read(medicalRecordProvider.notifier).clearError(),
-            icon: Icon(Icons.close, color: HospitalTheme.error, size: 16),
+            icon: const Icon(Icons.close, color: HospitalTheme.error, size: 16),
           ),
         ],
       ),
@@ -1198,7 +1198,7 @@ class _MedicalRecordSummaryScreenState
           if (reports.isEmpty)
             _buildNoReportsMessage()
           else
-            ...reports.map((pdf) => _buildReportCard(pdf)).toList(),
+            ...reports.map((pdf) => _buildReportCard(pdf)),
         ],
       ),
     );

@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class PrescriptionToSaleScreen extends StatefulWidget {
-  const PrescriptionToSaleScreen({Key? key}) : super(key: key);
+  const PrescriptionToSaleScreen({super.key});
 
   @override
   _PrescriptionToSaleScreenState createState() =>
@@ -62,7 +62,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/pharma/getAllPrescriptions'),
+        Uri.parse('$KVM_URL/pharma/getAllPrescriptions'),
       );
 
       if (response.statusCode == 200) {
@@ -113,7 +113,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
       }
 
       // Create URI with query parameters
-      final uri = Uri.parse('${KVM_URL}/pharma/getInventory')
+      final uri = Uri.parse('$KVM_URL/pharma/getInventory')
           .replace(queryParameters: queryParams);
 
       final response = await http.get(uri);
@@ -287,7 +287,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/pharma/createSaleFromPatientPrescription'),
+        Uri.parse('$KVM_URL/pharma/createSaleFromPatientPrescription'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );
@@ -340,28 +340,28 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
         title: Row(
           children: [
             Icon(Icons.warning_amber_rounded, color: warningColor),
-            SizedBox(width: 8),
-            Text('Insufficient Stock'),
+            const SizedBox(width: 8),
+            const Text('Insufficient Stock'),
           ],
         ),
-        content: Container(
+        content: SizedBox(
           width: 400,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'The following medicines have insufficient stock:',
                 style: TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: Colors.grey[300]!),
                 ),
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   children: unavailableMedicines.map((medicineName) {
                     return Padding(
@@ -370,11 +370,11 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                         children: [
                           Icon(Icons.error_outline,
                               color: errorColor, size: 16),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               medicineName,
-                              style: TextStyle(fontWeight: FontWeight.w500),
+                              style: const TextStyle(fontWeight: FontWeight.w500),
                             ),
                           ),
                         ],
@@ -383,7 +383,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   }).toList(),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Please update your inventory or adjust the prescription.',
                 style: TextStyle(
@@ -401,18 +401,18 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               _selectedTabIndex = 1; // Switch to inventory tab
               setState(() {});
             },
-            child: Text('View Inventory'),
             style: TextButton.styleFrom(
               foregroundColor: primaryColor,
             ),
+            child: Text('View Inventory'),
           ),
           ElevatedButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('OK'),
             style: ElevatedButton.styleFrom(
               backgroundColor: primaryColor,
               foregroundColor: Colors.white,
             ),
+            child: Text('OK'),
           ),
         ],
       ),
@@ -489,7 +489,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
         }
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
           color: _isEditingDosage
               ? color.withOpacity(0.2)
@@ -511,9 +511,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(width: 4),
+            const SizedBox(width: 4),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
                 color: _isEditingDosage
                     ? color.withOpacity(0.3)
@@ -554,11 +554,11 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text('Enter the new dosage for $timeLabel:'),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: controller,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Dosage',
                 hintText: 'Enter a number',
@@ -569,10 +569,10 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('Cancel'),
             style: TextButton.styleFrom(
               foregroundColor: Colors.grey[700],
             ),
+            child: Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -590,17 +590,17 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 // Show error for invalid input
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Please enter a valid number'),
+                    content: const Text('Please enter a valid number'),
                     backgroundColor: errorColor,
                   ),
                 );
               }
             },
-            child: Text('Save'),
             style: ElevatedButton.styleFrom(
               backgroundColor: primaryColor,
               foregroundColor: Colors.white,
             ),
+            child: Text('Save'),
           ),
         ],
       ),
@@ -658,7 +658,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Create Sale from Prescription',
           style: TextStyle(
             color: Colors.white,
@@ -669,7 +669,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
         elevation: 4,
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh, color: Colors.white),
+            icon: const Icon(Icons.refresh, color: Colors.white),
             onPressed: () {
               _fetchPrescriptions();
               _fetchInventory();
@@ -712,7 +712,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 child: InkWell(
                   onTap: () => setState(() => _selectedTabIndex = 0),
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     decoration: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(
@@ -743,7 +743,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 child: InkWell(
                   onTap: () => setState(() => _selectedTabIndex = 1),
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     decoration: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(
@@ -807,14 +807,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               : _showSuccessCard
                   ? _buildSuccessCard()
                   : SingleChildScrollView(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _buildPatientDetails(),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           _buildPrescriptionsList(),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           _buildCreateSaleForm(),
                         ],
                       ),
@@ -871,7 +871,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       child: InkWell(
                         onTap: () => setState(() => _selectedTabIndex = 0),
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
@@ -902,7 +902,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       child: InkWell(
                         onTap: () => setState(() => _selectedTabIndex = 1),
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
@@ -941,14 +941,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                         : _showSuccessCard
                             ? _buildSuccessCard()
                             : SingleChildScrollView(
-                                padding: EdgeInsets.all(24),
+                                padding: const EdgeInsets.all(24),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildPatientDetails(),
-                                    SizedBox(height: 24),
+                                    const SizedBox(height: 24),
                                     _buildPrescriptionsList(),
-                                    SizedBox(height: 24),
+                                    const SizedBox(height: 24),
                                     _buildCreateSaleForm(),
                                   ],
                                 ),
@@ -976,7 +976,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
   // Search bar for patients
   Widget _buildSearchBar() {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -989,7 +989,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               color: primaryColor,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Container(
             height: 46,
             decoration: BoxDecoration(
@@ -1004,7 +1004,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 prefixIcon: Icon(Icons.search, color: primaryColor),
                 border: InputBorder.none,
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               ),
               onChanged: (value) {
                 setState(() {
@@ -1021,7 +1021,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
   // Search bar for inventory
   Widget _buildInventorySearchBar() {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1034,7 +1034,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               color: primaryColor,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Row(
             children: [
               Expanded(
@@ -1051,7 +1051,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       prefixIcon: Icon(Icons.search, color: primaryColor),
                       border: InputBorder.none,
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                          const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                     ),
                     onChanged: (value) {
                       // Implement inventory search
@@ -1059,26 +1059,26 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   ),
                 ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               ElevatedButton.icon(
                 onPressed: () => _fetchInventory(expiringSoon: true),
-                icon: Icon(Icons.warning_amber_rounded, size: 20),
-                label: Text('Expiring Soon'),
+                icon: const Icon(Icons.warning_amber_rounded, size: 20),
+                label: const Text('Expiring Soon'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: warningColor,
                   foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               ElevatedButton.icon(
                 onPressed: () => _fetchInventory(),
-                icon: Icon(Icons.refresh, size: 20),
-                label: Text('Refresh'),
+                icon: const Icon(Icons.refresh, size: 20),
+                label: const Text('Refresh'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryColor,
                   foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
               ),
             ],
@@ -1100,7 +1100,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               size: 64,
               color: Colors.grey[400],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'No patients found',
               style: TextStyle(
@@ -1115,9 +1115,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
     }
 
     return ListView.separated(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       itemCount: _filteredPatients.length,
-      separatorBuilder: (context, index) => SizedBox(height: 12),
+      separatorBuilder: (context, index) => const SizedBox(height: 12),
       itemBuilder: (context, index) {
         final patient = _filteredPatients[index];
         final prescriptions = List.from(patient['prescriptions'] as List);
@@ -1137,7 +1137,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
             onTap: () => _handlePatientSelection(patient),
             borderRadius: BorderRadius.circular(12),
             child: Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color:
@@ -1165,7 +1165,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                           size: 24,
                         ),
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
 
                       // Patient details
                       Expanded(
@@ -1184,9 +1184,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                         : Colors.black,
                                   ),
                                 ),
-                                SizedBox(width: 8),
+                                const SizedBox(width: 8),
                                 Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 8, vertical: 2),
                                   decoration: BoxDecoration(
                                     color: primaryColor.withOpacity(0.1),
@@ -1203,7 +1203,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               'Contact: ${patient['contact']}',
                               style: TextStyle(
@@ -1211,7 +1211,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                 fontSize: 14,
                               ),
                             ),
-                            SizedBox(height: 2),
+                            const SizedBox(height: 2),
                             Text(
                               'From: ${patient['from']}',
                               style: TextStyle(
@@ -1226,9 +1226,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   ),
 
                   // Prescription count
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: isSelected
                           ? primaryColor.withOpacity(0.1)
@@ -1265,7 +1265,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               size: 64,
               color: Colors.grey[400],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'No inventory items found',
               style: TextStyle(
@@ -1274,11 +1274,11 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             ElevatedButton.icon(
               onPressed: () => _fetchInventory(),
-              icon: Icon(Icons.refresh),
-              label: Text('Refresh Inventory'),
+              icon: const Icon(Icons.refresh),
+              label: const Text('Refresh Inventory'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
                 foregroundColor: Colors.white,
@@ -1316,14 +1316,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 icon: Icons.inventory_2_outlined,
                 color: primaryColor,
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               _buildStatusCard(
                 title: 'Low Stock',
                 count: _inventory.where((item) => item['quantity'] < 10).length,
                 icon: Icons.warning_amber_rounded,
                 color: warningColor,
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               _buildStatusCard(
                 title: 'Expiring Soon',
                 count: _inventory
@@ -1332,7 +1332,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 icon: Icons.event_busy,
                 color: Colors.orange,
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               _buildStatusCard(
                 title: 'Expired',
                 count: _inventory
@@ -1344,7 +1344,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
             ],
           ),
 
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // Table
           Container(
@@ -1355,7 +1355,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.05),
                   blurRadius: 4,
-                  offset: Offset(0, 2),
+                  offset: const Offset(0, 2),
                 ),
               ],
             ),
@@ -1363,16 +1363,16 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               borderRadius: BorderRadius.circular(8),
               child: DataTable(
                 columnSpacing: 24,
-                headingRowColor: MaterialStateProperty.all(Colors.grey[100]),
-                dataRowColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.selected)) {
+                headingRowColor: WidgetStateProperty.all(Colors.grey[100]),
+                dataRowColor: WidgetStateProperty.resolveWith<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.selected)) {
                       return primaryColor.withOpacity(0.1);
                     }
                     return null;
                   },
                 ),
-                columns: [
+                columns: const [
                   DataColumn(
                     label: Text(
                       'Medicine',
@@ -1439,7 +1439,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                           children: [
                             Text(
                               medicineName,
-                              style: TextStyle(fontWeight: FontWeight.w500),
+                              style: const TextStyle(fontWeight: FontWeight.w500),
                             ),
                             Text(
                               manufacturer,
@@ -1457,7 +1457,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       DataCell(
                         Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                              const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                           decoration: BoxDecoration(
                             color: isLowStock
                                 ? warningColor.withOpacity(0.1)
@@ -1485,7 +1485,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                 color: isExpired ? errorColor : warningColor,
                                 size: 16,
                               ),
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Text(
                               _formatDate(item['expiryDate']),
                               style: TextStyle(
@@ -1502,7 +1502,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       DataCell(
                         Text(
                           '₹${_convertToDouble(mrp).toStringAsFixed(2)}',
-                          style: TextStyle(fontWeight: FontWeight.w500),
+                          style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
                       ),
                       DataCell(
@@ -1564,13 +1564,13 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
           ],
         ),
 
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
 
         // Grid
         Expanded(
           child: ListView.separated(
             itemCount: _inventory.length,
-            separatorBuilder: (context, index) => SizedBox(height: 12),
+            separatorBuilder: (context, index) => const SizedBox(height: 12),
             itemBuilder: (context, index) {
               final item = _inventory[index];
 
@@ -1594,7 +1594,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1608,12 +1608,12 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                               children: [
                                 Text(
                                   medicineName,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
                                 ),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Text(
                                   manufacturer,
                                   style: TextStyle(
@@ -1624,7 +1624,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(
                               color: isLowStock
@@ -1645,7 +1645,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                         ],
                       ),
 
-                      Divider(height: 24),
+                      const Divider(height: 24),
 
                       // Details grid
                       Wrap(
@@ -1711,7 +1711,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 4,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -1721,7 +1721,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
           Row(
             children: [
               Container(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
@@ -1732,7 +1732,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   size: isSmall ? 18 : 20,
                 ),
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 title,
                 style: TextStyle(
@@ -1764,7 +1764,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
     IconData? icon,
     Color? iconColor,
   }) {
-    return Container(
+    return SizedBox(
       width: 130,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1776,7 +1776,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               fontSize: 12,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Row(
             children: [
               if (icon != null) ...[
@@ -1785,7 +1785,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   color: iconColor,
                   size: 14,
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
               ],
               Expanded(
                 child: Text(
@@ -1815,7 +1815,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
             size: 80,
             color: Colors.grey[400],
           ),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           Text(
             'Select a patient to create a sale',
             style: TextStyle(
@@ -1824,7 +1824,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(
             'Choose a patient from the list on the left',
             style: TextStyle(
@@ -1839,7 +1839,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
 
   // Patient details card
   Widget _buildPatientDetails() {
-    if (_selectedPatient == null) return SizedBox();
+    if (_selectedPatient == null) return const SizedBox();
 
     return Card(
       color: Colors.white,
@@ -1848,7 +1848,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1861,9 +1861,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 color: primaryColor,
               ),
             ),
-            SizedBox(height: 16),
-            Divider(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            const Divider(),
+            const SizedBox(height: 16),
 
             // Patient information
             Row(
@@ -1887,7 +1887,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                     size: 36,
                   ),
                 ),
-                SizedBox(width: 24),
+                const SizedBox(width: 24),
 
                 // Patient details
                 Expanded(
@@ -1898,14 +1898,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                         children: [
                           Text(
                             _selectedPatient!['name'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
                             ),
                           ),
-                          SizedBox(width: 12),
+                          const SizedBox(width: 12),
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 12, vertical: 4),
                             decoration: BoxDecoration(
                               color: primaryColor.withOpacity(0.1),
@@ -1926,7 +1926,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 12),
+                      const SizedBox(height: 12),
 
                       // Info grid - responsive
                       Wrap(
@@ -1968,13 +1968,13 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
     required String label,
     required String value,
   }) {
-    return Container(
+    return SizedBox(
       width: 200,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, color: primaryColor, size: 20),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1986,10 +1986,10 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                     fontSize: 14,
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   value,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
                   ),
@@ -2004,7 +2004,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
 
   // Prescriptions list
   Widget _buildPrescriptionsList() {
-    if (_selectedPatient == null) return SizedBox();
+    if (_selectedPatient == null) return const SizedBox();
 
     return Card(
       color: Colors.white,
@@ -2013,7 +2013,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -2028,7 +2028,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                     color: primaryColor,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 // Add Toggle Edit Mode button
                 TextButton.icon(
                   onPressed: () {
@@ -2048,7 +2048,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                     ),
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 TextButton.icon(
                   onPressed: () {
                     setState(() {
@@ -2061,13 +2061,13 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       _checkMedicineAvailability();
                     });
                   },
-                  icon: Icon(Icons.select_all, size: 18),
-                  label: Text('Select All'),
+                  icon: const Icon(Icons.select_all, size: 18),
+                  label: const Text('Select All'),
                   style: TextButton.styleFrom(
                     foregroundColor: primaryColor,
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 TextButton.icon(
                   onPressed: () {
                     setState(() {
@@ -2080,23 +2080,23 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       _checkMedicineAvailability();
                     });
                   },
-                  icon: Icon(Icons.deselect, size: 18),
-                  label: Text('Deselect All'),
+                  icon: const Icon(Icons.deselect, size: 18),
+                  label: const Text('Deselect All'),
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.grey[700],
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            Divider(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            const Divider(),
+            const SizedBox(height: 16),
 
             // Add helper text when in edit mode
             if (_isEditingDosage)
               Container(
-                padding: EdgeInsets.all(12),
-                margin: EdgeInsets.only(bottom: 16),
+                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.only(bottom: 16),
                 decoration: BoxDecoration(
                   color: accentColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
@@ -2104,7 +2104,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 child: Row(
                   children: [
                     Icon(Icons.info_outline, color: accentColor),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         'Tap on any dosage chip to modify the dosage amount. This helps when you need to adjust prescriptions based on available inventory.',
@@ -2119,7 +2119,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
             _selectedPrescriptions.isEmpty
                 ? Center(
                     child: Padding(
-                      padding: EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(24),
                       child: Text(
                         'No prescriptions found for this patient',
                         style: TextStyle(
@@ -2192,7 +2192,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
 
     return Card(
       color: Colors.white,
-      margin: EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       elevation: isSelected ? 3 : 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -2213,7 +2213,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
         splashColor: primaryColor.withOpacity(0.1),
         highlightColor: primaryColor.withOpacity(0.05),
         child: Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             gradient: isSelected
@@ -2245,9 +2245,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       },
                       borderRadius: BorderRadius.circular(50),
                       child: Padding(
-                        padding: EdgeInsets.all(6.0),
+                        padding: const EdgeInsets.all(6.0),
                         child: AnimatedContainer(
-                          duration: Duration(milliseconds: 200),
+                          duration: const Duration(milliseconds: 200),
                           width: 24,
                           height: 24,
                           decoration: BoxDecoration(
@@ -2263,13 +2263,13 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                     BoxShadow(
                                       color: primaryColor.withOpacity(0.3),
                                       blurRadius: 5,
-                                      offset: Offset(0, 1),
+                                      offset: const Offset(0, 1),
                                     )
                                   ]
                                 : null,
                           ),
                           child: isSelected
-                              ? Icon(
+                              ? const Icon(
                                   Icons.check,
                                   color: Colors.white,
                                   size: 16,
@@ -2279,7 +2279,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
 
                   // Medicine name with tag if modified
                   Expanded(
@@ -2303,8 +2303,8 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                             ),
                             if (isDosageModified)
                               Container(
-                                margin: EdgeInsets.only(left: 8, top: 2),
-                                padding: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.only(left: 8, top: 2),
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 3),
                                 decoration: BoxDecoration(
                                   color: accentColor.withOpacity(0.1),
@@ -2325,7 +2325,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                               ),
                           ],
                         ),
-                        SizedBox(height: 6),
+                        const SizedBox(height: 6),
 
                         // Prescription date
                         Row(
@@ -2335,7 +2335,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                               size: 14,
                               color: Colors.grey[600],
                             ),
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Text(
                               'Prescribed: ${_formatDate(prescription['prescribedDate'])}',
                               style: TextStyle(
@@ -2351,7 +2351,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
 
                   // Availability indicator
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
                       color: isAvailable ? Colors.green[50] : Colors.red[50],
                       borderRadius: BorderRadius.circular(12),
@@ -2372,7 +2372,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                               isAvailable ? Colors.green[600] : Colors.red[600],
                           size: 14,
                         ),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                         Text(
                           isAvailable ? 'In Stock' : 'Low Stock',
                           style: TextStyle(
@@ -2389,9 +2389,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 ],
               ),
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Divider(height: 1, thickness: 1, color: Colors.grey[200]),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // Dosage information in card layout
               Row(
@@ -2411,7 +2411,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                             fontSize: 14,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Wrap(
                           spacing: 8,
                           runSpacing: 8,
@@ -2465,9 +2465,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                             fontSize: 14,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 10),
                           decoration: BoxDecoration(
                             color: primaryColor.withOpacity(0.07),
@@ -2487,7 +2487,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                     size: 16,
                                     color: primaryColor,
                                   ),
-                                  SizedBox(width: 6),
+                                  const SizedBox(width: 6),
                                   Text(
                                     '$requiredQuantity units',
                                     style: TextStyle(
@@ -2498,9 +2498,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               Text(
-                                'For ${days} days',
+                                'For $days days',
                                 style: TextStyle(
                                   color: Colors.grey[600],
                                   fontSize: 12,
@@ -2519,9 +2519,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               if (prescription['comment'] != null &&
                   prescription['comment'] != '')
                 Padding(
-                  padding: EdgeInsets.only(top: 16),
+                  padding: const EdgeInsets.only(top: 16),
                   child: Container(
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Colors.grey[50],
                       borderRadius: BorderRadius.circular(8),
@@ -2535,7 +2535,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                           size: 16,
                           color: Colors.grey[600],
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             'Note: ${prescription['comment']}',
@@ -2579,8 +2579,8 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
             }
           : null,
       child: Container(
-        margin: EdgeInsets.only(bottom: 6),
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        margin: const EdgeInsets.only(bottom: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -2602,7 +2602,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   BoxShadow(
                     color: color.withOpacity(0.1),
                     blurRadius: 3,
-                    offset: Offset(0, 1),
+                    offset: const Offset(0, 1),
                   )
                 ]
               : null,
@@ -2618,7 +2618,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   size: 16,
                   color: color,
                 ),
-                SizedBox(width: 6),
+                const SizedBox(width: 6),
                 Text(
                   label,
                   style: TextStyle(
@@ -2638,12 +2638,12 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   ),
               ],
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
                     color: color.withOpacity(isModified ? 0.15 : 0.08),
                     borderRadius: BorderRadius.circular(6),
@@ -2689,9 +2689,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
           children: [
             if (_isEditingDosage)
               AnimatedContainer(
-                duration: Duration(milliseconds: 300),
-                margin: EdgeInsets.only(right: 16),
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                duration: const Duration(milliseconds: 300),
+                margin: const EdgeInsets.only(right: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: primaryColor.withOpacity(0.07),
                   borderRadius: BorderRadius.circular(20),
@@ -2707,7 +2707,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       size: 16,
                       color: accentColor,
                     ),
-                    SizedBox(width: 6),
+                    const SizedBox(width: 6),
                     Text(
                       'Editing Mode Active',
                       style: TextStyle(
@@ -2737,7 +2737,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 ),
               ),
               style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                   side: BorderSide(
@@ -2752,7 +2752,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                     : Colors.transparent,
               ),
             ),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             if (_isEditingDosage)
               TextButton.icon(
                 onPressed: () {
@@ -2775,7 +2775,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 label: Text('Reset Dosages',
                     style: TextStyle(color: warningColor)),
                 style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                     side: BorderSide(
@@ -2788,13 +2788,13 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               ),
           ],
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
 
         // Help text for editing mode
         if (_isEditingDosage)
           Container(
-            margin: EdgeInsets.only(bottom: 16, top: 8),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            margin: const EdgeInsets.only(bottom: 16, top: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: accentColor.withOpacity(0.08),
               borderRadius: BorderRadius.circular(12),
@@ -2806,7 +2806,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
             child: Row(
               children: [
                 Icon(Icons.info_outline, color: accentColor, size: 20),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     'Tap on any dosage chip to modify the amount. This helps when you need to adjust prescriptions based on available inventory.',
@@ -2830,7 +2830,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 color: Colors.black.withOpacity(0.04),
                 blurRadius: 5,
                 spreadRadius: 1,
-                offset: Offset(0, 2),
+                offset: const Offset(0, 2),
               ),
             ],
           ),
@@ -2845,7 +2845,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                     color: primaryColor,
                     fontSize: 14,
                   ),
-                  dataTextStyle: TextStyle(
+                  dataTextStyle: const TextStyle(
                     color: Colors.black87,
                     fontSize: 14,
                   ),
@@ -2856,12 +2856,12 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 horizontalMargin: 16,
                 headingRowHeight: 56,
                 dataRowHeight: 84,
-                headingRowColor: MaterialStateProperty.all(Colors.grey[50]),
+                headingRowColor: WidgetStateProperty.all(Colors.grey[50]),
                 dividerThickness: 1,
                 showCheckboxColumn: false,
-                dataRowColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.selected)) {
+                dataRowColor: WidgetStateProperty.resolveWith<Color?>(
+                  (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.selected)) {
                       return primaryColor.withOpacity(0.07);
                     }
                     return null;
@@ -2873,7 +2873,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                     width: 1,
                   ),
                 ),
-                columns: [
+                columns: const [
                   DataColumn(
                     label: Text('Select'),
                   ),
@@ -2938,7 +2938,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                     cells: [
                       DataCell(
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 8),
+                          margin: const EdgeInsets.symmetric(vertical: 8),
                           child: Material(
                             color: Colors.transparent,
                             child: InkWell(
@@ -2950,9 +2950,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                               },
                               borderRadius: BorderRadius.circular(50),
                               child: Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: AnimatedContainer(
-                                  duration: Duration(milliseconds: 200),
+                                  duration: const Duration(milliseconds: 200),
                                   width: 22,
                                   height: 22,
                                   decoration: BoxDecoration(
@@ -2972,13 +2972,13 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                               color:
                                                   primaryColor.withOpacity(0.3),
                                               blurRadius: 5,
-                                              offset: Offset(0, 1),
+                                              offset: const Offset(0, 1),
                                             )
                                           ]
                                         : null,
                                   ),
                                   child: isSelected
-                                      ? Icon(
+                                      ? const Icon(
                                           Icons.check,
                                           color: Colors.white,
                                           size: 14,
@@ -3009,8 +3009,8 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                             ),
                             if (isDosageModified)
                               Container(
-                                margin: EdgeInsets.only(left: 8),
-                                padding: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.only(left: 8),
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 6, vertical: 2),
                                 decoration: BoxDecoration(
                                   color: accentColor.withOpacity(0.1),
@@ -3034,7 +3034,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       ),
                       DataCell(
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 8),
+                          margin: const EdgeInsets.symmetric(vertical: 8),
                           child: Wrap(
                             spacing: 6,
                             children: [
@@ -3090,7 +3090,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       DataCell(
                         Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           decoration: BoxDecoration(
                             color: primaryColor.withOpacity(0.07),
                             borderRadius: BorderRadius.circular(8),
@@ -3110,7 +3110,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       DataCell(
                         Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                           decoration: BoxDecoration(
                             color:
                                 isAvailable ? Colors.green[50] : Colors.red[50],
@@ -3134,7 +3134,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                     : Colors.red[600],
                                 size: 14,
                               ),
-                              SizedBox(width: 4),
+                              const SizedBox(width: 4),
                               Text(
                                 isAvailable ? 'Available' : 'Low Stock',
                                 style: TextStyle(
@@ -3158,7 +3158,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                               size: 14,
                               color: Colors.grey[600],
                             ),
-                            SizedBox(width: 6),
+                            const SizedBox(width: 6),
                             Text(
                               _formatDate(prescription['prescribedDate']),
                               style: TextStyle(
@@ -3197,7 +3197,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
             }
           : null,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
         decoration: BoxDecoration(
           color: color.withOpacity(isOriginal ? 0.08 : 0.15),
           borderRadius: BorderRadius.circular(6),
@@ -3214,7 +3214,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               size: 12,
               color: color,
             ),
-            SizedBox(width: 4),
+            const SizedBox(width: 4),
             Text(
               label,
               style: TextStyle(
@@ -3223,9 +3223,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(width: 4),
+            const SizedBox(width: 4),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
               decoration: BoxDecoration(
                 color: color.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(4),
@@ -3273,7 +3273,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
     required Color color,
   }) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(16),
@@ -3293,9 +3293,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             decoration: BoxDecoration(
               color: color.withOpacity(0.2),
               borderRadius: BorderRadius.circular(10),
@@ -3316,7 +3316,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
 
   // Create sale form
   Widget _buildCreateSaleForm() {
-    if (_selectedPatient == null) return SizedBox();
+    if (_selectedPatient == null) return const SizedBox();
 
     return Card(
       color: Colors.white,
@@ -3325,7 +3325,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -3338,15 +3338,15 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 color: primaryColor,
               ),
             ),
-            SizedBox(height: 16),
-            Divider(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            const Divider(),
+            const SizedBox(height: 16),
 
             // Display error message if any
             if (_errorResponse.isNotEmpty && _errorResponse['message'] != null)
               Container(
-                margin: EdgeInsets.only(bottom: 16),
-                padding: EdgeInsets.all(12),
+                margin: const EdgeInsets.only(bottom: 16),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: errorColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
@@ -3361,7 +3361,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       Icons.error_outline,
                       color: errorColor,
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         _errorResponse['message'],
@@ -3389,7 +3389,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(child: _buildDaysField()),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           Expanded(child: _buildPaymentMethodField()),
                         ],
                       )
@@ -3398,22 +3398,22 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _buildDaysField(),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           _buildPaymentMethodField(),
                         ],
                       ),
 
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
                     // Doctor Notes
                     _buildDoctorNotesField(),
 
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
 
                     // Prescription summary
                     _buildPrescriptionSummary(),
 
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
 
                     // Create sale button
                     Align(
@@ -3424,7 +3424,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                 ? _createSale
                                 : null,
                         icon: _isSaleLoading
-                            ? SizedBox(
+                            ? const SizedBox(
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(
@@ -3432,10 +3432,10 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                   strokeWidth: 2,
                                 ),
                               )
-                            : Icon(Icons.shopping_cart_checkout),
+                            : const Icon(Icons.shopping_cart_checkout),
                         label: Text(
                           _isSaleLoading ? 'Creating Sale...' : 'Create Sale',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -3443,7 +3443,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: accentColor,
                           foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 24, vertical: 16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -3473,14 +3473,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Number of Days',
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -3492,7 +3492,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
             decoration: InputDecoration(
               hintText: 'Enter number of days',
               contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               border: InputBorder.none,
               suffixIcon: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -3524,20 +3524,20 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Payment Method',
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.grey[300]!),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               isExpanded: true,
@@ -3574,10 +3574,10 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
       child: Row(
         children: [
           Icon(icon, size: 18, color: primaryColor),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -3591,14 +3591,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Doctor Notes',
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -3607,7 +3607,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
           child: TextField(
             controller: _doctorNotesController,
             maxLines: 3,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Enter doctor notes (optional)',
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -3628,7 +3628,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
 
     if (selectedPrescriptions.isEmpty) {
       return Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.grey[100],
           borderRadius: BorderRadius.circular(8),
@@ -3646,16 +3646,16 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Summary',
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.grey[50],
             borderRadius: BorderRadius.circular(8),
@@ -3676,7 +3676,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
                       color: primaryColor.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(16),
@@ -3693,9 +3693,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 ],
               ),
 
-              SizedBox(height: 16),
-              Divider(),
-              SizedBox(height: 8),
+              const SizedBox(height: 16),
+              const Divider(),
+              const SizedBox(height: 8),
 
               // Medicine list with quantities and modified indicator
               LayoutBuilder(
@@ -3743,7 +3743,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                           _medicineAvailabilityMap[medicineName] ?? false;
 
                       return Container(
-                        padding: EdgeInsets.symmetric(vertical: 8),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
@@ -3768,14 +3768,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                               : Colors.red[700],
                                           size: 16,
                                         ),
-                                        SizedBox(width: 8),
+                                        const SizedBox(width: 8),
                                         Expanded(
                                           child: Row(
                                             children: [
                                               Flexible(
                                                 child: Text(
                                                   medicineName,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
@@ -3783,8 +3783,8 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                               if (isDosageModified)
                                                 Container(
                                                   margin:
-                                                      EdgeInsets.only(left: 8),
-                                                  padding: EdgeInsets.symmetric(
+                                                      const EdgeInsets.only(left: 8),
+                                                  padding: const EdgeInsets.symmetric(
                                                       horizontal: 6,
                                                       vertical: 2),
                                                   decoration: BoxDecoration(
@@ -3815,7 +3815,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          '${currentMorning}-${currentAfternoon}-${currentNight}',
+                                          '$currentMorning-$currentAfternoon-$currentNight',
                                           style: TextStyle(
                                             color: isDosageModified
                                                 ? accentColor
@@ -3828,9 +3828,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                         if (isDosageModified)
                                           Tooltip(
                                             message:
-                                                'Original: ${originalMorning}-${originalAfternoon}-${originalNight}',
+                                                'Original: $originalMorning-$originalAfternoon-$originalNight',
                                             child: Padding(
-                                              padding: EdgeInsets.only(left: 4),
+                                              padding: const EdgeInsets.only(left: 4),
                                               child: Icon(Icons.edit,
                                                   size: 14, color: accentColor),
                                             ),
@@ -3841,7 +3841,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                   Expanded(
                                     flex: 1,
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 8, vertical: 2),
                                       decoration: BoxDecoration(
                                         color: accentColor.withOpacity(0.1),
@@ -3874,14 +3874,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                             : Colors.red[700],
                                         size: 16,
                                       ),
-                                      SizedBox(width: 8),
+                                      const SizedBox(width: 8),
                                       Expanded(
                                         child: Row(
                                           children: [
                                             Flexible(
                                               child: Text(
                                                 medicineName,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
@@ -3889,8 +3889,8 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                             if (isDosageModified)
                                               Container(
                                                 margin:
-                                                    EdgeInsets.only(left: 8),
-                                                padding: EdgeInsets.symmetric(
+                                                    const EdgeInsets.only(left: 8),
+                                                padding: const EdgeInsets.symmetric(
                                                     horizontal: 6, vertical: 2),
                                                 decoration: BoxDecoration(
                                                   color: accentColor
@@ -3912,7 +3912,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 4),
+                                  const SizedBox(height: 4),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -3927,7 +3927,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                             ),
                                           ),
                                           Text(
-                                            '${currentMorning}-${currentAfternoon}-${currentNight}',
+                                            '$currentMorning-$currentAfternoon-$currentNight',
                                             style: TextStyle(
                                               color: isDosageModified
                                                   ? accentColor
@@ -3941,10 +3941,10 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                           if (isDosageModified)
                                             Tooltip(
                                               message:
-                                                  'Original: ${originalMorning}-${originalAfternoon}-${originalNight}',
+                                                  'Original: $originalMorning-$originalAfternoon-$originalNight',
                                               child: Padding(
                                                 padding:
-                                                    EdgeInsets.only(left: 4),
+                                                    const EdgeInsets.only(left: 4),
                                                 child: Icon(Icons.edit,
                                                     size: 14,
                                                     color: accentColor),
@@ -3953,7 +3953,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                         ],
                                       ),
                                       Container(
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                             horizontal: 8, vertical: 2),
                                         decoration: BoxDecoration(
                                           color: accentColor.withOpacity(0.1),
@@ -3979,7 +3979,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                 },
               ),
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // Availability warning and modified dosage notice
               Column(
@@ -3987,8 +3987,8 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   if (_editedDosages.values
                       .any((dosages) => dosages.isNotEmpty))
                     Container(
-                      padding: EdgeInsets.all(12),
-                      margin: EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.all(12),
+                      margin: const EdgeInsets.only(bottom: 12),
                       decoration: BoxDecoration(
                         color: accentColor.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(8),
@@ -4005,7 +4005,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                             color: accentColor,
                             size: 20,
                           ),
-                          SizedBox(width: 12),
+                          const SizedBox(width: 12),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -4017,7 +4017,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Text(
                                   'You have modified the original prescription dosages to better match available inventory.',
                                   style: TextStyle(
@@ -4033,7 +4033,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   if (selectedPrescriptions.any((p) =>
                       _medicineAvailabilityMap[p['medicineName']] == false))
                     Container(
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: warningColor.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(8),
@@ -4050,7 +4050,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                             color: warningColor,
                             size: 20,
                           ),
-                          SizedBox(width: 12),
+                          const SizedBox(width: 12),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -4062,14 +4062,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Text(
                                   'Please verify inventory before proceeding, adjust the number of days, or modify dosages.',
                                   style: TextStyle(
                                     color: warningColor,
                                   ),
                                 ),
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                                 Row(
                                   children: [
                                     TextButton.icon(
@@ -4079,15 +4079,15 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                               1; // Switch to inventory tab
                                         });
                                       },
-                                      icon: Icon(Icons.inventory_2, size: 14),
-                                      label: Text('View Inventory'),
+                                      icon: const Icon(Icons.inventory_2, size: 14),
+                                      label: const Text('View Inventory'),
                                       style: TextButton.styleFrom(
                                         foregroundColor: primaryColor,
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                             horizontal: 8, vertical: 4),
                                       ),
                                     ),
-                                    SizedBox(width: 8),
+                                    const SizedBox(width: 8),
                                     if (!_isEditingDosage)
                                       TextButton.icon(
                                         onPressed: () {
@@ -4095,11 +4095,11 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                             _isEditingDosage = true;
                                           });
                                         },
-                                        icon: Icon(Icons.edit, size: 14),
-                                        label: Text('Modify Dosages'),
+                                        icon: const Icon(Icons.edit, size: 14),
+                                        label: const Text('Modify Dosages'),
                                         style: TextButton.styleFrom(
                                           foregroundColor: accentColor,
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 8, vertical: 4),
                                         ),
                                       ),
@@ -4113,7 +4113,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                     )
                   else
                     Container(
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: Colors.green[50],
                         borderRadius: BorderRadius.circular(8),
@@ -4129,7 +4129,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                             color: Colors.green[700],
                             size: 20,
                           ),
-                          SizedBox(width: 12),
+                          const SizedBox(width: 12),
                           Expanded(
                             child: Text(
                               'All selected medicines are available in sufficient quantity.',
@@ -4164,14 +4164,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
 
   // Success card
   Widget _buildSuccessCard() {
-    if (_saleResponse == null) return SizedBox();
+    if (_saleResponse == null) return const SizedBox();
 
     final sale = _saleResponse!;
     final items = List<Map<String, dynamic>>.from(sale['items']);
     final customer = sale['customer'] as Map<String, dynamic>;
 
     return Container(
-      margin: EdgeInsets.all(24),
+      margin: const EdgeInsets.all(24),
       child: Card(
         elevation: 4,
         shape: RoundedRectangleBorder(
@@ -4182,27 +4182,27 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
           children: [
             // Header
             Container(
-              padding: EdgeInsets.all(24),
+              padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
                 color: Colors.green[700],
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16),
                   topRight: Radius.circular(16),
                 ),
               ),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.check_circle,
                     color: Colors.white,
                     size: 32,
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Sale Created Successfully',
                           style: TextStyle(
                             color: Colors.white,
@@ -4210,7 +4210,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                             fontSize: 20,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Text(
                           'Invoice #: ${sale['billNumber']}',
                           style: TextStyle(
@@ -4223,13 +4223,13 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                   ),
                   ElevatedButton.icon(
                     onPressed: () => _launchPdf(sale['pdfLink']),
-                    icon: Icon(Icons.picture_as_pdf),
-                    label: Text('View Invoice'),
+                    icon: const Icon(Icons.picture_as_pdf),
+                    label: const Text('View Invoice'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: Colors.green[700],
                       padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       elevation: 0,
                     ),
                   ),
@@ -4240,7 +4240,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
             // Sale details
             Expanded(
               child: SingleChildScrollView(
-                padding: EdgeInsets.all(24),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -4260,7 +4260,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                   fontSize: 14,
                                 ),
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Row(
                                 children: [
                                   Icon(
@@ -4268,7 +4268,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                     color: primaryColor,
                                     size: 20,
                                   ),
-                                  SizedBox(width: 8),
+                                  const SizedBox(width: 8),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:
@@ -4276,12 +4276,12 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                       children: [
                                         Text(
                                           customer['name'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16,
                                           ),
                                         ),
-                                        SizedBox(height: 4),
+                                        const SizedBox(height: 4),
                                         Text(
                                           customer['contactNumber'],
                                           style: TextStyle(
@@ -4309,7 +4309,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                   fontSize: 14,
                                 ),
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Row(
                                 children: [
                                   Icon(
@@ -4317,10 +4317,10 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                     color: primaryColor,
                                     size: 20,
                                   ),
-                                  SizedBox(width: 8),
+                                  const SizedBox(width: 8),
                                   Text(
                                     _formatDateTime(sale['createdAt']),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16,
                                     ),
@@ -4333,9 +4333,9 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       ],
                     ),
 
-                    SizedBox(height: 24),
-                    Divider(),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
+                    const Divider(),
+                    const SizedBox(height: 24),
 
                     // Items
                     Text(
@@ -4346,7 +4346,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                         color: primaryColor,
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
                     // Items table
                     LayoutBuilder(
@@ -4357,8 +4357,8 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                           return DataTable(
                             columnSpacing: 16,
                             headingRowColor:
-                                MaterialStateProperty.all(Colors.grey[100]),
-                            columns: [
+                                WidgetStateProperty.all(Colors.grey[100]),
+                            columns: const [
                               DataColumn(
                                 label: Text(
                                   'Medicine',
@@ -4405,7 +4405,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                       children: [
                                         Text(
                                           medicine['name'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.w500),
                                         ),
                                         Text(
@@ -4424,7 +4424,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                   DataCell(
                                     Text(
                                       item['quantity'].toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w500),
                                     ),
                                   ),
@@ -4435,7 +4435,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                   DataCell(
                                     Text(
                                       '₹${_convertToDouble(item['totalAmount']).toStringAsFixed(2)}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
@@ -4450,21 +4450,21 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                   item['medicine'] as Map<String, dynamic>;
 
                               return Card(
-                                margin: EdgeInsets.only(bottom: 16),
+                                margin: const EdgeInsets.only(bottom: 16),
                                 child: Padding(
-                                  padding: EdgeInsets.all(16),
+                                  padding: const EdgeInsets.all(16),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         medicine['name'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
                                         ),
                                       ),
-                                      SizedBox(height: 8),
+                                      const SizedBox(height: 8),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -4478,7 +4478,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                           Text(medicine['manufacturer']),
                                         ],
                                       ),
-                                      SizedBox(height: 4),
+                                      const SizedBox(height: 4),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -4492,7 +4492,7 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                           Text(item['batchNumber']),
                                         ],
                                       ),
-                                      SizedBox(height: 4),
+                                      const SizedBox(height: 4),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -4505,12 +4505,12 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                           ),
                                           Text(
                                             item['quantity'].toString(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.w500),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 4),
+                                      const SizedBox(height: 4),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -4525,12 +4525,12 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                               '₹${_convertToDouble(item['mrp']).toStringAsFixed(2)}'),
                                         ],
                                       ),
-                                      Divider(),
+                                      const Divider(),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
+                                          const Text(
                                             'Total:',
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -4555,13 +4555,13 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       },
                     ),
 
-                    SizedBox(height: 24),
-                    Divider(),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 24),
+                    const Divider(),
+                    const SizedBox(height: 16),
 
                     // Summary
                     Container(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: Colors.grey[50],
                         borderRadius: BorderRadius.circular(8),
@@ -4572,24 +4572,24 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Subtotal'),
+                              const Text('Subtotal'),
                               Text(
                                   '₹${_convertToDouble(sale['subtotal']).toStringAsFixed(2)}'),
                             ],
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           if (sale['discount'] > 0) ...[
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Discount'),
+                                const Text('Discount'),
                                 Text(
                                   '-₹${_convertToDouble(sale['discount']).toStringAsFixed(2)}',
                                   style: TextStyle(color: Colors.red[700]),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                           ],
                           if (sale['tax'] > 0) ...[
                             Row(
@@ -4600,14 +4600,14 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                                     '₹${(_convertToDouble(sale['subtotal']) * _convertToDouble(sale['tax']) / 100).toStringAsFixed(2)}'),
                               ],
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                           ],
-                          Divider(),
-                          SizedBox(height: 8),
+                          const Divider(),
+                          const SizedBox(height: 8),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 'Total',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -4634,10 +4634,10 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
 
             // Footer
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.grey[100],
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(16),
                   bottomRight: Radius.circular(16),
                 ),
@@ -4655,8 +4655,8 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                         _saleResponse = null;
                       });
                     },
-                    icon: Icon(Icons.arrow_back),
-                    label: Text('Back to Prescriptions'),
+                    icon: const Icon(Icons.arrow_back),
+                    label: const Text('Back to Prescriptions'),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.grey[700],
                     ),
@@ -4675,8 +4675,8 @@ class _PrescriptionToSaleScreenState extends State<PrescriptionToSaleScreen> {
                       _fetchPrescriptions();
                       _fetchInventory();
                     },
-                    icon: Icon(Icons.add_shopping_cart),
-                    label: Text('Create New Sale'),
+                    icon: const Icon(Icons.add_shopping_cart),
+                    label: const Text('Create New Sale'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: accentColor,
                       foregroundColor: Colors.white,

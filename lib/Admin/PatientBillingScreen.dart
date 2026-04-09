@@ -494,7 +494,7 @@ class _PatientBillingScreenState extends ConsumerState<PatientBillingScreen> {
                       if (patient.hasOutstandingBalance)
                         Text(
                           'Outstanding: ₹${patient.totalOutstanding.toStringAsFixed(0)}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: HospitalTheme.error,
                             fontWeight: FontWeight.w600,
                           ),
@@ -514,7 +514,7 @@ class _PatientBillingScreenState extends ConsumerState<PatientBillingScreen> {
                       ),
                       Text(
                         '${patient.totalAdmissions} admissions',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: HospitalTheme.textMedium,
                           fontSize: 12,
                         ),
@@ -594,7 +594,7 @@ class _PatientBillingScreenState extends ConsumerState<PatientBillingScreen> {
           CircleAvatar(
             radius: 40,
             backgroundColor: HospitalTheme.primary.withOpacity(0.1),
-            child: Icon(
+            child: const Icon(
               Icons.person,
               size: 40,
               color: HospitalTheme.primary,
@@ -615,7 +615,7 @@ class _PatientBillingScreenState extends ConsumerState<PatientBillingScreen> {
                 const SizedBox(height: 8),
                 Text(
                   'Patient ID: ${patient.patientId}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: HospitalTheme.textMedium,
                   ),
@@ -623,12 +623,12 @@ class _PatientBillingScreenState extends ConsumerState<PatientBillingScreen> {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    Icon(Icons.phone,
+                    const Icon(Icons.phone,
                         size: 16, color: HospitalTheme.textMedium),
                     const SizedBox(width: 8),
                     Text(patient.contact),
                     const SizedBox(width: 24),
-                    Icon(Icons.cake, size: 16, color: HospitalTheme.textMedium),
+                    const Icon(Icons.cake, size: 16, color: HospitalTheme.textMedium),
                     const SizedBox(width: 8),
                     Text('${patient.age} years'),
                     const SizedBox(width: 24),
@@ -1013,7 +1013,7 @@ class _PatientBillingScreenState extends ConsumerState<PatientBillingScreen> {
               ),
               child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.warning_amber_rounded,
                     color: HospitalTheme.error,
                     size: 24,
@@ -1023,7 +1023,7 @@ class _PatientBillingScreenState extends ConsumerState<PatientBillingScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Outstanding Balance Alert',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -1033,7 +1033,7 @@ class _PatientBillingScreenState extends ConsumerState<PatientBillingScreen> {
                         const SizedBox(height: 4),
                         Text(
                           'This patient has an outstanding balance of ₹${patient.totalOutstanding.toStringAsFixed(0)}. Consider sending a payment reminder.',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: HospitalTheme.textDark,
                             fontSize: 13,
                           ),
@@ -1113,7 +1113,7 @@ class _PatientBillingScreenState extends ConsumerState<PatientBillingScreen> {
             children: [
               Text(
                 'Outstanding Amount: ₹${patient.totalOutstanding.toStringAsFixed(0)}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.error,
                 ),

@@ -294,12 +294,12 @@ class FadeSlideTransition extends StatelessWidget {
   final Curve curve;
 
   const FadeSlideTransition({
-    Key? key,
+    super.key,
     required this.child,
     required this.animation,
     this.beginOffset = const Offset(0, 0.3),
     this.curve = Curves.easeOut,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -327,10 +327,10 @@ class StaggeredAnimations extends StatelessWidget {
   final Duration interval;
 
   const StaggeredAnimations({
-    Key? key,
+    super.key,
     required this.children,
     this.interval = const Duration(milliseconds: 100),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -518,9 +518,9 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
             if (!_isDesktopView && widget.showBackButton)
               Container(
                 height: 120,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: HospitalTheme.primary,
-                  borderRadius: const BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30),
                   ),
@@ -646,7 +646,7 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
                       color: Colors.white.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.local_hospital,
                       size: 120,
                       color: Colors.white,
@@ -738,7 +738,7 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
     if (!isDesktop) {
       formWidgets.add(Container(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: HospitalTheme.surfaceLight,
         ),
@@ -764,7 +764,7 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
 
       formWidgets.add(SizedBox(height: spacing * 0.4));
 
-      formWidgets.add(Text(
+      formWidgets.add(const Text(
         "Nurse Portal - Please login to continue",
         textAlign: TextAlign.center,
         style: TextStyle(
@@ -778,7 +778,7 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
 
     // Desktop heading
     if (isDesktop) {
-      formWidgets.add(Text(
+      formWidgets.add(const Text(
         "Login to your account",
         style: TextStyle(
           fontSize: 28,
@@ -804,24 +804,24 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
       decoration: InputDecoration(
         labelText: 'Email Address',
         hintText: 'Enter your email',
-        prefixIcon: Icon(Icons.email_outlined, color: HospitalTheme.primary),
+        prefixIcon: const Icon(Icons.email_outlined, color: HospitalTheme.primary),
         filled: true,
         fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: HospitalTheme.border),
+          borderSide: const BorderSide(color: HospitalTheme.border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: HospitalTheme.border),
+          borderSide: const BorderSide(color: HospitalTheme.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+          borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: HospitalTheme.error, width: 1),
+          borderSide: const BorderSide(color: HospitalTheme.error, width: 1),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -856,7 +856,7 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
       decoration: InputDecoration(
         labelText: 'Password',
         hintText: 'Enter your password',
-        prefixIcon: Icon(Icons.lock_outlined, color: HospitalTheme.primary),
+        prefixIcon: const Icon(Icons.lock_outlined, color: HospitalTheme.primary),
         suffixIcon: IconButton(
           icon: Icon(
             formState.isPasswordVisible
@@ -874,19 +874,19 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
         fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: HospitalTheme.border),
+          borderSide: const BorderSide(color: HospitalTheme.border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: HospitalTheme.border),
+          borderSide: const BorderSide(color: HospitalTheme.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+          borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: HospitalTheme.error, width: 1),
+          borderSide: const BorderSide(color: HospitalTheme.error, width: 1),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -913,8 +913,8 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
       child: TextButton(
         onPressed: () {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text(
+            const SnackBar(
+              content: Text(
                   "Please contact administrator to reset your password"),
               backgroundColor: HospitalTheme.info,
               behavior: SnackBarBehavior.floating,
@@ -985,7 +985,7 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
           width: 1,
         ),
       ),
-      child: Row(
+      child: const Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -994,7 +994,7 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
             color: HospitalTheme.primary,
             size: 22,
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: 10),
           Text(
             "Hospital Management System",
             style: TextStyle(
@@ -1016,7 +1016,7 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
   }
 
   Widget _buildKeyboardHints() {
-    return Column(
+    return const Column(
       children: [
         Text(
           'Keyboard Shortcuts:',
@@ -1027,7 +1027,7 @@ class _NurseLoginScreenState extends ConsumerState<NurseLoginScreen>
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 4.0),
+        SizedBox(height: 4.0),
         Text(
           'Ctrl+Enter: Sign in • Escape: Go back',
           style: TextStyle(

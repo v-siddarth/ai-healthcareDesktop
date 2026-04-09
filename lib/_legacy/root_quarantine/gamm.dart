@@ -11,7 +11,7 @@ final gameScoreProvider = StateProvider<int>((ref) => 0);
 final gameLifeProvider = StateProvider<int>((ref) => 3);
 
 class BirdGameScreen extends ConsumerStatefulWidget {
-  const BirdGameScreen({Key? key}) : super(key: key);
+  const BirdGameScreen({super.key});
 
   @override
   _BirdGameScreenState createState() => _BirdGameScreenState();
@@ -221,7 +221,7 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
       ..clearSnackBars()
       ..showSnackBar(SnackBar(
         content: Text(hit ? 'Hit! +10 points' : 'Missed!'),
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         backgroundColor: hit ? Colors.green : Colors.red,
       ));
   }
@@ -261,18 +261,18 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
     _gameTimer?.cancel();
 
     // Show game over dialog after a brief delay
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) => AlertDialog(
-          title: Text('Game Over!'),
+          title: const Text('Game Over!'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text('Your score: $_score'),
-              SizedBox(height: 20),
-              Text('Would you like to play again?'),
+              const SizedBox(height: 20),
+              const Text('Would you like to play again?'),
             ],
           ),
           actions: [
@@ -281,14 +281,14 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
                 Navigator.pop(context);
                 Navigator.pop(context); // Return to previous screen
               },
-              child: Text('Exit'),
+              child: const Text('Exit'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
                 _startGame();
               },
-              child: Text('Play Again'),
+              child: const Text('Play Again'),
             ),
           ],
         ),
@@ -303,12 +303,12 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bird Shooter Game'),
+        title: const Text('Bird Shooter Game'),
         backgroundColor: Colors.green[700],
         actions: [
           if (isConnected && connectedDevice != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
+            const Padding(
+              padding: EdgeInsets.only(right: 16.0),
               child: Row(
                 children: [
                   Icon(Icons.phone_android, color: Colors.white),
@@ -405,7 +405,7 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
                   border: Border.all(color: Colors.red, width: 2),
                   shape: BoxShape.circle,
                 ),
-                child: Center(
+                child: const Center(
                   child: Icon(
                     Icons.add,
                     color: Colors.red,
@@ -424,14 +424,14 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
                       color: Colors.black54,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       'Score: $_score',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -441,9 +441,9 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
                   Row(
                     children: List.generate(
                         _lives,
-                        (index) => Padding(
+                        (index) => const Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                                  EdgeInsets.symmetric(horizontal: 4.0),
                               child: Icon(Icons.favorite,
                                   color: Colors.red, size: 30),
                             )),
@@ -459,13 +459,13 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
                 left: 0,
                 right: 0,
                 child: Container(
-                  padding: EdgeInsets.all(12),
-                  margin: EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.all(12),
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
                   decoration: BoxDecoration(
                     color: Colors.black54,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.phone_android, color: Colors.white),
@@ -494,14 +494,14 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
                     color: Colors.black.withOpacity(0.7),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Connection Logs",
                             style: TextStyle(
                               color: Colors.white,
@@ -509,7 +509,7 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
                             ),
                           ),
                           IconButton(
-                            icon: Icon(Icons.close, color: Colors.white),
+                            icon: const Icon(Icons.close, color: Colors.white),
                             onPressed: () {
                               setState(() {
                                 _showLogs = false;
@@ -517,11 +517,11 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
                             },
                             iconSize: 16,
                             padding: EdgeInsets.zero,
-                            constraints: BoxConstraints(),
+                            constraints: const BoxConstraints(),
                           ),
                         ],
                       ),
-                      Divider(color: Colors.white30),
+                      const Divider(color: Colors.white30),
                       Expanded(
                         child: ListView.builder(
                           itemCount: _logMessages.length,
@@ -531,7 +531,7 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
                               padding: const EdgeInsets.only(bottom: 4.0),
                               child: Text(
                                 _logMessages[_logMessages.length - 1 - index],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white70,
                                   fontSize: 12,
                                 ),
@@ -551,7 +551,7 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
                 opacity: _fadeAnimation,
                 child: Container(
                   color: Colors.black54,
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'GAME OVER',
                       style: TextStyle(
@@ -568,8 +568,8 @@ class _BirdGameScreenState extends ConsumerState<BirdGameScreen>
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _fireBullet,
-        child: Icon(Icons.movie_filter),
         backgroundColor: Colors.red,
+        child: Icon(Icons.movie_filter),
       ),
     );
   }

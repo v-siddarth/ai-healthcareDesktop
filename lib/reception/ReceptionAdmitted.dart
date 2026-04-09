@@ -342,7 +342,7 @@ final totalPagesProvider = Provider<int>((ref) {
 });
 
 class ReceptionBedManagementScreen extends ConsumerStatefulWidget {
-  const ReceptionBedManagementScreen({Key? key}) : super(key: key);
+  const ReceptionBedManagementScreen({super.key});
 
   @override
   ConsumerState<ReceptionBedManagementScreen> createState() =>
@@ -380,7 +380,7 @@ class _ReceptionBedManagementScreenState
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/admin/getAllSections'),
+        Uri.parse('$KVM_URL/admin/getAllSections'),
       );
 
       if (response.statusCode == 200) {
@@ -419,7 +419,7 @@ class _ReceptionBedManagementScreenState
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/reception/getAdmittedPatients'),
+        Uri.parse('$KVM_URL/reception/getAdmittedPatients'),
       );
 
       if (response.statusCode == 200) {
@@ -448,7 +448,7 @@ class _ReceptionBedManagementScreenState
     try {
       // Fetch available beds
       final availableResponse = await http.get(
-        Uri.parse('${KVM_URL}/reception/availableBeds/${section.id}'),
+        Uri.parse('$KVM_URL/reception/availableBeds/${section.id}'),
       );
 
       if (availableResponse.statusCode == 200) {
@@ -462,7 +462,7 @@ class _ReceptionBedManagementScreenState
 
         // Fetch occupied beds
         final occupiedResponse = await http.get(
-          Uri.parse('${KVM_URL}/reception/occupiedBeds/${section.id}'),
+          Uri.parse('$KVM_URL/reception/occupiedBeds/${section.id}'),
         );
 
         if (occupiedResponse.statusCode == 200) {
@@ -500,7 +500,7 @@ class _ReceptionBedManagementScreenState
 
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/assignBedToPatient'),
+        Uri.parse('$KVM_URL/reception/assignBedToPatient'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'patientId': selection.patientId,
@@ -716,7 +716,7 @@ class _ReceptionBedManagementScreenState
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: _getSectionColor(section.type).withOpacity(0.1),
-                border: Border(
+                border: const Border(
                   bottom: BorderSide(color: HospitalTheme.border),
                 ),
               ),
@@ -873,7 +873,7 @@ class _ReceptionBedManagementScreenState
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
-                headingRowColor: MaterialStateProperty.all(
+                headingRowColor: WidgetStateProperty.all(
                   HospitalTheme.surfaceLight,
                 ),
                 columns: const [
@@ -1133,9 +1133,9 @@ class _ReceptionBedManagementScreenState
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: HospitalTheme.primary),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Icon(Icons.medical_services,
                           color: HospitalTheme.primary),
                       SizedBox(width: 8),
@@ -1241,10 +1241,10 @@ class _ReceptionBedManagementScreenState
     }
 
     if (patients.isEmpty) {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Icon(Icons.person_off, size: 48, color: HospitalTheme.textMedium),
             SizedBox(height: 16),
             Text(
@@ -1298,7 +1298,7 @@ class _ReceptionBedManagementScreenState
         if (totalPages > 1)
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               border: Border(
                 top: BorderSide(color: HospitalTheme.border),
@@ -1598,7 +1598,7 @@ class _ReceptionBedManagementScreenState
           // Header
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [HospitalTheme.primary, HospitalTheme.primaryLight],
                 begin: Alignment.topLeft,
@@ -1640,7 +1640,7 @@ class _ReceptionBedManagementScreenState
           if (!uiState.isPatientsExpanded)
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.cardBackground,
                 border: Border(
                   top: BorderSide(color: HospitalTheme.border),
@@ -1761,7 +1761,7 @@ class _ReceptionBedManagementScreenState
           if (selection.patient != null)
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.surfaceLight,
                 border: Border(
                   top: BorderSide(color: HospitalTheme.border),
@@ -1854,7 +1854,7 @@ class _ReceptionBedManagementScreenState
                   const Icon(Icons.search, color: HospitalTheme.primary),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: HospitalTheme.border),
+                borderSide: const BorderSide(color: HospitalTheme.border),
               ),
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
@@ -2107,9 +2107,9 @@ class _ReceptionBedManagementScreenState
                 );
               } catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                  const SnackBar(
                     content:
-                        const Text('Patient data not found in admitted list'),
+                        Text('Patient data not found in admitted list'),
                     backgroundColor: HospitalTheme.error,
                     behavior: SnackBarBehavior.floating,
                   ),

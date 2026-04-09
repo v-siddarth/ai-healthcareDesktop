@@ -82,31 +82,31 @@ class InsuranceTheme {
   static BorderRadius get radiusXLarge => BorderRadius.circular(24);
 
   // Professional Gradients (Subtle)
-  static LinearGradient get primaryGradient => LinearGradient(
+  static LinearGradient get primaryGradient => const LinearGradient(
         colors: [primaryNavy, primaryBlue],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
 
-  static LinearGradient get secondaryGradient => LinearGradient(
+  static LinearGradient get secondaryGradient => const LinearGradient(
         colors: [secondaryTeal, primaryBlue],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
 
-  static LinearGradient get accentGradient => LinearGradient(
+  static LinearGradient get accentGradient => const LinearGradient(
         colors: [accentGold, Color(0xFFEAB308)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
 
-  static LinearGradient get successGradient => LinearGradient(
+  static LinearGradient get successGradient => const LinearGradient(
         colors: [successGreen, Color(0xFF10B981)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
 
-  static LinearGradient get backgroundGradient => LinearGradient(
+  static LinearGradient get backgroundGradient => const LinearGradient(
         colors: [backgroundStart, backgroundEnd],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -114,15 +114,13 @@ class InsuranceTheme {
 
   // Professional Theme Data
   static ThemeData get themeData => ThemeData.light().copyWith(
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: primaryBlue,
           secondary: secondaryTeal,
           surface: surfaceElevated,
-          background: backgroundStart,
           onPrimary: textOnPrimary,
           onSecondary: textOnAccent,
           onSurface: textPrimary,
-          onBackground: textPrimary,
         ),
         scaffoldBackgroundColor: backgroundStart,
         textTheme: ThemeData.light().textTheme.apply(
@@ -133,7 +131,7 @@ class InsuranceTheme {
           elevation: 1,
           shadowColor: Colors.black.withOpacity(0.1),
           centerTitle: false,
-          titleTextStyle: TextStyle(
+          titleTextStyle: const TextStyle(
             color: textPrimary,
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -198,7 +196,7 @@ class InsuranceTheme {
                   color: backgroundColor ?? surfaceElevated,
                   borderRadius: borderRadius ?? radiusMedium,
                   border: Border.all(
-                    color: Color(0xFFE5E7EB),
+                    color: const Color(0xFFE5E7EB),
                     width: 1,
                   ),
                   boxShadow: isHovered ? elevatedShadow : cardShadow,
@@ -271,7 +269,7 @@ class InsuranceTheme {
                   if (icon != null && !isLoading) const SizedBox(width: 8),
                   Text(
                     label,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                       letterSpacing: 0.3,
@@ -331,7 +329,7 @@ class InsuranceTheme {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               color: textPrimary,
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -341,7 +339,7 @@ class InsuranceTheme {
           if (subtitle != null)
             Text(
               subtitle,
-              style: TextStyle(
+              style: const TextStyle(
                 color: textSecondary,
                 fontSize: 13,
                 fontWeight: FontWeight.w400,
@@ -355,7 +353,7 @@ class InsuranceTheme {
       actions: actions,
       leading: showBackButton
           ? IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_rounded,
                 color: textPrimary,
                 size: 20,
@@ -408,7 +406,7 @@ class InsuranceTheme {
           const SizedBox(height: 16),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w700,
               color: textPrimary,
@@ -418,7 +416,7 @@ class InsuranceTheme {
           const SizedBox(height: 4),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: textSecondary,
               fontWeight: FontWeight.w500,
@@ -428,7 +426,7 @@ class InsuranceTheme {
             const SizedBox(height: 2),
             Text(
               subtitle,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: textTertiary,
               ),
@@ -494,7 +492,7 @@ class InsuranceTheme {
                   children: [
                     Text(
                       clientName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: textPrimary,
@@ -503,7 +501,7 @@ class InsuranceTheme {
                     const SizedBox(height: 2),
                     Text(
                       'ID: $clientId',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
                         color: textTertiary,
                       ),
@@ -569,7 +567,7 @@ class InsuranceTheme {
           const SizedBox(width: 8),
           Text(
             '$label: ',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               color: textSecondary,
               fontWeight: FontWeight.w500,
@@ -578,7 +576,7 @@ class InsuranceTheme {
           Expanded(
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13,
                 color: textPrimary,
                 fontWeight: FontWeight.w600,
@@ -621,7 +619,7 @@ class InsuranceTheme {
               Expanded(
                 child: Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: textPrimary,

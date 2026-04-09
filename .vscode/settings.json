@@ -1,3 +1,4 @@
 {
-  "cmake.sourceDirectory": "/Users/aadarshmane/Desktop/20sHub/doctordesktop/linux"
+  "cmake.sourceDirectory": "/Users/aadarshmane/Desktop/20sHub/doctordesktop/linux",
+  "dart.flutterSdkPath": ".fvm/versions/3.27.1"
 }

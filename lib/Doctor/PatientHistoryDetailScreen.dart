@@ -11,9 +11,9 @@ class PatientHistoryDetailScreen extends StatefulWidget {
   final String patientId;
 
   const PatientHistoryDetailScreen({
-    Key? key,
+    super.key,
     required this.patientId,
-  }) : super(key: key);
+  });
 
   @override
   _PatientHistoryDetailScreenState createState() =>
@@ -77,7 +77,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
       });
 
       final url = Uri.parse(
-          '${KVM_URL}/doctors/getPatientHistory1/${widget.patientId}');
+          '$KVM_URL/doctors/getPatientHistory1/${widget.patientId}');
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -106,7 +106,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Patient History Details',
           style: TextStyle(
             color: textDark,
@@ -115,10 +115,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
         ),
         backgroundColor: Colors.white,
         elevation: 2,
-        iconTheme: IconThemeData(color: primary),
+        iconTheme: const IconThemeData(color: primary),
       ),
       body: isLoading
-          ? Center(
+          ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -139,27 +139,27 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.error_outline,
                         color: error,
                         size: 64,
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Text(
                         errorMessage,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: textMedium,
                           fontSize: 16,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
                       ElevatedButton(
                         onPressed: fetchPatientHistory,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                         ),
-                        child: Text('Retry'),
+                        child: const Text('Retry'),
                       ),
                     ],
                   ),
@@ -174,13 +174,13 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
         // Left Sidebar with Patient Info
         Container(
           width: 300,
-          color: Color(0xFF1E2843), // Dark navy background
+          color: const Color(0xFF1E2843), // Dark navy background
           child: Column(
             children: [
               // Patient info header
               Container(
-                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
                       Color(0xFF2C3E50),
@@ -199,7 +199,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                           color: Colors.white.withOpacity(0.3),
                           width: 3,
                         ),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Colors.black26,
                             blurRadius: 10,
@@ -214,7 +214,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                                   ?.substring(0, 1)
                                   .toUpperCase() ??
                               'P',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -222,20 +222,20 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                         ),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       patientHistory['name'] ?? 'Patient Name',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       'ID: ${patientHistory['patientId'] ?? 'Unknown ID'}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 14,
                       ),
@@ -247,7 +247,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
               // Patient details
               Expanded(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -267,7 +267,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                         ],
                       ),
 
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
 
                       _buildSidebarSection(
                         title: 'Admission Summary',
@@ -289,7 +289,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                         ],
                       ),
 
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
 
                       // Navigation Buttons
                       _buildActionButton(
@@ -298,14 +298,14 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                         onTap: () {
                           // PDF export feature would be implemented here
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 content:
                                     Text('PDF export feature coming soon')),
                           );
                         },
                       ),
 
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
                       _buildActionButton(
                         icon: Icons.print,
@@ -313,7 +313,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                         onTap: () {
                           // Print implementation would go here
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 content: Text('Print feature coming soon')),
                           );
                         },
@@ -385,7 +385,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, size: isSelected ? 22 : 20),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text(
             label,
             style: TextStyle(
@@ -405,16 +405,16 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
       children: [
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.05),
             borderRadius: BorderRadius.circular(8),
@@ -433,7 +433,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
   Widget _buildInfoItem(String label, String value, IconData icon) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -442,22 +442,22 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
             size: 16,
             color: Colors.white70,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   label,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white70,
                     fontSize: 12,
                   ),
                 ),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Text(
                   value,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -483,7 +483,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
         borderRadius: BorderRadius.circular(8),
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.white.withOpacity(0.2),
@@ -497,10 +497,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                 size: 20,
                 color: Colors.white,
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -523,11 +523,11 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
     }
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Admission History',
             style: TextStyle(
               fontSize: 22,
@@ -535,10 +535,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
               color: textDark,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: historyList.length,
             itemBuilder: (context, index) {
               final admission = historyList[index];
@@ -574,7 +574,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
     }
 
     return Card(
-      margin: EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -584,7 +584,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
         children: [
           // Header with status
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [primary, primaryLight],
                 begin: Alignment.centerLeft,
@@ -595,25 +595,25 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                 topRight: Radius.circular(12),
               ),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.local_hospital,
                   color: Colors.white,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   'Admission #${index + 1}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(16),
@@ -628,10 +628,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                           shape: BoxShape.circle,
                         ),
                       ),
-                      SizedBox(width: 6),
+                      const SizedBox(width: 6),
                       Text(
                         status,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -646,7 +646,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
           // Content
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -669,8 +669,8 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
                 // Additional details for discharged patients
                 if (admission['dischargeDate'] != null) ...[
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Discharge Details',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -678,7 +678,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                       color: textDark,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   _buildAdmissionInfoRow('Condition at Discharge',
                       admission['conditionAtDischarge'] ?? 'N/A'),
                   _buildAdmissionInfoRow(
@@ -697,15 +697,15 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
   Widget _buildAdmissionInfoRow(String label, String value) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             width: 160,
             child: Text(
-              label + ':',
-              style: TextStyle(
+              '$label:',
+              style: const TextStyle(
                 color: textMedium,
                 fontWeight: FontWeight.w500,
               ),
@@ -714,7 +714,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
           Expanded(
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 color: textDark,
                 fontWeight: FontWeight.w600,
               ),
@@ -728,7 +728,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
   Widget _buildTableHeader(String text) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         fontWeight: FontWeight.bold,
         color: primary,
       ),
@@ -754,11 +754,11 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
     }
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Prescriptions',
             style: TextStyle(
               fontSize: 22,
@@ -766,7 +766,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
               color: textDark,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
 
           // Prescriptions table
           Container(
@@ -777,7 +777,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                 BoxShadow(
                   color: Colors.black.withOpacity(0.05),
                   blurRadius: 10,
-                  offset: Offset(0, 4),
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
@@ -787,12 +787,12 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                 Container(
                   decoration: BoxDecoration(
                     color: primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12),
                       topRight: Radius.circular(12),
                     ),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                   child: Row(
                     children: [
                       Expanded(flex: 3, child: _buildTableHeader('Medicine')),
@@ -808,7 +808,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                 // Table content
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: allPrescriptions.length,
                   itemBuilder: (context, index) {
                     final prescription = allPrescriptions[index];
@@ -823,14 +823,14 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                         ),
                       ),
                       padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                          const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                       child: Row(
                         children: [
                           Expanded(
                             flex: 3,
                             child: Text(
                               medicine['name'] ?? 'N/A',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 color: textDark,
                               ),
@@ -962,11 +962,11 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
     }
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Symptoms & Diagnosis',
             style: TextStyle(
               fontSize: 22,
@@ -974,10 +974,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
               color: textDark,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: allEntries.length,
             itemBuilder: (context, index) {
               final entry = allEntries[index];
@@ -1015,18 +1015,18 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
     }
 
     return Card(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: color.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
@@ -1037,7 +1037,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                 size: 24,
               ),
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1046,7 +1046,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                     children: [
                       Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                         decoration: BoxDecoration(
                           color: color.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(16),
@@ -1060,24 +1060,24 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       if (dateStr != null)
                         Text(
                           dateStr != null
                               ? DateFormat('MMM dd, yyyy - hh:mm a')
                                   .format(dateStr)
                               : 'N/A',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: textMedium,
                             fontSize: 12,
                           ),
                         ),
                     ],
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Text(
                     mainContent,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       color: textDark,
                     ),
@@ -1117,11 +1117,11 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
     }
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Vitals Records',
             style: TextStyle(
               fontSize: 22,
@@ -1129,10 +1129,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
               color: textDark,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: allVitals.length,
             itemBuilder: (context, index) {
               final vital = allVitals[index];
@@ -1146,7 +1146,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
   Widget _buildVitalCard(Map<String, dynamic> vital, int index) {
     return Card(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -1158,31 +1158,31 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
           Container(
             decoration: BoxDecoration(
               color: medical.withOpacity(0.1),
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.monitor_heart,
                   color: medical,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   'Vital Record #${index + 1}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: medical,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   _formatDate(vital['recordedAt']),
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: textMedium,
                     fontSize: 12,
                   ),
@@ -1193,7 +1193,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
           // Content
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -1215,15 +1215,15 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
   Widget _buildVitalInfoRow(String label, String value) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             width: 150,
             child: Text(
-              label + ':',
-              style: TextStyle(
+              '$label:',
+              style: const TextStyle(
                 color: textMedium,
                 fontWeight: FontWeight.w500,
               ),
@@ -1232,7 +1232,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
           Expanded(
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 color: textDark,
                 fontWeight: FontWeight.w600,
               ),
@@ -1267,11 +1267,11 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
     }
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Lab Reports',
             style: TextStyle(
               fontSize: 22,
@@ -1279,10 +1279,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
               color: textDark,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: allLabReports.length,
             itemBuilder: (context, index) {
               final report = allLabReports[index];
@@ -1296,7 +1296,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
   Widget _buildLabReportCard(Map<String, dynamic> report) {
     return Card(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -1308,13 +1308,13 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
             _methods.openPdf(report['reportUrl']);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Report URL not available')),
+              const SnackBar(content: Text('Report URL not available')),
             );
           }
         },
         borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Row(
             children: [
               Container(
@@ -1324,36 +1324,36 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                   color: laboratory.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.description,
                   color: laboratory,
                 ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       report['labTestName'] ?? 'Unknown Lab Test',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         color: textDark,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       'Test Type: ${report['labType'] ?? 'N/A'}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: textMedium,
                         fontSize: 14,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       'Uploaded: ${_formatDate(report['uploadedAt'])}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: textMedium,
                         fontSize: 12,
                       ),
@@ -1361,7 +1361,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                   ],
                 ),
               ),
-              Icon(
+              const Icon(
                 Icons.open_in_new,
                 color: primary,
                 size: 20,
@@ -1398,11 +1398,11 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
     }
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Doctor Notes',
             style: TextStyle(
               fontSize: 22,
@@ -1410,10 +1410,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
               color: textDark,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: allNotes.length,
             itemBuilder: (context, index) {
               final note = allNotes[index];
@@ -1427,47 +1427,47 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
   Widget _buildNoteCard(Map<String, dynamic> note) {
     return Card(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.note_alt,
                     color: primary,
                     size: 20,
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Dr. ${note['doctorName'] ?? 'Unknown'}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                           color: textDark,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         '${note['date'] ?? 'Unknown date'} ${note['time'] ?? ''}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: textMedium,
                           fontSize: 12,
                         ),
@@ -1477,9 +1477,9 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.grey.shade50,
                 borderRadius: BorderRadius.circular(8),
@@ -1489,7 +1489,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
               ),
               child: Text(
                 note['text'] ?? 'No content',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: textDark,
                   height: 1.5,
@@ -1538,11 +1538,11 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
     }
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Follow-Up Records',
             style: TextStyle(
               fontSize: 22,
@@ -1550,10 +1550,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
               color: textDark,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: allFollowUps.length,
             itemBuilder: (context, index) {
               final followUp = allFollowUps[index];
@@ -1570,7 +1570,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
     final color = isRegular ? primary : accent;
 
     return Card(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -1582,19 +1582,19 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
           Container(
             decoration: BoxDecoration(
               color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Row(
               children: [
                 Icon(
                   Icons.follow_the_signs,
                   color: color,
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   '${followUp['type']} Follow-Up #${index + 1}',
                   style: TextStyle(
@@ -1603,10 +1603,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                     fontSize: 16,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   followUp['date'] ?? 'Unknown date',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: textMedium,
                     fontSize: 12,
                   ),
@@ -1617,7 +1617,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
           // Content
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -1627,8 +1627,8 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                   _buildFollowUpInfoRow(
                       'Observations', followUp['observations']),
 
-                SizedBox(height: 16),
-                Text(
+                const SizedBox(height: 16),
+                const Text(
                   'Vital Signs',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -1636,7 +1636,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                     color: textDark,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
 
                 // If 4-hour follow-up, use the fourhr* fields, otherwise use regular fields
                 _buildFollowUpInfoRow(
@@ -1669,8 +1669,8 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
                 if (followUp['ivFluid'] != null ||
                     followUp['fourhrivFluid'] != null) ...[
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Fluids & Output',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -1678,7 +1678,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                       color: textDark,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   _buildFollowUpInfoRow(
                       'IV Fluid',
                       isRegular
@@ -1712,8 +1712,8 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
                 // Ventilator information if available
                 if (followUp['ventyMode'] != null) ...[
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Ventilator Settings',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -1721,7 +1721,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
                       color: textDark,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   _buildFollowUpInfoRow(
                       'Ventilator Mode', followUp['ventyMode'] ?? 'N/A'),
                   _buildFollowUpInfoRow(
@@ -1746,15 +1746,15 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
 
   Widget _buildFollowUpInfoRow(String label, String value) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             width: 160,
             child: Text(
-              label + ':',
-              style: TextStyle(
+              '$label:',
+              style: const TextStyle(
                 color: textMedium,
                 fontWeight: FontWeight.w500,
               ),
@@ -1763,7 +1763,7 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
           Expanded(
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 color: textDark,
                 fontWeight: FontWeight.w600,
               ),
@@ -1785,10 +1785,10 @@ class _PatientHistoryDetailScreenState extends State<PatientHistoryDetailScreen>
             size: 80,
             color: Colors.grey.shade300,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             message,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               color: textMedium,
               fontWeight: FontWeight.w500,

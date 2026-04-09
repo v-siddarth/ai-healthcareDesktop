@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:table_calendar/table_calendar.dart';
 
 final nursesProvider = FutureProvider<List<String>>((ref) async {
-  final response = await http.get(Uri.parse('${KVM_URL}/doctors/allNurses'));
+  final response = await http.get(Uri.parse('$KVM_URL/doctors/allNurses'));
   if (response.statusCode == 200) {
     final List data = json.decode(response.body);
     final filteredNurses = data
@@ -24,7 +24,7 @@ final nursesProvider = FutureProvider<List<String>>((ref) async {
 final attendanceProvider =
     FutureProvider.family<List<Attendance>, String>((ref, name) async {
   final response =
-      await http.get(Uri.parse('${KVM_URL}/doctors/allAttendees/?name=$name'));
+      await http.get(Uri.parse('$KVM_URL/doctors/allAttendees/?name=$name'));
   if (response.statusCode == 200) {
     final List data = json.decode(response.body);
     return data.map((json) => Attendance.fromJson(json)).toList();
@@ -71,6 +71,8 @@ class CheckOut {
 }
 
 class GetAllAttendance extends ConsumerStatefulWidget {
+  const GetAllAttendance({super.key});
+
   @override
   _GetAllAttendanceState createState() => _GetAllAttendanceState();
 }
@@ -105,7 +107,7 @@ class _GetAllAttendanceState extends ConsumerState<GetAllAttendance> {
     final nursesState = ref.watch(nursesProvider);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: Text("Nurse Attendance")),
+      appBar: AppBar(title: const Text("Nurse Attendance")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -113,15 +115,15 @@ class _GetAllAttendanceState extends ConsumerState<GetAllAttendance> {
             Container(
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                color: Color(0xffff96a8),
+                color: const Color(0xffff96a8),
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Text(
+              child: const Text(
                 "Select Nurse to view attendance",
                 style: TextStyle(fontSize: 18),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             nursesState.when(
               data: (nurses) => Container(
                 padding: const EdgeInsets.only(
@@ -136,7 +138,7 @@ class _GetAllAttendanceState extends ConsumerState<GetAllAttendance> {
                   focusColor: Colors.amber,
                   iconEnabledColor: Colors.cyan,
                   value: selectedNurse,
-                  hint: Text("Select Nurse"),
+                  hint: const Text("Select Nurse"),
                   items: nurses
                       .map((nurse) =>
                           DropdownMenuItem(value: nurse, child: Text(nurse)))
@@ -150,10 +152,10 @@ class _GetAllAttendanceState extends ConsumerState<GetAllAttendance> {
                   },
                 ),
               ),
-              loading: () => CircularProgressIndicator(),
+              loading: () => const CircularProgressIndicator(),
               error: (e, _) => Text("Error loading nurses ${e.toString()}"),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TableCalendar(
               firstDay: DateTime.utc(2020, 1, 1),
               lastDay: DateTime.utc(2030, 12, 31),
@@ -167,7 +169,7 @@ class _GetAllAttendanceState extends ConsumerState<GetAllAttendance> {
                   DateTime dayOnly = DateTime(date.year, date.month, date.day);
                   if (presentDays[dayOnly] == true) {
                     // Ensure it checks for `true`
-                    return Positioned(
+                    return const Positioned(
                       bottom: 5,
                       child: Icon(Icons.check_circle,
                           color: Colors.green, size: 16),
@@ -177,7 +179,7 @@ class _GetAllAttendanceState extends ConsumerState<GetAllAttendance> {
                 },
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             if (selectedNurse != null)
               AttendanceList(
                   nurseName: selectedNurse!, selectedDate: selectedDay),
@@ -192,7 +194,7 @@ class AttendanceList extends ConsumerWidget {
   final String nurseName;
   final DateTime selectedDate;
 
-  AttendanceList({required this.nurseName, required this.selectedDate});
+  const AttendanceList({super.key, required this.nurseName, required this.selectedDate});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -208,7 +210,7 @@ class AttendanceList extends ConsumerWidget {
           }).toList();
 
           if (filteredList.isEmpty) {
-            return Center(child: Text("No attendance records found."));
+            return const Center(child: Text("No attendance records found."));
           }
 
           return Column(
@@ -223,14 +225,14 @@ class AttendanceList extends ConsumerWidget {
                   color: Colors.blueAccent,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Expanded(child: Text("Date", style: _headerStyle)),
-                    const VerticalDivider(),
+                    VerticalDivider(),
                     Expanded(child: Text("Check-in", style: _headerStyle)),
-                    const VerticalDivider(),
+                    VerticalDivider(),
                     Expanded(child: Text("Check-out", style: _headerStyle)),
-                    const VerticalDivider(),
+                    VerticalDivider(),
                     Expanded(child: Text("Status", style: _headerStyle)),
                   ],
                 ),
@@ -248,9 +250,9 @@ class AttendanceList extends ConsumerWidget {
             ],
           );
         },
-        loading: () => Center(child: CircularProgressIndicator()),
+        loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => Center(
-          child: Text(error.toString(), style: TextStyle(color: Colors.red)),
+          child: Text(error.toString(), style: const TextStyle(color: Colors.red)),
         ),
       ),
     );
@@ -265,12 +267,12 @@ class AttendanceList extends ConsumerWidget {
 
 class AttendanceCard extends StatelessWidget {
   final Attendance attendance;
-  AttendanceCard({required this.attendance});
+  const AttendanceCard({super.key, required this.attendance});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       margin: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
         color: Colors.grey[200],
@@ -281,11 +283,11 @@ class AttendanceCard extends StatelessWidget {
           Row(
             children: [
               Expanded(child: Text(attendance.date)),
-              VerticalDivider(),
+              const VerticalDivider(),
               Expanded(child: Text(attendance.checkIn.time)),
-              VerticalDivider(),
+              const VerticalDivider(),
               Expanded(child: Text(attendance.checkOut?.time ?? "-")),
-              VerticalDivider(),
+              const VerticalDivider(),
               Expanded(
                 child: Text(
                   attendance.status,

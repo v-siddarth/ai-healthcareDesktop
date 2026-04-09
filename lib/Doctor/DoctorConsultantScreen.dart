@@ -11,10 +11,10 @@ class EnhancedDoctorConsultingScreen extends ConsumerStatefulWidget {
   final String admissionId;
 
   const EnhancedDoctorConsultingScreen({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
-  }) : super(key: key);
+  });
 
   @override
   ConsumerState<EnhancedDoctorConsultingScreen> createState() =>
@@ -217,7 +217,7 @@ class _EnhancedDoctorConsultingScreenState
           const SizedBox(width: 8),
         ],
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Row(
@@ -231,7 +231,7 @@ class _EnhancedDoctorConsultingScreenState
             if (isWideScreen)
               Container(
                 width: 320,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: HospitalTheme.cardBackground,
                   border: Border(
                     left: BorderSide(color: HospitalTheme.border),
@@ -347,7 +347,7 @@ class _EnhancedDoctorConsultingScreenState
               const SizedBox(width: 12),
               Text(
                 category,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.primary,
@@ -373,7 +373,7 @@ class _EnhancedDoctorConsultingScreenState
                 config['rows'] as int,
               ),
             );
-          }).toList(),
+          }),
       ],
     );
   }
@@ -429,10 +429,10 @@ class _EnhancedDoctorConsultingScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
               Icon(Icons.person_outline, color: HospitalTheme.primary),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               Text(
                 'Patient Information',
                 style: TextStyle(
@@ -450,7 +450,7 @@ class _EnhancedDoctorConsultingScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Patient ID',
                       style: TextStyle(
                         fontSize: 12,
@@ -459,7 +459,7 @@ class _EnhancedDoctorConsultingScreenState
                     ),
                     Text(
                       widget.patientId,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
@@ -472,7 +472,7 @@ class _EnhancedDoctorConsultingScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Admission ID',
                       style: TextStyle(
                         fontSize: 12,
@@ -481,7 +481,7 @@ class _EnhancedDoctorConsultingScreenState
                     ),
                     Text(
                       widget.admissionId,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
@@ -494,7 +494,7 @@ class _EnhancedDoctorConsultingScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Date & Time',
                       style: TextStyle(
                         fontSize: 12,
@@ -503,7 +503,7 @@ class _EnhancedDoctorConsultingScreenState
                     ),
                     Text(
                       DateFormat('MMM dd, yyyy • HH:mm').format(DateTime.now()),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
@@ -561,7 +561,7 @@ class _EnhancedDoctorConsultingScreenState
             const SizedBox(width: 8),
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: HospitalTheme.textDark,
@@ -608,7 +608,7 @@ class _EnhancedDoctorConsultingScreenState
             const SizedBox(width: 8),
             Text(
               fieldName,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: HospitalTheme.textDark,
@@ -630,7 +630,7 @@ class _EnhancedDoctorConsultingScreenState
             hintText: _getFieldHint(fieldName),
             suffixIcon: controller.text.isNotEmpty
                 ? IconButton(
-                    icon: Icon(Icons.clear, color: HospitalTheme.textMedium),
+                    icon: const Icon(Icons.clear, color: HospitalTheme.textMedium),
                     onPressed: () {
                       controller.clear();
                       setState(() {}); // Rebuild to hide clear button
@@ -651,11 +651,11 @@ class _EnhancedDoctorConsultingScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
               Icon(Icons.sentiment_satisfied_outlined,
                   color: HospitalTheme.primary),
-              const SizedBox(width: 12),
+              SizedBox(width: 12),
               Text(
                 'Wong Baker Faces Scale',
                 style: TextStyle(
@@ -705,7 +705,7 @@ class _EnhancedDoctorConsultingScreenState
                 const SizedBox(height: 8),
                 Text(
                   'Pain Level: ${_wongBakerValue.round()}/10',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.textDark,
@@ -713,7 +713,7 @@ class _EnhancedDoctorConsultingScreenState
                 ),
                 Text(
                   _getPainDescription(_wongBakerValue),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),
@@ -732,7 +732,7 @@ class _EnhancedDoctorConsultingScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Quick Actions',
             style: TextStyle(
               fontSize: 18,
@@ -800,7 +800,7 @@ class _EnhancedDoctorConsultingScreenState
               const SizedBox(width: 8),
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.textDark,
@@ -816,13 +816,13 @@ class _EnhancedDoctorConsultingScreenState
                       onTap: () => _handleQuickAction(action),
                       child: Row(
                         children: [
-                          Icon(Icons.arrow_forward_ios,
+                          const Icon(Icons.arrow_forward_ios,
                               size: 12, color: HospitalTheme.textMedium),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               action,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 13,
                                 color: HospitalTheme.textMedium,
                               ),
@@ -832,7 +832,7 @@ class _EnhancedDoctorConsultingScreenState
                       ),
                     ),
                   ))
-              .toList(),
+              ,
         ],
       ),
     );
@@ -848,7 +848,7 @@ class _EnhancedDoctorConsultingScreenState
             label: const Text('Save Draft'),
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 16),
-              side: BorderSide(color: HospitalTheme.primary),
+              side: const BorderSide(color: HospitalTheme.primary),
               foregroundColor: HospitalTheme.primary,
             ),
           ),

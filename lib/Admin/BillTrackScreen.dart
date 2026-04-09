@@ -413,7 +413,7 @@ final selectedBillProvider = StateProvider<Bill?>((ref) => null);
 
 final billsProvider =
     FutureProvider.family<BillsResponse, BillFilters>((ref, filters) async {
-  final uri = Uri.parse('${KVM_URL}/reception/getAllBills')
+  final uri = Uri.parse('$KVM_URL/reception/getAllBills')
       .replace(queryParameters: filters.toQueryParams());
 
   final response = await http.get(uri);
@@ -507,7 +507,7 @@ class BillsListView extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error_outline,
+                  const Icon(Icons.error_outline,
                       size: 48, color: HospitalTheme.error),
                   const SizedBox(height: 16),
                   Text('Error loading bills: $error'),
@@ -550,7 +550,7 @@ class BillsListView extends ConsumerWidget {
             children: [
               Text(
                 'Showing ${response.bills.length} of ${response.pagination.total} bills',
-                style: TextStyle(color: HospitalTheme.textMedium),
+                style: const TextStyle(color: HospitalTheme.textMedium),
               ),
               const Spacer(),
               if (response.pagination.pages > 1)
@@ -633,7 +633,7 @@ class BillListTile extends ConsumerWidget {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    Icon(Icons.person_outline,
+                    const Icon(Icons.person_outline,
                         size: 16, color: HospitalTheme.textMedium),
                     const SizedBox(width: 8),
                     Expanded(
@@ -647,15 +647,15 @@ class BillListTile extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Icon(Icons.calendar_today,
+                    const Icon(Icons.calendar_today,
                         size: 16, color: HospitalTheme.textMedium),
                     const SizedBox(width: 8),
                     Text(
                       DateFormat('MMM dd, yyyy').format(bill.generatedAt),
-                      style: TextStyle(color: HospitalTheme.textMedium),
+                      style: const TextStyle(color: HospitalTheme.textMedium),
                     ),
                     const SizedBox(width: 24),
-                    Icon(Icons.currency_rupee,
+                    const Icon(Icons.currency_rupee,
                         size: 16, color: HospitalTheme.textMedium),
                     const SizedBox(width: 4),
                     Text(
@@ -671,12 +671,12 @@ class BillListTile extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      Icon(Icons.warning_amber,
+                      const Icon(Icons.warning_amber,
                           size: 16, color: HospitalTheme.warning),
                       const SizedBox(width: 8),
                       Text(
                         'Due: ₹${NumberFormat('#,##,###').format(bill.financials.dueAmount)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: HospitalTheme.warning,
                           fontWeight: FontWeight.w600,
                         ),
@@ -730,7 +730,7 @@ class BillsFilterBar extends ConsumerWidget {
 
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(bottom: BorderSide(color: HospitalTheme.border)),
       ),
@@ -1141,7 +1141,7 @@ class BillDetailView extends ConsumerWidget {
           if (isMobile)
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 border: Border(bottom: BorderSide(color: HospitalTheme.border)),
               ),
@@ -1232,30 +1232,30 @@ class BillDetailView extends ConsumerWidget {
           const SizedBox(height: 8),
           Row(
             children: [
-              Icon(Icons.calendar_today,
+              const Icon(Icons.calendar_today,
                   size: 16, color: HospitalTheme.textMedium),
               const SizedBox(width: 8),
               Text(
                 'Generated: ${DateFormat('MMM dd, yyyy HH:mm').format(bill.generatedAt)}',
-                style: TextStyle(color: HospitalTheme.textMedium),
+                style: const TextStyle(color: HospitalTheme.textMedium),
               ),
             ],
           ),
           const SizedBox(height: 8),
           Row(
             children: [
-              Icon(Icons.receipt, size: 16, color: HospitalTheme.textMedium),
+              const Icon(Icons.receipt, size: 16, color: HospitalTheme.textMedium),
               const SizedBox(width: 8),
               Text(
                 'Bill No: ${bill.billNo}',
-                style: TextStyle(color: HospitalTheme.textMedium),
+                style: const TextStyle(color: HospitalTheme.textMedium),
               ),
               const SizedBox(width: 24),
-              Icon(Icons.print, size: 16, color: HospitalTheme.textMedium),
+              const Icon(Icons.print, size: 16, color: HospitalTheme.textMedium),
               const SizedBox(width: 8),
               Text(
                 'Printed: ${bill.printCount} times',
-                style: TextStyle(color: HospitalTheme.textMedium),
+                style: const TextStyle(color: HospitalTheme.textMedium),
               ),
             ],
           ),
@@ -1270,7 +1270,7 @@ class BillDetailView extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Notes:',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
@@ -1280,7 +1280,7 @@ class BillDetailView extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     bill.notes!,
-                    style: TextStyle(color: HospitalTheme.textMedium),
+                    style: const TextStyle(color: HospitalTheme.textMedium),
                   ),
                 ],
               ),
@@ -1302,11 +1302,11 @@ class BillDetailView extends ConsumerWidget {
               Container(
                 width: 60,
                 height: 60,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: HospitalTheme.surfaceLight,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.person,
                   size: 32,
                   color: HospitalTheme.primary,
@@ -1327,7 +1327,7 @@ class BillDetailView extends ConsumerWidget {
                     const SizedBox(height: 4),
                     Text(
                       'Patient ID: ${bill.patient.patientId}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                         fontWeight: FontWeight.w500,
                       ),
@@ -1489,7 +1489,7 @@ class BillDetailView extends ConsumerWidget {
                             const SizedBox(height: 2),
                             Text(
                               service.description,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: HospitalTheme.textMedium,
                                 fontSize: 13,
                               ),
@@ -1520,14 +1520,14 @@ class BillDetailView extends ConsumerWidget {
                       child: Text(
                         '${service.quantity}',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: HospitalTheme.textMedium),
+                        style: const TextStyle(color: HospitalTheme.textMedium),
                       ),
                     ),
                     Expanded(
                       child: Text(
                         '₹${NumberFormat('#,##,###').format(service.rate)}',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: HospitalTheme.textMedium),
+                        style: const TextStyle(color: HospitalTheme.textMedium),
                       ),
                     ),
                     Expanded(
@@ -1618,7 +1618,7 @@ class BillDetailView extends ConsumerWidget {
                         color: HospitalTheme.success.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.payment,
                         color: HospitalTheme.success,
                         size: 20,
@@ -1648,7 +1648,7 @@ class BillDetailView extends ConsumerWidget {
                                 ),
                                 child: Text(
                                   payment.paymentMode,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: HospitalTheme.info,
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
@@ -1661,7 +1661,7 @@ class BillDetailView extends ConsumerWidget {
                           Text(
                             DateFormat('MMM dd, yyyy HH:mm')
                                 .format(payment.paymentDate),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: HospitalTheme.textMedium,
                               fontSize: 13,
                             ),
@@ -1670,7 +1670,7 @@ class BillDetailView extends ConsumerWidget {
                             const SizedBox(height: 4),
                             Text(
                               payment.notes,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: HospitalTheme.textMedium,
                                 fontSize: 13,
                                 fontStyle: FontStyle.italic,
@@ -1758,7 +1758,7 @@ class BillDetailView extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'File Information:',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
@@ -1768,7 +1768,7 @@ class BillDetailView extends ConsumerWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Icon(Icons.file_present,
+                      const Icon(Icons.file_present,
                           size: 16, color: HospitalTheme.textMedium),
                       const SizedBox(width: 8),
                       Expanded(child: Text(bill.files!.pdfFileName)),
@@ -1777,13 +1777,13 @@ class BillDetailView extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      Icon(Icons.storage,
+                      const Icon(Icons.storage,
                           size: 16, color: HospitalTheme.textMedium),
                       const SizedBox(width: 8),
                       Text(
                           '${(bill.files!.pdfSize / 1024).toStringAsFixed(1)} KB'),
                       const SizedBox(width: 24),
-                      Icon(Icons.access_time,
+                      const Icon(Icons.access_time,
                           size: 16, color: HospitalTheme.textMedium),
                       const SizedBox(width: 8),
                       Text(DateFormat('MMM dd, yyyy HH:mm')
@@ -1810,7 +1810,7 @@ class BillDetailView extends ConsumerWidget {
         const SizedBox(width: 8),
         Text(
           '$label: ',
-          style: TextStyle(
+          style: const TextStyle(
             color: HospitalTheme.textMedium,
             fontSize: 13,
           ),
@@ -1978,13 +1978,13 @@ class BillDetailPlaceholder extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.keyboard,
                     size: 24,
                     color: HospitalTheme.primary,
                   ),
                   const SizedBox(height: 8),
-                  Text(
+                  const Text(
                     'Keyboard Shortcuts',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -2026,7 +2026,7 @@ class BillDetailPlaceholder extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             description,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textMedium,
             ),

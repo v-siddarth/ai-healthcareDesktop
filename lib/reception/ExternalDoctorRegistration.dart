@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
@@ -9,7 +8,7 @@ import 'package:doctordesktop/constants/Url.dart';
 import 'package:toastification/toastification.dart';
 
 class ExternalDoctorRegister extends StatefulWidget {
-  const ExternalDoctorRegister({Key? key}) : super(key: key);
+  const ExternalDoctorRegister({super.key});
 
   @override
   _DoctorRegisterScreenState createState() => _DoctorRegisterScreenState();
@@ -37,7 +36,7 @@ class _DoctorRegisterScreenState extends State<ExternalDoctorRegister> {
   String type = 'external';
 
   String phoneNumber = '';
-  File? doctorImage = null;
+  File? doctorImage;
 
   // UI state
   bool _isSubmitting = false;
@@ -124,7 +123,7 @@ class _DoctorRegisterScreenState extends State<ExternalDoctorRegister> {
 
     try {
       final request = http.MultipartRequest(
-          'POST', Uri.parse('${KVM_URL}/reception/addDoctor'))
+          'POST', Uri.parse('$KVM_URL/reception/addDoctor'))
         ..fields['email'] = email
         ..fields['password'] = password
         ..fields['usertype'] = userType // This is already set to 'external'
@@ -367,7 +366,7 @@ class _DoctorRegisterScreenState extends State<ExternalDoctorRegister> {
                   const EdgeInsets.only(top: 8), // To align with prefix icon
               child: Row(
                 children: [
-                  SizedBox(width: 48), // Width of prefix icon + padding
+                  const SizedBox(width: 48), // Width of prefix icon + padding
                   Text(
                     'Dr. ',
                     style: TextStyle(
@@ -824,7 +823,7 @@ class _DoctorRegisterScreenState extends State<ExternalDoctorRegister> {
           padding: const EdgeInsets.symmetric(vertical: 12),
         ),
         child: _isSubmitting
-            ? Row(
+            ? const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
@@ -835,8 +834,8 @@ class _DoctorRegisterScreenState extends State<ExternalDoctorRegister> {
                       strokeWidth: 2,
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  const Text('Registering...'),
+                  SizedBox(width: 12),
+                  Text('Registering...'),
                 ],
               )
             : const Text(

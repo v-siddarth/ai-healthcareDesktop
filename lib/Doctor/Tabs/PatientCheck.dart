@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class ModeView extends StatefulWidget {
+  const ModeView({super.key});
+
   @override
   State<ModeView> createState() => _ModeViewState();
 }
 
 class _ModeViewState extends State<ModeView> {
   bool isAcON = true;
-  double _currentSliderValue = 20;
+  final double _currentSliderValue = 20;
   double _temperatureValue = 50;
   @override
   Widget build(BuildContext context) {
@@ -37,9 +39,9 @@ class _ModeViewState extends State<ModeView> {
           },
         ),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'LATEST PATIENT INFO',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.deepOrangeAccent,
@@ -54,7 +56,7 @@ class _ModeViewState extends State<ModeView> {
           child: Image.asset(
             'assets/images/bb1.png',
             fit: BoxFit.cover,
-            opacity: AlwaysStoppedAnimation(0.3),
+            opacity: const AlwaysStoppedAnimation(0.3),
           ),
         ),
         Container(
@@ -83,11 +85,11 @@ class _ModeViewState extends State<ModeView> {
                             return temperature.toString();
                           }),
                       customColors: CustomSliderColors(
-                          dotColor: Color(0xFFFFA726),
+                          dotColor: const Color(0xFFFFA726),
                           progressBarColor: Colors.deepOrange,
                           trackColors: [
-                            Color(0xFF1E1E2C),
-                            Color(0xFF282C34)
+                            const Color(0xFF1E1E2C),
+                            const Color(0xFF282C34)
                             // CustomColor.kBackground2,
                             // CustomColor.kBackground1
                           ]),
@@ -278,7 +280,7 @@ class TemperatureCard extends StatelessWidget {
     return Container(
       height: 80,
       decoration: BoxDecoration(
-          color: Color(0xFF001F3F), borderRadius: BorderRadius.circular(10)),
+          color: const Color(0xFF001F3F), borderRadius: BorderRadius.circular(10)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

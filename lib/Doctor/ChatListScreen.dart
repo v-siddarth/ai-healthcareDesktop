@@ -398,7 +398,7 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen>
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(isTablet ? 16 : 12),
-        side: BorderSide(color: HospitalTheme.border),
+        side: const BorderSide(color: HospitalTheme.border),
       ),
       child: InkWell(
         onTap: () => _navigateToChat(chat),

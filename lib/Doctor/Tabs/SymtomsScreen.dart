@@ -45,8 +45,8 @@ class SymptomsScreen extends ConsumerStatefulWidget {
   const SymptomsScreen({
     required this.patientId,
     required this.admissionId,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _SymptomsScreenState createState() => _SymptomsScreenState();
@@ -110,7 +110,7 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
               backgroundColor: primaryColor,
               actions: [
                 IconButton(
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   onPressed: () => _openAddSymptomsScreen(
                       ref, context, widget.patientId, widget.admissionId),
                 ),
@@ -186,8 +186,8 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
           position: Tween<Offset>(
-            begin: Offset(0, -1), // Starts from the top
-            end: Offset(0, 0), // Ends at the normal position
+            begin: const Offset(0, -1), // Starts from the top
+            end: const Offset(0, 0), // Ends at the normal position
           ).animate(CurvedAnimation(
             parent: animation,
             curve: Curves.easeOut, // Smooth falling effect
@@ -309,7 +309,7 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    _createFallingPageRoute(SymptomAnalyticsDashboard()),
+                    _createFallingPageRoute(const SymptomAnalyticsDashboard()),
                   );
                   // Implement print functionality
                 },
@@ -367,7 +367,7 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: const Color(0xFFDFEAF4)),
+              borderSide: const BorderSide(color: Color(0xFFDFEAF4)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
@@ -427,7 +427,7 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: const Color(0xFFDFEAF4)),
+                        borderSide: const BorderSide(color: Color(0xFFDFEAF4)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -456,7 +456,7 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: const Color(0xFFDFEAF4)),
+                        borderSide: const BorderSide(color: Color(0xFFDFEAF4)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -567,7 +567,7 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: const Color(0xFFDFEAF4)),
+                        borderSide: const BorderSide(color: Color(0xFFDFEAF4)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -598,7 +598,7 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: const Color(0xFFDFEAF4)),
+                        borderSide: const BorderSide(color: Color(0xFFDFEAF4)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -691,7 +691,7 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 itemCount: symptoms.length,
-                separatorBuilder: (context, index) => Divider(height: 1),
+                separatorBuilder: (context, index) => const Divider(height: 1),
                 itemBuilder: (context, index) {
                   final symptom = symptoms[index];
                   final severityLevel = _determineSeverity(symptom['text']);
@@ -864,7 +864,7 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
       List<DataColumn> columns, double availableWidth) {
     return DataTable(
       columnSpacing: _isTablet ? 16 : 24,
-      headingRowColor: MaterialStateColor.resolveWith(
+      headingRowColor: WidgetStateColor.resolveWith(
         (states) => primaryColor.withOpacity(0.05),
       ),
       headingRowHeight: _isTablet ? 48 : 56,
@@ -964,7 +964,7 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
                         onPressed: () {
                           _showDeleteConfirmation(context, symptom['original']);
                         },
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                           minWidth: 30,
                           minHeight: 30,
                         ),
@@ -1111,8 +1111,8 @@ class _SymptomsScreenState extends ConsumerState<SymptomsScreen> {
         }
 
         return DataRow(
-          color: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
+          color: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
               if (index % 2 == 0) {
                 return Colors.grey.shade50;
               }

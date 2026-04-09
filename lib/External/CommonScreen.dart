@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:doctordesktop/Check.dart';
+import 'package:doctordesktop/app/home_page.dart';
 import 'package:doctordesktop/External/AppointMentScreen.dart';
 import 'package:doctordesktop/External/DashBoard.dart';
 import 'package:doctordesktop/ExternalDoctor/AppointmentDashboardScreen.dart';
@@ -15,7 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // Splash screen to check for existing login
 class SplashScreen1 extends StatefulWidget {
-  const SplashScreen1({Key? key}) : super(key: key);
+  const SplashScreen1({super.key});
 
   @override
   State<SplashScreen1> createState() => _SplashScreenState();
@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen1> {
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => AppointmentsScreen(),
+            builder: (context) => const AppointmentsScreen(),
           ),
         );
       });
@@ -73,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen1> {
                   color: HospitalTheme.primary.withOpacity(0.2),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.local_hospital,
                   size: 80,
                   color: HospitalTheme.primary,
@@ -98,7 +98,7 @@ class _SplashScreenState extends State<SplashScreen1> {
 }
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: HospitalTheme.primary,
           ),
@@ -137,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Navigate back to home screen
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => HomePage(),
+                builder: (context) => const HomePage(),
               ),
             );
           },
@@ -162,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.local_hospital,
                     size: 60,
                     color: HospitalTheme.primary,
@@ -213,34 +213,34 @@ class _LoginScreenState extends State<LoginScreen> {
                   _currentPage = page;
                 });
               },
-              children: [
+              children: const [
                 // Hospital Doctor Login
                 LoginForm(
                   title: 'Hospital Doctor Login',
-                  apiEndpoint: '${KVM_URL}/users/signin',
+                  apiEndpoint: '$KVM_URL/users/signin',
                   userType: 'hospital_doctor',
-                  fields: const ['email', 'password'],
+                  fields: ['email', 'password'],
                 ),
                 // External Doctor Login
                 LoginForm(
                   title: 'External Doctor Login',
-                  apiEndpoint: '${KVM_URL}/users/signin',
+                  apiEndpoint: '$KVM_URL/users/signin',
                   userType: 'doctor',
-                  fields: const ['email', 'password'],
+                  fields: ['email', 'password'],
                 ),
                 // Admin Login
                 LoginForm(
                   title: 'Admin Login',
-                  apiEndpoint: '${KVM_URL}/users/adminSignin',
+                  apiEndpoint: '$KVM_URL/users/adminSignin',
                   userType: 'admin',
-                  fields: const ['email', 'password'],
+                  fields: ['email', 'password'],
                 ),
                 // Staff Login
                 LoginForm(
                   title: 'Staff Login',
-                  apiEndpoint: '${KVM_URL}/users/staffSignin',
+                  apiEndpoint: '$KVM_URL/users/staffSignin',
                   userType: 'staff',
-                  fields: const ['email', 'password', 'hospitalId'],
+                  fields: ['email', 'password', 'hospitalId'],
                 ),
               ],
             ),
@@ -313,12 +313,12 @@ class LoginForm extends StatefulWidget {
   final List<String> fields;
 
   const LoginForm({
-    Key? key,
+    super.key,
     required this.title,
     required this.apiEndpoint,
     required this.userType,
     required this.fields,
-  }) : super(key: key);
+  });
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -427,7 +427,7 @@ class _LoginFormState extends State<LoginForm> {
           if (!mounted) return;
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => AppointmentsScreen(),
+              builder: (context) => const AppointmentsScreen(),
             ),
           );
         } else {
@@ -530,7 +530,7 @@ class _LoginFormState extends State<LoginForm> {
                               const SizedBox(height: 20),
                             ],
                           ))
-                      .toList(),
+                      ,
                   if (_errorMessage != null) ...[
                     Container(
                       padding: const EdgeInsets.all(12),
@@ -540,7 +540,7 @@ class _LoginFormState extends State<LoginForm> {
                       ),
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.error_outline,
                             color: HospitalTheme.error,
                             size: 18,
@@ -549,7 +549,7 @@ class _LoginFormState extends State<LoginForm> {
                           Expanded(
                             child: Text(
                               _errorMessage!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: HospitalTheme.error,
                                 fontSize: 14,
                               ),

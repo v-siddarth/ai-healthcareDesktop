@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:doctordesktop/Doctor/PatientHistoryDetailScreen.dart';
+import 'package:doctordesktop/core/theme/google_fonts_compat.dart';
 import 'package:doctordesktop/core/utils/PdfViewerScreen.dart';
 import 'package:doctordesktop/pharmacy/pharmaTheme.dart';
 import 'package:doctordesktop/reception/ManualDischargeSummaryScreen.dart';
@@ -9,7 +10,6 @@ import 'package:doctordesktop/reception/MedicalRecordSummaryScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:doctordesktop/constants/HospitalTheme.dart';
@@ -82,7 +82,7 @@ class PatientFilters {
     // Doctor type filter
     if (doctorType != 'All') {
       final patientDoctorType =
-          patient.lastRecord.doctor?.usertype?.toLowerCase() ?? '';
+          patient.lastRecord.doctor?.usertype.toLowerCase() ?? '';
       if (doctorType.toLowerCase() != patientDoctorType) {
         return false;
       }
@@ -472,7 +472,7 @@ class DischargedPatientsNotifier
     fetchDischargedPatients();
   }
 
-  static const String apiUrl = '${KVM_URL}/reception/getAllDischargedPatient';
+  static const String apiUrl = '$KVM_URL/reception/getAllDischargedPatient';
 
   Future<void> fetchDischargedPatients() async {
     try {
@@ -954,26 +954,27 @@ class _FiltersSection extends StatelessWidget {
       controller: searchController,
       focusNode: searchFocusNode,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.search, color: HospitalTheme.primary),
+        prefixIcon: const Icon(Icons.search, color: HospitalTheme.primary),
         hintText: 'Search by name, ID, contact, OPD/IPD number... (Ctrl+F)',
         filled: true,
         fillColor: HospitalTheme.background,
         border: HospitalTheme.radiusSmall.let(
           (radius) => OutlineInputBorder(
             borderRadius: radius,
-            borderSide: BorderSide(color: HospitalTheme.border),
+            borderSide: const BorderSide(color: HospitalTheme.border),
           ),
         ),
         enabledBorder: HospitalTheme.radiusSmall.let(
           (radius) => OutlineInputBorder(
             borderRadius: radius,
-            borderSide: BorderSide(color: HospitalTheme.border),
+            borderSide: const BorderSide(color: HospitalTheme.border),
           ),
         ),
         focusedBorder: HospitalTheme.radiusSmall.let(
           (radius) => OutlineInputBorder(
             borderRadius: radius,
-            borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+            borderSide:
+                const BorderSide(color: HospitalTheme.primary, width: 2),
           ),
         ),
         contentPadding:
@@ -1115,14 +1116,14 @@ class _CustomDropdown extends StatelessWidget {
               Text(hint),
             ],
           ),
-          icon: Icon(Icons.arrow_drop_down, color: HospitalTheme.primary),
+          icon: const Icon(Icons.arrow_drop_down, color: HospitalTheme.primary),
           onChanged: onChanged,
           items: items
               .map((item) => DropdownMenuItem<String>(
                     value: item['value'],
                     child: Text(
                       item['label']!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textDark,
                         fontSize: 14,
                       ),
@@ -1237,7 +1238,7 @@ class _EmptyDataState extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.surfaceLight,
                 shape: BoxShape.circle,
               ),
@@ -1248,7 +1249,7 @@ class _EmptyDataState extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'No Discharged Patients Yet',
               style: TextStyle(
                 fontSize: 24,
@@ -1258,7 +1259,7 @@ class _EmptyDataState extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
-            Text(
+            const Text(
               'No patients have been discharged yet.\nPatients will appear here once they are discharged.',
               style: TextStyle(
                 fontSize: 16,
@@ -1314,7 +1315,7 @@ class _NoMatchesState extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'No Matches Found',
               style: TextStyle(
                 fontSize: 24,
@@ -1324,7 +1325,7 @@ class _NoMatchesState extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
-            Text(
+            const Text(
               'No patients match your current search and filter criteria.\nTry adjusting your filters or search terms.',
               style: TextStyle(
                 fontSize: 16,
@@ -1369,7 +1370,7 @@ class _EmptyTabState extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.surfaceLight,
                 shape: BoxShape.circle,
               ),
@@ -1382,7 +1383,7 @@ class _EmptyTabState extends StatelessWidget {
             const SizedBox(height: 24),
             Text(
               'No ${tabName.capitalizeFirst()}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
@@ -1392,7 +1393,7 @@ class _EmptyTabState extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               'There are no $tabName in the system at the moment.',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: HospitalTheme.textMedium,
                 height: 1.5,
@@ -1435,9 +1436,9 @@ class _PatientCard extends ConsumerWidget {
             // Header with enhanced information
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.surfaceLight,
-                borderRadius: const BorderRadius.only(
+                borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(12),
                   topRight: Radius.circular(12),
                 ),
@@ -1447,11 +1448,12 @@ class _PatientCard extends ConsumerWidget {
                   // First row: Patient ID and main tags
                   Row(
                     children: [
-                      Icon(Icons.badge, size: 18, color: HospitalTheme.primary),
+                      const Icon(Icons.badge,
+                          size: 18, color: HospitalTheme.primary),
                       const SizedBox(width: 8),
                       Text(
                         'ID: ${patient.patientId}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           color: HospitalTheme.primary,
                         ),
@@ -1570,7 +1572,7 @@ class _PatientCard extends ConsumerWidget {
                   CircleAvatar(
                     radius: 30,
                     backgroundColor: HospitalTheme.primary.withOpacity(0.1),
-                    child: Icon(
+                    child: const Icon(
                       Icons.person,
                       size: 32,
                       color: HospitalTheme.primary,
@@ -1832,7 +1834,7 @@ class _InfoItem extends StatelessWidget {
           children: [
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontSize: 11,
               ),
@@ -1857,12 +1859,12 @@ class _LoadingState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircularProgressIndicator(color: HospitalTheme.primary),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'Loading patients...',
             style: TextStyle(
@@ -1907,7 +1909,7 @@ class _ErrorState extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'Unable to Load Patients',
               style: TextStyle(
                 fontSize: 24,
@@ -1919,7 +1921,7 @@ class _ErrorState extends StatelessWidget {
             const SizedBox(height: 12),
             Text(
               error.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: HospitalTheme.textMedium,
                 height: 1.5,
@@ -1972,7 +1974,7 @@ class _BottomStatusBar extends StatelessWidget {
 
         return Container(
           height: 80,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [HospitalTheme.primaryDark, HospitalTheme.secondary],
               begin: Alignment.topLeft,
@@ -2086,8 +2088,7 @@ extension BorderRadiusExtension on BorderRadius {
 class PatientDetailsScreen extends ConsumerStatefulWidget {
   final PatientDischarge patient;
 
-  const PatientDetailsScreen({Key? key, required this.patient})
-      : super(key: key);
+  const PatientDetailsScreen({super.key, required this.patient});
 
   @override
   ConsumerState<PatientDetailsScreen> createState() =>
@@ -2203,7 +2204,7 @@ class _PatientDetailsScreenState extends ConsumerState<PatientDetailsScreen>
                     color: HospitalTheme.warning.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.warning_amber_rounded,
                     color: HospitalTheme.warning,
                     size: 24,
@@ -2275,7 +2276,7 @@ class _PatientDetailsScreenState extends ConsumerState<PatientDetailsScreen>
     try {
       final response = await http.put(
         Uri.parse(
-            '${KVM_URL}/reception/dischargeByReceptionCondition/${widget.patient.patientId}/${widget.patient.lastRecord.admissionId}'),
+            '$KVM_URL/reception/dischargeByReceptionCondition/${widget.patient.patientId}/${widget.patient.lastRecord.admissionId}'),
       );
 
       if (response.statusCode == 200) {
@@ -2319,7 +2320,7 @@ class _PatientDetailsScreenState extends ConsumerState<PatientDetailsScreen>
                     color: HospitalTheme.primary.withOpacity(0.1),
                     shape: BoxShape.circle,
                   ),
-                  child: CircularProgressIndicator(
+                  child: const CircularProgressIndicator(
                     valueColor:
                         AlwaysStoppedAnimation<Color>(HospitalTheme.primary),
                     strokeWidth: 3,
@@ -2351,7 +2352,7 @@ class _PatientDetailsScreenState extends ConsumerState<PatientDetailsScreen>
 
       final response = await http.get(
         Uri.parse(
-            '${KVM_URL}/reception/generateDischargeSummary/${widget.patient.patientId}'),
+            '$KVM_URL/reception/generateDischargeSummary/${widget.patient.patientId}'),
       );
 
       if (dialogContext != null && Navigator.of(dialogContext!).canPop()) {
@@ -2385,7 +2386,7 @@ class _PatientDetailsScreenState extends ConsumerState<PatientDetailsScreen>
                         color: HospitalTheme.success.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.check_circle_rounded,
                         color: HospitalTheme.success,
                         size: 28,
@@ -2960,7 +2961,7 @@ class _PatientDetailsScreenState extends ConsumerState<PatientDetailsScreen>
                         },
                         style: OutlinedButton.styleFrom(
                           foregroundColor: HospitalTheme.primary,
-                          side: BorderSide(
+                          side: const BorderSide(
                               color: HospitalTheme.primary, width: 1),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 8), // Reduced padding
@@ -3082,7 +3083,7 @@ class _PatientDetailsScreenState extends ConsumerState<PatientDetailsScreen>
     final isInternalPatient =
         widget.patient.lastRecord.patientType?.toLowerCase() == 'internal';
     final doctorType =
-        widget.patient.lastRecord.doctor?.name?.capitalizeFirst() ?? 'Unknown';
+        widget.patient.lastRecord.doctor?.name.capitalizeFirst() ?? 'Unknown';
 
     return Container(
       padding: const EdgeInsets.all(16), // Reduced from 24
@@ -3159,7 +3160,7 @@ class _PatientDetailsScreenState extends ConsumerState<PatientDetailsScreen>
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.badge_rounded,
                             color: Colors.black,
                             size: 14, // Reduced from 16
@@ -3251,7 +3252,7 @@ class _PatientDetailsScreenState extends ConsumerState<PatientDetailsScreen>
                   ),
                   child: Column(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.medical_services_rounded,
                         color: Colors.white,
                         size: 20, // Reduced from 24
@@ -3359,7 +3360,7 @@ class _PatientDetailsScreenState extends ConsumerState<PatientDetailsScreen>
           ),
           _buildColorfulInfoRow(
             'Doctor Type',
-            widget.patient.lastRecord.doctor?.usertype?.capitalizeFirst() ??
+            widget.patient.lastRecord.doctor?.usertype.capitalizeFirst() ??
                 'Unknown',
             Icons.medical_services_rounded,
             const Color(0xFF9C27B0),

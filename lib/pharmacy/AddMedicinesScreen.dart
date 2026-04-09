@@ -297,8 +297,7 @@ class ManufacturerSearchNotifier
 class OptimizedAddMedicineScreen extends ConsumerStatefulWidget {
   final Medicine? medicineToEdit;
 
-  const OptimizedAddMedicineScreen({Key? key, this.medicineToEdit})
-      : super(key: key);
+  const OptimizedAddMedicineScreen({super.key, this.medicineToEdit});
 
   @override
   ConsumerState<OptimizedAddMedicineScreen> createState() =>
@@ -492,7 +491,7 @@ class _OptimizedAddMedicineScreenState
   Widget _buildEmptySuggestions() {
     return Container(
       padding: const EdgeInsets.all(16),
-      child: Column(
+      child: const Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
@@ -500,7 +499,7 @@ class _OptimizedAddMedicineScreenState
             size: 48,
             color: HospitalTheme.textLight,
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             'Start typing to search medicines',
             style: TextStyle(
@@ -508,7 +507,7 @@ class _OptimizedAddMedicineScreenState
               fontSize: 14,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             'Search from thousands of medicines in our database',
             style: TextStyle(
@@ -524,7 +523,7 @@ class _OptimizedAddMedicineScreenState
   Widget _buildLoadingSuggestions() {
     return Container(
       padding: const EdgeInsets.all(24),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
@@ -535,7 +534,7 @@ class _OptimizedAddMedicineScreenState
               color: HospitalTheme.primary,
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           Text(
             'Searching medicines...',
             style: TextStyle(
@@ -550,7 +549,7 @@ class _OptimizedAddMedicineScreenState
   Widget _buildErrorSuggestions(String error) {
     return Container(
       padding: const EdgeInsets.all(16),
-      child: Column(
+      child: const Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
@@ -558,7 +557,7 @@ class _OptimizedAddMedicineScreenState
             color: HospitalTheme.error,
             size: 32,
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             'Search failed',
             style: TextStyle(
@@ -566,7 +565,7 @@ class _OptimizedAddMedicineScreenState
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             'Please try again',
             style: TextStyle(
@@ -583,7 +582,7 @@ class _OptimizedAddMedicineScreenState
     if (suggestions.isEmpty) {
       return Container(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: const Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
@@ -591,7 +590,7 @@ class _OptimizedAddMedicineScreenState
               size: 48,
               color: HospitalTheme.textLight,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'No medicines found',
               style: TextStyle(
@@ -599,7 +598,7 @@ class _OptimizedAddMedicineScreenState
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             Text(
               'Try a different search term',
               style: TextStyle(
@@ -615,7 +614,7 @@ class _OptimizedAddMedicineScreenState
     return ListView.separated(
       shrinkWrap: true,
       itemCount: suggestions.length.clamp(0, 10), // Limit to 10 suggestions
-      separatorBuilder: (context, index) => Divider(
+      separatorBuilder: (context, index) => const Divider(
         height: 1,
         color: HospitalTheme.border,
       ),
@@ -656,7 +655,7 @@ class _OptimizedAddMedicineScreenState
       SnackBar(
         content: Row(
           children: [
-            Icon(Icons.auto_fix_high, color: Colors.white),
+            const Icon(Icons.auto_fix_high, color: Colors.white),
             const SizedBox(width: 8),
             Expanded(
               child: Text('Auto-filled from "${suggestion.medicineName}"'),
@@ -757,7 +756,7 @@ class _OptimizedAddMedicineScreenState
                   color: HospitalTheme.accent.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.auto_fix_high,
                   color: HospitalTheme.accent,
                   size: 32,
@@ -772,7 +771,7 @@ class _OptimizedAddMedicineScreenState
                       'Smart Medicine Entry',
                       style: HospitalTheme.themeData.textTheme.headlineSmall,
                     ),
-                    Text(
+                    const Text(
                       'Search our database to auto-fill medicine details',
                       style: TextStyle(
                         color: HospitalTheme.textMedium,
@@ -791,7 +790,7 @@ class _OptimizedAddMedicineScreenState
                     color: HospitalTheme.success.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
@@ -799,7 +798,7 @@ class _OptimizedAddMedicineScreenState
                         color: HospitalTheme.success,
                         size: 16,
                       ),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4),
                       Text(
                         'Auto-filled',
                         style: TextStyle(
@@ -823,14 +822,14 @@ class _OptimizedAddMedicineScreenState
                 color: HospitalTheme.info.withOpacity(0.3),
               ),
             ),
-            child: Row(
+            child: const Row(
               children: [
                 Icon(
                   Icons.lightbulb_outline,
                   color: HospitalTheme.info,
                   size: 20,
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     'Pro tip: Start typing in the medicine name field to see smart suggestions from our comprehensive database',
@@ -925,7 +924,7 @@ class _OptimizedAddMedicineScreenState
                         const SizedBox(width: 16),
                         Container(
                           padding: const EdgeInsets.all(8),
-                          child: SizedBox(
+                          child: const SizedBox(
                             width: 20,
                             height: 20,
                             child: CircularProgressIndicator(
@@ -950,7 +949,7 @@ class _OptimizedAddMedicineScreenState
                       ),
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.auto_fix_high,
                             color: HospitalTheme.success,
                             size: 16,
@@ -959,7 +958,7 @@ class _OptimizedAddMedicineScreenState
                           Expanded(
                             child: Text(
                               'Auto-filled from database: ${_selectedSuggestion!.manufacturer}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: HospitalTheme.success,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -973,7 +972,7 @@ class _OptimizedAddMedicineScreenState
                               });
                               _clearForm();
                             },
-                            child: Text(
+                            child: const Text(
                               'Clear',
                               style: TextStyle(
                                 color: HospitalTheme.success,
@@ -1255,7 +1254,7 @@ class _OptimizedAddMedicineScreenState
                         fontSize: 16,
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Real-time calculation based on entered prices',
                       style: TextStyle(
                         color: HospitalTheme.textMedium,
@@ -1342,7 +1341,7 @@ class _OptimizedAddMedicineScreenState
               label: const Text('Save & Add Another'),
               style: OutlinedButton.styleFrom(
                 foregroundColor: HospitalTheme.primary,
-                side: BorderSide(color: HospitalTheme.primary),
+                side: const BorderSide(color: HospitalTheme.primary),
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
             ),
@@ -1394,7 +1393,7 @@ class _OptimizedAddMedicineScreenState
             SnackBar(
               content: Row(
                 children: [
-                  Icon(Icons.check_circle, color: Colors.white),
+                  const Icon(Icons.check_circle, color: Colors.white),
                   const SizedBox(width: 8),
                   Text(
                     widget.medicineToEdit != null
@@ -1424,7 +1423,7 @@ class _OptimizedAddMedicineScreenState
           SnackBar(
             content: Row(
               children: [
-                Icon(Icons.error, color: Colors.white),
+                const Icon(Icons.error, color: Colors.white),
                 const SizedBox(width: 8),
                 Expanded(child: Text('Error: $e')),
               ],
@@ -1447,14 +1446,14 @@ class _OptimizedAddMedicineScreenState
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.help_outline, color: HospitalTheme.primary),
-            const SizedBox(width: 8),
-            const Text('Smart Medicine Entry Help'),
+            SizedBox(width: 8),
+            Text('Smart Medicine Entry Help'),
           ],
         ),
-        content: SingleChildScrollView(
+        content: const SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -1468,7 +1467,7 @@ class _OptimizedAddMedicineScreenState
                   'Get accurate pricing and composition data',
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               _HelpSection(
                 title: 'Keyboard Shortcuts',
                 items: [
@@ -1478,7 +1477,7 @@ class _OptimizedAddMedicineScreenState
                   'Tab: Navigate between fields',
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               _HelpSection(
                 title: 'Pro Tips',
                 items: [
@@ -1544,7 +1543,7 @@ class _SuggestionTile extends StatelessWidget {
                   ),
                   child: Text(
                     '₹${suggestion.price.toStringAsFixed(2)}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.primary,
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
@@ -1556,7 +1555,7 @@ class _SuggestionTile extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               suggestion.manufacturer,
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontSize: 13,
               ),
@@ -1565,7 +1564,7 @@ class _SuggestionTile extends StatelessWidget {
               const SizedBox(height: 2),
               Text(
                 suggestion.composition,
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textLight,
                   fontSize: 12,
                 ),
@@ -1577,7 +1576,7 @@ class _SuggestionTile extends StatelessWidget {
               const SizedBox(height: 2),
               Text(
                 suggestion.packageInfo,
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textLight,
                   fontSize: 12,
                   fontStyle: FontStyle.italic,
@@ -1704,7 +1703,7 @@ class _ProfitMetric extends StatelessWidget {
         const SizedBox(height: 4),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             color: HospitalTheme.textMedium,
           ),
@@ -1741,7 +1740,7 @@ class _HelpSection extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     '• ',
                     style: TextStyle(color: HospitalTheme.primary),
                   ),

@@ -8,8 +8,7 @@ class AdmitPatientDialog extends StatefulWidget {
   final Function(String) onAdmit;
 
   const AdmitPatientDialog(
-      {Key? key, required this.patientName, required this.onAdmit})
-      : super(key: key);
+      {super.key, required this.patientName, required this.onAdmit});
 
   @override
   _AdmitPatientDialogState createState() => _AdmitPatientDialogState();
@@ -39,14 +38,14 @@ class _AdmitPatientDialogState extends State<AdmitPatientDialog> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Specify where patient',
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 4),
             Text(
               widget.patientName,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF005F9E),
@@ -61,7 +60,7 @@ class _AdmitPatientDialogState extends State<AdmitPatientDialog> {
               title: const Text('General Ward'),
               value: 'General Ward',
               groupValue: _selectedLocation,
-              activeColor: Color(0xFF005F9E),
+              activeColor: const Color(0xFF005F9E),
               onChanged: (value) {
                 setState(() {
                   _selectedLocation = value!;
@@ -73,7 +72,7 @@ class _AdmitPatientDialogState extends State<AdmitPatientDialog> {
               title: const Text('ICU'),
               value: 'ICU',
               groupValue: _selectedLocation,
-              activeColor: Color(0xFF005F9E),
+              activeColor: const Color(0xFF005F9E),
               onChanged: (value) {
                 setState(() {
                   _selectedLocation = value!;
@@ -85,7 +84,7 @@ class _AdmitPatientDialogState extends State<AdmitPatientDialog> {
               title: const Text('Other'),
               value: 'Other',
               groupValue: _selectedLocation,
-              activeColor: Color(0xFF005F9E),
+              activeColor: const Color(0xFF005F9E),
               onChanged: (value) {
                 setState(() {
                   _selectedLocation = value!;
@@ -108,7 +107,7 @@ class _AdmitPatientDialogState extends State<AdmitPatientDialog> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide:
-                          BorderSide(color: Color(0xFF005F9E), width: 2),
+                          const BorderSide(color: Color(0xFF005F9E), width: 2),
                     ),
                   ),
                   maxLines: 1,
@@ -124,7 +123,7 @@ class _AdmitPatientDialogState extends State<AdmitPatientDialog> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFF005F9E),
+            backgroundColor: const Color(0xFF005F9E),
             foregroundColor:
                 Colors.white, // <-- ensures text is white and visible
           ),
@@ -132,7 +131,7 @@ class _AdmitPatientDialogState extends State<AdmitPatientDialog> {
             if (_showOtherField &&
                 _otherLocationController.text.trim().isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Please specify a location.')),
+                const SnackBar(content: Text('Please specify a location.')),
               );
               return;
             }

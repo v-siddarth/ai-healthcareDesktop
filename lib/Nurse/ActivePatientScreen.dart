@@ -414,7 +414,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
         Expanded(
           flex: 5,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               border: Border(
                 right: BorderSide(color: HospitalTheme.border),
@@ -463,7 +463,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
         // Header and Search
         Container(
           padding: EdgeInsets.all(isDesktop ? 24.0 : 16.0),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             border: Border(
               bottom: BorderSide(color: HospitalTheme.border),
@@ -511,7 +511,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
         // Detail Header
         Container(
           padding: EdgeInsets.all(isDesktop ? 24.0 : 16.0),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             border: Border(
               bottom: BorderSide(color: HospitalTheme.border),
@@ -569,11 +569,11 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
           Container(
             width: 120.0,
             height: 120.0,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.people_outline,
               size: 60.0,
               color: HospitalTheme.textMedium,
@@ -741,7 +741,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
                         : null,
                     child: patient.imageUrl.trim().isEmpty ||
                             patient.imageUrl == ' '
-                        ? Icon(
+                        ? const Icon(
                             Icons.person,
                             size: 25.0,
                             color: HospitalTheme.primary,
@@ -755,7 +755,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
                       children: [
                         Text(
                           patient.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: HospitalTheme.textDark,
                             fontSize: 16.0,
@@ -764,7 +764,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
                         const SizedBox(height: 2.0),
                         Text(
                           'ID: ${patient.patientId}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: HospitalTheme.textMedium,
                             fontSize: 12.0,
                           ),
@@ -777,7 +777,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
                     children: [
                       Text(
                         'Bed ${admission.bedNumber}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: HospitalTheme.textDark,
                           fontWeight: FontWeight.w600,
                           fontSize: 14.0,
@@ -786,7 +786,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
                       const SizedBox(height: 2.0),
                       Text(
                         admission.section.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: HospitalTheme.textMedium,
                           fontSize: 12.0,
                         ),
@@ -798,12 +798,12 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
               const SizedBox(height: 12.0),
               Row(
                 children: [
-                  Icon(Icons.person,
+                  const Icon(Icons.person,
                       size: 14.0, color: HospitalTheme.textMedium),
                   const SizedBox(width: 4.0),
                   Text(
                     '${patient.age}y, ${patient.gender}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.textMedium,
                       fontSize: 12.0,
                     ),
@@ -817,7 +817,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
                         color: HospitalTheme.warning.withOpacity(0.1),
                         borderRadius: HospitalTheme.radiusSmall,
                       ),
-                      child: Text(
+                      child: const Text(
                         'Has Pending Tasks',
                         style: TextStyle(
                           color: HospitalTheme.warning,
@@ -922,12 +922,12 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
                         color: HospitalTheme.warning.withOpacity(0.1),
                         borderRadius: HospitalTheme.radiusSmall,
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.pending_actions,
                               size: 16.0, color: HospitalTheme.warning),
-                          const SizedBox(width: 8.0),
+                          SizedBox(width: 8.0),
                           Text(
                             'Pending Tasks',
                             style: TextStyle(
@@ -965,7 +965,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.local_hospital,
+                  const Icon(Icons.local_hospital,
                       size: 20.0, color: HospitalTheme.primary),
                   const SizedBox(width: 8.0),
                   Text(
@@ -1001,7 +1001,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.pending_actions,
+                    const Icon(Icons.pending_actions,
                         size: 20.0, color: HospitalTheme.warning),
                     const SizedBox(width: 8.0),
                     Text(
@@ -1068,7 +1068,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.touch_app,
+                  const Icon(Icons.touch_app,
                       size: 20.0, color: HospitalTheme.primary),
                   const SizedBox(width: 8.0),
                   Text(
@@ -1154,7 +1154,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
           const SizedBox(height: 4.0),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12.0,
               color: HospitalTheme.textMedium,
               fontWeight: FontWeight.w500,
@@ -1183,7 +1183,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
         children: [
           Text(
             item.label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12.0,
               color: HospitalTheme.textMedium,
               fontWeight: FontWeight.w500,
@@ -1192,7 +1192,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
           const SizedBox(height: 4.0),
           Text(
             item.value,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14.0,
               color: HospitalTheme.textDark,
               fontWeight: FontWeight.w600,
@@ -1277,7 +1277,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
                         color: HospitalTheme.warning.withOpacity(0.1),
                         borderRadius: HospitalTheme.radiusSmall,
                       ),
-                      child: Text(
+                      child: const Text(
                         'Pending',
                         style: TextStyle(
                           color: HospitalTheme.warning,
@@ -1451,7 +1451,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
             Container(
               width: isDesktop ? 120.0 : 100.0,
               height: isDesktop ? 120.0 : 100.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.surfaceLight,
                 shape: BoxShape.circle,
               ),
@@ -1558,7 +1558,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
         const SizedBox(height: 3.0),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.bold,
             color: HospitalTheme.textDark,
@@ -1570,7 +1570,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
         const SizedBox(height: 1.0),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12.0,
             color: HospitalTheme.textMedium,
           ),
@@ -1603,7 +1603,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
             children: [
               Text(
                 value,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 13.0,
                   fontWeight: FontWeight.w600,
                   color: HospitalTheme.textDark,
@@ -1613,7 +1613,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
               ),
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 8.0,
                   color: HospitalTheme.textMedium,
                 ),
@@ -1667,7 +1667,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
       child: HospitalTheme.buildCard(
         padding: const EdgeInsets.all(12.0),
         backgroundColor: HospitalTheme.surfaceLight,
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -1678,7 +1678,7 @@ class _ActivePatientsScreenState extends ConsumerState<ActivePatientsScreen> {
                 fontSize: 12.0,
               ),
             ),
-            const SizedBox(height: 4.0),
+            SizedBox(height: 4.0),
             Text(
               '• Ctrl+F: Focus search • F5: Refresh • Esc: Clear search',
               style: TextStyle(

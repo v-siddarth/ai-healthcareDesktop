@@ -368,7 +368,7 @@ final filteredMedicinesProvider = Provider<List<Medicine>>((ref) {
 
 // Main Screen - Medicine Management
 class AllMedicineScreen extends ConsumerStatefulWidget {
-  const AllMedicineScreen({Key? key}) : super(key: key);
+  const AllMedicineScreen({super.key});
 
   @override
   ConsumerState<AllMedicineScreen> createState() => _AllMedicineScreenState();
@@ -684,7 +684,7 @@ class _SearchAndFilterBar extends ConsumerWidget {
 
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
           bottom: BorderSide(color: HospitalTheme.border),
@@ -1012,7 +1012,7 @@ class _StatCard extends StatelessWidget {
                 ),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
                     color: HospitalTheme.textMedium,
                   ),
@@ -1020,7 +1020,7 @@ class _StatCard extends StatelessWidget {
                 if (subtitle != null)
                   Text(
                     subtitle!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                       color: HospitalTheme.textLight,
                     ),
@@ -1065,9 +1065,9 @@ class _ResponsiveMedicineTable extends ConsumerWidget {
           // Table Header
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.primary,
-              borderRadius: const BorderRadius.only(
+              borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
@@ -1184,7 +1184,7 @@ class _ResponsiveMedicineTable extends ConsumerWidget {
               // Adjust column spacing based on available width
               columnSpacing: baseSpacing,
               headingRowColor:
-                  MaterialStateProperty.all(HospitalTheme.surfaceLight),
+                  WidgetStateProperty.all(HospitalTheme.surfaceLight),
               dataRowMaxHeight: 60,
               // Make columns responsive to available width
               columns: _buildDataColumns(
@@ -1204,7 +1204,7 @@ class _ResponsiveMedicineTable extends ConsumerWidget {
                 return DataRow(
                   selected: isSelected,
                   color: isSelected
-                      ? MaterialStateProperty.all(
+                      ? WidgetStateProperty.all(
                           HospitalTheme.primaryLight.withOpacity(0.1))
                       : null,
                   onSelectChanged: (_) => onMedicineSelected(medicine),
@@ -1325,7 +1325,7 @@ class _ResponsiveMedicineTable extends ConsumerWidget {
               if (!showManufacturer)
                 Text(
                   medicine.manufacturer,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.textMedium,
                   ),
@@ -1361,7 +1361,7 @@ class _ResponsiveMedicineTable extends ConsumerWidget {
               ),
               child: Text(
                 medicine.category ?? 'N/A',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   color: HospitalTheme.info,
                   fontWeight: FontWeight.w500,
@@ -1387,7 +1387,7 @@ class _ResponsiveMedicineTable extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
               '₹${medicine.purchasePrice.toStringAsFixed(2)}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
               ),
             ),
@@ -1497,7 +1497,7 @@ class _ResponsiveMedicineTable extends ConsumerWidget {
           children: [
             Text('Are you sure you want to delete "${medicine.name}"?'),
             const SizedBox(height: 8),
-            Text(
+            const Text(
               'This action cannot be undone.',
               style: TextStyle(
                 color: HospitalTheme.error,
@@ -1538,15 +1538,15 @@ class _ResponsiveMedicineTable extends ConsumerWidget {
               if (success) {
                 onRefresh();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: const Text('Medicine deleted successfully'),
+                  const SnackBar(
+                    content: Text('Medicine deleted successfully'),
                     backgroundColor: HospitalTheme.success,
                   ),
                 );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: const Text('Failed to delete medicine'),
+                  const SnackBar(
+                    content: Text('Failed to delete medicine'),
                     backgroundColor: HospitalTheme.error,
                   ),
                 );
@@ -1584,22 +1584,22 @@ class _MedicineDetailPanel extends ConsumerWidget {
           // Close button header
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.primary,
-              borderRadius: const BorderRadius.only(
+              borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
             ),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.info_outline,
                   color: Colors.white,
                   size: 20,
                 ),
                 const SizedBox(width: 8),
-                Text(
+                const Text(
                   'Medicine Details',
                   style: TextStyle(
                     color: Colors.white,
@@ -1665,7 +1665,7 @@ class _MedicineDetailPanel extends ConsumerWidget {
                                   ),
                                   Text(
                                     'by ${medicine.manufacturer}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: HospitalTheme.textMedium,
                                     ),
                                   ),
@@ -1683,7 +1683,7 @@ class _MedicineDetailPanel extends ConsumerWidget {
                                       ),
                                       child: Text(
                                         medicine.category!,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 12,
                                           color: HospitalTheme.info,
                                           fontWeight: FontWeight.w500,
@@ -1708,7 +1708,7 @@ class _MedicineDetailPanel extends ConsumerWidget {
                           const SizedBox(height: 8),
                           Text(
                             medicine.description!,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: HospitalTheme.textMedium,
                             ),
                           ),
@@ -1891,10 +1891,10 @@ class MedicineDetailScreen extends StatelessWidget {
   final VoidCallback onRefresh;
 
   const MedicineDetailScreen({
-    Key? key,
+    super.key,
     required this.medicine,
     required this.onRefresh,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1944,7 +1944,7 @@ class _EmptyMedicineState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
+          const Icon(
             Icons.medication_outlined,
             size: 120,
             color: HospitalTheme.textLight,
@@ -1957,7 +1957,7 @@ class _EmptyMedicineState extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          Text(
+          const Text(
             'Start building your medicine inventory by adding your first medicine',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -2001,7 +2001,7 @@ class _ErrorState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
+          const Icon(
             Icons.error_outline,
             size: 80,
             color: HospitalTheme.error,
@@ -2017,7 +2017,7 @@ class _ErrorState extends StatelessWidget {
           Text(
             error,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textMedium,
             ),
           ),

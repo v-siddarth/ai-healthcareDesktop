@@ -96,7 +96,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
     final name = _ipdSearchController.text.trim();
     if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text("Please enter a name to search."),
           backgroundColor: HospitalTheme.error,
         ),
@@ -106,7 +106,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/reception/info?name=$name'),
+        Uri.parse('$KVM_URL/reception/info?name=$name'),
       );
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -124,7 +124,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
           _ipdPatientIdResult = null;
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text("No patient found with that name."),
             backgroundColor: HospitalTheme.warning,
           ),
@@ -132,7 +132,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text("An error occurred. Please try again."),
           backgroundColor: HospitalTheme.error,
         ),
@@ -144,7 +144,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
     final name = _opdSearchController.text.trim();
     if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text("Please enter a name to search."),
           backgroundColor: HospitalTheme.error,
         ),
@@ -154,7 +154,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/reception/info?name=$name'),
+        Uri.parse('$KVM_URL/reception/info?name=$name'),
       );
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -172,7 +172,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
           _opdPatientIdResult = null;
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text("No patient found with that name."),
             backgroundColor: HospitalTheme.warning,
           ),
@@ -180,7 +180,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text("An error occurred. Please try again."),
           backgroundColor: HospitalTheme.error,
         ),
@@ -195,7 +195,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
     }
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/reception/suggestions?name=$query'),
+        Uri.parse('$KVM_URL/reception/suggestions?name=$query'),
       );
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as List;
@@ -213,7 +213,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
     }
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/reception/suggestions?name=$query'),
+        Uri.parse('$KVM_URL/reception/suggestions?name=$query'),
       );
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as List;
@@ -255,7 +255,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
     return Scaffold(
       backgroundColor: HospitalTheme.background,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Patient Registration",
           style: TextStyle(
             color: HospitalTheme.textDark,
@@ -269,7 +269,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
           indicatorColor: HospitalTheme.primary,
           labelColor: HospitalTheme.primary,
           unselectedLabelColor: HospitalTheme.textMedium,
-          tabs: [
+          tabs: const [
             Tab(
               text: "OPD Registration",
               icon: Icon(Icons.local_hospital_outlined),
@@ -317,7 +317,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                     isSmallScreen: isSmallScreen,
                   ),
 
-                  Divider(
+                  const Divider(
                     color: HospitalTheme.border,
                     height: 32,
                   ),
@@ -340,7 +340,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                     fetchSuggestions: _fetchIPDSuggestions,
                                     color: HospitalTheme.primary,
                                   ),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
                                   _buildPatientIdResultSection(
                                     patientId: _ipdPatientIdResult,
                                     color: HospitalTheme.primary,
@@ -361,7 +361,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                       color: HospitalTheme.primary,
                                     ),
                                   ),
-                                  SizedBox(width: 16),
+                                  const SizedBox(width: 16),
                                   Expanded(
                                     flex: 2,
                                     child: _buildPatientIdResultSection(
@@ -372,7 +372,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                 ],
                               ),
 
-                        SizedBox(height: 24),
+                        const SizedBox(height: 24),
 
                         // Personal Information Section
                         _buildInfoSection(
@@ -394,7 +394,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                         return null;
                                       },
                                     ),
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     _buildStyledField(
                                       label: "Age",
                                       controller: _ipdAgeController,
@@ -408,7 +408,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                         return null;
                                       },
                                     ),
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     _buildStyledField(
                                       label: "Weight (kg)",
                                       controller: _ipdWeightController,
@@ -422,7 +422,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                         return null;
                                       },
                                     ),
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     _buildStyledField(
                                       label: "Phone Number",
                                       controller: _ipdContactController,
@@ -436,7 +436,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                         return null;
                                       },
                                     ),
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     _buildStyledField(
                                       label: "Address",
                                       controller: _ipdAddressController,
@@ -471,7 +471,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                               return null;
                                             },
                                           ),
-                                          SizedBox(height: 16),
+                                          const SizedBox(height: 16),
                                           Row(
                                             children: [
                                               Expanded(
@@ -491,7 +491,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                                   },
                                                 ),
                                               ),
-                                              SizedBox(width: 16),
+                                              const SizedBox(width: 16),
                                               Expanded(
                                                 child: _buildStyledField(
                                                   label: "Weight (kg)",
@@ -515,7 +515,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                         ],
                                       ),
                                     ),
-                                    SizedBox(width: 16),
+                                    const SizedBox(width: 16),
                                     // Right column
                                     Expanded(
                                       child: Column(
@@ -534,7 +534,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                               return null;
                                             },
                                           ),
-                                          SizedBox(height: 16),
+                                          const SizedBox(height: 16),
                                           _buildStyledField(
                                             label: "Address",
                                             controller: _ipdAddressController,
@@ -560,7 +560,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                           ),
                         ),
 
-                        SizedBox(height: 24),
+                        const SizedBox(height: 24),
 
                         // Medical Information
                         _buildInfoSection(
@@ -583,7 +583,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                   return null;
                                 },
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               _buildStyledField(
                                 label: "Symptoms",
                                 controller: _ipdSymptomsController,
@@ -596,7 +596,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                   return null;
                                 },
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               _buildStyledField(
                                 label: "Initial Diagnosis",
                                 controller: _ipdInitialDiagnosisController,
@@ -609,7 +609,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                   return null;
                                 },
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               // Caste Field
                               _buildStyledField(
                                 label: "Caste (Optional)",
@@ -617,13 +617,13 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                 hintText: 'Enter caste if applicable',
                                 icon: Icons.group,
                               ),
-                              SizedBox(height: 16),
+                              const SizedBox(height: 16),
                               // Readmission
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
+                                  const Row(
                                     children: [
                                       Icon(
                                         Icons.rotate_left,
@@ -669,7 +669,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                           ),
                         ),
 
-                        SizedBox(height: 24),
+                        const SizedBox(height: 24),
 
                         // Patient Photo Section
                         _buildPatientPhotoSection(
@@ -681,7 +681,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                           isSmallScreen: isSmallScreen,
                         ),
 
-                        SizedBox(height: 32),
+                        const SizedBox(height: 32),
 
                         // Submit button
                         _buildSubmitButton(
@@ -735,7 +735,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                     isSmallScreen: isSmallScreen,
                   ),
 
-                  Divider(
+                  const Divider(
                     color: HospitalTheme.border,
                     height: 32,
                   ),
@@ -758,7 +758,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                     fetchSuggestions: _fetchOPDSuggestions,
                                     color: HospitalTheme.pharmacy,
                                   ),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
                                   _buildPatientIdResultSection(
                                     patientId: _opdPatientIdResult,
                                     color: HospitalTheme.pharmacy,
@@ -779,7 +779,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                       color: HospitalTheme.pharmacy,
                                     ),
                                   ),
-                                  SizedBox(width: 16),
+                                  const SizedBox(width: 16),
                                   Expanded(
                                     flex: 2,
                                     child: _buildPatientIdResultSection(
@@ -790,7 +790,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                 ],
                               ),
 
-                        SizedBox(height: 24),
+                        const SizedBox(height: 24),
 
                         // Personal Information Section
                         _buildInfoSection(
@@ -813,7 +813,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                         return null;
                                       },
                                     ),
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     _buildStyledField(
                                       label: "Age",
                                       controller: _opdAgeController,
@@ -828,7 +828,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                         return null;
                                       },
                                     ),
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     _buildStyledField(
                                       label: "Weight (kg)",
                                       controller: _opdWeightController,
@@ -843,7 +843,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                         return null;
                                       },
                                     ),
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     _buildStyledField(
                                       label: "Phone Number",
                                       controller: _opdContactController,
@@ -858,7 +858,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                         return null;
                                       },
                                     ),
-                                    SizedBox(height: 16),
+                                    const SizedBox(height: 16),
                                     _buildStyledField(
                                       label: "Address",
                                       controller: _opdAddressController,
@@ -895,7 +895,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                               return null;
                                             },
                                           ),
-                                          SizedBox(height: 16),
+                                          const SizedBox(height: 16),
                                           Row(
                                             children: [
                                               Expanded(
@@ -917,7 +917,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                                   },
                                                 ),
                                               ),
-                                              SizedBox(width: 16),
+                                              const SizedBox(width: 16),
                                               Expanded(
                                                 child: _buildStyledField(
                                                   label: "Weight (kg)",
@@ -943,7 +943,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                         ],
                                       ),
                                     ),
-                                    SizedBox(width: 16),
+                                    const SizedBox(width: 16),
                                     // Right column
                                     Expanded(
                                       child: Column(
@@ -963,7 +963,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                               return null;
                                             },
                                           ),
-                                          SizedBox(height: 16),
+                                          const SizedBox(height: 16),
                                           _buildStyledField(
                                             label: "Address",
                                             controller: _opdAddressController,
@@ -991,7 +991,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                           ),
                         ),
 
-                        SizedBox(height: 24),
+                        const SizedBox(height: 24),
 
                         // Readmission Section
                         _buildInfoSection(
@@ -1006,7 +1006,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
+                                  const Row(
                                     children: [
                                       Icon(
                                         Icons.rotate_left,
@@ -1053,7 +1053,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                           ),
                         ),
 
-                        SizedBox(height: 24),
+                        const SizedBox(height: 24),
 
                         // Patient Photo Section
                         _buildPatientPhotoSection(
@@ -1065,7 +1065,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                           isSmallScreen: isSmallScreen,
                         ),
 
-                        SizedBox(height: 32),
+                        const SizedBox(height: 32),
 
                         // Submit button
                         _buildSubmitButton(
@@ -1103,7 +1103,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -1114,10 +1114,10 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                   size: 32,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.textDark,
@@ -1125,20 +1125,20 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
               ),
               Text(
                 subtitle,
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textMedium,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Center(
-                child: Image.asset("${AppImages.logo}", height: 40),
+                child: Image.asset(AppImages.logo, height: 40),
               ),
             ],
           )
         : Row(
             children: [
               Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -1149,14 +1149,14 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                   size: 32,
                 ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
@@ -1164,18 +1164,18 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                     ),
                     Text(
                       subtitle,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(width: 16),
-              Container(
+              const SizedBox(width: 16),
+              SizedBox(
                 height: 50,
                 child: Center(
-                  child: Image.asset("${AppImages.logo}", height: 50),
+                  child: Image.asset(AppImages.logo, height: 50),
                 ),
               ),
             ],
@@ -1196,12 +1196,12 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w600,
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Autocomplete<String>(
           optionsBuilder: (TextEditingValue textEditingValue) {
             fetchSuggestions(textEditingValue.text);
@@ -1214,7 +1214,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
             searchFn();
           },
           fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
-            return Container(
+            return SizedBox(
               height: 50,
               child: TextField(
                 controller: controller,
@@ -1228,7 +1228,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: HospitalTheme.border),
+                    borderSide: const BorderSide(color: HospitalTheme.border),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -1251,14 +1251,14 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "Patient ID Result",
           style: TextStyle(
             fontWeight: FontWeight.w600,
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Container(
           height: 50,
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -1271,7 +1271,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
             children: [
               Expanded(
                 child: SelectableText(
-                  patientId != null ? "$patientId" : "No patient found",
+                  patientId != null ? patientId : "No patient found",
                   style: TextStyle(
                     color: patientId != null ? color : HospitalTheme.textMedium,
                     fontWeight: FontWeight.w600,
@@ -1285,7 +1285,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                     Clipboard.setData(ClipboardData(text: patientId));
                     if (mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text("Patient ID copied to clipboard!"),
                           backgroundColor: HospitalTheme.success,
                         ),
@@ -1326,10 +1326,10 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
               color: color,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           content,
           if (footer != null) ...[
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             footer,
           ],
         ],
@@ -1352,12 +1352,12 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w600,
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         TextFormField(
           controller: controller,
           keyboardType: keyboardType,
@@ -1365,10 +1365,10 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
           decoration: InputDecoration(
             hintText: hintText,
             prefixIcon: Icon(icon, color: color),
-            contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+            contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: HospitalTheme.border),
+              borderSide: const BorderSide(color: HospitalTheme.border),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
@@ -1376,11 +1376,11 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: HospitalTheme.error),
+              borderSide: const BorderSide(color: HospitalTheme.error),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: HospitalTheme.error, width: 2),
+              borderSide: const BorderSide(color: HospitalTheme.error, width: 2),
             ),
           ),
         ),
@@ -1397,14 +1397,14 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "Gender",
           style: TextStyle(
             fontWeight: FontWeight.w600,
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Row(
           children: [
             _buildGenderOption(
@@ -1414,7 +1414,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
               onTap: () => onChanged("Male"),
               color: color,
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             _buildGenderOption(
               label: "Female",
               icon: Icons.female,
@@ -1422,7 +1422,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
               onTap: () => onChanged("Female"),
               color: color,
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             _buildGenderOption(
               label: "Other",
               icon: Icons.transgender,
@@ -1449,7 +1449,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
         onTap: onTap,
         borderRadius: BorderRadius.circular(8),
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
           decoration: BoxDecoration(
             color: isSelected ? color.withOpacity(0.1) : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
@@ -1466,7 +1466,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                 color: isSelected ? color : HospitalTheme.textMedium,
                 size: 20,
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 label,
                 style: TextStyle(
@@ -1490,7 +1490,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
     required bool isSmallScreen,
   }) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: HospitalTheme.background,
         borderRadius: BorderRadius.circular(12),
@@ -1507,7 +1507,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
               color: color,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           isSmallScreen
               ? Column(
                   children: [
@@ -1529,7 +1529,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                   fit: BoxFit.cover,
                                 ),
                               )
-                            : Column(
+                            : const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
@@ -1549,41 +1549,41 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                               ),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     // Upload instructions
-                    Text(
+                    const Text(
                       "Please upload a clear photo of the patient's face for identification purposes.",
                       style: TextStyle(
                         color: HospitalTheme.textMedium,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     // Upload buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton.icon(
                           onPressed: onPick,
-                          icon: Icon(Icons.file_upload),
-                          label: Text("Select Image"),
+                          icon: const Icon(Icons.file_upload),
+                          label: const Text("Select Image"),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: color,
                             foregroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 12),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         if (image != null)
                           TextButton.icon(
                             onPressed: onRemove,
                             icon:
-                                Icon(Icons.delete, color: HospitalTheme.error),
-                            label: Text(
+                                const Icon(Icons.delete, color: HospitalTheme.error),
+                            label: const Text(
                               "Remove",
                               style: TextStyle(
                                 color: HospitalTheme.error,
@@ -1613,7 +1613,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                                 fit: BoxFit.cover,
                               ),
                             )
-                          : Column(
+                          : const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
@@ -1632,49 +1632,49 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                               ],
                             ),
                     ),
-                    SizedBox(width: 24),
+                    const SizedBox(width: 24),
                     // Upload button
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "Upload patient photo",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 8),
-                          Text(
+                          const SizedBox(height: 8),
+                          const Text(
                             "Please upload a clear photo of the patient's face for identification purposes.",
                             style: TextStyle(
                               color: HospitalTheme.textMedium,
                             ),
                           ),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           Row(
                             children: [
                               ElevatedButton.icon(
                                 onPressed: onPick,
-                                icon: Icon(Icons.file_upload),
-                                label: Text("Select Image"),
+                                icon: const Icon(Icons.file_upload),
+                                label: const Text("Select Image"),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: color,
                                   foregroundColor: Colors.white,
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 12),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 16),
+                              const SizedBox(width: 16),
                               if (image != null)
                                 TextButton.icon(
                                   onPressed: onRemove,
-                                  icon: Icon(Icons.delete,
+                                  icon: const Icon(Icons.delete,
                                       color: HospitalTheme.error),
-                                  label: Text(
+                                  label: const Text(
                                     "Remove",
                                     style: TextStyle(
                                       color: HospitalTheme.error,
@@ -1706,7 +1706,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
         ElevatedButton.icon(
           onPressed: isSubmitting ? null : onPressed,
           icon: isSubmitting
-              ? SizedBox(
+              ? const SizedBox(
                   width: 20,
                   height: 20,
                   child: CircularProgressIndicator(
@@ -1714,12 +1714,12 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                     strokeWidth: 2,
                   ),
                 )
-              : Icon(Icons.save),
+              : const Icon(Icons.save),
           label: Text(isSubmitting ? "Processing..." : text),
           style: ElevatedButton.styleFrom(
             backgroundColor: color,
             foregroundColor: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
@@ -1736,14 +1736,14 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
       children: [
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: HospitalTheme.primary,
           ),
         ),
         Divider(color: color.withOpacity(0.5)),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
       ],
     );
   }
@@ -1759,7 +1759,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
             flex: 2,
             child: Text(
               "$label:",
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
               ),
@@ -1769,7 +1769,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
             flex: 3,
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textDark,
               ),
             ),
@@ -1790,7 +1790,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
     });
 
     try {
-      final uri = Uri.parse('${KVM_URL}/reception/addPatient');
+      final uri = Uri.parse('$KVM_URL/reception/addPatient');
       print("IPD Request URL: $uri");
       final request = http.MultipartRequest('POST', uri);
 
@@ -1921,7 +1921,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
     });
 
     try {
-      final uri = Uri.parse('${KVM_URL}/reception/addPatient');
+      final uri = Uri.parse('$KVM_URL/reception/addPatient');
       print("OPD Request URL: $uri");
       final request = http.MultipartRequest('POST', uri);
 
@@ -2076,15 +2076,15 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
             children: [
               // Header
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: themeColor,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(12),
                     topRight: Radius.circular(12),
                   ),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(
                       Icons.medical_information,
@@ -2104,7 +2104,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
               // Content
               Flexible(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -2129,7 +2129,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                             ),
                           ),
                         ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       _buildConfirmationSectionHeader(
                           "Personal Information", themeColor),
                       _buildConfirmationRow("Full Name", name),
@@ -2139,7 +2139,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                       _buildConfirmationRow("Address", address),
                       _buildConfirmationRow("Weight", "$weight kg"),
                       if (isIPD) ...[
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         _buildConfirmationSectionHeader(
                             "Medical Information", themeColor),
                         _buildConfirmationRow("Reason for Admission",
@@ -2152,7 +2152,7 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                           _buildConfirmationRow(
                               "Caste", _ipdCasteController.text),
                       ],
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       _buildConfirmationSectionHeader(
                           "Visit Information", themeColor),
                       _buildConfirmationRow(
@@ -2166,10 +2166,10 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
               ),
               // Footer with action buttons
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade50,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(12),
                     bottomRight: Radius.circular(12),
                   ),
@@ -2179,19 +2179,19 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(dialogContext),
-                      child: Text(
+                      child: const Text(
                         "Edit",
                         style: TextStyle(color: HospitalTheme.textMedium),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     ElevatedButton(
                       onPressed: () {
                         // Pop the dialog first to prevent stacking issues
                         Navigator.pop(dialogContext);
 
                         // Brief delay to ensure dialog is dismissed
-                        Future.delayed(Duration(milliseconds: 100), () {
+                        Future.delayed(const Duration(milliseconds: 100), () {
                           if (isIPD) {
                             _addIPDPatient(context);
                           } else {
@@ -2203,12 +2203,12 @@ class _PatientRegistrationScreenState extends State<PatientRegistrationScreen>
                         backgroundColor: themeColor,
                         foregroundColor: Colors.white,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text("Confirm & Register"),
+                      child: const Text("Confirm & Register"),
                     ),
                   ],
                 ),

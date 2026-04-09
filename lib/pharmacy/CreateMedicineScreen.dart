@@ -313,7 +313,7 @@ final selectedMedicineProvider = StateProvider<Medicine?>((ref) => null);
 
 // Screen for Medicine Management
 class MedicineScreen extends ConsumerStatefulWidget {
-  const MedicineScreen({Key? key}) : super(key: key);
+  const MedicineScreen({super.key});
 
   @override
   ConsumerState<MedicineScreen> createState() => _MedicineScreenState();
@@ -967,9 +967,9 @@ class _MedicineScreenState extends ConsumerState<MedicineScreen> {
                   distributorsAsync.when(
                     data: (distributors) {
                       if (distributors.isEmpty) {
-                        return TextButton(
+                        return const TextButton(
                           onPressed: null,
-                          child: const Text('Save'),
+                          child: Text('Save'),
                         );
                       }
 
@@ -1028,9 +1028,9 @@ class _MedicineScreenState extends ConsumerState<MedicineScreen> {
                       );
                     },
                     loading: () => const CircularProgressIndicator(),
-                    error: (_, __) => TextButton(
+                    error: (_, __) => const TextButton(
                       onPressed: null,
-                      child: const Text('Save'),
+                      child: Text('Save'),
                     ),
                   ),
                 ],
@@ -1161,7 +1161,7 @@ class _MedicineScreenState extends ConsumerState<MedicineScreen> {
         decoration: BoxDecoration(
           color: PharmaTheme.background,
           image: DecorationImage(
-            image: const AssetImage('${AppImages.logo}'),
+            image: const AssetImage(AppImages.logo),
             fit: BoxFit.cover,
             opacity: 0.05,
             colorFilter: ColorFilter.mode(
@@ -1226,7 +1226,7 @@ class _MedicineScreenState extends ConsumerState<MedicineScreen> {
                       // Header
                       Container(
                         padding: const EdgeInsets.all(PharmaTheme.spacingM),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: PharmaTheme.primary,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(PharmaTheme.radiusM),
@@ -1598,11 +1598,10 @@ class _MedicineScreenState extends ConsumerState<MedicineScreen> {
                         title: 'Profit Margin',
                         amount: medicine.mrp - medicine.purchasePrice,
                         percentage: medicine.purchasePrice > 0
-                            ? ((medicine.mrp - medicine.purchasePrice) /
+                            ? '${((medicine.mrp - medicine.purchasePrice) /
                                         medicine.purchasePrice *
                                         100)
-                                    .toStringAsFixed(1) +
-                                '%'
+                                    .toStringAsFixed(1)}%'
                             : 'N/A',
                         icon: Icons.trending_up,
                         color: PharmaTheme.info,
@@ -1657,7 +1656,7 @@ class _MedicineScreenState extends ConsumerState<MedicineScreen> {
                       vertical: PharmaTheme.spacingS,
                       horizontal: PharmaTheme.spacingM,
                     ),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: PharmaTheme.primary,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(PharmaTheme.radiusM),
@@ -1912,7 +1911,7 @@ class _MedicineScreenState extends ConsumerState<MedicineScreen> {
                 borderRadius: BorderRadius.circular(PharmaTheme.radiusM),
                 child: SingleChildScrollView(
                   child: DataTable(
-                    headingRowColor: MaterialStateProperty.all<Color>(
+                    headingRowColor: WidgetStateProperty.all<Color>(
                       PharmaTheme.background,
                     ),
                     columnSpacing: 16,

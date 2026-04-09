@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'pharmatheme.dart'; // Import the existing PharmaTheme
 
 class InventoryDashboard extends ConsumerStatefulWidget {
-  const InventoryDashboard({Key? key}) : super(key: key);
+  const InventoryDashboard({super.key});
 
   @override
   ConsumerState<InventoryDashboard> createState() => _InventoryDashboardState();
@@ -252,7 +252,7 @@ class _InventoryDashboardState extends ConsumerState<InventoryDashboard> {
 
 // Main screen
 class InventoryApp extends ConsumerWidget {
-  const InventoryApp({Key? key}) : super(key: key);
+  const InventoryApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

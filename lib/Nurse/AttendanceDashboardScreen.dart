@@ -435,7 +435,7 @@ class _NurseAttendanceDashboardState
 }
 
 class AttendanceDashboardLayout extends ConsumerWidget {
-  const AttendanceDashboardLayout();
+  const AttendanceDashboardLayout({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -1008,7 +1008,7 @@ class _AttendanceRecordCard extends StatelessWidget {
               Row(
                 children: [
                   if (record.checkIn != null) ...[
-                    Icon(Icons.login, size: 16, color: HospitalTheme.success),
+                    const Icon(Icons.login, size: 16, color: HospitalTheme.success),
                     const SizedBox(width: 4),
                     Text(
                       _formatTime(record.checkIn!.time),
@@ -1021,7 +1021,7 @@ class _AttendanceRecordCard extends StatelessWidget {
                   if (record.checkIn != null && record.checkOut != null)
                     const SizedBox(width: 16),
                   if (record.checkOut != null) ...[
-                    Icon(Icons.logout, size: 16, color: HospitalTheme.error),
+                    const Icon(Icons.logout, size: 16, color: HospitalTheme.error),
                     const SizedBox(width: 4),
                     Text(
                       _formatTime(record.checkOut!.time),
@@ -1114,11 +1114,11 @@ class _DetailsColumn extends StatelessWidget {
               color: Colors.white,
               border: Border(bottom: BorderSide(color: HospitalTheme.border)),
             ),
-            child: Row(
+            child: const Row(
               children: [
-                const Icon(Icons.analytics, color: HospitalTheme.primary),
-                const SizedBox(width: 8),
-                const Text(
+                Icon(Icons.analytics, color: HospitalTheme.primary),
+                SizedBox(width: 8),
+                Text(
                   'Details & Statistics',
                   style: TextStyle(
                     fontSize: 18,
@@ -1215,14 +1215,14 @@ class _DetailsColumn extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(Icons.percent, color: HospitalTheme.primary),
+              const Icon(Icons.percent, color: HospitalTheme.primary),
               const SizedBox(width: 12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     '${statistics.presentPercentage.toStringAsFixed(1)}%',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: HospitalTheme.primary,
@@ -1371,7 +1371,7 @@ class _DetailsColumn extends StatelessWidget {
   }
 
   Widget _buildNoSelectionMessage() {
-    return Center(
+    return const Center(
       child: Column(
         children: [
           Icon(
@@ -1379,8 +1379,8 @@ class _DetailsColumn extends StatelessWidget {
             size: 64,
             color: HospitalTheme.textLight,
           ),
-          const SizedBox(height: 16),
-          const Text(
+          SizedBox(height: 16),
+          Text(
             'Select a record to view details',
             style: TextStyle(
               fontSize: 16,

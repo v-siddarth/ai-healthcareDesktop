@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class DoctorAppointmentsScreen extends StatefulWidget {
-  const DoctorAppointmentsScreen({Key? key}) : super(key: key);
+  const DoctorAppointmentsScreen({super.key});
 
   @override
   State<DoctorAppointmentsScreen> createState() =>
@@ -25,7 +25,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
   Map<String, List<Map<String, dynamic>>> _groupedAppointments = {};
   DateTime _selectedDate = DateTime.now();
   String _activeFilter = 'All'; // Default filter
-  bool _isCalendarVisible = false;
+  final bool _isCalendarVisible = false;
 
   // Map to track appointment counts by date for the calendar
   Map<DateTime, int> _appointmentCountsByDate = {};
@@ -78,7 +78,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
       final token = prefs.getString('doctor_token') ?? '';
 
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getDoctorAppointments'),
+        Uri.parse('$KVM_URL/doctors/getDoctorAppointments'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -225,7 +225,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
       final token = prefs.getString('doctor_token') ?? '';
 
       final response = await http.patch(
-        Uri.parse('${KVM_URL}/doctors/rescheduleAppointment'),
+        Uri.parse('$KVM_URL/doctors/rescheduleAppointment'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -308,7 +308,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
       final token = prefs.getString('doctor_token') ?? '';
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/doctors/updateAppointmentStatus'),
+        Uri.parse('$KVM_URL/doctors/updateAppointmentStatus'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -382,7 +382,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: HospitalTheme.primary,
               onPrimary: HospitalTheme.textOnPrimary,
               surface: HospitalTheme.cardBackground,
@@ -393,12 +393,12 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              titleTextStyle: TextStyle(
+              titleTextStyle: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
-              contentTextStyle: TextStyle(
+              contentTextStyle: const TextStyle(
                 fontSize: 14,
                 color: Colors.black54,
               ),
@@ -477,7 +477,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
           // Main content area
           Expanded(
             child: _isLoading
-                ? Center(
+                ? const Center(
                     child:
                         CircularProgressIndicator(color: HospitalTheme.primary))
                 : _errorMessage.isNotEmpty
@@ -511,7 +511,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
             children: [
               // Enhanced tab bar with icons
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: HospitalTheme.border),
                   ),
@@ -606,23 +606,23 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                   color: HospitalTheme.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                formatButtonTextStyle: TextStyle(
+                formatButtonTextStyle: const TextStyle(
                   color: HospitalTheme.primary,
                   fontSize: 12, // Smaller format button text
                 ),
-                titleTextStyle: TextStyle(
+                titleTextStyle: const TextStyle(
                   fontSize: 15, // Smaller title text
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.textDark,
                 ),
                 headerPadding: const EdgeInsets.symmetric(
                     vertical: 8), // Less padding in header
-                leftChevronIcon: Icon(
+                leftChevronIcon: const Icon(
                   Icons.chevron_left,
                   size: 20, // Smaller icons
                   color: HospitalTheme.primary,
                 ),
-                rightChevronIcon: Icon(
+                rightChevronIcon: const Icon(
                   Icons.chevron_right,
                   size: 20, // Smaller icons
                   color: HospitalTheme.primary,
@@ -633,7 +633,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                   color: HospitalTheme.primary.withOpacity(0.7),
                   shape: BoxShape.circle,
                 ),
-                selectedDecoration: BoxDecoration(
+                selectedDecoration: const BoxDecoration(
                   color: HospitalTheme.primary,
                   shape: BoxShape.circle,
                 ),
@@ -644,7 +644,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                     const TextStyle(fontSize: 12), // Smaller day text
                 weekendTextStyle:
                     const TextStyle(fontSize: 12), // Smaller weekend text
-                outsideTextStyle: TextStyle(
+                outsideTextStyle: const TextStyle(
                   fontSize: 12,
                   color: HospitalTheme.textLight,
                 ),
@@ -731,12 +731,12 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
               ),
               child: Row(
                 children: [
-                  Icon(Icons.event, color: HospitalTheme.primary, size: 18),
+                  const Icon(Icons.event, color: HospitalTheme.primary, size: 18),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       'Appointments for ${DateFormat('EEEE, MMMM d, yyyy').format(_selectedDate)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14, // Reduced font size
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
@@ -753,7 +753,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
           // List of appointments for selected date - expanded to use more space
           Expanded(
             child: _sortedDates.isEmpty
-                ? Center(
+                ? const Center(
                     child: Text(
                       'No appointments for this date',
                       style: TextStyle(
@@ -801,7 +801,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
         const SizedBox(width: 4),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 11, // Smaller text
             color: HospitalTheme.textMedium,
           ),
@@ -822,7 +822,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: HospitalTheme.border),
+        side: const BorderSide(color: HospitalTheme.border),
       ),
       child: Column(
         children: [
@@ -833,7 +833,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
               backgroundColor: HospitalTheme.surfaceLight,
               child: Text(
                 patientName.substring(0, 1).toUpperCase(),
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.primary,
                   fontWeight: FontWeight.bold,
                 ),
@@ -855,7 +855,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                 const SizedBox(width: 4),
                 Text(
                   time,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: HospitalTheme.textMedium,
                   ),
                 ),
@@ -919,7 +919,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
               Container(
                 width: 16,
                 height: 16,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: HospitalTheme.primary,
                   shape: BoxShape.circle,
                 ),
@@ -927,7 +927,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
               const SizedBox(width: 16),
               Text(
                 _formatDate(date),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.textDark,
@@ -949,7 +949,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                 ),
                 child: Text(
                   '${appointments.length} appointments',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: HospitalTheme.primary,
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
@@ -963,7 +963,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
         // Timeline appointments
         Container(
           margin: const EdgeInsets.only(left: 8),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             border: Border(
               left: BorderSide(
                 color: HospitalTheme.border,
@@ -1015,7 +1015,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
             ),
             child: Text(
               time,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.primary,
               ),
@@ -1060,7 +1060,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                         backgroundColor: HospitalTheme.surfaceLight,
                         child: Text(
                           patientName.substring(0, 1).toUpperCase(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: HospitalTheme.primary,
                             fontWeight: FontWeight.bold,
                           ),
@@ -1091,7 +1091,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                                           .substring(0, 1)
                                           .toUpperCase() +
                                       appointmentType.substring(1),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: HospitalTheme.textMedium,
                                     fontSize: 12,
                                   ),
@@ -1123,7 +1123,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                   if (symptoms.isNotEmpty &&
                       symptoms != 'No symptoms recorded') ...[
                     const SizedBox(height: 12),
-                    Text(
+                    const Text(
                       'Symptoms:',
                       style: TextStyle(
                         fontSize: 12,
@@ -1134,7 +1134,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                     const SizedBox(height: 4),
                     Text(
                       symptoms,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: HospitalTheme.textMedium,
                       ),
@@ -1178,7 +1178,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
             },
           ),
           const SizedBox(width: 16),
-          Text(
+          const Text(
             'Doctor Dashboard',
             style: TextStyle(
               color: HospitalTheme.textDark,
@@ -1199,12 +1199,12 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
             border: Border.all(color: HospitalTheme.border),
           ),
           child: TextField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'Search patients...',
               hintStyle: TextStyle(color: HospitalTheme.textLight),
               prefixIcon: Icon(Icons.search, color: HospitalTheme.textMedium),
               border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(vertical: 10),
+              contentPadding: EdgeInsets.symmetric(vertical: 10),
             ),
             onChanged: (value) {
               // Implement search functionality here
@@ -1215,7 +1215,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
 
         // Calendar button
         IconButton(
-          icon: Icon(Icons.calendar_today, color: HospitalTheme.primary),
+          icon: const Icon(Icons.calendar_today, color: HospitalTheme.primary),
           onPressed: () => _selectDate(context),
           tooltip: 'Open Calendar',
         ),
@@ -1225,7 +1225,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
           alignment: Alignment.center,
           children: [
             IconButton(
-              icon: Icon(Icons.notifications_outlined,
+              icon: const Icon(Icons.notifications_outlined,
                   color: HospitalTheme.textDark),
               onPressed: () {
                 // Open notifications panel
@@ -1279,40 +1279,40 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                 const SizedBox(width: 8),
                 Text(
                   'Dr. $_doctorName',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: HospitalTheme.textDark,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(width: 4),
-                Icon(Icons.arrow_drop_down, color: HospitalTheme.textMedium),
+                const Icon(Icons.arrow_drop_down, color: HospitalTheme.textMedium),
               ],
             ),
             itemBuilder: (context) => <PopupMenuEntry>[
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: 'profile',
                 child: ListTile(
                   leading:
                       Icon(Icons.person_outline, color: HospitalTheme.primary),
-                  title: const Text('My Profile'),
+                  title: Text('My Profile'),
                   dense: true,
                 ),
               ),
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: 'settings',
                 child: ListTile(
                   leading: Icon(Icons.settings_outlined,
                       color: HospitalTheme.textMedium),
-                  title: const Text('Settings'),
+                  title: Text('Settings'),
                   dense: true,
                 ),
               ),
               const PopupMenuDivider(),
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: 'logout',
                 child: ListTile(
                   leading: Icon(Icons.logout, color: HospitalTheme.error),
-                  title: const Text('Logout'),
+                  title: Text('Logout'),
                   dense: true,
                 ),
               ),
@@ -1593,9 +1593,9 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.error_outline, size: 64, color: HospitalTheme.error),
+            const Icon(Icons.error_outline, size: 64, color: HospitalTheme.error),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'Something went wrong',
               style: TextStyle(
                 fontSize: 22,
@@ -1606,7 +1606,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
             const SizedBox(height: 12),
             Text(
               _errorMessage,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: HospitalTheme.textMedium,
               ),
@@ -1649,7 +1649,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
               color: HospitalTheme.primary.withOpacity(0.5),
             ),
             const SizedBox(height: 32),
-            Text(
+            const Text(
               'No Appointments Found',
               style: TextStyle(
                 fontSize: 24,
@@ -1658,7 +1658,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
               ),
             ),
             const SizedBox(height: 16),
-            SizedBox(
+            const SizedBox(
               width: 400,
               child: Text(
                 'You don\'t have any scheduled appointments for the selected period. Try changing the filter or create a new appointment.',
@@ -1676,15 +1676,15 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
               children: [
                 OutlinedButton.icon(
                   onPressed: _fetchAppointments,
-                  icon: Icon(Icons.refresh, color: HospitalTheme.primary),
-                  label: Text(
+                  icon: const Icon(Icons.refresh, color: HospitalTheme.primary),
+                  label: const Text(
                     'Refresh',
                     style: TextStyle(color: HospitalTheme.primary),
                   ),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24, vertical: 16),
-                    side: BorderSide(color: HospitalTheme.primary),
+                    side: const BorderSide(color: HospitalTheme.primary),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -1727,7 +1727,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: Row(
               children: [
-                Text(
+                const Text(
                   'Filter by status:',
                   style: TextStyle(
                     fontSize: 14,
@@ -1774,12 +1774,12 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.calendar_today,
+                    const Icon(Icons.calendar_today,
                         size: 18, color: HospitalTheme.primary),
                     const SizedBox(width: 8),
                     Text(
                       'Showing appointments for: ${DateFormat('MMMM d, yyyy').format(_selectedDate)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.primary,
                       ),
@@ -1792,10 +1792,10 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                           _groupAppointmentsByDate();
                         });
                       },
-                      child: Text('Clear Filter'),
                       style: TextButton.styleFrom(
                         foregroundColor: HospitalTheme.primary,
                       ),
+                      child: Text('Clear Filter'),
                     ),
                   ],
                 ),
@@ -1805,7 +1805,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
           // Appointments list with enhanced date headers
           Expanded(
             child: _sortedDates.isEmpty
-                ? Center(
+                ? const Center(
                     child: Text(
                       'No appointments match your current filter',
                       style: TextStyle(
@@ -1901,7 +1901,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                       children: [
                         Text(
                           _formatDate(date),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: HospitalTheme.textDark,
@@ -1919,7 +1919,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                                 color: HospitalTheme.success.withOpacity(0.3),
                               ),
                             ),
-                            child: Text(
+                            child: const Text(
                               'TODAY',
                               style: TextStyle(
                                 fontSize: 10,
@@ -1939,7 +1939,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                                 color: HospitalTheme.warning.withOpacity(0.3),
                               ),
                             ),
-                            child: Text(
+                            child: const Text(
                               'TOMORROW',
                               style: TextStyle(
                                 fontSize: 10,
@@ -1953,7 +1953,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                     const SizedBox(height: 4),
                     Text(
                       '${appointments.length} appointments scheduled',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         color: HospitalTheme.textMedium,
                       ),
@@ -1998,12 +1998,12 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                 padding: const EdgeInsets.only(left: 8, bottom: 4),
                 child: Row(
                   children: [
-                    Icon(Icons.access_time,
+                    const Icon(Icons.access_time,
                         size: 14, color: HospitalTheme.primary),
                     const SizedBox(width: 8),
                     Text(
                       time,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.primary,
                       ),
@@ -2019,7 +2019,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
               ),
             ],
           );
-        }).toList(),
+        }),
 
         if (_sortedDates.last != date)
           Divider(color: HospitalTheme.border.withOpacity(0.5)),
@@ -2087,7 +2087,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(12),
@@ -2110,7 +2110,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                     children: [
                       Text(
                         time,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: HospitalTheme.primary,
@@ -2131,7 +2131,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                           Text(
                             appointmentType.substring(0, 1).toUpperCase() +
                                 appointmentType.substring(1).toLowerCase(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               color: HospitalTheme.textMedium,
                             ),
@@ -2159,7 +2159,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                       const SizedBox(height: 4),
                       Text(
                         'ID: $patientId',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: HospitalTheme.textMedium,
                         ),
@@ -2195,7 +2195,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                         backgroundColor: HospitalTheme.surfaceLight,
                         child: Text(
                           patientName.substring(0, 1).toUpperCase(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: HospitalTheme.primary,
@@ -2215,7 +2215,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Symptoms:',
                                       style: TextStyle(
                                         fontSize: 14,
@@ -2226,7 +2226,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                                     const SizedBox(height: 4),
                                     Text(
                                       symptoms,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         color: HospitalTheme.textMedium,
                                       ),
@@ -2240,7 +2240,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Payment:',
                                     style: TextStyle(
                                       fontSize: 14,
@@ -2313,11 +2313,11 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
         onPressed: () {
           // View patient details/medical records
         },
-        icon: Icon(Icons.visibility_outlined,
+        icon: const Icon(Icons.visibility_outlined,
             size: 18, color: HospitalTheme.info),
         label: const Text('View Details'),
         style: OutlinedButton.styleFrom(
-          side: BorderSide(color: HospitalTheme.info),
+          side: const BorderSide(color: HospitalTheme.info),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -2360,10 +2360,10 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                 patientId: patientId,
               );
             },
-            icon: Icon(Icons.schedule, size: 18, color: HospitalTheme.warning),
+            icon: const Icon(Icons.schedule, size: 18, color: HospitalTheme.warning),
             label: const Text('Reschedule'),
             style: OutlinedButton.styleFrom(
-              side: BorderSide(color: HospitalTheme.warning),
+              side: const BorderSide(color: HospitalTheme.warning),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -2376,11 +2376,11 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
             onPressed: () {
               _showCancelConfirmationDialog(appointment['_id'] ?? '');
             },
-            icon: Icon(Icons.cancel_outlined,
+            icon: const Icon(Icons.cancel_outlined,
                 size: 18, color: HospitalTheme.error),
             label: const Text('Cancel'),
             style: OutlinedButton.styleFrom(
-              side: BorderSide(color: HospitalTheme.error),
+              side: const BorderSide(color: HospitalTheme.error),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -2419,10 +2419,10 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                 patientId: patientId,
               );
             },
-            icon: Icon(Icons.schedule, size: 18, color: HospitalTheme.warning),
+            icon: const Icon(Icons.schedule, size: 18, color: HospitalTheme.warning),
             label: const Text('Reschedule'),
             style: OutlinedButton.styleFrom(
-              side: BorderSide(color: HospitalTheme.warning),
+              side: const BorderSide(color: HospitalTheme.warning),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -2435,11 +2435,11 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
             onPressed: () {
               _showCancelConfirmationDialog(appointment['_id'] ?? '');
             },
-            icon: Icon(Icons.cancel_outlined,
+            icon: const Icon(Icons.cancel_outlined,
                 size: 18, color: HospitalTheme.error),
             label: const Text('Cancel'),
             style: OutlinedButton.styleFrom(
-              side: BorderSide(color: HospitalTheme.error),
+              side: const BorderSide(color: HospitalTheme.error),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -2509,7 +2509,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Update Appointment Status'),
+          title: const Text('Update Appointment Status'),
           content: Text(
               'Are you sure you want to mark this appointment as $status?'),
           actions: [
@@ -2528,11 +2528,11 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                   status: status,
                 );
               },
-              child: Text('Confirm'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: HospitalTheme.success,
                 foregroundColor: Colors.white,
               ),
+              child: Text('Confirm'),
             ),
           ],
           shape: RoundedRectangleBorder(
@@ -2556,11 +2556,11 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: Row(
+              title: const Row(
                 children: [
                   Icon(Icons.schedule, color: HospitalTheme.warning),
-                  const SizedBox(width: 8),
-                  const Text('Reschedule Appointment'),
+                  SizedBox(width: 8),
+                  Text('Reschedule Appointment'),
                 ],
               ),
               content: Column(
@@ -2577,7 +2577,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                         builder: (context, child) {
                           return Theme(
                             data: Theme.of(context).copyWith(
-                              colorScheme: ColorScheme.light(
+                              colorScheme: const ColorScheme.light(
                                 primary: HospitalTheme.primary,
                                 onPrimary: Colors.white,
                                 surface: Colors.white,
@@ -2603,13 +2603,13 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                       padding: const EdgeInsets.all(16),
                       child: Row(
                         children: [
-                          Icon(Icons.calendar_today,
+                          const Icon(Icons.calendar_today,
                               color: HospitalTheme.primary),
                           const SizedBox(width: 16),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Date',
                                 style: TextStyle(
                                   fontSize: 14,
@@ -2627,7 +2627,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                             ],
                           ),
                           const Spacer(),
-                          Icon(Icons.arrow_drop_down,
+                          const Icon(Icons.arrow_drop_down,
                               color: HospitalTheme.textMedium),
                         ],
                       ),
@@ -2645,7 +2645,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                         builder: (context, child) {
                           return Theme(
                             data: Theme.of(context).copyWith(
-                              colorScheme: ColorScheme.light(
+                              colorScheme: const ColorScheme.light(
                                 primary: HospitalTheme.primary,
                                 onPrimary: Colors.white,
                                 surface: Colors.white,
@@ -2671,12 +2671,12 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                       padding: const EdgeInsets.all(16),
                       child: Row(
                         children: [
-                          Icon(Icons.access_time, color: HospitalTheme.primary),
+                          const Icon(Icons.access_time, color: HospitalTheme.primary),
                           const SizedBox(width: 16),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Time',
                                 style: TextStyle(
                                   fontSize: 14,
@@ -2693,7 +2693,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                             ],
                           ),
                           const Spacer(),
-                          Icon(Icons.arrow_drop_down,
+                          const Icon(Icons.arrow_drop_down,
                               color: HospitalTheme.textMedium),
                         ],
                       ),
@@ -2706,7 +2706,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text(
+                  child: const Text(
                     'Cancel',
                     style: TextStyle(color: HospitalTheme.textMedium),
                   ),
@@ -2721,13 +2721,13 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
                       newTime: selectedTime.format(context),
                     );
                   },
-                  child: Text('Reschedule'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: HospitalTheme.warning,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24, vertical: 12),
                   ),
+                  child: Text('Reschedule'),
                 ),
               ],
               shape: RoundedRectangleBorder(
@@ -2745,22 +2745,22 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Row(
+          title: const Row(
             children: [
               Icon(Icons.warning_amber_rounded, color: HospitalTheme.error),
-              const SizedBox(width: 8),
-              const Text('Cancel Appointment'),
+              SizedBox(width: 8),
+              Text('Cancel Appointment'),
             ],
           ),
-          content: Column(
+          content: const Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Are you sure you want to cancel this appointment?',
                 style: TextStyle(fontSize: 16),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Text(
                 'This action cannot be undone and the patient will be notified.',
                 style: TextStyle(
@@ -2775,7 +2775,7 @@ class _DoctorAppointmentsScreenState extends State<DoctorAppointmentsScreen>
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(
+              child: const Text(
                 'Keep Appointment',
                 style: TextStyle(color: HospitalTheme.textMedium),
               ),

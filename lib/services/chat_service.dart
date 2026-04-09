@@ -15,7 +15,7 @@ class ChatService {
   }) async {
     try {
       final response = await http.get(
-        Uri.parse('${BASE_URL}/chat/search-doctors?query=$query'),
+        Uri.parse('$BASE_URL/chat/search-doctors?query=$query'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -44,10 +44,10 @@ class ChatService {
   }) async {
     try {
       print('=== FETCHING USER CHATS ===');
-      print('URL: ${BASE_URL}/chat/list?page=$page&limit=$limit');
+      print('URL: $BASE_URL/chat/list?page=$page&limit=$limit');
 
       final response = await http.get(
-        Uri.parse('${BASE_URL}/chat/list?page=$page&limit=$limit'),
+        Uri.parse('$BASE_URL/chat/list?page=$page&limit=$limit'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ class ChatService {
   }) async {
     try {
       final response = await http.get(
-        Uri.parse('${BASE_URL}/chat/$recipientId'),
+        Uri.parse('$BASE_URL/chat/$recipientId'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ class ChatService {
     int limit = 50,
   }) async {
     try {
-      final url = '${BASE_URL}/chat/$chatId/messages?page=$page&limit=$limit';
+      final url = '$BASE_URL/chat/$chatId/messages?page=$page&limit=$limit';
       print('=== API REQUEST ===');
       print('URL: $url');
       print('Chat ID: $chatId');
@@ -180,7 +180,7 @@ class ChatService {
       }
     } catch (e) {
       print('Error getting chat messages: $e');
-      throw Exception('Failed to get messages: ${e}');
+      throw Exception('Failed to get messages: $e');
     }
   }
 
@@ -206,7 +206,7 @@ class ChatService {
       print('Request body: $requestBody');
 
       final response = await http.post(
-        Uri.parse('${BASE_URL}/chat/$chatId/send'),
+        Uri.parse('$BASE_URL/chat/$chatId/send'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -239,7 +239,7 @@ class ChatService {
   }) async {
     try {
       final response = await http.put(
-        Uri.parse('${BASE_URL}/chat/$chatId/read'),
+        Uri.parse('$BASE_URL/chat/$chatId/read'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -261,7 +261,7 @@ class ChatService {
   }) async {
     try {
       final response = await http.get(
-        Uri.parse('${BASE_URL}/chat/unread-count'),
+        Uri.parse('$BASE_URL/chat/unread-count'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -288,7 +288,7 @@ class ChatService {
   }) async {
     try {
       final response = await http.delete(
-        Uri.parse('${BASE_URL}/chat/$chatId/messages/$messageId'),
+        Uri.parse('$BASE_URL/chat/$chatId/messages/$messageId'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -308,7 +308,7 @@ class ChatService {
   static Future<Map<String, dynamic>> checkSocketStatus() async {
     try {
       final response = await http.get(
-        Uri.parse('${BASE_URL}/socket-status'),
+        Uri.parse('$BASE_URL/socket-status'),
       );
 
       if (response.statusCode == 200) {

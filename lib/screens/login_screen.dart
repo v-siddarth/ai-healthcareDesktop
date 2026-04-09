@@ -1,5 +1,5 @@
 // lib/screens/login_screen.dart - Fixed responsive handling
-import 'package:doctordesktop/Check.dart';
+import 'package:doctordesktop/app/home_page.dart';
 import 'package:doctordesktop/Doctor/DoctorMainScreen.dart';
 import 'package:doctordesktop/constants/Assets.dart';
 import 'package:doctordesktop/constants/HospitalTheme.dart';
@@ -16,6 +16,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginScreen1 extends ConsumerStatefulWidget {
+  const LoginScreen1({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -37,7 +39,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1200),
+      duration: const Duration(milliseconds: 1200),
     );
     _animationController.forward();
   }
@@ -84,15 +86,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
             : AppBar(
                 elevation: 0,
                 leading: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                     );
                   },
                 ),
-                title: Text(
+                title: const Text(
                   "Login",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -109,7 +111,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
                 height: 120,
                 decoration: BoxDecoration(
                   color: AppColors.primary,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30),
                   ),
@@ -170,7 +172,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                     );
                   },
                 ),
@@ -230,22 +232,22 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
               children: [
                 FadeSlideTransition(
                   animation: _animationController,
-                  beginOffset: Offset(-0.35, 0),
+                  beginOffset: const Offset(-0.35, 0),
                   child: Padding(
-                    padding: EdgeInsets.all(32),
+                    padding: const EdgeInsets.all(32),
                     child: Image.asset(
-                      '${AppImages.logo}',
+                      AppImages.logo,
                       width: 180,
                       height: 180,
                     ),
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 FadeSlideTransition(
                   animation: _animationController,
-                  beginOffset: Offset(-0.35, 0),
+                  beginOffset: const Offset(-0.35, 0),
                   curve: Curves.easeOutQuart,
-                  child: Padding(
+                  child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       "Welcome to ${AppStrings.hospitalName}",
@@ -259,13 +261,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 FadeSlideTransition(
                   animation: _animationController,
-                  beginOffset: Offset(-0.35, 0),
+                  beginOffset: const Offset(-0.35, 0),
                   curve: Curves.easeOutQuart,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: Text(
                       "Your trusted healthcare management system",
                       textAlign: TextAlign.center,
@@ -287,7 +289,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
           flex: 4,
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(40),
+              padding: const EdgeInsets.all(40),
               child: _buildLoginForm(isDarkMode, true),
             ),
           ),
@@ -321,13 +323,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
     // Add logo for mobile/tablet only
     if (!isDesktop) {
       formWidgets.add(Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: isDarkMode ? AppColors.backgroundDark : Colors.grey[100],
         ),
         child: Image.asset(
-          '${AppImages.logo}',
+          AppImages.logo,
           fit: BoxFit.contain,
           width: ResponsiveHelper.getAdaptiveLogoSize(context),
           height: ResponsiveHelper.getAdaptiveLogoSize(context),
@@ -445,9 +447,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
         },
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         ),
-        child: Text(
+        child: const Text(
           "Forgot Password?",
           style: TextStyle(
             fontWeight: FontWeight.w600,
@@ -466,7 +468,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
         onPressed: _isLoading ? null : _login,
         style: AppStyles.primaryButtonStyle(),
         child: _isLoading
-            ? SizedBox(
+            ? const SizedBox(
                 width: 24,
                 height: 24,
                 child: CircularProgressIndicator(
@@ -485,7 +487,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
 
     // Footer branding
     formWidgets.add(Container(
-      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
       decoration: BoxDecoration(
         color: isDarkMode ? AppColors.backgroundDark : Colors.grey[100],
         borderRadius: BorderRadius.circular(12),
@@ -503,9 +505,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
             color: AppColors.primary,
             size: 22,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text(
-            "${AppStrings.hospitalName}",
+            AppStrings.hospitalName,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -562,10 +564,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen1>
             SnackbarService.showSuccessSnackbar("Login successful!");
 
             // Navigate to DoctorMainScreen after a short delay for better UX
-            Future.delayed(Duration(milliseconds: 500), () {
+            Future.delayed(const Duration(milliseconds: 500), () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => DoctorMainScreen()),
+                MaterialPageRoute(builder: (context) => const DoctorMainScreen()),
               );
             });
           } else {

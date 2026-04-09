@@ -72,18 +72,17 @@ class HospitalTheme {
 
   // Custom theme data
   static ThemeData get themeData => ThemeData(
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: primary,
           primaryContainer: primaryLight,
           secondary: secondary,
           secondaryContainer: secondaryLight,
           surface: cardBackground,
-          background: background,
           error: error,
         ),
         scaffoldBackgroundColor: background,
         fontFamily: 'Poppins',
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           foregroundColor: Colors.white,
           elevation: 0,
@@ -101,7 +100,7 @@ class HospitalTheme {
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: radiusMedium,
-            side: BorderSide(color: border),
+            side: const BorderSide(color: border),
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -127,51 +126,51 @@ class HospitalTheme {
           filled: true,
           border: OutlineInputBorder(
             borderRadius: radiusSmall,
-            borderSide: BorderSide(color: border),
+            borderSide: const BorderSide(color: border),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: radiusSmall,
-            borderSide: BorderSide(color: border),
+            borderSide: const BorderSide(color: border),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: radiusSmall,
-            borderSide: BorderSide(color: primary, width: 2),
+            borderSide: const BorderSide(color: primary, width: 2),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: radiusSmall,
-            borderSide: BorderSide(color: error, width: 1),
+            borderSide: const BorderSide(color: error, width: 1),
           ),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 16,
           ),
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: textLight,
             fontSize: 14,
           ),
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             color: textMedium,
             fontSize: 14,
           ),
         ),
         checkboxTheme: CheckboxThemeData(
-          fillColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
+          fillColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
                 return primary;
               }
               return Colors.white;
             },
           ),
-          side: BorderSide(color: borderDark),
+          side: const BorderSide(color: borderDark),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
           ),
         ),
         radioTheme: RadioThemeData(
-          fillColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
+          fillColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
                 return primary;
               }
               return textMedium;
@@ -184,13 +183,13 @@ class HospitalTheme {
           shape: RoundedRectangleBorder(
             borderRadius: radiusSmall,
           ),
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
             color: textDark,
             fontSize: 14,
           ),
         ),
         // Fixed: Use TabBarThemeData instead of TabBarTheme
-        tabBarTheme: TabBarThemeData(
+        tabBarTheme: const TabBarThemeData(
           labelColor: primary,
           unselectedLabelColor: textMedium,
           indicator: UnderlineTabIndicator(
@@ -199,16 +198,16 @@ class HospitalTheme {
               width: 2,
             ),
           ),
-          labelStyle: const TextStyle(
+          labelStyle: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
-          unselectedLabelStyle: const TextStyle(
+          unselectedLabelStyle: TextStyle(
             fontWeight: FontWeight.normal,
             fontSize: 16,
           ),
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headlineLarge: TextStyle(
             color: textDark,
             fontSize: 28,
@@ -255,11 +254,11 @@ class HospitalTheme {
             fontWeight: FontWeight.normal,
           ),
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: textDark,
           size: 24,
         ),
-        dividerTheme: DividerThemeData(
+        dividerTheme: const DividerThemeData(
           color: border,
           thickness: 1,
           space: 24,
@@ -297,7 +296,7 @@ class HospitalTheme {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: textDark,
@@ -338,7 +337,7 @@ class HospitalTheme {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             isLoading
-                ? SizedBox(
+                ? const SizedBox(
                     width: 20,
                     height: 20,
                     child: CircularProgressIndicator(
@@ -350,7 +349,7 @@ class HospitalTheme {
             const SizedBox(width: 8),
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 color: textOnPrimary,
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
@@ -403,7 +402,7 @@ class HospitalTheme {
   }) {
     return AppBar(
       title: Text(title),
-      titleTextStyle: TextStyle(
+      titleTextStyle: const TextStyle(
         color: Colors.white,
         fontSize: 20,
         fontWeight: FontWeight.bold,
@@ -411,14 +410,14 @@ class HospitalTheme {
       centerTitle: centerTitle,
       actions: actions,
       bottom: bottom,
-      backgroundColor: Color(0xFF1E2843),
+      backgroundColor: const Color(0xFF1E2843),
       foregroundColor: textDark,
       elevation: 0,
       shadowColor: Colors.transparent,
       automaticallyImplyLeading: showBackButton,
       leading: showBackButton
           ? IconButton(
-              icon: Icon(Icons.arrow_back_ios_new, size: 20),
+              icon: const Icon(Icons.arrow_back_ios_new, size: 20),
               onPressed:
                   onBackPressed ?? () => Navigator.pop(context), // Use context
             )
@@ -457,7 +456,7 @@ class HospitalTheme {
       decoration: BoxDecoration(
         color: isSelected ? surfaceLight : null,
         border: showBorder
-            ? Border(bottom: BorderSide(color: border, width: 1))
+            ? const Border(bottom: BorderSide(color: border, width: 1))
             : null,
       ),
       child: ListTile(
@@ -471,7 +470,7 @@ class HospitalTheme {
         subtitle: subtitle != null
             ? Text(
                 subtitle,
-                style: TextStyle(
+                style: const TextStyle(
                   color: textMedium,
                   fontSize: 13,
                 ),
@@ -492,21 +491,21 @@ class HospitalTheme {
   static Widget buildDividerWithLabel(String label) {
     return Row(
       children: [
-        Expanded(
+        const Expanded(
           child: Divider(color: border),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               color: textMedium,
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
           ),
         ),
-        Expanded(
+        const Expanded(
           child: Divider(color: border),
         ),
       ],
@@ -592,7 +591,7 @@ class HospitalTheme {
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: surfaceLight,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(12),
@@ -604,7 +603,7 @@ class HospitalTheme {
                 Expanded(
                   child: Text(
                     patientName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: textDark,
@@ -622,12 +621,12 @@ class HospitalTheme {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.medical_services_outlined,
+                    const Icon(Icons.medical_services_outlined,
                         size: 16, color: textMedium),
                     const SizedBox(width: 8),
                     Text(
                       'Dr. $doctorName',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         color: textDark,
                       ),
@@ -637,11 +636,11 @@ class HospitalTheme {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Icon(Icons.event, size: 16, color: textMedium),
+                    const Icon(Icons.event, size: 16, color: textMedium),
                     const SizedBox(width: 8),
                     Text(
                       '$date at $time',
-                      style: TextStyle(color: textMedium),
+                      style: const TextStyle(color: textMedium),
                     ),
                   ],
                 ),
@@ -660,7 +659,7 @@ class HospitalTheme {
                       appointmentType == 'online'
                           ? 'Tele-consultation'
                           : 'In-person',
-                      style: TextStyle(color: textMedium),
+                      style: const TextStyle(color: textMedium),
                     ),
                     if (isReadmission) ...[
                       const SizedBox(width: 16),
@@ -673,7 +672,7 @@ class HospitalTheme {
                           color: warning.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Readmission',
                           style: TextStyle(
                             color: warning,
@@ -687,7 +686,7 @@ class HospitalTheme {
                 ),
                 if (symptoms != null) ...[
                   const SizedBox(height: 12),
-                  Text(
+                  const Text(
                     'Symptoms:',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
@@ -698,7 +697,7 @@ class HospitalTheme {
                   const SizedBox(height: 4),
                   Text(
                     symptoms,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: textMedium,
                       fontSize: 13,
                     ),
@@ -711,8 +710,8 @@ class HospitalTheme {
                     if (onView != null)
                       TextButton.icon(
                         onPressed: onView,
-                        icon: Icon(Icons.visibility_outlined, size: 18),
-                        label: Text('View'),
+                        icon: const Icon(Icons.visibility_outlined, size: 18),
+                        label: const Text('View'),
                         style: TextButton.styleFrom(
                           foregroundColor: primary,
                         ),
@@ -720,8 +719,8 @@ class HospitalTheme {
                     if (onEdit != null)
                       TextButton.icon(
                         onPressed: onEdit,
-                        icon: Icon(Icons.edit_outlined, size: 18),
-                        label: Text('Edit'),
+                        icon: const Icon(Icons.edit_outlined, size: 18),
+                        label: const Text('Edit'),
                         style: TextButton.styleFrom(
                           foregroundColor: info,
                         ),
@@ -729,8 +728,8 @@ class HospitalTheme {
                     if (onCancel != null)
                       TextButton.icon(
                         onPressed: onCancel,
-                        icon: Icon(Icons.cancel_outlined, size: 18),
-                        label: Text('Cancel'),
+                        icon: const Icon(Icons.cancel_outlined, size: 18),
+                        label: const Text('Cancel'),
                         style: TextButton.styleFrom(
                           foregroundColor: error,
                         ),
@@ -832,7 +831,7 @@ class HospitalTheme {
           const SizedBox(height: 4),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: textMedium,
             ),
@@ -841,7 +840,7 @@ class HospitalTheme {
             const SizedBox(height: 2),
             Text(
               subtitle,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: textLight,
               ),
@@ -889,7 +888,7 @@ class HospitalTheme {
                           : null,
                     ),
                     child: imageUrl == null
-                        ? Icon(
+                        ? const Icon(
                             Icons.person,
                             size: 32,
                             color: primary,
@@ -911,7 +910,7 @@ class HospitalTheme {
                         const SizedBox(height: 4),
                         Text(
                           'ID: $patientId',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             color: textMedium,
                           ),
@@ -920,7 +919,7 @@ class HospitalTheme {
                           const SizedBox(height: 4),
                           Text(
                             'Last visit: $lastVisit',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               color: textMedium,
                             ),
@@ -931,7 +930,7 @@ class HospitalTheme {
                   ),
                   if (onEditPressed != null)
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.edit_outlined,
                         color: primary,
                         size: 20,
@@ -1008,7 +1007,7 @@ class HospitalTheme {
         const SizedBox(height: 2),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             color: textMedium,
           ),

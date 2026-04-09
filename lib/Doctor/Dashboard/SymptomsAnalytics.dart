@@ -8,7 +8,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
 class SymptomAnalyticsDashboard extends StatefulWidget {
-  const SymptomAnalyticsDashboard({Key? key}) : super(key: key);
+  const SymptomAnalyticsDashboard({super.key});
 
   @override
   _SymptomAnalyticsDashboardState createState() =>
@@ -64,7 +64,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
 
   Future<void> _fetchSymptomAnalytics() async {
     final response =
-        await http.get(Uri.parse('${KVM_URL}/doctors/getSymptomAnalytics'));
+        await http.get(Uri.parse('$KVM_URL/doctors/getSymptomAnalytics'));
     if (response.statusCode == 200) {
       setState(() {
         _analyticsData = json.decode(response.body);
@@ -76,7 +76,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
 
   Future<void> _fetchSeasonalSymptoms() async {
     final response =
-        await http.get(Uri.parse('${KVM_URL}/doctors/getSeasonalSymptoms'));
+        await http.get(Uri.parse('$KVM_URL/doctors/getSeasonalSymptoms'));
     if (response.statusCode == 200) {
       setState(() {
         _seasonalData = json.decode(response.body);
@@ -88,7 +88,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
 
   Future<void> _fetchCoOccurringSymptoms() async {
     final response =
-        await http.get(Uri.parse('${KVM_URL}/doctors/getCoOccurringSymptoms'));
+        await http.get(Uri.parse('$KVM_URL/doctors/getCoOccurringSymptoms'));
     if (response.statusCode == 200) {
       setState(() {
         _coOccurringData = json.decode(response.body);
@@ -100,7 +100,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
 
   Future<void> _fetchSymptomDemographics() async {
     final response =
-        await http.get(Uri.parse('${KVM_URL}/doctors/getSymptomDemographics'));
+        await http.get(Uri.parse('$KVM_URL/doctors/getSymptomDemographics'));
     if (response.statusCode == 200) {
       setState(() {
         _demographicsData = json.decode(response.body);
@@ -112,7 +112,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
 
   Future<void> _fetchSymptomsByLocation() async {
     final response =
-        await http.get(Uri.parse('${KVM_URL}/doctors/getSymptomsByLocation'));
+        await http.get(Uri.parse('$KVM_URL/doctors/getSymptomsByLocation'));
     if (response.statusCode == 200) {
       setState(() {
         _locationData = json.decode(response.body);
@@ -124,7 +124,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
 
   Future<void> _fetchOutbreakDetection() async {
     final response =
-        await http.get(Uri.parse('${KVM_URL}/doctors/getOutbreakDetection'));
+        await http.get(Uri.parse('$KVM_URL/doctors/getOutbreakDetection'));
     if (response.statusCode == 200) {
       setState(() {
         _outbreakData = json.decode(response.body);
@@ -170,14 +170,14 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
   }
 
   Widget _buildLoadingView() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircularProgressIndicator(
             valueColor: AlwaysStoppedAnimation<Color>(HospitalTheme.primary),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'Loading Symptom Analytics...',
             style: TextStyle(
@@ -195,13 +195,13 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.error_outline,
             size: 64,
             color: HospitalTheme.error,
           ),
           const SizedBox(height: 16),
-          Text(
+          const Text(
             'Error',
             style: TextStyle(
               fontSize: 24,
@@ -215,7 +215,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
             child: Text(
               _errorMessage,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: HospitalTheme.textMedium,
               ),
@@ -237,7 +237,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
 
   Widget _buildDashboard() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: HospitalTheme.background,
       ),
       child: Column(
@@ -272,7 +272,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
     return Container(
       padding: const EdgeInsets.fromLTRB(24, 20, 24, 20),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [HospitalTheme.primaryDark, HospitalTheme.primary],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -296,7 +296,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.analytics_outlined,
                   color: Colors.white,
                   size: 32,
@@ -329,7 +329,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                         fontSize: 15,
                         color: Colors.white.withOpacity(0.9),
                       ),
-                      children: [
+                      children: const [
                         TextSpan(
                           text:
                               'Comprehensive analysis of patient symptoms and trends ',
@@ -401,7 +401,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
       ),
       child: Row(
         children: [
-          Icon(
+          const Icon(
             Icons.update,
             size: 18,
             color: Colors.white,
@@ -409,7 +409,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
           const SizedBox(width: 8),
           Text(
             lastUpdateText,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
               color: Colors.white,
@@ -489,7 +489,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Overview',
           style: TextStyle(
             fontSize: 20,
@@ -555,7 +555,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           'Top Reported Symptoms',
                           style: TextStyle(
                             fontSize: 16,
@@ -572,7 +572,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                           ),
                           child: Text(
                             'Top ${mostUsedSymptoms.length}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                               color: HospitalTheme.medical,
@@ -625,7 +625,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
 
   Widget _buildTopSymptomsChart(List<dynamic> symptoms) {
     if (symptoms.isEmpty) {
-      return Center(
+      return const Center(
         child: Text(
           'No symptom data available',
           style: TextStyle(
@@ -650,7 +650,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
               return BarTooltipItem(
                 '${symptoms[groupIndex]['name']}: ${symptoms[groupIndex]['count']}',
-                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               );
             },
           ),
@@ -664,13 +664,13 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                 if (value >= 0 && value < symptoms.length) {
                   String name = symptoms[value.toInt()]['name'];
                   if (name.length > 7) {
-                    name = name.substring(0, 7) + '...';
+                    name = '${name.substring(0, 7)}...';
                   }
                   return Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
                       name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -692,7 +692,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                     padding: const EdgeInsets.only(right: 8),
                     child: Text(
                       value.toInt().toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                         fontSize: 12,
                       ),
@@ -704,14 +704,14 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
               reservedSize: 30,
             ),
           ),
-          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
         ),
         borderData: FlBorderData(show: false),
         gridData: FlGridData(
           show: true,
           horizontalInterval: 1,
-          getDrawingHorizontalLine: (value) => FlLine(
+          getDrawingHorizontalLine: (value) => const FlLine(
             color: HospitalTheme.border,
             strokeWidth: 1,
             dashArray: [5, 5],
@@ -767,7 +767,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
         Expanded(
           child: Text(
             name,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
               color: HospitalTheme.textDark,
@@ -782,7 +782,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
           ),
           child: Text(
             count.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
               color: HospitalTheme.textDark,
@@ -797,7 +797,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Symptom Trends & Patterns',
           style: TextStyle(
             fontSize: 20,
@@ -817,7 +817,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                   children: [
                     HospitalTheme.buildSectionHeader(
                       'Seasonal Distribution',
-                      trailing: Icon(
+                      trailing: const Icon(
                         Icons.calendar_month,
                         color: HospitalTheme.primary,
                       ),
@@ -839,7 +839,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                   children: [
                     HospitalTheme.buildSectionHeader(
                       'Co-occurring Symptoms',
-                      trailing: Icon(
+                      trailing: const Icon(
                         Icons.bubble_chart,
                         color: HospitalTheme.laboratory,
                       ),
@@ -873,7 +873,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
         gridData: FlGridData(
           show: true,
           drawVerticalLine: false,
-          getDrawingHorizontalLine: (value) => FlLine(
+          getDrawingHorizontalLine: (value) => const FlLine(
             color: HospitalTheme.border,
             strokeWidth: 1,
             dashArray: [5, 5],
@@ -890,7 +890,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
                       months[monthIndex]['monthName'].substring(0, 3),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                         fontSize: 12,
                       ),
@@ -910,7 +910,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                   padding: const EdgeInsets.only(right: 4),
                   child: Text(
                     value.toInt().toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.textMedium,
                       fontSize: 12,
                     ),
@@ -920,8 +920,8 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
               reservedSize: 30,
             ),
           ),
-          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
         ),
         borderData: FlBorderData(show: false),
         minX: 0,
@@ -1041,7 +1041,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                   Expanded(
                     child: Text(
                       '${pair[0]} & ${pair[1]}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: HospitalTheme.textDark,
@@ -1059,14 +1059,14 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                 value: percentage / 100,
                 backgroundColor: HospitalTheme.border,
                 valueColor:
-                    AlwaysStoppedAnimation<Color>(HospitalTheme.laboratory),
+                    const AlwaysStoppedAnimation<Color>(HospitalTheme.laboratory),
                 minHeight: 8,
                 borderRadius: BorderRadius.circular(4),
               ),
               const SizedBox(height: 2),
               Text(
                 '${percentage.toStringAsFixed(1)}% of all co-occurrences',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   color: HospitalTheme.textMedium,
                 ),
@@ -1095,7 +1095,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Demographic Analysis',
           style: TextStyle(
             fontSize: 20,
@@ -1115,7 +1115,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                   children: [
                     HospitalTheme.buildSectionHeader(
                       'Symptoms by Gender',
-                      trailing: Icon(
+                      trailing: const Icon(
                         Icons.wc,
                         color: HospitalTheme.primary,
                       ),
@@ -1137,7 +1137,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                   children: [
                     HospitalTheme.buildSectionHeader(
                       'Symptoms by Age Group',
-                      trailing: Icon(
+                      trailing: const Icon(
                         Icons.people_outline,
                         color: HospitalTheme.medical,
                       ),
@@ -1212,7 +1212,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                 Expanded(
                   child: Text(
                     category,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       color: HospitalTheme.textDark,
                     ),
@@ -1220,7 +1220,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                 ),
                 Text(
                   count.toString(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.textDark,
@@ -1313,13 +1313,13 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                   String category =
                       ageData[value.toInt()]['category'] as String;
                   if (category.length > 10) {
-                    category = category.substring(0, 10) + '...';
+                    category = '${category.substring(0, 10)}...';
                   }
                   return Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
                       category,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -1341,7 +1341,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                     padding: const EdgeInsets.only(right: 8),
                     child: Text(
                       value.toInt().toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                         fontSize: 12,
                       ),
@@ -1353,14 +1353,14 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
               reservedSize: 30,
             ),
           ),
-          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
         ),
         borderData: FlBorderData(show: false),
         gridData: FlGridData(
           show: true,
           horizontalInterval: 1,
-          getDrawingHorizontalLine: (value) => FlLine(
+          getDrawingHorizontalLine: (value) => const FlLine(
             color: HospitalTheme.border,
             strokeWidth: 1,
             dashArray: [5, 5],
@@ -1396,7 +1396,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Geographical Distribution',
           style: TextStyle(
             fontSize: 20,
@@ -1411,13 +1411,13 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
             children: [
               HospitalTheme.buildSectionHeader(
                 'Symptoms by Location',
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.location_on_outlined,
                   color: HospitalTheme.primary,
                 ),
               ),
               const SizedBox(height: 16),
-              Center(
+              const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -1426,7 +1426,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                       size: 64,
                       color: HospitalTheme.textLight,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Text(
                       'Location data collection is pending',
                       style: TextStyle(
@@ -1434,7 +1434,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                         color: HospitalTheme.textMedium,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text(
                       'Geographic symptom distribution will be available once location data is collected.',
                       textAlign: TextAlign.center,
@@ -1464,7 +1464,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Outbreak Monitoring',
           style: TextStyle(
             fontSize: 20,
@@ -1490,7 +1490,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.warning_amber,
                               size: 16,
                               color: HospitalTheme.error,
@@ -1498,7 +1498,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                             const SizedBox(width: 4),
                             Text(
                               '$alertCount Alerts',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
                                 color: HospitalTheme.error,
@@ -1521,7 +1521,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                       itemBuilder: (context, index) {
                         final alert = outbreakAlerts[index];
                         return ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.warning_amber,
                             color: HospitalTheme.error,
                           ),
@@ -1538,9 +1538,9 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                         );
                       },
                     )
-                  : Center(
+                  : const Center(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 48),
+                        padding: EdgeInsets.symmetric(vertical: 48),
                         child: Column(
                           children: [
                             Icon(
@@ -1548,7 +1548,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                               size: 64,
                               color: HospitalTheme.success,
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: 16),
                             Text(
                               'No outbreak alerts detected',
                               style: TextStyle(
@@ -1557,7 +1557,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                                 color: HospitalTheme.textDark,
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8),
                             Text(
                               'The system is continuously monitoring symptom patterns for potential outbreaks',
                               textAlign: TextAlign.center,
@@ -1584,7 +1584,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
             children: [
               Text(
                 message.split(' ')[0],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.textDark,
@@ -1597,7 +1597,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                     padding: const EdgeInsets.symmetric(vertical: 40),
                     child: Column(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.bar_chart,
                           size: 64,
                           color: HospitalTheme.textLight,
@@ -1605,7 +1605,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                         const SizedBox(height: 16),
                         Text(
                           message,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             color: HospitalTheme.textMedium,
                           ),
@@ -1622,7 +1622,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
               padding: const EdgeInsets.symmetric(vertical: 40),
               child: Column(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.bar_chart,
                     size: 64,
                     color: HospitalTheme.textLight,
@@ -1630,7 +1630,7 @@ class _SymptomAnalyticsDashboardState extends State<SymptomAnalyticsDashboard> {
                   const SizedBox(height: 16),
                   Text(
                     message,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       color: HospitalTheme.textMedium,
                     ),

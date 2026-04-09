@@ -653,7 +653,7 @@ class _MyEmergencyMedicationsScreenState
         Expanded(
           flex: 5,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               border: Border(
                 right: BorderSide(color: HospitalTheme.border),
@@ -702,7 +702,7 @@ class _MyEmergencyMedicationsScreenState
         // Header and Search
         Container(
           padding: EdgeInsets.all(isDesktop ? 24.0 : 16.0),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             border: Border(
               bottom: BorderSide(color: HospitalTheme.border),
@@ -751,7 +751,7 @@ class _MyEmergencyMedicationsScreenState
         // Detail Header
         Container(
           padding: EdgeInsets.all(isDesktop ? 24.0 : 16.0),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             border: Border(
               bottom: BorderSide(color: HospitalTheme.border),
@@ -829,11 +829,11 @@ class _MyEmergencyMedicationsScreenState
           Container(
             width: 120.0,
             height: 120.0,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.emergency_outlined,
               size: 60.0,
               color: HospitalTheme.textMedium,
@@ -1016,7 +1016,7 @@ class _MyEmergencyMedicationsScreenState
                       color: HospitalTheme.emergency.withOpacity(0.1),
                       borderRadius: HospitalTheme.radiusSmall,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.emergency,
                       color: HospitalTheme.emergency,
                       size: 20.0,
@@ -1029,7 +1029,7 @@ class _MyEmergencyMedicationsScreenState
                       children: [
                         Text(
                           medication.medicationName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: HospitalTheme.textDark,
                             fontSize: 14.0,
@@ -1038,7 +1038,7 @@ class _MyEmergencyMedicationsScreenState
                         const SizedBox(height: 2.0),
                         Text(
                           medication.patientDetails.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: HospitalTheme.textMedium,
                             fontSize: 12.0,
                           ),
@@ -1074,12 +1074,12 @@ class _MyEmergencyMedicationsScreenState
               const SizedBox(height: 12.0),
               Row(
                 children: [
-                  Icon(Icons.access_time,
+                  const Icon(Icons.access_time,
                       size: 14.0, color: HospitalTheme.textMedium),
                   const SizedBox(width: 4.0),
                   Text(
                     _formatDateTime(medication.administeredAt),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.textMedium,
                       fontSize: 12.0,
                     ),
@@ -1087,7 +1087,7 @@ class _MyEmergencyMedicationsScreenState
                   const Spacer(),
                   Text(
                     medication.dosage,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.textMedium,
                       fontSize: 12.0,
                       fontWeight: FontWeight.w500,
@@ -1291,11 +1291,11 @@ class _MyEmergencyMedicationsScreenState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.person,
                       size: 16.0, color: HospitalTheme.textMedium),
-                  const SizedBox(width: 8.0),
+                  SizedBox(width: 8.0),
                   Text(
                     'Patient Information',
                     style: TextStyle(
@@ -1350,11 +1350,11 @@ class _MyEmergencyMedicationsScreenState
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
                 Icon(Icons.description,
                     size: 16.0, color: HospitalTheme.textMedium),
-                const SizedBox(width: 8.0),
+                SizedBox(width: 8.0),
                 Text(
                   'Emergency Reason',
                   style: TextStyle(
@@ -1375,7 +1375,7 @@ class _MyEmergencyMedicationsScreenState
               ),
               child: Text(
                 medication.reason,
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textMedium,
                   fontSize: 13.0,
                   height: 1.4,
@@ -1398,10 +1398,10 @@ class _MyEmergencyMedicationsScreenState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.schedule, size: 16.0, color: HospitalTheme.info),
-                  const SizedBox(width: 8.0),
+                  SizedBox(width: 8.0),
                   Text(
                     'Administration Details',
                     style: TextStyle(
@@ -1454,11 +1454,11 @@ class _MyEmergencyMedicationsScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.verified_user,
                         size: 16.0, color: HospitalTheme.success),
-                    const SizedBox(width: 8.0),
+                    SizedBox(width: 8.0),
                     Text(
                       'Doctor Approval',
                       style: TextStyle(
@@ -1496,7 +1496,7 @@ class _MyEmergencyMedicationsScreenState
                 if ((medication.approvalDetails?.notes.isNotEmpty == true) ||
                     (medication.doctorApproval?.notes.isNotEmpty == true)) ...[
                   const SizedBox(height: 8.0),
-                  Text(
+                  const Text(
                     'Notes:',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
@@ -1509,7 +1509,7 @@ class _MyEmergencyMedicationsScreenState
                     medication.approvalDetails?.notes ??
                         medication.doctorApproval?.notes ??
                         '',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.textMedium,
                       fontSize: 12.0,
                       fontStyle: FontStyle.italic,
@@ -1528,11 +1528,11 @@ class _MyEmergencyMedicationsScreenState
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.gavel,
                       size: 16.0, color: HospitalTheme.textMedium),
-                  const SizedBox(width: 8.0),
+                  SizedBox(width: 8.0),
                   Text(
                     'Justification',
                     style: TextStyle(
@@ -1554,7 +1554,7 @@ class _MyEmergencyMedicationsScreenState
                 ),
                 child: Text(
                   medication.justification!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: HospitalTheme.textMedium,
                     fontSize: 13.0,
                     height: 1.4,
@@ -1595,7 +1595,7 @@ class _MyEmergencyMedicationsScreenState
             Container(
               width: isDesktop ? 120.0 : 100.0,
               height: isDesktop ? 120.0 : 100.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.surfaceLight,
                 shape: BoxShape.circle,
               ),
@@ -1695,7 +1695,7 @@ class _MyEmergencyMedicationsScreenState
             width: 80.0,
             child: Text(
               '$label:',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12.0,
                 color: HospitalTheme.textMedium,
                 fontWeight: FontWeight.w500,
@@ -1705,7 +1705,7 @@ class _MyEmergencyMedicationsScreenState
           Expanded(
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12.0,
                 color: HospitalTheme.textDark,
                 fontWeight: FontWeight.w600,
@@ -1723,7 +1723,7 @@ class _MyEmergencyMedicationsScreenState
       child: HospitalTheme.buildCard(
         padding: const EdgeInsets.all(12.0),
         backgroundColor: HospitalTheme.surfaceLight,
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -1734,7 +1734,7 @@ class _MyEmergencyMedicationsScreenState
                 fontSize: 12.0,
               ),
             ),
-            const SizedBox(height: 4.0),
+            SizedBox(height: 4.0),
             Text(
               '• Ctrl+F: Focus search • F5: Refresh • Esc: Clear search',
               style: TextStyle(

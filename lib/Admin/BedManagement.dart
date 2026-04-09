@@ -9,6 +9,8 @@ void main() {
 }
 
 class HospitalBedManagementApp extends StatelessWidget {
+  const HospitalBedManagementApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -107,7 +109,7 @@ class TypeStat {
 }
 
 class BedManagementDashboard extends StatefulWidget {
-  const BedManagementDashboard({Key? key}) : super(key: key);
+  const BedManagementDashboard({super.key});
 
   @override
   _BedManagementDashboardState createState() => _BedManagementDashboardState();
@@ -148,7 +150,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/admin/getAllSections'),
+        Uri.parse('$KVM_URL/admin/getAllSections'),
       );
 
       if (response.statusCode == 200) {
@@ -180,7 +182,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
     try {
       // Fetch available beds
       final availableResponse = await http.get(
-        Uri.parse('${KVM_URL}/reception/availableBeds/${section.id}'),
+        Uri.parse('$KVM_URL/reception/availableBeds/${section.id}'),
       );
 
       if (availableResponse.statusCode == 200) {
@@ -190,7 +192,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
 
         // Fetch occupied beds
         final occupiedResponse = await http.get(
-          Uri.parse('${KVM_URL}/reception/occupiedBeds/${section.id}'),
+          Uri.parse('$KVM_URL/reception/occupiedBeds/${section.id}'),
         );
 
         if (occupiedResponse.statusCode == 200) {
@@ -226,7 +228,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
 
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/admin/createSection'),
+        Uri.parse('$KVM_URL/admin/createSection'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'name': nameController.text,
@@ -265,7 +267,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
 
     try {
       final response = await http.patch(
-        Uri.parse('${KVM_URL}/admin/updateSection/$selectedSectionId'),
+        Uri.parse('$KVM_URL/admin/updateSection/$selectedSectionId'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'name': nameController.text,
@@ -294,7 +296,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
   Future<void> deleteSection(String id) async {
     try {
       final response = await http.delete(
-        Uri.parse('${KVM_URL}/admin/deleteSection/$id'),
+        Uri.parse('$KVM_URL/admin/deleteSection/$id'),
       );
 
       if (response.statusCode == 200) {
@@ -364,11 +366,11 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hospital Bed Management System'),
+        title: const Text('Hospital Bed Management System'),
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: fetchSections,
             tooltip: 'Refresh',
           ),
@@ -473,21 +475,21 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
               children: [
                 // Header with action buttons
                 Container(
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.05),
                         blurRadius: 5,
-                        offset: Offset(0, 2),
+                        offset: const Offset(0, 2),
                       ),
                     ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Hospital Sections',
                         style: TextStyle(
                           fontSize: 20,
@@ -505,8 +507,8 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                             ),
                           );
                         },
-                        icon: Icon(Icons.add),
-                        label: Text('Add Section'),
+                        icon: const Icon(Icons.add),
+                        label: const Text('Add Section'),
                       ),
                     ],
                   ),
@@ -515,9 +517,9 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                 // Main content - Sections overview and bed layout
                 Expanded(
                   child: isLoading
-                      ? Center(child: CircularProgressIndicator())
+                      ? const Center(child: CircularProgressIndicator())
                       : sections.isEmpty
-                          ? Center(
+                          ? const Center(
                               child: Text(
                                 'No sections found. Create a new section to get started.',
                                 style:
@@ -525,7 +527,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                               ),
                             )
                           : ListView.builder(
-                              padding: EdgeInsets.all(16),
+                              padding: const EdgeInsets.all(16),
                               itemCount: sections.length,
                               itemBuilder: (context, index) {
                                 return _buildSectionCard(
@@ -547,7 +549,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
     bool isSelected = false,
   }) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+      margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
       decoration: BoxDecoration(
         color: isSelected ? HospitalTheme.surfaceLight : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
@@ -591,38 +593,38 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
     }
 
     return Container(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: statColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(statIcon, color: statColor, size: 24),
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   stat.id,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.textDark,
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   '${stat.availableBeds}/${stat.totalBeds} beds available',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.textMedium,
                   ),
                 ),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
                 LinearProgressIndicator(
                   value: stat.occupancyRate,
                   backgroundColor: HospitalTheme.border,
@@ -646,7 +648,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
     bool isExpanded = index == expandedSectionIndex;
 
     return Card(
-      margin: EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -655,10 +657,10 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
           InkWell(
             onTap: () => toggleSectionExpansion(index),
             child: Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: _getSectionColor(section.type).withOpacity(0.1),
-                border: Border(
+                border: const Border(
                   bottom: BorderSide(color: HospitalTheme.border),
                 ),
               ),
@@ -668,11 +670,11 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                     _getSectionIcon(section.type),
                     color: _getSectionColor(section.type),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       section.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
@@ -683,7 +685,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                     section.type,
                     color: _getSectionColor(section.type),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   IconButton(
                     icon: Icon(
                       isExpanded
@@ -695,7 +697,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                     tooltip: isExpanded ? 'Collapse' : 'Expand',
                   ),
                   IconButton(
-                    icon: Icon(Icons.edit, color: HospitalTheme.textMedium),
+                    icon: const Icon(Icons.edit, color: HospitalTheme.textMedium),
                     onPressed: () {
                       editSection(section);
                       showDialog(
@@ -712,27 +714,27 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                     tooltip: 'Edit Section',
                   ),
                   IconButton(
-                    icon: Icon(Icons.delete, color: HospitalTheme.error),
+                    icon: const Icon(Icons.delete, color: HospitalTheme.error),
                     onPressed: () {
                       showDialog(
                         context: context,
                         useRootNavigator: false, // This is critical
                         builder: (BuildContext dialogContext) => AlertDialog(
-                          title: Text('Delete Section'),
+                          title: const Text('Delete Section'),
                           content: Text(
                               'Are you sure you want to delete ${section.name}?'),
                           actions: [
                             TextButton(
                               onPressed: () =>
                                   Navigator.of(dialogContext).pop(),
-                              child: Text('Cancel'),
+                              child: const Text('Cancel'),
                             ),
                             TextButton(
                               onPressed: () {
                                 Navigator.of(dialogContext).pop();
                                 deleteSection(section.id);
                               },
-                              child: Text(
+                              child: const Text(
                                 'Delete',
                                 style: TextStyle(color: HospitalTheme.error),
                               ),
@@ -750,7 +752,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
 
           // Overview stats
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Row(
               children: [
                 _buildSectionInfoCard(
@@ -759,21 +761,21 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                   value: section.totalBeds.toString(),
                   color: HospitalTheme.primary,
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 _buildSectionInfoCard(
                   icon: Icons.check_circle,
                   title: 'Available',
                   value: section.availableBeds.toString(),
                   color: HospitalTheme.success,
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 _buildSectionInfoCard(
                   icon: Icons.person,
                   title: 'Occupied',
                   value: (section.totalBeds - section.availableBeds).toString(),
                   color: HospitalTheme.warning,
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 _buildSectionInfoCard(
                   icon: Icons.timeline,
                   title: 'Occupancy Rate',
@@ -789,11 +791,11 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
           // Expanded section with bed layout
           if (isExpanded)
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Bed Layout',
                     style: TextStyle(
                       fontSize: 16,
@@ -801,12 +803,12 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                       color: HospitalTheme.textDark,
                     ),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
 
                   // Show loading indicator while fetching bed details
                   section.isBedsDataLoaded
                       ? _buildBedLayout(section)
-                      : Center(
+                      : const Center(
                           child: Column(
                             children: [
                               CircularProgressIndicator(),
@@ -836,7 +838,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
   }) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(8),
@@ -844,23 +846,23 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
         child: Row(
           children: [
             Icon(icon, color: color),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     value,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: HospitalTheme.textDark,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: HospitalTheme.textMedium,
                     ),
@@ -885,7 +887,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: HospitalTheme.border),
       ),
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -894,16 +896,16 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildLegendItem('Available', HospitalTheme.success),
-              SizedBox(width: 24),
+              const SizedBox(width: 24),
               _buildLegendItem('Occupied', HospitalTheme.error),
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Theater-style layout for beds
           Container(
             width: double.infinity,
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.blue.shade50,
               borderRadius: BorderRadius.circular(12),
@@ -912,12 +914,12 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
               children: [
                 // Entrance indicator
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
                   decoration: BoxDecoration(
                     color: HospitalTheme.primary,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Text(
+                  child: const Text(
                     'ENTRANCE',
                     style: TextStyle(
                       color: Colors.white,
@@ -925,7 +927,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Beds layout
                 for (int row = 0; row < rows; row++) ...[
@@ -947,23 +949,23 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                                     section, row * bedsPerRow + col + 1)
                                 : null,
                           ),
-                        if (col < bedsPerRow - 1) SizedBox(width: 12),
+                        if (col < bedsPerRow - 1) const SizedBox(width: 12),
                       ],
                     ],
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                 ],
 
                 // Nurse station
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
                   decoration: BoxDecoration(
                     color: HospitalTheme.primary.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: HospitalTheme.primary),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.medical_services,
@@ -1000,7 +1002,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
 
   Widget _buildOccupiedBedsTable(Section section) {
     if (section.occupiedBeds.isEmpty) {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
 
     return Padding(
@@ -1008,7 +1010,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Occupied Beds',
             style: TextStyle(
               fontSize: 18,
@@ -1016,7 +1018,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Container(
             decoration: BoxDecoration(
               border: Border.all(color: HospitalTheme.border),
@@ -1025,10 +1027,10 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
-                headingRowColor: MaterialStateProperty.all(
+                headingRowColor: WidgetStateProperty.all(
                   HospitalTheme.surfaceLight,
                 ),
-                columns: [
+                columns: const [
                   DataColumn(label: Text('Bed Number')),
                   DataColumn(label: Text('Patient ID')),
                   DataColumn(label: Text('Patient Name')),
@@ -1041,7 +1043,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                       DataCell(
                         Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
                             color: HospitalTheme.error.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(4),
@@ -1049,7 +1051,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                           ),
                           child: Text(
                             'Bed ${bed.bedNumber}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: HospitalTheme.error,
                             ),
@@ -1066,7 +1068,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.visibility,
+                              icon: const Icon(Icons.visibility,
                                   color: HospitalTheme.primary),
                               onPressed: () {
                                 // View patient details
@@ -1075,7 +1077,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                               iconSize: 20,
                             ),
                             IconButton(
-                              icon: Icon(Icons.output,
+                              icon: const Icon(Icons.output,
                                   color: HospitalTheme.warning),
                               onPressed: () {
                                 // Discharge patient
@@ -1108,10 +1110,10 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
             borderRadius: BorderRadius.circular(4),
           ),
         ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             color: HospitalTheme.textDark,
           ),
@@ -1161,7 +1163,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(icon, color: color),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   'Bed $bedNumber',
                   style: TextStyle(
@@ -1190,8 +1192,8 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
   Widget _buildPatientDetailsDialog(
       OccupiedBed patientInfo, BuildContext dialogContext) {
     return AlertDialog(
-      title: Text('Patient Details'),
-      content: Container(
+      title: const Text('Patient Details'),
+      content: SizedBox(
         width: 400,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -1212,7 +1214,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
             // Use the passed dialogContext
             Navigator.of(dialogContext).pop();
           },
-          child: Text('Close'),
+          child: const Text('Close'),
         ),
         ElevatedButton(
           onPressed: () {
@@ -1220,10 +1222,10 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
             Navigator.of(dialogContext).pop();
             // Implement discharge functionality
           },
-          child: Text('Discharge Patient'),
           style: ElevatedButton.styleFrom(
             backgroundColor: HospitalTheme.warning,
           ),
+          child: Text('Discharge Patient'),
         ),
       ],
     );
@@ -1239,7 +1241,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
             width: 120,
             child: Text(
               '$label:',
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
               ),
@@ -1248,7 +1250,7 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
           Expanded(
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textDark,
               ),
             ),
@@ -1268,45 +1270,45 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
       ),
       child: Container(
         width: 400,
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               isEditing ? 'Edit Section' : 'Add New Section',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             TextField(
               controller: nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Section Name',
                 hintText: 'e.g., General Ward, ICU',
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: typeController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Section Type',
                 hintText: 'e.g., Ward, Icu',
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: bedsController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Total Beds',
                 hintText: 'e.g., 20',
               ),
               keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -1315,9 +1317,9 @@ class _BedManagementDashboardState extends State<BedManagementDashboard> {
                     Navigator.of(dialogContext).pop();
                     clearSectionForm();
                   },
-                  child: Text('Cancel'),
+                  child: const Text('Cancel'),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 ElevatedButton(
                   onPressed: isEditingSection || isCreatingSection
                       ? null

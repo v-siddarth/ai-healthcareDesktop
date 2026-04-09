@@ -8,7 +8,7 @@ import 'package:doctordesktop/constants/Methods.dart';
 import 'package:doctordesktop/constants/Url.dart';
 
 class LaboratoryAssignmentsScreen extends StatefulWidget {
-  const LaboratoryAssignmentsScreen({Key? key}) : super(key: key);
+  const LaboratoryAssignmentsScreen({super.key});
 
   @override
   _LaboratoryAssignmentsScreenState createState() =>
@@ -50,7 +50,7 @@ class _LaboratoryAssignmentsScreenState
       }
 
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getDoctorAssignedPatient'),
+        Uri.parse('$KVM_URL/doctors/getDoctorAssignedPatient'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -152,14 +152,14 @@ class _LaboratoryAssignmentsScreenState
               color: HospitalTheme.primary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.science,
               color: HospitalTheme.primary,
               size: 24,
             ),
           ),
           const SizedBox(width: 16),
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -210,11 +210,11 @@ class _LaboratoryAssignmentsScreenState
         border: Border.all(color: HospitalTheme.border),
       ),
       child: TextField(
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Search by patient name or test...',
-          prefixIcon: const Icon(Icons.search, color: HospitalTheme.textMedium),
+          prefixIcon: Icon(Icons.search, color: HospitalTheme.textMedium),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(vertical: 10),
+          contentPadding: EdgeInsets.symmetric(vertical: 10),
           isDense: true,
         ),
         onChanged: (value) {
@@ -230,7 +230,7 @@ class _LaboratoryAssignmentsScreenState
   Widget _buildFilterSection() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: HospitalTheme.background,
         border: Border(
           bottom: BorderSide(color: HospitalTheme.border),
@@ -238,7 +238,7 @@ class _LaboratoryAssignmentsScreenState
       ),
       child: Row(
         children: [
-          Text(
+          const Text(
             'Filter: ',
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -254,7 +254,7 @@ class _LaboratoryAssignmentsScreenState
           const Spacer(),
           Text(
             'Total: ${_filteredAssignments.length} assignments',
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textMedium,
               fontWeight: FontWeight.w500,
             ),
@@ -294,12 +294,12 @@ class _LaboratoryAssignmentsScreenState
 
   Widget _buildContent() {
     if (_isLoading) {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircularProgressIndicator(color: HospitalTheme.primary),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'Loading lab assignments...',
               style: TextStyle(color: HospitalTheme.textMedium),
@@ -314,11 +314,11 @@ class _LaboratoryAssignmentsScreenState
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, color: HospitalTheme.error, size: 48),
+            const Icon(Icons.error_outline, color: HospitalTheme.error, size: 48),
             const SizedBox(height: 16),
             Text(
               _errorMessage,
-              style: TextStyle(color: HospitalTheme.error),
+              style: const TextStyle(color: HospitalTheme.error),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
@@ -341,10 +341,10 @@ class _LaboratoryAssignmentsScreenState
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.science_outlined,
+            const Icon(Icons.science_outlined,
                 color: HospitalTheme.textLight, size: 64),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'No lab assignments found',
               style: TextStyle(
                 fontSize: 18,
@@ -357,7 +357,7 @@ class _LaboratoryAssignmentsScreenState
               _searchQuery.isNotEmpty || _selectedFilter != 'All'
                   ? 'Try adjusting your filters'
                   : 'Assigned labs will appear here',
-              style: TextStyle(color: HospitalTheme.textMedium),
+              style: const TextStyle(color: HospitalTheme.textMedium),
             ),
             const SizedBox(height: 24),
             if (_searchQuery.isNotEmpty || _selectedFilter != 'All')
@@ -387,20 +387,20 @@ class _LaboratoryAssignmentsScreenState
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(color: HospitalTheme.border),
+          side: const BorderSide(color: HospitalTheme.border),
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: SingleChildScrollView(
             child: DataTable(
               headingRowColor:
-                  MaterialStateProperty.all(HospitalTheme.surfaceLight),
+                  WidgetStateProperty.all(HospitalTheme.surfaceLight),
               dataRowMinHeight: 72,
               dataRowMaxHeight: 100,
               columnSpacing: 32,
               dividerThickness: 1,
               showBottomBorder: true,
-              columns: [
+              columns: const [
                 DataColumn(
                   label: Text(
                     'Patient Details',
@@ -498,7 +498,7 @@ class _LaboratoryAssignmentsScreenState
             assignment.patientName.isNotEmpty
                 ? assignment.patientName[0].toUpperCase()
                 : '?',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: HospitalTheme.primary,
             ),
@@ -518,14 +518,14 @@ class _LaboratoryAssignmentsScreenState
             const SizedBox(height: 4),
             Text(
               'ID: ${assignment.patientId}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: HospitalTheme.textMedium,
               ),
             ),
             Text(
               '${assignment.patientAge} yrs, ${assignment.patientGender}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: HospitalTheme.textMedium,
               ),
@@ -555,7 +555,7 @@ class _LaboratoryAssignmentsScreenState
         if (testNameParts.length > 1)
           Text(
             'Ref: ${assignment.assignmentId.substring(0, 10)}...',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textMedium,
             ),
@@ -579,7 +579,7 @@ class _LaboratoryAssignmentsScreenState
       children: [
         Text(
           dateStr.isNotEmpty ? dateStr : 'N/A',
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w500,
             color: HospitalTheme.textDark,
           ),
@@ -599,7 +599,7 @@ class _LaboratoryAssignmentsScreenState
 
   Widget _buildReportsCell(LabAssignment assignment) {
     if (!assignment.hasReports) {
-      return Text(
+      return const Text(
         'No reports yet',
         style: TextStyle(
           color: HospitalTheme.textMedium,
@@ -617,7 +617,7 @@ class _LaboratoryAssignmentsScreenState
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
+              const Icon(
                 Icons.description,
                 size: 16,
                 color: HospitalTheme.primary,
@@ -625,7 +625,7 @@ class _LaboratoryAssignmentsScreenState
               const SizedBox(width: 4),
               Text(
                 report.labTestName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   color: HospitalTheme.textDark,
                 ),
@@ -633,7 +633,7 @@ class _LaboratoryAssignmentsScreenState
               const SizedBox(width: 4),
               Text(
                 report.labType.isNotEmpty ? '(${report.labType})' : '',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   color: HospitalTheme.textMedium,
                 ),
@@ -654,7 +654,7 @@ class _LaboratoryAssignmentsScreenState
             Tooltip(
               message: 'View Report',
               child: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.visibility,
                   color: HospitalTheme.primary,
                 ),
@@ -666,7 +666,7 @@ class _LaboratoryAssignmentsScreenState
         Tooltip(
           message: 'Patient Details',
           child: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.person,
               color: HospitalTheme.medical,
             ),

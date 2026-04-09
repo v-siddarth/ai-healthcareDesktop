@@ -211,7 +211,7 @@ final selectedDistributorProvider = StateProvider<Distributor?>((ref) => null);
 
 // Screen for Distributor Management
 class DistributorScreen extends ConsumerStatefulWidget {
-  const DistributorScreen({Key? key}) : super(key: key);
+  const DistributorScreen({super.key});
 
   @override
   ConsumerState<DistributorScreen> createState() => _DistributorScreenState();
@@ -647,7 +647,7 @@ class _DistributorScreenState extends ConsumerState<DistributorScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Selected Medicine Details:',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -674,7 +674,7 @@ class _DistributorScreenState extends ConsumerState<DistributorScreen> {
                                               'Purchase Price: ₹${m['purchasePrice']}'),
                                         ],
                                       ))
-                                  .toList(),
+                                  ,
                             ],
                           ),
                         ),
@@ -982,7 +982,7 @@ class _DistributorScreenState extends ConsumerState<DistributorScreen> {
                         // Header
                         Container(
                           padding: const EdgeInsets.all(PharmaTheme.spacingM),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: PharmaTheme.primary,
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(PharmaTheme.radiusM),
@@ -1408,7 +1408,7 @@ class _DistributorScreenState extends ConsumerState<DistributorScreen> {
               horizontal: PharmaTheme.spacingM,
               vertical: PharmaTheme.spacingS,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: PharmaTheme.primary,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(PharmaTheme.radiusM),
@@ -1462,7 +1462,7 @@ class _DistributorScreenState extends ConsumerState<DistributorScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(PharmaTheme.radiusM),
                   bottomRight: Radius.circular(PharmaTheme.radiusM),
                 ),
@@ -1786,11 +1786,11 @@ class _DistributorScreenState extends ConsumerState<DistributorScreen> {
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               if (isExpiryNear)
-                                                Icon(
+                                                const Icon(
                                                   Icons.warning_amber_rounded,
                                                   size: 16,
                                                   color:
-                                                      const Color(0xFFFFA000),
+                                                      Color(0xFFFFA000),
                                                 ),
                                               if (isExpiryNear)
                                                 const SizedBox(width: 4),
@@ -1818,7 +1818,7 @@ class _DistributorScreenState extends ConsumerState<DistributorScreen> {
                                           60, // Fixed width for Actions column
                                       child: Center(
                                         child: IconButton(
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.info,
                                             size: 24,
                                             color: PharmaTheme.primary,
@@ -1842,7 +1842,7 @@ class _DistributorScreenState extends ConsumerState<DistributorScreen> {
                             vertical: PharmaTheme.spacingM,
                             horizontal: PharmaTheme.spacingL,
                           ),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: PharmaTheme.background,
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(PharmaTheme.radiusM),
@@ -1928,7 +1928,7 @@ class _DistributorScreenState extends ConsumerState<DistributorScreen> {
               // Header
               Container(
                 padding: const EdgeInsets.all(PharmaTheme.spacingM),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: PharmaTheme.primary,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(PharmaTheme.radiusM),
@@ -2179,7 +2179,7 @@ class _DistributorScreenState extends ConsumerState<DistributorScreen> {
               // Footer
               Container(
                 padding: const EdgeInsets.all(PharmaTheme.spacingM),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: PharmaTheme.background,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(PharmaTheme.radiusM),

@@ -1,5 +1,5 @@
-import 'package:doctordesktop/Provider.dart';
-import 'package:doctordesktop/StateProvider.dart';
+import 'package:doctordesktop/providers/session_provider.dart';
+import 'package:doctordesktop/providers/medical_state_provider.dart';
 import 'package:doctordesktop/repositories/auth_repository.dart';
 import 'package:doctordesktop/model/getDoctorProfile.dart';
 import 'package:doctordesktop/model/getLabModel.dart';

@@ -13,8 +13,7 @@ class DoctorInvestigationScreen extends StatefulWidget {
   final String admissionId;
 
   const DoctorInvestigationScreen(
-      {Key? key, required this.patientId, required this.admissionId})
-      : super(key: key);
+      {super.key, required this.patientId, required this.admissionId});
 
   @override
   _DoctorInvestigationScreenState createState() =>
@@ -52,7 +51,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
       }
 
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getDoctorInvestigations'),
+        Uri.parse('$KVM_URL/doctors/getDoctorInvestigations'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -142,7 +141,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
         title: 'Investigation Management',
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -155,7 +154,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
 
   Widget _buildBody() {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: HospitalTheme.background,
       ),
       child: Column(
@@ -176,26 +175,26 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
   Widget _buildHeader() {
     return Container(
       height: 70,
-      padding: EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 10,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Row(
         children: [
-          Icon(
+          const Icon(
             Icons.science_outlined,
             color: HospitalTheme.primary,
             size: 28,
           ),
-          SizedBox(width: 16),
-          Text(
+          const SizedBox(width: 16),
+          const Text(
             'Investigation Management',
             style: TextStyle(
               fontSize: 24,
@@ -203,7 +202,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
               color: HospitalTheme.textDark,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           ElevatedButton.icon(
             onPressed: () {
               Navigator.push(
@@ -219,15 +218,15 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                 _fetchInvestigations();
               });
             },
-            icon: Icon(Icons.add),
-            label: Text('New Investigation'),
+            icon: const Icon(Icons.add),
+            label: const Text('New Investigation'),
             style: ElevatedButton.styleFrom(
               backgroundColor: HospitalTheme.primary,
               foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           _buildRefreshButton(),
         ],
       ),
@@ -236,12 +235,12 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
 
   Widget _buildRefreshButton() {
     return ElevatedButton.icon(
-      icon: Icon(Icons.refresh),
-      label: Text('Refresh Data'),
+      icon: const Icon(Icons.refresh),
+      label: const Text('Refresh Data'),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
         backgroundColor: HospitalTheme.primary,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -251,7 +250,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
   }
 
   Widget _buildLoadingIndicator() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -276,28 +275,28 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.error_outline,
             color: HospitalTheme.error,
             size: 64,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             _errorMessage ?? 'An unknown error occurred',
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.error,
               fontSize: 16,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           ElevatedButton.icon(
-            icon: Icon(Icons.refresh),
-            label: Text('Try Again'),
+            icon: const Icon(Icons.refresh),
+            label: const Text('Try Again'),
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
               backgroundColor: HospitalTheme.primary,
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -322,7 +321,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
                 blurRadius: 10,
-                offset: Offset(2, 0),
+                offset: const Offset(2, 0),
               ),
             ],
           ),
@@ -362,8 +361,8 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
     final dischargeOptions = ['All', 'Active', 'Discharged'];
 
     return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(16),
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: HospitalTheme.border),
         ),
@@ -371,7 +370,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Filters',
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -379,19 +378,19 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Search bar
           TextField(
             controller: _searchController,
             decoration: InputDecoration(
               hintText: 'Search investigations...',
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: const Icon(Icons.search),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: HospitalTheme.border),
+                borderSide: const BorderSide(color: HospitalTheme.border),
               ),
-              contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             ),
             onChanged: (value) {
               setState(() {
@@ -399,23 +398,23 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
               });
             },
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Status filter
-          Text(
+          const Text(
             'Status:',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: HospitalTheme.border),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 value: _selectedStatusFilter,
@@ -437,23 +436,23 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
             ),
           ),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Discharge status filter
-          Text(
+          const Text(
             'Patient Status:',
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: HospitalTheme.border),
             ),
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 value: _selectedDischargeFilter,
@@ -475,12 +474,12 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
             ),
           ),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Investigations count
           Text(
             '${_filteredInvestigations.length} investigations found',
-            style: TextStyle(
+            style: const TextStyle(
               fontStyle: FontStyle.italic,
               color: HospitalTheme.textMedium,
             ),
@@ -495,13 +494,13 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.search_off,
             size: 64,
             color: HospitalTheme.textLight,
           ),
-          SizedBox(height: 16),
-          Text(
+          const SizedBox(height: 16),
+          const Text(
             'No investigations found',
             style: TextStyle(
               fontSize: 16,
@@ -510,8 +509,8 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
             ),
           ),
           if (_searchQuery.isNotEmpty || _selectedStatusFilter != 'All')
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Try adjusting your filters',
                 style: TextStyle(
@@ -526,10 +525,10 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
 
   Widget _buildInvestigationsList() {
     return ListView.separated(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       itemCount: _filteredInvestigations.length,
       separatorBuilder: (context, index) =>
-          Divider(height: 1, color: HospitalTheme.border),
+          const Divider(height: 1, color: HospitalTheme.border),
       itemBuilder: (context, index) {
         final investigation = _filteredInvestigations[index];
         final isSelected = _selectedInvestigation?.id == investigation.id;
@@ -563,7 +562,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
     return InkWell(
       onTap: () => _selectInvestigation(investigation),
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: isSelected ? HospitalTheme.surfaceLight : Colors.white,
           border: Border(
@@ -582,7 +581,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                 Expanded(
                   child: Text(
                     investigation.investigationType,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: HospitalTheme.primary,
@@ -591,7 +590,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
                     color: statusColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(4),
@@ -608,28 +607,28 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Row(
               children: [
-                Icon(Icons.person_outline,
+                const Icon(Icons.person_outline,
                     size: 16, color: HospitalTheme.textMedium),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Text(
                   investigation.patientName,
-                  style: TextStyle(color: HospitalTheme.textMedium),
+                  style: const TextStyle(color: HospitalTheme.textMedium),
                 ),
                 // Add discharge status indicator
                 if (investigation.patientDischarged) ...[
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
                       color: HospitalTheme.success.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(4),
                       border:
                           Border.all(color: HospitalTheme.success, width: 0.5),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(Icons.exit_to_app,
@@ -649,33 +648,33 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                 ],
               ],
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Row(
               children: [
-                Icon(Icons.calendar_today,
+                const Icon(Icons.calendar_today,
                     size: 16, color: HospitalTheme.textMedium),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Text(
                   _formatDate(investigation.orderDate),
-                  style: TextStyle(color: HospitalTheme.textMedium),
+                  style: const TextStyle(color: HospitalTheme.textMedium),
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             if (investigation.tags != null && investigation.tags!.isNotEmpty)
               Wrap(
                 spacing: 4,
                 runSpacing: 4,
                 children: investigation.tags!.map((tag) {
                   return Container(
-                    padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
                       color: HospitalTheme.borderDark.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
                       tag,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 11,
                         color: HospitalTheme.textMedium,
                       ),
@@ -683,16 +682,16 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                   );
                 }).toList(),
               ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Row(
               children: [
                 _buildFeatureIndicator(investigation.hasAttachments,
                     Icons.attach_file, 'Has Attachments'),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 _buildFeatureIndicator(
                     investigation.hasResults, Icons.assessment, 'Has Results'),
                 if (investigation.isOverdue) ...[
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   _buildFeatureIndicator(true, Icons.warning, 'Overdue',
                       color: HospitalTheme.error),
                 ],
@@ -709,7 +708,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
     return Tooltip(
       message: tooltip,
       child: Container(
-        padding: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           color: isAvailable
               ? (color ?? HospitalTheme.info).withOpacity(0.1)
@@ -726,7 +725,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
   }
 
   Widget _buildNoSelectionMessage() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -754,7 +753,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
     final investigation = _selectedInvestigation!;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(24),
+      padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -767,13 +766,13 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                   children: [
                     Text(
                       investigation.investigationType,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     _buildStatusWithPriorityIndicator(investigation),
                   ],
                 ),
@@ -788,7 +787,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                       // Implement print functionality
                     },
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   if (investigation.hasAttachments)
                     _buildActionButton(
                       label: 'View Attachment',
@@ -802,7 +801,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                         } else {
                           // Show error or message that file is not available
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                                 content:
                                     Text('No viewable attachment available')),
                           );
@@ -814,7 +813,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
             ],
           ),
 
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // Investigation details in cards
           Row(
@@ -847,7 +846,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     _buildDetailCard(
                       title: 'Investigation Details',
                       icon: Icons.science_outlined,
@@ -860,40 +859,40 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                               'Reason', investigation.reasonForInvestigation),
                           _buildDetailItem('Priority', investigation.priority),
                           if (investigation.investigationDetails != null) ...[
-                            SizedBox(height: 12),
-                            Text(
+                            const SizedBox(height: 12),
+                            const Text(
                               'Parameters:',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: HospitalTheme.textDark,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               _formatInvestigationDetails(
                                   investigation.investigationDetails!),
-                              style: TextStyle(color: HospitalTheme.textDark),
+                              style: const TextStyle(color: HospitalTheme.textDark),
                             ),
                           ],
-                          SizedBox(height: 12),
-                          Text(
+                          const SizedBox(height: 12),
+                          const Text(
                             'Clinical History:',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: HospitalTheme.textDark,
                             ),
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(
                             investigation.clinicalHistory ??
                                 'No clinical history provided',
-                            style: TextStyle(color: HospitalTheme.textDark),
+                            style: const TextStyle(color: HospitalTheme.textDark),
                           ),
                         ],
                       ),
                     ),
                     if (investigation.billing != null) ...[
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       _buildDetailCard(
                         title: 'Billing Information',
                         icon: Icons.payments_outlined,
@@ -920,7 +919,7 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                 ),
               ),
 
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
 
               // Right column
               Expanded(
@@ -929,16 +928,16 @@ class _DoctorInvestigationScreenState extends State<DoctorInvestigationScreen> {
                   children: [
                     if (investigation.hasResults) ...[
                       _buildResultsCard(investigation),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                     ],
                     if (investigation.hasAttachments) ...[
                       _buildAttachmentsCard(investigation),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                     ],
                     if (investigation.notes != null &&
                         investigation.notes!.isNotEmpty) ...[
                       _buildNotesCard(investigation),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                     ],
                     if (investigation.tags != null &&
                         investigation.tags!.isNotEmpty) ...[
@@ -978,7 +977,7 @@ Widget _buildStatusWithPriorityIndicator(Investigation1 investigation) {
   return Row(
     children: [
       Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         decoration: BoxDecoration(
           color: statusColor.withOpacity(0.1),
           borderRadius: BorderRadius.circular(16),
@@ -993,7 +992,7 @@ Widget _buildStatusWithPriorityIndicator(Investigation1 investigation) {
         ),
       ),
 
-      SizedBox(width: 12),
+      const SizedBox(width: 12),
 
       // Priority indicator
       Row(
@@ -1005,7 +1004,7 @@ Widget _buildStatusWithPriorityIndicator(Investigation1 investigation) {
                 ? HospitalTheme.error
                 : HospitalTheme.info,
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Text(
             investigation.priority,
             style: TextStyle(
@@ -1032,7 +1031,7 @@ Widget _buildActionButton({
     style: ElevatedButton.styleFrom(
       foregroundColor: HospitalTheme.textOnPrimary,
       backgroundColor: HospitalTheme.primary,
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -1055,7 +1054,7 @@ Widget _buildDetailCard({
         BoxShadow(
           color: Colors.black.withOpacity(0.05),
           blurRadius: 10,
-          offset: Offset(0, 2),
+          offset: const Offset(0, 2),
         ),
       ],
     ),
@@ -1064,8 +1063,8 @@ Widget _buildDetailCard({
       children: [
         // Header
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: const BoxDecoration(
             color: HospitalTheme.surfaceLight,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12),
@@ -1075,10 +1074,10 @@ Widget _buildDetailCard({
           child: Row(
             children: [
               Icon(icon, color: HospitalTheme.primary),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                   color: HospitalTheme.primary,
@@ -1090,7 +1089,7 @@ Widget _buildDetailCard({
 
         // Content
         Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: content,
         ),
       ],
@@ -1108,7 +1107,7 @@ Widget _buildDetailItem(String label, String value) {
           width: 120,
           child: Text(
             '$label:',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: HospitalTheme.textDark,
             ),
@@ -1117,7 +1116,7 @@ Widget _buildDetailItem(String label, String value) {
         Expanded(
           child: Text(
             value,
-            style: TextStyle(color: HospitalTheme.textDark),
+            style: const TextStyle(color: HospitalTheme.textDark),
           ),
         ),
       ],
@@ -1137,82 +1136,82 @@ Widget _buildResultsCard(Investigation1 investigation) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (results.findings != null) ...[
-          Text(
+          const Text(
             'Findings:',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             results.findings!,
-            style: TextStyle(color: HospitalTheme.textDark),
+            style: const TextStyle(color: HospitalTheme.textDark),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
         ],
         if (results.impression != null) ...[
-          Text(
+          const Text(
             'Impression:',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             results.impression!,
-            style: TextStyle(color: HospitalTheme.textDark),
+            style: const TextStyle(color: HospitalTheme.textDark),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
         ],
         if (results.isAbnormal != null) ...[
           _buildDetailItem(
               'Abnormal Result', results.isAbnormal! ? 'Yes' : 'No'),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
         ],
         if (results.numericalResults != null &&
             results.numericalResults!.isNotEmpty) ...[
-          Text(
+          const Text(
             'Numerical Results:',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           _buildNumericalResultsTable(results),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
         ],
         if (results.recommendations != null) ...[
-          Text(
+          const Text(
             'Recommendations:',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             results.recommendations!,
-            style: TextStyle(color: HospitalTheme.textDark),
+            style: const TextStyle(color: HospitalTheme.textDark),
           ),
         ],
         if (investigation.performedBy != null) ...[
-          SizedBox(height: 16),
-          Divider(),
-          SizedBox(height: 8),
-          Text(
+          const SizedBox(height: 16),
+          const Divider(),
+          const SizedBox(height: 8),
+          const Text(
             'Performed By:',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             '${investigation.performedBy!.name} (${investigation.performedBy!.designation}), ${investigation.performedBy!.facility}',
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textDark,
               fontStyle: FontStyle.italic,
             ),
@@ -1238,20 +1237,20 @@ Widget _buildNumericalResultsTable(InvestigationResults results) {
       color: HospitalTheme.border,
       width: 1,
     ),
-    columnWidths: {
-      0: FlexColumnWidth(2),
-      1: FlexColumnWidth(1),
-      2: FlexColumnWidth(2),
+    columnWidths: const {
+      0: const FlexColumnWidth(2),
+      1: const FlexColumnWidth(1),
+      2: const FlexColumnWidth(2),
     },
     children: [
       // Header row
-      TableRow(
+      const TableRow(
         decoration: BoxDecoration(
           color: HospitalTheme.surfaceLight,
         ),
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'Parameter',
               style: TextStyle(
@@ -1261,7 +1260,7 @@ Widget _buildNumericalResultsTable(InvestigationResults results) {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'Value',
               style: TextStyle(
@@ -1271,7 +1270,7 @@ Widget _buildNumericalResultsTable(InvestigationResults results) {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'Normal Range',
               style: TextStyle(
@@ -1338,7 +1337,7 @@ Widget _buildNumericalResultsTable(InvestigationResults results) {
             ),
           ],
         );
-      }).toList(),
+      }),
     ],
   );
 }
@@ -1355,8 +1354,8 @@ Widget _buildAttachmentsCard(Investigation1 investigation) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: investigation.attachments!.map((attachment) {
         return Container(
-          margin: EdgeInsets.only(bottom: 12),
-          padding: EdgeInsets.all(12),
+          margin: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: HospitalTheme.surfaceLight.withOpacity(0.5),
             borderRadius: BorderRadius.circular(8),
@@ -1372,11 +1371,11 @@ Widget _buildAttachmentsCard(Investigation1 investigation) {
                     color: HospitalTheme.primary,
                     size: 20,
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       attachment.fileName ?? 'Unnamed File',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
                       ),
@@ -1385,37 +1384,37 @@ Widget _buildAttachmentsCard(Investigation1 investigation) {
                 ],
               ),
               if (attachment.description != null) ...[
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   attachment.description!,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontStyle: FontStyle.italic,
                     color: HospitalTheme.textMedium,
                     fontSize: 13,
                   ),
                 ),
               ],
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Row(
                 children: [
                   Text(
                     'Uploaded: ${_formatDate(attachment.uploadDate!)}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: HospitalTheme.textMedium,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   ElevatedButton.icon(
-                    icon: Icon(Icons.visibility, size: 16),
-                    label: Text('View'),
+                    icon: const Icon(Icons.visibility, size: 16),
+                    label: const Text('View'),
                     style: ElevatedButton.styleFrom(
                       foregroundColor: HospitalTheme.textOnPrimary,
                       backgroundColor: HospitalTheme.primary,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      textStyle: TextStyle(fontSize: 12),
-                      minimumSize: Size(100, 36),
+                          const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      textStyle: const TextStyle(fontSize: 12),
+                      minimumSize: const Size(100, 36),
                     ),
                     onPressed: () {
                       if (attachment.fileUrl != null) {
@@ -1469,8 +1468,8 @@ Widget _buildNotesCard(Investigation1 investigation) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: investigation.notes!.map((note) {
         return Container(
-          margin: EdgeInsets.only(bottom: 12),
-          padding: EdgeInsets.all(12),
+          margin: const EdgeInsets.only(bottom: 12),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
@@ -1481,24 +1480,24 @@ Widget _buildNotesCard(Investigation1 investigation) {
             children: [
               Text(
                 note.text ?? '',
-                style: TextStyle(color: HospitalTheme.textDark),
+                style: const TextStyle(color: HospitalTheme.textDark),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
                     'Added by: ${note.addedBy?.name ?? 'Unknown'} (${note.addedBy?.userType ?? 'Staff'})',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontStyle: FontStyle.italic,
                       color: HospitalTheme.textMedium,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     _formatDate(note.dateAdded!),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: HospitalTheme.textMedium,
                     ),
@@ -1522,7 +1521,7 @@ Widget _buildTagsCard(Investigation1 investigation) {
       runSpacing: 8,
       children: investigation.tags!.map((tag) {
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
             color: HospitalTheme.surfaceLight,
             borderRadius: BorderRadius.circular(16),
@@ -1530,7 +1529,7 @@ Widget _buildTagsCard(Investigation1 investigation) {
           ),
           child: Text(
             tag,
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.primary,
               fontWeight: FontWeight.w500,
             ),
@@ -1697,7 +1696,7 @@ class Billing {
     return Billing(
       insuranceCovered: json['insuranceCovered'],
       paymentStatus: json['paymentStatus'],
-      cost: json['cost'] != null ? json['cost'].toDouble() : null,
+      cost: json['cost']?.toDouble(),
     );
   }
 }

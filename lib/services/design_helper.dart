@@ -8,17 +8,17 @@ class AppColors {
   static final secondary = Colors.blue[300]!;
 
   static final backgroundLight = Colors.grey[50]!;
-  static final backgroundDark = Color(0xFF1E1E1E);
+  static final backgroundDark = const Color(0xFF1E1E1E);
 
-  static final cardLight = Colors.white;
-  static final cardDark = Color(0xFF2C2C2C);
+  static const cardLight = Colors.white;
+  static final cardDark = const Color(0xFF2C2C2C);
 
   static final textPrimaryLight = Colors.grey[900]!;
   static final textSecondaryLight = Colors.grey[700]!;
-  static final textPrimaryDark = Colors.white;
+  static const textPrimaryDark = Colors.white;
   static final textSecondaryDark = Colors.grey[300]!;
 
-  static final shadowColor = Colors.black26;
+  static const shadowColor = Colors.black26;
   static final inputBorderLight = Colors.grey[300]!;
   static final inputBorderDark = Colors.grey[700]!;
 
@@ -52,7 +52,7 @@ class AppStyles {
   }
 
   static TextStyle buttonTextStyle(BuildContext context) {
-    return TextStyle(
+    return const TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.bold,
       letterSpacing: 0.5,
@@ -110,7 +110,7 @@ class AppStyles {
             ? AppColors.textSecondaryDark.withOpacity(0.6)
             : AppColors.textSecondaryLight.withOpacity(0.6),
       ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
     );
   }
 
@@ -122,7 +122,7 @@ class AppStyles {
       boxShadow: [
         BoxShadow(
           color: AppColors.shadowColor,
-          offset: Offset(0, 10),
+          offset: const Offset(0, 10),
           blurRadius: 20,
           spreadRadius: 0,
         ),
@@ -140,7 +140,7 @@ class AppStyles {
       ),
       elevation: 2,
       shadowColor: AppColors.shadowColor,
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
     );
   }
 }

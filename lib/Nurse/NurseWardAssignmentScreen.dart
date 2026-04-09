@@ -1453,7 +1453,7 @@ class _CurrentAssignments extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.warning_amber_rounded,
                     color: HospitalTheme.warning,
                     size: 32,
@@ -1609,8 +1609,8 @@ class _AvailableNurses extends StatefulWidget {
 class _AvailableNursesState extends State<_AvailableNurses> {
   String _searchQuery = '';
   String _filterStatus = 'All';
-  Set<String> _assigningNurses = {};
-  Set<String> _checkingOutNurses = {};
+  final Set<String> _assigningNurses = {};
+  final Set<String> _checkingOutNurses = {};
 
   static const List<String> statusFilters = [
     'All',
@@ -1692,15 +1692,15 @@ class _AvailableNursesState extends State<_AvailableNurses> {
                 color: HospitalTheme.info.withOpacity(0.1),
                 borderRadius: HospitalTheme.radiusSmall,
               ),
-              child: Column(
+              child: const Column(
                 children: [
                   Icon(
                     Icons.search_off,
                     color: HospitalTheme.info,
                     size: 32,
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     'No nurses found',
                     style: TextStyle(
                       fontSize: 16,
@@ -1708,8 +1708,8 @@ class _AvailableNursesState extends State<_AvailableNurses> {
                       color: HospitalTheme.textDark,
                     ),
                   ),
-                  const SizedBox(height: 4),
-                  const Text(
+                  SizedBox(height: 4),
+                  Text(
                     'Try adjusting your search or filter criteria',
                     style: TextStyle(
                       fontSize: 14,
@@ -2112,15 +2112,15 @@ class _NurseCard extends StatelessWidget {
                                     color: HospitalTheme.warning,
                                   ),
                                 )
-                              : Row(
+                              : const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const Icon(
+                                    Icon(
                                       Icons.exit_to_app,
                                       size: 12,
                                     ),
-                                    const SizedBox(width: 4),
-                                    const Text(
+                                    SizedBox(width: 4),
+                                    Text(
                                       'Checkout',
                                       style: TextStyle(fontSize: 9),
                                     ),

@@ -5,7 +5,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   List<Widget>? buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';
         },
@@ -16,7 +16,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
       onPressed: () {
         close(context, '');
       },
@@ -29,7 +29,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
     return ListView(
       children: [
         ListTile(
-          title: Text('Search Result 1'),
+          title: const Text('Search Result 1'),
           onTap: () {
             // Handle result selection
           },
@@ -44,7 +44,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
     return ListView(
       children: [
         ListTile(
-          title: Text('Suggested Result 1'),
+          title: const Text('Suggested Result 1'),
           onTap: () {
             query = 'Suggested Result 1';
           },
@@ -62,12 +62,12 @@ class UserProfileWidget extends StatelessWidget {
   final VoidCallback onLogoutTap;
 
   const UserProfileWidget({
-    Key? key,
+    super.key,
     required this.userName,
     required this.userRole,
     required this.onProfileTap,
     required this.onLogoutTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class UserProfileWidget extends StatelessWidget {
         // Animated Avatar with Status
         Stack(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 20,
               backgroundImage: NetworkImage(
                 'https://example.com/user-avatar.jpg',
@@ -97,14 +97,14 @@ class UserProfileWidget extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               userName,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
                 color: Color(0xFF1E2843),
@@ -119,14 +119,14 @@ class UserProfileWidget extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         PopupMenuButton<String>(
           icon: Icon(
             Icons.keyboard_arrow_down,
             color: Colors.grey.shade700,
           ),
           itemBuilder: (BuildContext context) => [
-            PopupMenuItem(
+            const PopupMenuItem(
               value: 'profile',
               child: Row(
                 children: [
@@ -136,7 +136,7 @@ class UserProfileWidget extends StatelessWidget {
                 ],
               ),
             ),
-            PopupMenuItem(
+            const PopupMenuItem(
               value: 'settings',
               child: Row(
                 children: [
@@ -146,7 +146,7 @@ class UserProfileWidget extends StatelessWidget {
                 ],
               ),
             ),
-            PopupMenuItem(
+            const PopupMenuItem(
               value: 'logout',
               child: Row(
                 children: [

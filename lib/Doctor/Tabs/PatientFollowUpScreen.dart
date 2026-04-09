@@ -289,8 +289,8 @@ String _formatDateTime(DateTime dateTime) {
 
 class FollowUpsNotifier extends StateNotifier<FollowUpsData> {
   FollowUpsNotifier()
-      : super(FollowUpsData(
-          patientInfo: const PatientInfo(
+      : super(const FollowUpsData(
+          patientInfo: PatientInfo(
             patientId: '',
             name: '',
             age: 0,
@@ -311,8 +311,8 @@ class FollowUpsNotifier extends StateNotifier<FollowUpsData> {
         _fetchFourHourFollowUps(patientId, admissionId),
       ]);
 
-      final twoHourData = results[0] as Map<String, dynamic>;
-      final fourHourData = results[1] as Map<String, dynamic>;
+      final twoHourData = results[0];
+      final fourHourData = results[1];
 
       final patientInfo = PatientInfo.fromJson(twoHourData['patientInfo']);
       final twoHourFollowUps = (twoHourData['followUps'] as List)
@@ -341,7 +341,7 @@ class FollowUpsNotifier extends StateNotifier<FollowUpsData> {
   Future<Map<String, dynamic>> _fetchTwoHourFollowUps(
       String patientId, String admissionId) async {
     final response = await http.get(
-      Uri.parse('${BASE_URL}/nurse/getTwoHrFollowUps/$patientId/$admissionId'),
+      Uri.parse('$BASE_URL/nurse/getTwoHrFollowUps/$patientId/$admissionId'),
       headers: {'Content-Type': 'application/json'},
     );
 
@@ -360,7 +360,7 @@ class FollowUpsNotifier extends StateNotifier<FollowUpsData> {
   Future<Map<String, dynamic>> _fetchFourHourFollowUps(
       String patientId, String admissionId) async {
     final response = await http.get(
-      Uri.parse('${BASE_URL}/nurse/getFourHrFollowUps/$patientId/$admissionId'),
+      Uri.parse('$BASE_URL/nurse/getFourHrFollowUps/$patientId/$admissionId'),
       headers: {'Content-Type': 'application/json'},
     );
 
@@ -450,10 +450,10 @@ class FollowUpsScreen extends ConsumerStatefulWidget {
   final String admissionId;
 
   const FollowUpsScreen({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
-  }) : super(key: key);
+  });
 
   @override
   ConsumerState<FollowUpsScreen> createState() => _FollowUpsScreenState();
@@ -1197,7 +1197,7 @@ class _FollowUpColumn extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.inbox,
                         size: 64,
                         color: HospitalTheme.textLight,
@@ -1283,7 +1283,7 @@ class _FollowUpSection extends StatelessWidget {
               padding: const EdgeInsets.all(32.0),
               child: Column(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.inbox,
                     size: 64,
                     color: HospitalTheme.textLight,
@@ -1301,7 +1301,7 @@ class _FollowUpSection extends StatelessWidget {
             ),
           )
         else
-          Container(
+          SizedBox(
             height: children.length > 3 ? maxSectionHeight : null,
             child: children.length > 3
                 ? _ScrollableListView(children: children)

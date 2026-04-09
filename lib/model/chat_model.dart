@@ -1,5 +1,4 @@
 // models/chat_models.dart - FIXED FOR YOUR SPECIFIC API RESPONSE
-import 'package:flutter/foundation.dart';
 
 class ChatUser {
   final String id;

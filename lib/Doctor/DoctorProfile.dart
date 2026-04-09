@@ -11,7 +11,7 @@ import '../constants/HospitalTheme.dart';
 import '../constants/Url.dart';
 
 class DoctorProfileScreen extends StatefulWidget {
-  const DoctorProfileScreen({Key? key}) : super(key: key);
+  const DoctorProfileScreen({super.key});
 
   @override
   _DoctorProfileScreenState createState() => _DoctorProfileScreenState();
@@ -95,8 +95,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
               if (_selectedEndDate != null) {
                 // Include the whole end date by adding 1 day and subtracting 1 millisecond
                 final endDayIncluded = _selectedEndDate!
-                    .add(Duration(days: 1))
-                    .subtract(Duration(milliseconds: 1));
+                    .add(const Duration(days: 1))
+                    .subtract(const Duration(milliseconds: 1));
                 if (admissionDate.isAfter(endDayIncluded)) {
                   dateMatch = false;
                 }
@@ -179,7 +179,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
       }
 
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getDoctorProfile'),
+        Uri.parse('$KVM_URL/doctors/getDoctorProfile'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -255,7 +255,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
         updatedImageUrl = await _uploadImage(_imageFile!, token);
         if (updatedImageUrl == null) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content:
                   Text('Failed to upload image. Profile update will continue.'),
               backgroundColor: HospitalTheme.warning,
@@ -281,7 +281,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
 
       // Make update request
       final response = await http.patch(
-        Uri.parse('${KVM_URL}/doctors/updateProfile'),
+        Uri.parse('$KVM_URL/doctors/updateProfile'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -298,7 +298,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Profile updated successfully'),
             backgroundColor: HospitalTheme.success,
           ),
@@ -338,7 +338,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
       // Create multipart request
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('${KVM_URL}/upload'),
+        Uri.parse('$KVM_URL/upload'),
       );
 
       // Add authorization header
@@ -405,11 +405,11 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
           ? DateTimeRange(start: _selectedStartDate!, end: _selectedEndDate!)
           : null,
       firstDate: DateTime(2020),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: HospitalTheme.primary,
               onPrimary: HospitalTheme.textOnPrimary,
               surface: HospitalTheme.cardBackground,
@@ -464,7 +464,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   }
 
   Widget _buildLoadingView() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -489,23 +489,23 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
+          const Icon(
             Icons.error_outline,
             size: 80,
             color: HospitalTheme.error,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             _errorMessage ?? 'An error occurred',
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textDark,
               fontSize: 16,
             ),
           ),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           ElevatedButton.icon(
-            icon: Icon(Icons.refresh),
-            label: Text('Retry'),
+            icon: const Icon(Icons.refresh),
+            label: const Text('Retry'),
             onPressed: _fetchDoctorProfile,
             style: ElevatedButton.styleFrom(
               foregroundColor: HospitalTheme.textOnPrimary,
@@ -525,7 +525,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
           width: 280,
           decoration: BoxDecoration(
             color: HospitalTheme.navBackground,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(16),
               bottomRight: Radius.circular(16),
             ),
@@ -533,15 +533,15 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
                 blurRadius: 10,
-                offset: Offset(3, 0),
+                offset: const Offset(3, 0),
               ),
             ],
           ),
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Profile Management',
                 style: TextStyle(
                   color: HospitalTheme.textOnPrimary,
@@ -549,7 +549,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 48),
+              const SizedBox(height: 48),
               _buildSidebarItem(
                 icon: Icons.person,
                 title: 'Personal Information',
@@ -567,7 +567,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
         // Main Content
         Expanded(
           child: Container(
-            padding: EdgeInsets.all(32),
+            padding: const EdgeInsets.all(32),
             child: SingleChildScrollView(
               child: Form(
                 key: _formKey,
@@ -577,7 +577,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                     // Header
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           'Doctor Profile',
                           style: TextStyle(
                             fontSize: 28,
@@ -585,24 +585,24 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                             color: HospitalTheme.textDark,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         // Update button
                         _isUpdating
-                            ? CircularProgressIndicator()
+                            ? const CircularProgressIndicator()
                             : ElevatedButton.icon(
                                 onPressed: _updateProfile,
-                                icon: Icon(Icons.save),
-                                label: Text('Save Changes'),
+                                icon: const Icon(Icons.save),
+                                label: const Text('Save Changes'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: HospitalTheme.success,
                                   foregroundColor: Colors.white,
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                     horizontal: 20,
                                     vertical: 12,
                                   ),
                                 ),
                               ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         // Close button
                         HospitalTheme.buildGradientButton(
                           label: 'Close',
@@ -615,7 +615,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 32),
+                    const SizedBox(height: 32),
 
                     // Profile Content in two columns
                     Row(
@@ -628,22 +628,22 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               _buildProfilePhotoSection(),
-                              SizedBox(height: 48),
+                              const SizedBox(height: 48),
                               _buildStatsCard(),
                             ],
                           ),
                         ),
-                        SizedBox(width: 32),
+                        const SizedBox(width: 32),
 
                         // Right column with form fields
                         Expanded(
                           flex: 2,
                           child: HospitalTheme.buildCard(
-                            padding: EdgeInsets.all(24),
+                            padding: const EdgeInsets.all(24),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   'Personal Information',
                                   style: TextStyle(
                                     fontSize: 20,
@@ -651,7 +651,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     color: HospitalTheme.textDark,
                                   ),
                                 ),
-                                SizedBox(height: 24),
+                                const SizedBox(height: 24),
 
                                 // Form fields
                                 _buildFormField(
@@ -665,7 +665,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     return null;
                                   },
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
 
                                 Row(
                                   children: [
@@ -676,7 +676,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                         icon: Icons.medical_services_outlined,
                                       ),
                                     ),
-                                    SizedBox(width: 16),
+                                    const SizedBox(width: 16),
                                     Expanded(
                                       child: _buildFormField(
                                         controller: _experienceController,
@@ -696,7 +696,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
 
                                 Row(
                                   children: [
@@ -707,7 +707,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                         icon: Icons.business_outlined,
                                       ),
                                     ),
-                                    SizedBox(width: 16),
+                                    const SizedBox(width: 16),
                                     Expanded(
                                       child: _buildFormField(
                                         controller: _phoneController,
@@ -728,15 +728,15 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
 
                                 // Email field (disabled, can't edit)
                                 TextFormField(
                                   initialValue: _doctorProfile?['email'] ?? '',
                                   decoration: InputDecoration(
                                     labelText: 'Email',
-                                    prefixIcon: Icon(Icons.email_outlined),
-                                    border: OutlineInputBorder(),
+                                    prefixIcon: const Icon(Icons.email_outlined),
+                                    border: const OutlineInputBorder(),
                                     filled: true,
                                     fillColor: Colors.grey.shade100,
                                   ),
@@ -745,13 +745,13 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                 ),
 
                                 // Save button at the bottom of the form
-                                SizedBox(height: 24),
+                                const SizedBox(height: 24),
                                 Center(
                                   child: ElevatedButton.icon(
                                     onPressed:
                                         _isUpdating ? null : _updateProfile,
                                     icon: _isUpdating
-                                        ? SizedBox(
+                                        ? const SizedBox(
                                             width: 20,
                                             height: 20,
                                             child: CircularProgressIndicator(
@@ -759,18 +759,18 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                               strokeWidth: 2,
                                             ),
                                           )
-                                        : Icon(Icons.save),
+                                        : const Icon(Icons.save),
                                     label: Text(_isUpdating
                                         ? 'Saving...'
                                         : 'Save Changes'),
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: HospitalTheme.primary,
                                       foregroundColor: Colors.white,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                         horizontal: 32,
                                         vertical: 16,
                                       ),
-                                      minimumSize: Size(200, 50),
+                                      minimumSize: const Size(200, 50),
                                     ),
                                   ),
                                 ),
@@ -781,7 +781,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                       ],
                     ),
 
-                    SizedBox(height: 32),
+                    const SizedBox(height: 32),
 
                     // Assigned Patients Section
                     _buildAssignedPatientsSection(),
@@ -801,14 +801,14 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
     required bool isActive,
   }) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       child: InkWell(
         onTap: () {
           // Handle navigation to different sections (not implemented)
         },
         borderRadius: BorderRadius.circular(8),
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: isActive
@@ -824,7 +824,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                     : HospitalTheme.textOnPrimary.withOpacity(0.7),
                 size: 20,
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Text(
                 title,
                 style: TextStyle(
@@ -836,11 +836,11 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                 ),
               ),
               if (isActive) ...[
-                Spacer(),
+                const Spacer(),
                 Container(
                   width: 6,
                   height: 6,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: HospitalTheme.textOnPrimary,
                   ),
@@ -854,7 +854,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   }
 
   Widget _buildProfilePhotoSection() {
-    final double photoSize = 180;
+    const double photoSize = 180;
 
     return Column(
       children: [
@@ -875,7 +875,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 15,
-                    offset: Offset(0, 5),
+                    offset: const Offset(0, 5),
                   ),
                 ],
                 image: (_imageFile != null)
@@ -909,7 +909,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
               child: InkWell(
                 onTap: _pickImage,
                 child: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: HospitalTheme.primary,
                     shape: BoxShape.circle,
@@ -921,11 +921,11 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                       BoxShadow(
                         color: Colors.black.withOpacity(0.1),
                         blurRadius: 5,
-                        offset: Offset(0, 2),
+                        offset: const Offset(0, 2),
                       ),
                     ],
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.edit,
                     color: Colors.white,
                     size: 20,
@@ -935,21 +935,21 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
             ),
           ],
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
           _nameController.text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           _specialityController.text.isNotEmpty
               ? _specialityController.text
               : 'Speciality not specified',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             color: HospitalTheme.textMedium,
           ),
@@ -957,15 +957,15 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
 
         // Preview vs Current note
         if (_imageFile != null) ...[
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: HospitalTheme.surfaceLight,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: HospitalTheme.primary),
             ),
-            child: Text(
+            child: const Text(
               'New photo selected - save to apply changes',
               style: TextStyle(
                 fontSize: 12,
@@ -986,7 +986,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Account Stats',
             style: TextStyle(
               fontSize: 16,
@@ -994,7 +994,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
               color: HospitalTheme.primary,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -1030,16 +1030,16 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
       children: [
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: HospitalTheme.primary,
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             color: HospitalTheme.textMedium,
           ),
@@ -1060,7 +1060,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon),
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
       ),
       keyboardType: keyboardType,
       validator: validator,
@@ -1074,9 +1074,9 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.people_alt, color: HospitalTheme.medical),
-              SizedBox(width: 12),
-              Text(
+              const Icon(Icons.people_alt, color: HospitalTheme.medical),
+              const SizedBox(width: 12),
+              const Text(
                 'Assigned Patients',
                 style: TextStyle(
                   fontSize: 20,
@@ -1084,29 +1084,29 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                   color: HospitalTheme.textDark,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               _buildPatientsCounter(),
             ],
           ),
 
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // Search and filter controls
           _buildSearchAndFilterBar(),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Date filter display
           if (_selectedStartDate != null || _selectedEndDate != null)
             _buildActiveDateFilter(),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Column headers with sort functionality
           _buildTableHeader(),
 
-          SizedBox(height: 8),
-          Divider(),
+          const SizedBox(height: 8),
+          const Divider(),
 
           // Patients list
           _buildPatientsList(),
@@ -1117,7 +1117,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
 
   Widget _buildPatientsCounter() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: HospitalTheme.medical.withOpacity(0.1),
         borderRadius: BorderRadius.circular(16),
@@ -1127,7 +1127,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
         children: [
           Text(
             'Showing ${_filteredPatients.length} of ${_assignedPatients.length}',
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.medical,
               fontWeight: FontWeight.bold,
               fontSize: 14,
@@ -1148,28 +1148,28 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
             controller: _searchController,
             decoration: InputDecoration(
               hintText: 'Search by patient name or ID',
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: const Icon(Icons.search),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
-              contentPadding: EdgeInsets.symmetric(vertical: 12),
+              contentPadding: const EdgeInsets.symmetric(vertical: 12),
             ),
           ),
         ),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
 
         // Date filter button
         OutlinedButton.icon(
           onPressed: () => _selectDateRange(context),
-          icon: Icon(Icons.date_range),
-          label: Text('Filter by Date'),
+          icon: const Icon(Icons.date_range),
+          label: const Text('Filter by Date'),
           style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            side: BorderSide(color: HospitalTheme.primary),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            side: const BorderSide(color: HospitalTheme.primary),
           ),
         ),
 
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
 
         // Refresh button
         IconButton(
@@ -1181,7 +1181,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
               _filteredPatients = List.from(_assignedPatients);
             });
           },
-          icon: Icon(Icons.refresh),
+          icon: const Icon(Icons.refresh),
           tooltip: 'Reset all filters',
           color: HospitalTheme.primary,
         ),
@@ -1192,7 +1192,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   Widget _buildActiveDateFilter() {
     final dateFormat = DateFormat('MMM d, yyyy');
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: HospitalTheme.surfaceLight,
         borderRadius: BorderRadius.circular(8),
@@ -1201,23 +1201,23 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.filter_list, color: HospitalTheme.primary, size: 18),
-          SizedBox(width: 8),
+          const Icon(Icons.filter_list, color: HospitalTheme.primary, size: 18),
+          const SizedBox(width: 8),
           Text(
             _selectedStartDate != null && _selectedEndDate != null
                 ? 'Date: ${dateFormat.format(_selectedStartDate!)} - ${dateFormat.format(_selectedEndDate!)}'
                 : _selectedStartDate != null
                     ? 'From: ${dateFormat.format(_selectedStartDate!)}'
                     : 'Until: ${dateFormat.format(_selectedEndDate!)}',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
               color: HospitalTheme.primary,
             ),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           InkWell(
             onTap: _clearDateFilter,
-            child: Icon(Icons.close, color: HospitalTheme.primary, size: 18),
+            child: const Icon(Icons.close, color: HospitalTheme.primary, size: 18),
           ),
         ],
       ),
@@ -1226,7 +1226,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
 
   Widget _buildTableHeader() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
           // Patient ID
@@ -1251,7 +1251,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
           ),
 
           // Gender
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Text(
               'Gender',
@@ -1263,7 +1263,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
           ),
 
           // Status
-          Expanded(
+          const Expanded(
             flex: 1,
             child: Text(
               'Status',
@@ -1275,7 +1275,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
           ),
 
           // Actions
-          SizedBox(width: 80, child: Text('Actions')),
+          const SizedBox(width: 80, child: Text('Actions')),
         ],
       ),
     );
@@ -1302,7 +1302,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                     isActive ? HospitalTheme.primary : HospitalTheme.textMedium,
               ),
             ),
-            SizedBox(width: 4),
+            const SizedBox(width: 4),
             if (isActive)
               Icon(
                 _sortAscending ? Icons.arrow_upward : Icons.arrow_downward,
@@ -1323,17 +1323,17 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.search_off,
               size: 48,
               color: HospitalTheme.textLight,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               _assignedPatients.isEmpty
                   ? 'No patients assigned to you yet'
                   : 'No patients match your search criteria',
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontSize: 16,
               ),
@@ -1343,11 +1343,11 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
       );
     }
 
-    return Container(
+    return SizedBox(
       height: 500, // Fixed height for the list
       child: ListView.separated(
         itemCount: _filteredPatients.length,
-        separatorBuilder: (context, index) => Divider(height: 1),
+        separatorBuilder: (context, index) => const Divider(height: 1),
         itemBuilder: (context, index) {
           final patient = _filteredPatients[index];
           return _buildPatientRow(patient);
@@ -1401,8 +1401,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
         );
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        decoration: const BoxDecoration(
           color: Colors.white,
           border: Border(
             bottom: BorderSide(color: HospitalTheme.border),
@@ -1415,7 +1415,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
               flex: 1,
               child: Text(
                 patient['patientId'] ?? 'N/A',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   color: HospitalTheme.textDark,
                 ),
@@ -1436,16 +1436,16 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                               .substring(0, 1)
                               .toUpperCase()
                           : 'N/A',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.primary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     patient['name'] ?? 'N/A',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       color: HospitalTheme.textDark,
                     ),
@@ -1459,7 +1459,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
               flex: 1,
               child: Text(
                 formattedDate,
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textMedium,
                 ),
               ),
@@ -1470,7 +1470,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
               flex: 1,
               child: Text(
                 patient['gender'] ?? 'N/A',
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textMedium,
                 ),
               ),
@@ -1491,7 +1491,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
               child: Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.visibility, color: HospitalTheme.primary),
+                    icon: const Icon(Icons.visibility, color: HospitalTheme.primary),
                     tooltip: 'View Details',
                     onPressed: () {
                       // Navigate to patient details using the same conversion
@@ -1507,7 +1507,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                     },
                   ),
                   IconButton(
-                    icon: Icon(Icons.medical_services,
+                    icon: const Icon(Icons.medical_services,
                         color: HospitalTheme.secondary),
                     tooltip: 'Manage Treatment',
                     onPressed: () {
@@ -1627,39 +1627,39 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
 
 // Helper methods to parse nested objects
   List<FollowUp> _parseFollowUps(dynamic followUpsData) {
-    if (followUpsData == null || !(followUpsData is List)) {
+    if (followUpsData == null || followUpsData is! List) {
       return [];
     }
 
-    return (followUpsData as List)
+    return (followUpsData)
         .map((followUp) => FollowUp.fromJson(followUp))
         .toList();
   }
 
   List<DoctorPrescription> _parsePrescriptions(dynamic prescriptionsData) {
-    if (prescriptionsData == null || !(prescriptionsData is List)) {
+    if (prescriptionsData == null || prescriptionsData is! List) {
       return [];
     }
 
-    return (prescriptionsData as List)
+    return (prescriptionsData)
         .map((prescription) => DoctorPrescription.fromJson(prescription))
         .toList();
   }
 
   List<Vitals> _parseVitals(dynamic vitalsData) {
-    if (vitalsData == null || !(vitalsData is List)) {
+    if (vitalsData == null || vitalsData is! List) {
       return [];
     }
 
-    return (vitalsData as List).map((vital) => Vitals.fromJson(vital)).toList();
+    return (vitalsData).map((vital) => Vitals.fromJson(vital)).toList();
   }
 
   List<DoctorConsulting> _parseConsulting(dynamic consultingData) {
-    if (consultingData == null || !(consultingData is List)) {
+    if (consultingData == null || consultingData is! List) {
       return [];
     }
 
-    return (consultingData as List)
+    return (consultingData)
         .map((consulting) => DoctorConsulting.fromJson(consulting))
         .toList();
   }

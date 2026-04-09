@@ -73,8 +73,9 @@ class PatientFilters {
     if (maxAge != null) params['maxAge'] = maxAge;
     if (city != null && city!.isNotEmpty) params['city'] = city;
     if (state != null && state!.isNotEmpty) params['state'] = state;
-    if (patientType != null && patientType!.isNotEmpty)
+    if (patientType != null && patientType!.isNotEmpty) {
       params['patientType'] = patientType;
+    }
     if (dateFrom != null) params['dateFrom'] = dateFrom!.toIso8601String();
     if (dateTo != null) params['dateTo'] = dateTo!.toIso8601String();
     params['sortBy'] = sortBy;

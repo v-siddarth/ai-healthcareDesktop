@@ -11,11 +11,11 @@ class InventoryItemCard extends StatelessWidget {
   final VoidCallback? onDelete;
 
   const InventoryItemCard({
-    Key? key,
+    super.key,
     required this.item,
     this.onEdit,
     this.onDelete,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +166,7 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
 
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.label,
     this.hint,
     required this.controller,
@@ -181,7 +181,7 @@ class CustomTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -233,14 +233,14 @@ class DatePickerFormField extends StatelessWidget {
   final DateTime? lastDate;
 
   const DatePickerFormField({
-    Key? key,
+    super.key,
     required this.label,
     required this.controller,
     this.validator,
     this.initialDate,
     this.firstDate,
     this.lastDate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -281,14 +281,14 @@ class CustomDropdownField<T> extends StatelessWidget {
   final String? hint;
 
   const CustomDropdownField({
-    Key? key,
+    super.key,
     required this.label,
     required this.value,
     required this.items,
     required this.onChanged,
     this.validator,
     this.hint,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -334,7 +334,7 @@ class CustomButton extends StatelessWidget {
   final double? width;
 
   const CustomButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
     this.isLoading = false,
@@ -342,7 +342,7 @@ class CustomButton extends StatelessWidget {
     this.textColor,
     this.icon,
     this.width,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -387,12 +387,12 @@ class EmptyStateWidget extends StatelessWidget {
   final String? actionLabel;
 
   const EmptyStateWidget({
-    Key? key,
+    super.key,
     required this.message,
     this.icon = Icons.inventory_2_outlined,
     this.onActionPressed,
     this.actionLabel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -436,10 +436,10 @@ class ErrorStateWidget extends StatelessWidget {
   final VoidCallback onRetry;
 
   const ErrorStateWidget({
-    Key? key,
+    super.key,
     required this.message,
     required this.onRetry,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -481,12 +481,12 @@ class ResponsiveGridView extends StatelessWidget {
   final double minItemWidth;
 
   const ResponsiveGridView({
-    Key? key,
+    super.key,
     required this.children,
     this.spacing = 16,
     this.runSpacing = 16,
     this.minItemWidth = 300,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -523,14 +523,14 @@ class SearchBar extends StatelessWidget {
   final FocusNode? focusNode;
 
   const SearchBar({
-    Key? key,
+    super.key,
     required this.controller,
     required this.onChanged,
     required this.onClear,
     this.hintText = 'Search...',
     this.showClearButton = true,
     this.focusNode,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -616,11 +616,11 @@ class StatusBadge extends StatelessWidget {
   final Color? textColor;
 
   const StatusBadge({
-    Key? key,
+    super.key,
     required this.text,
     required this.color,
     this.textColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -656,14 +656,14 @@ class ResponsiveDataTable<T> extends StatelessWidget {
   final bool isLoading;
 
   const ResponsiveDataTable({
-    Key? key,
+    super.key,
     required this.columns,
     required this.data,
     required this.cellBuilder,
     this.onRowTap,
     this.showHeader = true,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -774,7 +774,7 @@ class ResponsiveScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBarBottom;
 
   const ResponsiveScaffold({
-    Key? key,
+    super.key,
     required this.title,
     required this.body,
     this.actions,
@@ -785,7 +785,7 @@ class ResponsiveScaffold extends StatelessWidget {
     this.resizeToAvoidBottomInset = true,
     this.extendBodyBehindAppBar = false,
     this.appBarBottom,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

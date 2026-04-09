@@ -458,15 +458,15 @@ class _BillingAnalyticsDashboardState
         children: [
           Container(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
               border: Border(bottom: BorderSide(color: HospitalTheme.border)),
             ),
-            child: Row(
+            child: const Row(
               children: [
                 Icon(Icons.analytics, color: HospitalTheme.primary, size: 28),
-                const SizedBox(width: 12),
-                const Text(
+                SizedBox(width: 12),
+                Text(
                   'Analytics Views',
                   style: TextStyle(
                     fontSize: 18,
@@ -647,7 +647,7 @@ class _BillingAnalyticsDashboardState
               const SizedBox(height: 4),
               Text(
                 subtitle,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: HospitalTheme.textMedium,
                 ),
@@ -855,7 +855,7 @@ class _BillingAnalyticsDashboardState
           const SizedBox(height: 8),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               color: HospitalTheme.textMedium,
               fontWeight: FontWeight.w500,
@@ -949,7 +949,7 @@ class _BillingAnalyticsDashboardState
             ),
             Text(
               percentage,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: HospitalTheme.textMedium,
               ),
@@ -1001,7 +1001,7 @@ class _BillingAnalyticsDashboardState
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Collection Rate',
                       style: TextStyle(
                         fontSize: 14,
@@ -1068,11 +1068,11 @@ class _BillingAnalyticsDashboardState
               LineChartData(
                 gridData: FlGridData(
                   show: true,
-                  getDrawingHorizontalLine: (value) => FlLine(
+                  getDrawingHorizontalLine: (value) => const FlLine(
                     color: HospitalTheme.border,
                     strokeWidth: 1,
                   ),
-                  getDrawingVerticalLine: (value) => FlLine(
+                  getDrawingVerticalLine: (value) => const FlLine(
                     color: HospitalTheme.border,
                     strokeWidth: 1,
                   ),
@@ -1328,7 +1328,7 @@ class _BillingAnalyticsDashboardState
           const SizedBox(height: 2),
           Text(
             subtitle,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textMedium,
             ),
@@ -1377,7 +1377,7 @@ class _BillingAnalyticsDashboardState
               LineChartData(
                 gridData: FlGridData(
                   show: true,
-                  getDrawingHorizontalLine: (value) => FlLine(
+                  getDrawingHorizontalLine: (value) => const FlLine(
                     color: HospitalTheme.border,
                     strokeWidth: 1,
                   ),
@@ -1572,11 +1572,11 @@ class _BillingAnalyticsDashboardState
               3: FlexColumnWidth(1),
             },
             children: [
-              TableRow(
+              const TableRow(
                 decoration: BoxDecoration(
                   color: HospitalTheme.surfaceLight,
                 ),
-                children: const [
+                children: [
                   Padding(
                     padding: EdgeInsets.all(12),
                     child: Text(
@@ -1753,7 +1753,7 @@ class _BillingAnalyticsDashboardState
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Collection Rate',
                       style: TextStyle(
                         fontSize: 16,
@@ -1763,7 +1763,7 @@ class _BillingAnalyticsDashboardState
                     const SizedBox(height: 8),
                     Text(
                       '₹${data.kpiSummary.totalCollected.toStringAsFixed(0)} / ₹${data.kpiSummary.totalRevenue.toStringAsFixed(0)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: HospitalTheme.textMedium,
                       ),
@@ -1825,7 +1825,7 @@ class _BillingAnalyticsDashboardState
             ),
             child: Row(
               children: [
-                Icon(Icons.trending_up, color: HospitalTheme.success),
+                const Icon(Icons.trending_up, color: HospitalTheme.success),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -1841,7 +1841,7 @@ class _BillingAnalyticsDashboardState
                             : data.kpiSummary.collectionRate > 60
                                 ? 'Good collection rate, room for improvement.'
                                 : 'Collection rate needs attention and improvement.',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
                           color: HospitalTheme.textDark,
                         ),
@@ -1876,7 +1876,7 @@ class _BillingAnalyticsDashboardState
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 13,
                   color: HospitalTheme.textMedium,
                 ),
@@ -1925,7 +1925,7 @@ class _BillingAnalyticsDashboardState
               LineChartData(
                 gridData: FlGridData(
                   show: true,
-                  getDrawingHorizontalLine: (value) => FlLine(
+                  getDrawingHorizontalLine: (value) => const FlLine(
                     color: HospitalTheme.border,
                     strokeWidth: 1,
                   ),
@@ -2103,7 +2103,7 @@ class _BillingAnalyticsDashboardState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -2196,11 +2196,11 @@ class _BillingAnalyticsDashboardState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.warning_amber, color: HospitalTheme.warning),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'Outstanding Summary',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
@@ -2330,7 +2330,7 @@ class _BillingAnalyticsDashboardState
           const SizedBox(height: 4),
           Text(
             description,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               color: HospitalTheme.textMedium,
             ),
@@ -2346,10 +2346,10 @@ class _BillingAnalyticsDashboardState
                 elevation: 0,
                 padding: const EdgeInsets.symmetric(vertical: 8),
               ),
-              child: Text(
+              child: const Text(
                 'Execute',
                 style:
-                    const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                    TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -2418,11 +2418,11 @@ class _BillingAnalyticsDashboardState
               LineChartData(
                 gridData: FlGridData(
                   show: true,
-                  getDrawingHorizontalLine: (value) => FlLine(
+                  getDrawingHorizontalLine: (value) => const FlLine(
                     color: HospitalTheme.border,
                     strokeWidth: 1,
                   ),
-                  getDrawingVerticalLine: (value) => FlLine(
+                  getDrawingVerticalLine: (value) => const FlLine(
                     color: HospitalTheme.border,
                     strokeWidth: 1,
                   ),
@@ -2473,7 +2473,7 @@ class _BillingAnalyticsDashboardState
                       show: true,
                       color: HospitalTheme.primary.withOpacity(0.1),
                     ),
-                    dotData: FlDotData(show: true),
+                    dotData: const FlDotData(show: true),
                   ),
                   LineChartBarData(
                     spots: data.trendAnalysis.data.asMap().entries.map((entry) {
@@ -2483,7 +2483,7 @@ class _BillingAnalyticsDashboardState
                     isCurved: true,
                     color: HospitalTheme.success,
                     barWidth: 3,
-                    dotData: FlDotData(show: true),
+                    dotData: const FlDotData(show: true),
                   ),
                   LineChartBarData(
                     spots: data.trendAnalysis.data.asMap().entries.map((entry) {
@@ -2493,7 +2493,7 @@ class _BillingAnalyticsDashboardState
                     isCurved: true,
                     color: HospitalTheme.warning,
                     barWidth: 3,
-                    dotData: FlDotData(show: true),
+                    dotData: const FlDotData(show: true),
                   ),
                 ],
               ),
@@ -2619,7 +2619,7 @@ class _BillingAnalyticsDashboardState
               ),
               Text(
                 subtitle,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   color: HospitalTheme.textMedium,
                 ),
@@ -2701,7 +2701,7 @@ class _BillingAnalyticsDashboardState
               const SizedBox(height: 4),
               Text(
                 description,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 13,
                   color: HospitalTheme.textMedium,
                 ),
@@ -2820,7 +2820,7 @@ class _BillingAnalyticsDashboardState
                       borderData: FlBorderData(show: false),
                       gridData: FlGridData(
                         show: true,
-                        getDrawingHorizontalLine: (value) => FlLine(
+                        getDrawingHorizontalLine: (value) => const FlLine(
                           color: HospitalTheme.border,
                           strokeWidth: 1,
                         ),
@@ -2879,7 +2879,7 @@ class _BillingAnalyticsDashboardState
                                 const SizedBox(height: 4),
                                 Text(
                                   '${aging.count} bills • Avg: ${aging.averageDaysOutstanding.toStringAsFixed(0)} days',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
                                     color: HospitalTheme.textMedium,
                                   ),
@@ -2888,7 +2888,7 @@ class _BillingAnalyticsDashboardState
                             ),
                           ),
                         );
-                      }).toList(),
+                      }),
                     ],
                   ),
                 ),
@@ -2965,7 +2965,7 @@ class _BillingAnalyticsDashboardState
                 const SizedBox(height: 8),
                 Text(
                   '${data.kpiSummary.collectionRate.toStringAsFixed(1)}% Collection Rate',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),
@@ -3004,7 +3004,7 @@ class _BillingAnalyticsDashboardState
               children: [
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),
@@ -3121,7 +3121,7 @@ class _BillingAnalyticsDashboardState
           const SizedBox(height: 8),
           Text(
             description,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               color: HospitalTheme.textMedium,
             ),
@@ -3257,7 +3257,7 @@ class _BillingAnalyticsDashboardState
           Icon(icon, color: color, size: 32),
           const SizedBox(height: 16),
           Text(
-            '${score.toStringAsFixed(0)}',
+            score.toStringAsFixed(0),
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
@@ -3423,11 +3423,11 @@ class _BillingAnalyticsDashboardState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.info, color: HospitalTheme.info, size: 20),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'Benchmark Analysis',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
@@ -3504,7 +3504,7 @@ class _BillingAnalyticsDashboardState
                   const SizedBox(width: 16),
                   Text(
                     'Benchmark: ${benchmarkValue.toStringAsFixed(1)}$suffix',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       color: HospitalTheme.textMedium,
                     ),
@@ -3627,14 +3627,14 @@ class _BillingAnalyticsDashboardState
               ],
             ),
           );
-        }).toList(),
+        }),
       ],
     );
   }
 
   // Loading and Error States
   Widget _buildLoadingState() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -3646,7 +3646,7 @@ class _BillingAnalyticsDashboardState
               valueColor: AlwaysStoppedAnimation<Color>(HospitalTheme.primary),
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Text(
             'Loading Analytics Dashboard...',
             style: TextStyle(
@@ -3654,7 +3654,7 @@ class _BillingAnalyticsDashboardState
               color: HospitalTheme.textMedium,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             'Analyzing billing data and generating insights',
             style: TextStyle(
@@ -3672,13 +3672,13 @@ class _BillingAnalyticsDashboardState
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.error_outline,
             size: 80,
             color: HospitalTheme.error,
           ),
           const SizedBox(height: 24),
-          Text(
+          const Text(
             'Failed to Load Analytics',
             style: TextStyle(
               fontSize: 24,
@@ -3689,7 +3689,7 @@ class _BillingAnalyticsDashboardState
           const SizedBox(height: 16),
           Text(
             'Error: $error',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               color: HospitalTheme.textMedium,
             ),

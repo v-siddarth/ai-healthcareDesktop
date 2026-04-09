@@ -201,17 +201,17 @@ class OpdBillingNotifier extends StateNotifier<OpdBillingState> {
   final String patientId;
 
   OpdBillingNotifier(this.patientId)
-      : super(OpdBillingState(
+      : super(const OpdBillingState(
           consultationFee: 0,
           services: {
-            'ecg': const ServiceItem(name: 'ECG', quantity: 0, rate: 150),
-            'xray': const ServiceItem(name: 'X-Ray', quantity: 0, rate: 300),
+            'ecg': ServiceItem(name: 'ECG', quantity: 0, rate: 150),
+            'xray': ServiceItem(name: 'X-Ray', quantity: 0, rate: 300),
             'injection':
-                const ServiceItem(name: 'Injection', quantity: 0, rate: 50),
+                ServiceItem(name: 'Injection', quantity: 0, rate: 50),
             'dialysis':
-                const ServiceItem(name: 'Dialysis', quantity: 0, rate: 800),
+                ServiceItem(name: 'Dialysis', quantity: 0, rate: 800),
             'dressing':
-                const ServiceItem(name: 'Dressing', quantity: 0, rate: 100),
+                ServiceItem(name: 'Dressing', quantity: 0, rate: 100),
           },
         ));
 
@@ -308,7 +308,7 @@ class OpdBillingNotifier extends StateNotifier<OpdBillingState> {
       };
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/generateOPDBill/$patientId'),
+        Uri.parse('$KVM_URL/reception/generateOPDBill/$patientId'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(requestBody),
       );
@@ -345,7 +345,7 @@ class OpdBillingNotifier extends StateNotifier<OpdBillingState> {
       };
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/generateOpdReceipt'),
+        Uri.parse('$KVM_URL/reception/generateOpdReceipt'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(requestBody),
       );
@@ -370,15 +370,15 @@ class OpdBillingNotifier extends StateNotifier<OpdBillingState> {
   }
 
   void reset() {
-    state = OpdBillingState(
+    state = const OpdBillingState(
       consultationFee: 0,
       services: {
-        'ecg': const ServiceItem(name: 'ECG', quantity: 0, rate: 150),
-        'xray': const ServiceItem(name: 'X-Ray', quantity: 0, rate: 300),
+        'ecg': ServiceItem(name: 'ECG', quantity: 0, rate: 150),
+        'xray': ServiceItem(name: 'X-Ray', quantity: 0, rate: 300),
         'injection':
-            const ServiceItem(name: 'Injection', quantity: 0, rate: 50),
-        'dialysis': const ServiceItem(name: 'Dialysis', quantity: 0, rate: 800),
-        'dressing': const ServiceItem(name: 'Dressing', quantity: 0, rate: 100),
+            ServiceItem(name: 'Injection', quantity: 0, rate: 50),
+        'dialysis': ServiceItem(name: 'Dialysis', quantity: 0, rate: 800),
+        'dressing': ServiceItem(name: 'Dressing', quantity: 0, rate: 100),
       },
     );
   }
@@ -567,8 +567,8 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
       length: 2,
       child: Column(
         children: [
-          TabBar(
-            tabs: const [
+          const TabBar(
+            tabs: [
               Tab(text: 'Billing Form', icon: Icon(Icons.edit_document)),
               Tab(text: 'Bill Summary', icon: Icon(Icons.receipt_long)),
             ],
@@ -767,7 +767,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
           const SizedBox(height: 8),
           Text(
             'Total: ₹${service.total.toStringAsFixed(2)}',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: HospitalTheme.primary,
               fontSize: 12,
@@ -880,14 +880,14 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
                 Expanded(
                   child: Text(
                     'Total: ₹${charge.total}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: HospitalTheme.primary,
                     ),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.delete_outline, color: HospitalTheme.error),
+                  icon: const Icon(Icons.delete_outline, color: HospitalTheme.error),
                   onPressed: () => notifier.removeAdditionalCharge(index),
                   tooltip: 'Remove',
                 ),
@@ -907,7 +907,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.delete_outline,
+                      icon: const Icon(Icons.delete_outline,
                           color: HospitalTheme.error),
                       onPressed: () => notifier.removeAdditionalCharge(index),
                     ),
@@ -921,7 +921,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
                     Text('Rate: ₹${charge.rate}'),
                     Text(
                       'Total: ₹${charge.total}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.primary,
                       ),
@@ -939,14 +939,14 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
   Widget _buildEmptyAdditionalCharges() {
     return Container(
       padding: const EdgeInsets.all(32),
-      child: Column(
+      child: const Column(
         children: [
           Icon(
             Icons.receipt_long_outlined,
             size: 48,
             color: HospitalTheme.textLight,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'No additional charges added',
             style: TextStyle(
@@ -1019,7 +1019,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Discount Amount',
             style: TextStyle(
               fontSize: 12,
@@ -1140,11 +1140,11 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.check_circle, color: HospitalTheme.success),
-                  const SizedBox(width: 8),
-                  const Text(
+                  SizedBox(width: 8),
+                  Text(
                     'Bill Generated Successfully!',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -1263,7 +1263,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  Text(
+                  const Text(
                     'Balance: ',
                     style: TextStyle(
                       color: HospitalTheme.textMedium,
@@ -1292,14 +1292,14 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
                     color: HospitalTheme.surfaceLight,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Text(
                         'Generating receipt, please wait...',
                         style: TextStyle(
@@ -1352,11 +1352,11 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.check_circle, color: HospitalTheme.success),
-                  const SizedBox(width: 8),
-                  const Expanded(
+                  SizedBox(width: 8),
+                  Expanded(
                     child: Text(
                       'Receipt Generated Successfully!',
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -1428,7 +1428,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
   }
 
   Widget _buildEmptyBillState() {
-    return SizedBox(
+    return const SizedBox(
       height: 300,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -1438,7 +1438,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
             size: 64,
             color: HospitalTheme.textLight,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'Generate Bill',
             style: TextStyle(
@@ -1447,7 +1447,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
               color: HospitalTheme.textMedium,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             'Fill in the billing details and click\n"Generate Bill" to create the bill',
             textAlign: TextAlign.center,
@@ -1455,7 +1455,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
               color: HospitalTheme.textLight,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'Shortcuts: Ctrl+S to Generate • Ctrl+P to Preview',
             style: TextStyle(
@@ -1510,7 +1510,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textMedium,
               fontSize: 14,
             ),
@@ -1642,9 +1642,9 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
                 Navigator.pop(context);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                  const SnackBar(
                     content:
-                        const Text('Please fill all fields with valid values'),
+                        Text('Please fill all fields with valid values'),
                     backgroundColor: HospitalTheme.error,
                   ),
                 );
@@ -1661,7 +1661,7 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        icon: Icon(
+        icon: const Icon(
           Icons.check_circle,
           color: HospitalTheme.success,
           size: 48,
@@ -1775,8 +1775,8 @@ class _OpdBillingScreenState extends ConsumerState<OpdBillingScreen> {
 
     if (state.billingAmount <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Please enter a valid billing amount'),
+        const SnackBar(
+          content: Text('Please enter a valid billing amount'),
           backgroundColor: HospitalTheme.warning,
         ),
       );

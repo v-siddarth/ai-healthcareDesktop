@@ -216,8 +216,9 @@ class NurseApiService {
 
       if (startDate != null) queryParams['startDate'] = startDate;
       if (endDate != null) queryParams['endDate'] = endDate;
-      if (nurseId != null && nurseId.isNotEmpty)
+      if (nurseId != null && nurseId.isNotEmpty) {
         queryParams['nurseId'] = nurseId;
+      }
       if (status != null && status.isNotEmpty) queryParams['status'] = status;
       if (search != null && search.isNotEmpty) queryParams['search'] = search;
 
@@ -518,7 +519,7 @@ class _NurseManagementScreenState extends ConsumerState<NurseManagementScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error, size: 64, color: HospitalTheme.error),
+            const Icon(Icons.error, size: 64, color: HospitalTheme.error),
             const SizedBox(height: 16),
             Text('Error loading nurses: $error'),
             const SizedBox(height: 16),
@@ -695,7 +696,7 @@ class _NurseManagementScreenState extends ConsumerState<NurseManagementScreen>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.error, size: 64, color: HospitalTheme.error),
+                  const Icon(Icons.error, size: 64, color: HospitalTheme.error),
                   const SizedBox(height: 16),
                   Text('Error loading attendance: $error'),
                   const SizedBox(height: 16),
@@ -747,17 +748,17 @@ class _NurseManagementScreenState extends ConsumerState<NurseManagementScreen>
               },
             ),
             loading: () => DropdownButtonFormField<String>(
-              items: [],
+              items: const [],
               onChanged: null,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Loading...',
                 prefixIcon: Icon(Icons.person),
               ),
             ),
             error: (_, __) => DropdownButtonFormField<String>(
-              items: [],
+              items: const [],
               onChanged: null,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Error',
                 prefixIcon: Icon(Icons.error),
               ),
@@ -1169,11 +1170,11 @@ class _ManualAttendanceFormState extends ConsumerState<_ManualAttendanceForm> {
                 borderRadius: HospitalTheme.radiusSmall,
                 border: Border.all(color: HospitalTheme.info.withOpacity(0.3)),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(Icons.info, color: HospitalTheme.info),
-                  const SizedBox(width: 12),
-                  const Expanded(
+                  SizedBox(width: 12),
+                  Expanded(
                     child: Text(
                       'Use this form to manually mark attendance when automatic check-in/out is not available (e.g., biometric system issues).',
                       style: TextStyle(color: HospitalTheme.textDark),
@@ -1243,9 +1244,9 @@ class _ManualAttendanceFormState extends ConsumerState<_ManualAttendanceForm> {
                               setState(() => _selectedNurseId = value),
                         ),
                         loading: () => DropdownButtonFormField<String>(
-                          items: [],
+                          items: const [],
                           onChanged: null,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'Loading nurses...',
                             prefixIcon: Icon(Icons.person),
                           ),

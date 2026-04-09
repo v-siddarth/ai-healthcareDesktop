@@ -368,7 +368,7 @@ class MedicalCertificateNotifier
       };
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/doctors/generateMedicalCertificate'),
+        Uri.parse('$KVM_URL/doctors/generateMedicalCertificate'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -959,14 +959,14 @@ class _GenerateMedicalCertificateScreenState
                 color: HospitalTheme.pharmacy.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(
                     Icons.star,
                     color: HospitalTheme.pharmacy,
                     size: 16,
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Text(
                     'Custom Certificate Types',
                     style: TextStyle(
@@ -1212,14 +1212,14 @@ class _GenerateMedicalCertificateScreenState
       ),
       child: Row(
         children: [
-          Icon(Icons.error_outline, color: HospitalTheme.error, size: 16),
+          const Icon(Icons.error_outline, color: HospitalTheme.error, size: 16),
           const SizedBox(width: 8),
           Expanded(
-              child: Text(error, style: TextStyle(color: HospitalTheme.error))),
+              child: Text(error, style: const TextStyle(color: HospitalTheme.error))),
           IconButton(
             onPressed: () =>
                 ref.read(medicalCertificateProvider.notifier).clearError(),
-            icon: Icon(Icons.close, color: HospitalTheme.error, size: 16),
+            icon: const Icon(Icons.close, color: HospitalTheme.error, size: 16),
           ),
         ],
       ),
@@ -1554,14 +1554,14 @@ class _GenerateMedicalCertificateScreenState
                   color: HospitalTheme.primary.withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
-                child: CircularProgressIndicator(
+                child: const CircularProgressIndicator(
                   valueColor:
                       AlwaysStoppedAnimation<Color>(HospitalTheme.primary),
                   strokeWidth: 3,
                 ),
               ),
               const SizedBox(height: 24),
-              Text(
+              const Text(
                 'Loading PDF...',
                 style: TextStyle(
                   fontSize: 16,
@@ -1570,7 +1570,7 @@ class _GenerateMedicalCertificateScreenState
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
+              const Text(
                 'Please wait while we prepare your certificate',
                 style: TextStyle(
                   fontSize: 13,

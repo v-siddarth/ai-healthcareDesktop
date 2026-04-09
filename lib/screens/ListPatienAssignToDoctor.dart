@@ -5,6 +5,8 @@ import 'package:doctordesktop/constants/Url.dart';
 import 'package:doctordesktop/constants/HospitalTheme.dart';
 
 class PatientAssignmentScreen extends StatefulWidget {
+  const PatientAssignmentScreen({super.key});
+
   @override
   _PatientAssignmentScreenState createState() =>
       _PatientAssignmentScreenState();
@@ -35,7 +37,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
 
     try {
       final response =
-          await http.get(Uri.parse('${KVM_URL}/reception/listDoctors'));
+          await http.get(Uri.parse('$KVM_URL/reception/listDoctors'));
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -80,7 +82,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
     try {
       final response = await http.get(
         Uri.parse(
-            '${KVM_URL}/reception/getPatientAssignedToDoctor/$selectedDoctorName'),
+            '$KVM_URL/reception/getPatientAssignedToDoctor/$selectedDoctorName'),
       );
 
       if (response.statusCode == 200) {
@@ -138,7 +140,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/assign-Doctor'),
+        Uri.parse('$KVM_URL/reception/assign-Doctor'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'patientId': patientId,
@@ -187,10 +189,10 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Assign Doctor'),
+        title: const Text('Assign Doctor'),
         content: StatefulBuilder(
           builder: (context, setState) {
-            return Container(
+            return SizedBox(
               width: 400,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -198,19 +200,19 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                 children: [
                   Text(
                     'Assign a new doctor to ${selectedPatient!['name']}',
-                    style: TextStyle(color: HospitalTheme.textMedium),
+                    style: const TextStyle(color: HospitalTheme.textMedium),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     'Current Doctor: $selectedDoctorName',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: HospitalTheme.primary,
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
                       borderRadius: HospitalTheme.radiusSmall,
                       border: Border.all(color: HospitalTheme.border),
@@ -218,7 +220,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                         isExpanded: true,
-                        hint: Text('Select New Doctor'),
+                        hint: const Text('Select New Doctor'),
                         value: newDoctorId,
                         items: doctors
                             .where((doc) => doc['_id'] != selectedDoctorId)
@@ -227,7 +229,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                             value: doctor['_id'],
                             child: Text(
                               doctor['doctorName'] ?? 'Unknown',
-                              style: TextStyle(color: HospitalTheme.textDark),
+                              style: const TextStyle(color: HospitalTheme.textDark),
                             ),
                           );
                         }).toList(),
@@ -247,7 +249,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -257,14 +259,14 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
             onPressed: () {
               if (newDoctorId == null) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Please select a doctor')),
+                  const SnackBar(content: Text('Please select a doctor')),
                 );
                 return;
               }
               Navigator.pop(context);
               _assignDoctor(newDoctorId!);
             },
-            child: Text('Assign'),
+            child: const Text('Assign'),
           ),
         ],
       ),
@@ -275,7 +277,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.check_circle, color: Colors.green),
             SizedBox(width: 8),
@@ -286,7 +288,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
       ),
@@ -297,7 +299,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.error_outline, color: Colors.red),
             SizedBox(width: 8),
@@ -308,7 +310,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
       ),
@@ -338,7 +340,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
+        const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -349,7 +351,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                 color: HospitalTheme.textDark,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'View and manage patient assignments to doctors',
               style: TextStyle(
@@ -385,12 +387,12 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
           value: selectedDoctorId,
           hint: Text(
             doctors.isEmpty ? 'No doctors available' : 'Select Doctor',
-            style: TextStyle(color: HospitalTheme.textMedium),
+            style: const TextStyle(color: HospitalTheme.textMedium),
           ),
-          icon: Icon(Icons.arrow_drop_down, color: HospitalTheme.primary),
+          icon: const Icon(Icons.arrow_drop_down, color: HospitalTheme.primary),
           isExpanded: true,
           disabledHint: doctors.isEmpty
-              ? Text(
+              ? const Text(
                   'No doctors available',
                   style: TextStyle(color: HospitalTheme.textMedium),
                 )
@@ -415,7 +417,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
               value: doctor['_id'],
               child: Text(
                 doctor['doctorName'] ?? 'Unknown',
-                style: TextStyle(color: HospitalTheme.textDark),
+                style: const TextStyle(color: HospitalTheme.textDark),
               ),
             );
           }).toList(),
@@ -426,12 +428,12 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
 
   Widget _buildContent() {
     if (isLoading && patients.isEmpty && doctors.isEmpty) {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircularProgressIndicator(color: HospitalTheme.primary),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'Loading data...',
               style: TextStyle(color: HospitalTheme.textMedium),
@@ -446,7 +448,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, color: Colors.red, size: 48),
+            const Icon(Icons.error_outline, color: Colors.red, size: 48),
             const SizedBox(height: 16),
             Text(
               error,
@@ -484,7 +486,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
               color: HospitalTheme.primary.withOpacity(0.5),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'No doctors available in the system',
               style: TextStyle(
                 fontSize: 18,
@@ -524,7 +526,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
               color: HospitalTheme.primary.withOpacity(0.5),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'Please select a doctor to view assigned patients',
               style: TextStyle(
                 fontSize: 18,
@@ -580,7 +582,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                           patients.isEmpty
                               ? 'No patients assigned to this doctor'
                               : 'Select a patient to view details',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             color: HospitalTheme.textMedium,
                           ),
@@ -616,7 +618,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Assigned Patients',
                   style: TextStyle(
                     fontSize: 18,
@@ -633,7 +635,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                   ),
                   child: Text(
                     '${patients.length} Patients',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
@@ -642,7 +644,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
               ],
             ),
           ),
-          Divider(height: 1, thickness: 1, color: HospitalTheme.border),
+          const Divider(height: 1, thickness: 1, color: HospitalTheme.border),
           if (isLoading)
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -663,7 +665,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                           color: HospitalTheme.textMedium.withOpacity(0.5),
                         ),
                         const SizedBox(height: 16),
-                        Text(
+                        const Text(
                           'No patients assigned to this doctor',
                           style: TextStyle(
                             color: HospitalTheme.textMedium,
@@ -677,7 +679,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                 : ListView.separated(
                     itemCount: patients.length,
                     separatorBuilder: (_, __) =>
-                        Divider(height: 1, color: HospitalTheme.border),
+                        const Divider(height: 1, color: HospitalTheme.border),
                     itemBuilder: (context, index) {
                       final patient = patients[index];
                       final isSelected = selectedPatient == patient;
@@ -713,7 +715,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                               ),
                               title: Text(
                                 patient['name'] ?? 'Unknown',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                   color: HospitalTheme.textDark,
@@ -725,7 +727,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                                   const SizedBox(height: 4),
                                   Text(
                                     'ID: ${patient['patientId'] ?? 'N/A'}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 13,
                                       color: HospitalTheme.primary,
                                     ),
@@ -733,7 +735,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                                   const SizedBox(height: 2),
                                   Text(
                                     '${patient['age'] ?? 'N/A'} yrs | ${patient['gender'] ?? 'N/A'}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       color: HospitalTheme.textMedium,
                                     ),
@@ -787,7 +789,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                       color: HospitalTheme.textMedium.withOpacity(0.3),
                     ),
                     const SizedBox(height: 16),
-                    Text(
+                    const Text(
                       'Select a patient to view details',
                       style: TextStyle(
                         fontSize: 16,
@@ -803,7 +805,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24, vertical: 16),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: HospitalTheme.surfaceLight,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(12),
@@ -813,7 +815,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           'Patient Details',
                           style: TextStyle(
                             fontSize: 18,
@@ -825,7 +827,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                           onPressed:
                               isAssigning ? null : _showAssignDoctorDialog,
                           icon: isAssigning
-                              ? SizedBox(
+                              ? const SizedBox(
                                   width: 16,
                                   height: 16,
                                   child: CircularProgressIndicator(
@@ -833,12 +835,12 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                                     strokeWidth: 2,
                                   ),
                                 )
-                              : Icon(Icons.swap_horiz),
-                          label: Text('Reassign Doctor'),
+                              : const Icon(Icons.swap_horiz),
+                          label: const Text('Reassign Doctor'),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: HospitalTheme.primary,
                             foregroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 12),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -882,7 +884,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                     selectedPatient!['name'].toString().isNotEmpty
                 ? selectedPatient!['name'][0].toUpperCase()
                 : '?',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: HospitalTheme.primary,
@@ -896,7 +898,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
             children: [
               Text(
                 selectedPatient?['name'] ?? 'Unknown',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.textDark,
@@ -905,7 +907,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
               const SizedBox(height: 4),
               Text(
                 'Patient ID: ${selectedPatient?['patientId'] ?? 'N/A'}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: HospitalTheme.primary,
                   fontWeight: FontWeight.w500,
@@ -1010,7 +1012,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
             children: [
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   color: HospitalTheme.textMedium,
                   fontWeight: FontWeight.w500,
@@ -1019,7 +1021,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
               const SizedBox(height: 4),
               Text(
                 value,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: HospitalTheme.textDark,
                   fontWeight: FontWeight.w600,
@@ -1051,7 +1053,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: HospitalTheme.border),
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'No admission records available',
                 style: TextStyle(
@@ -1086,21 +1088,21 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                 child: Theme(
                   data: Theme.of(context).copyWith(
                     dividerColor: Colors.transparent,
-                    colorScheme: ColorScheme.light(
+                    colorScheme: const ColorScheme.light(
                       primary: HospitalTheme.primary,
                     ),
                   ),
                   child: ExpansionTile(
                     title: Text(
                       'Admission on ${admission['admissionDate'] ?? 'Unknown Date'}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
                       ),
                     ),
                     subtitle: Text(
                       'Reason: ${admission['reasonForAdmission'] ?? 'N/A'}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                         fontSize: 12,
                       ),
@@ -1111,7 +1113,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                         color: HospitalTheme.primary.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.medical_services_outlined,
                         color: HospitalTheme.primary,
                       ),
@@ -1136,7 +1138,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Admission Details',
           style: TextStyle(
             fontSize: 16,
@@ -1178,7 +1180,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Follow-ups',
           style: TextStyle(
             fontSize: 16,
@@ -1195,7 +1197,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: HospitalTheme.border),
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'No follow-ups recorded',
                 style: TextStyle(
@@ -1222,7 +1224,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                 child: ExpansionTile(
                   title: Text(
                     'Date: ${followUp['date'] ?? 'Unknown'}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       color: HospitalTheme.textDark,
@@ -1234,7 +1236,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
                       color: HospitalTheme.accent.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.event_note,
                       color: HospitalTheme.accent,
                       size: 16,
@@ -1265,14 +1267,14 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
   Widget _buildSectionHeader(String title) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           left: BorderSide(color: HospitalTheme.primary, width: 4),
         ),
       ),
       child: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
           color: HospitalTheme.primary,
@@ -1289,7 +1291,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
           flex: 2,
           child: Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
               color: HospitalTheme.textDark,
               fontSize: 14,
@@ -1301,7 +1303,7 @@ class _PatientAssignmentScreenState extends State<PatientAssignmentScreen> {
           flex: 5,
           child: Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w400,
               color: HospitalTheme.textMedium,
               fontSize: 14,

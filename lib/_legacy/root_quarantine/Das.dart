@@ -6,7 +6,7 @@ void main() {
 }
 
 class OripioFinApp extends StatelessWidget {
-  const OripioFinApp({Key? key}) : super(key: key);
+  const OripioFinApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class OripioFinApp extends StatelessWidget {
 }
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({super.key});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -834,7 +834,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 }
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({Key? key}) : super(key: key);
+  const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {

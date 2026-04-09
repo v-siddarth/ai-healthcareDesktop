@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DoctorDashboard extends StatefulWidget {
+  const DoctorDashboard({super.key});
+
   @override
   State<DoctorDashboard> createState() => _DoctorDashboardState();
 }
@@ -52,7 +54,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
       final token = prefs.getString('doctor_token') ?? '';
 
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getDoctorAppointments'),
+        Uri.parse('$KVM_URL/doctors/getDoctorAppointments'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -152,7 +154,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
         children: [
           // Left side: Improved Sidebar
           ImprovedSidebar(
-            navigationItems: [],
+            navigationItems: const [],
             selectedIndex: _selectedIndex,
             onDestinationSelected: _onNavItemTapped,
           ),
@@ -167,13 +169,13 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                 // Main Content Area
                 Expanded(
                   child: _isContentLoading
-                      ? Center(
+                      ? const Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               CircularProgressIndicator(
                                   color: HospitalTheme.primary),
-                              const SizedBox(height: 16),
+                              SizedBox(height: 16),
                               Text(
                                 'Loading dashboard...',
                                 style:
@@ -192,7 +194,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                                       color:
                                           HospitalTheme.error.withOpacity(0.7)),
                                   const SizedBox(height: 16),
-                                  Text(
+                                  const Text(
                                     'Error Loading Data',
                                     style: TextStyle(
                                       fontSize: 20,
@@ -203,7 +205,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                                   const SizedBox(height: 8),
                                   Text(
                                     _errorMessage,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: HospitalTheme.textMedium),
                                     textAlign: TextAlign.center,
                                   ),
@@ -246,7 +248,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
       ),
       child: Row(
         children: [
-          Text(
+          const Text(
             'Doctor Dashboard',
             style: TextStyle(
               fontSize: 22,
@@ -258,7 +260,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
 
           // Quick Actions
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.refresh_outlined,
               color: HospitalTheme.primary,
             ),
@@ -299,7 +301,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                     _userName.isNotEmpty
                         ? _userName.substring(0, 1).toUpperCase()
                         : 'D',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
@@ -319,7 +321,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                     ),
                     Text(
                       _userSpeciality,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: HospitalTheme.textMedium,
                       ),
@@ -347,37 +349,37 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                     }
                   },
                   itemBuilder: (context) => <PopupMenuEntry<String>>[
-                    PopupMenuItem<String>(
+                    const PopupMenuItem<String>(
                       value: 'profile',
                       child: Row(
                         children: [
                           Icon(Icons.person_outline,
                               color: HospitalTheme.primary, size: 18),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text('My Profile', style: TextStyle(fontSize: 14)),
                         ],
                       ),
                     ),
-                    PopupMenuItem<String>(
+                    const PopupMenuItem<String>(
                       value: 'account',
                       child: Row(
                         children: [
                           Icon(Icons.settings_outlined,
                               color: HospitalTheme.primary, size: 18),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text('Account Settings',
                               style: TextStyle(fontSize: 14)),
                         ],
                       ),
                     ),
                     const PopupMenuDivider(),
-                    PopupMenuItem<String>(
+                    const PopupMenuItem<String>(
                       value: 'logout',
                       child: Row(
                         children: [
                           Icon(Icons.logout,
                               color: HospitalTheme.error, size: 18),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text('Logout',
                               style: TextStyle(
                                   color: HospitalTheme.error, fontSize: 14)),
@@ -426,7 +428,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                                   width: 4),
                               color: HospitalTheme.surfaceLight,
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.person,
                               size: 50,
                               color: HospitalTheme.primary,
@@ -460,7 +462,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                                         children: [
                                           Text(
                                             DateTime.now().day.toString(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 36,
                                               fontWeight: FontWeight.bold,
                                               color: HospitalTheme.primary,
@@ -469,7 +471,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                                           Text(
                                             _getMonthAbbreviation(
                                                 DateTime.now().month),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
                                               color: HospitalTheme.textMedium,
@@ -483,7 +485,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                                 const SizedBox(height: 8),
                                 Text(
                                   '$_userSpeciality - ${_getUserTypeLabel()}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 18,
                                     color: HospitalTheme.textMedium,
                                   ),
@@ -505,7 +507,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                                         color: HospitalTheme.surfaceLight,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
-                                      child: Row(
+                                      child: const Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Icon(
@@ -513,7 +515,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                                             size: 16,
                                             color: HospitalTheme.primary,
                                           ),
-                                          const SizedBox(width: 6),
+                                          SizedBox(width: 6),
                                           Text(
                                             'Last Login: Today, 9:30 AM',
                                             style: TextStyle(
@@ -582,7 +584,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                               foregroundColor: HospitalTheme.primary,
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 12),
-                              side: BorderSide(color: HospitalTheme.primary),
+                              side: const BorderSide(color: HospitalTheme.primary),
                             ),
                           ),
                           const SizedBox(width: 16),
@@ -632,9 +634,9 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                     Container(
                       constraints: const BoxConstraints(maxHeight: 500),
                       child: _isLoadingAppointments
-                          ? Center(
+                          ? const Center(
                               child: Padding(
-                                padding: const EdgeInsets.all(20.0),
+                                padding: EdgeInsets.all(20.0),
                                 child: CircularProgressIndicator(
                                     color: HospitalTheme.primary),
                               ),
@@ -647,13 +649,13 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.event_busy,
                                             size: 48,
                                             color: HospitalTheme.textLight,
                                           ),
                                           const SizedBox(height: 16),
-                                          Text(
+                                          const Text(
                                             'No upcoming appointments',
                                             style: TextStyle(
                                               color: HospitalTheme.textMedium,
@@ -791,10 +793,10 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                           );
                           // View all activity
                         },
-                        child: const Text('View All'),
                         style: TextButton.styleFrom(
                           foregroundColor: HospitalTheme.primary,
                         ),
+                        child: const Text('View All'),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -838,7 +840,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 'March 2025',
                                 style: TextStyle(
                                   fontSize: 16,
@@ -849,13 +851,13 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                               Row(
                                 children: [
                                   IconButton(
-                                    icon: Icon(Icons.chevron_left,
+                                    icon: const Icon(Icons.chevron_left,
                                         size: 20, color: HospitalTheme.primary),
                                     onPressed: () {},
                                     visualDensity: VisualDensity.compact,
                                   ),
                                   IconButton(
-                                    icon: Icon(Icons.chevron_right,
+                                    icon: const Icon(Icons.chevron_right,
                                         size: 20, color: HospitalTheme.primary),
                                     onPressed: () {},
                                     visualDensity: VisualDensity.compact,
@@ -872,7 +874,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                               color: HospitalTheme.surfaceLight,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 'Calendar View',
                                 style: TextStyle(
@@ -941,7 +943,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                 ),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12, // Reduced from 14 to 12
                     color: HospitalTheme.textMedium,
                   ),
@@ -990,7 +992,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                     size: 24, // Reduced from 28 to 24
                   ),
                 ),
-                Icon(
+                const Icon(
                   Icons.arrow_forward,
                   color: HospitalTheme.textLight,
                   size: 16, // Reduced from 18 to 16
@@ -1010,7 +1012,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
             const SizedBox(height: 2), // Reduced from 4 to 2
             Text(
               description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 13, // Reduced from 14 to 13
                 color: HospitalTheme.textMedium,
               ),
@@ -1081,7 +1083,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                 const SizedBox(height: 4),
                 Text(
                   activity['description'] as String,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: HospitalTheme.textMedium,
                     fontSize: 14,
                   ),
@@ -1089,14 +1091,14 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                 const SizedBox(height: 4),
                 Text(
                   activity['time'] as String,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: HospitalTheme.textLight,
                     fontSize: 12,
                   ),
                 ),
               ],
             ),
-            trailing: Icon(
+            trailing: const Icon(
               Icons.more_horiz,
               color: HospitalTheme.textLight,
             ),
@@ -1136,7 +1138,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
               color: isToday
                   ? HospitalTheme.primary.withOpacity(0.1)
                   : HospitalTheme.surfaceLight,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
@@ -1200,7 +1202,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                         patientName.isNotEmpty
                             ? patientName.substring(0, 1).toUpperCase()
                             : 'P',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16, // Reduced from 18 to 16
                           fontWeight: FontWeight.bold,
                           color: HospitalTheme.primary,
@@ -1228,7 +1230,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                           const SizedBox(height: 2),
                           Text(
                             'Patient ID: $patientId',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12, // Reduced from 13 to 12
                               color: HospitalTheme.textMedium,
                             ),
@@ -1255,7 +1257,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                             ),
                             child: Text(
                               time,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13, // Added smaller font size
                                 color: HospitalTheme.primary,
@@ -1279,7 +1281,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                                 appointmentType.toLowerCase() == 'online'
                                     ? 'Online' // Shortened from 'Tele-consultation'
                                     : 'In-person',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 11, // Reduced from 13 to 11
                                   color: HospitalTheme.textMedium,
                                 ),
@@ -1299,7 +1301,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                   const SizedBox(height: 12), // Reduced from 16 to 12
                   const Divider(height: 1),
                   const SizedBox(height: 8), // Reduced from 12 to 8
-                  Text(
+                  const Text(
                     'Symptoms:',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -1310,7 +1312,7 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                   const SizedBox(height: 2), // Reduced from 4 to 2
                   Text(
                     symptoms,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12, // Reduced from 14 to 12
                       color: HospitalTheme.textMedium,
                     ),
@@ -1328,11 +1330,11 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                       onPressed: () {
                         // View appointment details
                       },
-                      icon: Icon(Icons.visibility_outlined,
+                      icon: const Icon(Icons.visibility_outlined,
                           size: 16,
                           color:
                               HospitalTheme.primary), // Reduced from 18 to 16
-                      label: Text('View',
+                      label: const Text('View',
                           style: TextStyle(
                             color: HospitalTheme.primary,
                             fontSize: 13, // Added smaller font size
@@ -1348,11 +1350,11 @@ class _DoctorDashboardState extends State<DoctorDashboard> {
                         onPressed: () {
                           // Start video consultation
                         },
-                        icon: Icon(Icons.videocam_outlined,
+                        icon: const Icon(Icons.videocam_outlined,
                             size: 16,
                             color:
                                 HospitalTheme.medical), // Reduced from 18 to 16
-                        label: Text('Call', // Shortened from 'Start Call'
+                        label: const Text('Call', // Shortened from 'Start Call'
                             style: TextStyle(
                               color: HospitalTheme.medical,
                               fontSize: 13, // Added smaller font size

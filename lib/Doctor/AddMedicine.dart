@@ -73,7 +73,7 @@ class DosageInputFormatter extends TextInputFormatter {
 }
 
 class MedicineManagementScreen extends StatefulWidget {
-  const MedicineManagementScreen({Key? key}) : super(key: key);
+  const MedicineManagementScreen({super.key});
 
   @override
   State<MedicineManagementScreen> createState() =>
@@ -312,7 +312,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
       }
 
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getDoctorMedicines'),
+        Uri.parse('$KVM_URL/doctors/getDoctorMedicines'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -362,7 +362,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
       }
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/doctors/addMedicine'),
+        Uri.parse('$KVM_URL/doctors/addMedicine'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -390,11 +390,11 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
         _nameFocusNode.requestFocus();
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Medicine added successfully'),
+          const SnackBar(
+            content: Text('Medicine added successfully'),
             backgroundColor: HospitalTheme.success,
             behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 2),
+            duration: Duration(seconds: 2),
           ),
         );
 
@@ -445,7 +445,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
       }
 
       final response = await http.delete(
-        Uri.parse('${KVM_URL}/doctors/deleteDoctorMedicine/$medicineId'),
+        Uri.parse('$KVM_URL/doctors/deleteDoctorMedicine/$medicineId'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -454,8 +454,8 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
 
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Medicine deleted successfully'),
+          const SnackBar(
+            content: Text('Medicine deleted successfully'),
             backgroundColor: HospitalTheme.success,
             behavior: SnackBarBehavior.floating,
           ),
@@ -495,7 +495,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
       }
 
       final response = await http.patch(
-        Uri.parse('${KVM_URL}/doctors/updateMedicine/$medicineId'),
+        Uri.parse('$KVM_URL/doctors/updateMedicine/$medicineId'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -513,8 +513,8 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
       if (response.statusCode == 200) {
         Navigator.of(context).pop(); // Close the dialog
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Medicine updated successfully'),
+          const SnackBar(
+            content: Text('Medicine updated successfully'),
             backgroundColor: HospitalTheme.success,
             behavior: SnackBarBehavior.floating,
           ),
@@ -627,7 +627,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('Cancel',
+              child: const Text('Cancel',
                   style: TextStyle(color: HospitalTheme.textMedium)),
             ),
             HospitalTheme.buildGradientButton(
@@ -659,22 +659,22 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
       focusNode: focusNode,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: HospitalTheme.textMedium),
+        labelStyle: const TextStyle(color: HospitalTheme.textMedium),
         enabledBorder: OutlineInputBorder(
           borderRadius: HospitalTheme.radiusSmall,
-          borderSide: BorderSide(color: HospitalTheme.border),
+          borderSide: const BorderSide(color: HospitalTheme.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: HospitalTheme.radiusSmall,
-          borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+          borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: HospitalTheme.radiusSmall,
-          borderSide: BorderSide(color: HospitalTheme.error, width: 1),
+          borderSide: const BorderSide(color: HospitalTheme.error, width: 1),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: HospitalTheme.radiusSmall,
-          borderSide: BorderSide(color: HospitalTheme.error, width: 2),
+          borderSide: const BorderSide(color: HospitalTheme.error, width: 2),
         ),
       ),
       validator: validator,
@@ -730,25 +730,25 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
           focusNode: fieldFocusNode,
           decoration: InputDecoration(
             labelText: label,
-            labelStyle: TextStyle(color: HospitalTheme.textMedium),
+            labelStyle: const TextStyle(color: HospitalTheme.textMedium),
             hintText: 'Type or select a category',
             enabledBorder: OutlineInputBorder(
               borderRadius: HospitalTheme.radiusSmall,
-              borderSide: BorderSide(color: HospitalTheme.border),
+              borderSide: const BorderSide(color: HospitalTheme.border),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: HospitalTheme.radiusSmall,
-              borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+              borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: HospitalTheme.radiusSmall,
-              borderSide: BorderSide(color: HospitalTheme.error, width: 1),
+              borderSide: const BorderSide(color: HospitalTheme.error, width: 1),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: HospitalTheme.radiusSmall,
-              borderSide: BorderSide(color: HospitalTheme.error, width: 2),
+              borderSide: const BorderSide(color: HospitalTheme.error, width: 2),
             ),
-            suffixIcon: Icon(
+            suffixIcon: const Icon(
               Icons.arrow_drop_down,
               color: HospitalTheme.textMedium,
             ),
@@ -783,7 +783,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -850,18 +850,18 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
       focusNode: focusNode,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: HospitalTheme.textMedium),
+        labelStyle: const TextStyle(color: HospitalTheme.textMedium),
         enabledBorder: OutlineInputBorder(
           borderRadius: HospitalTheme.radiusSmall,
-          borderSide: BorderSide(color: HospitalTheme.border),
+          borderSide: const BorderSide(color: HospitalTheme.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: HospitalTheme.radiusSmall,
-          borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+          borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: HospitalTheme.radiusSmall,
-          borderSide: BorderSide(color: HospitalTheme.error, width: 1),
+          borderSide: const BorderSide(color: HospitalTheme.error, width: 1),
         ),
         suffixIcon: Icon(
           _getDosageIcon(label.toLowerCase()),
@@ -906,7 +906,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
       ),
       child: Row(
         children: [
-          Icon(
+          const Icon(
             Icons.search,
             color: HospitalTheme.textMedium,
           ),
@@ -914,16 +914,16 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
           Expanded(
             child: TextField(
               controller: _searchController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search medicines...',
                 hintStyle: TextStyle(color: HospitalTheme.textLight),
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                contentPadding: EdgeInsets.symmetric(vertical: 16),
               ),
             ),
           ),
           const SizedBox(width: 8),
-          Tooltip(
+          const Tooltip(
             message: 'Press Ctrl+F to focus search',
             child: Icon(
               Icons.keyboard,
@@ -995,7 +995,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
                         children: [
                           HospitalTheme.buildSectionHeader(
                             'Add New Medicine',
-                            trailing: Tooltip(
+                            trailing: const Tooltip(
                               message: 'Keyboard shortcut: Ctrl+N',
                               child: Icon(
                                 Icons.keyboard,
@@ -1077,14 +1077,14 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
                               width: double.infinity,
                               child: Row(
                                 children: [
-                                  Icon(Icons.error_outline,
+                                  const Icon(Icons.error_outline,
                                       color: HospitalTheme.error),
                                   const SizedBox(width: 8),
                                   Expanded(
                                     child: Text(
                                       _errorMessage!,
                                       style:
-                                          TextStyle(color: HospitalTheme.error),
+                                          const TextStyle(color: HospitalTheme.error),
                                     ),
                                   ),
                                 ],
@@ -1109,12 +1109,12 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
                     ),
                     Expanded(
                       child: _isLoading && _medicines.isEmpty
-                          ? Center(
+                          ? const Center(
                               child: CircularProgressIndicator(
                                   color: HospitalTheme.primary),
                             )
                           : _medicines.isEmpty
-                              ? Center(
+                              ? const Center(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -1123,7 +1123,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
                                         size: 80,
                                         color: HospitalTheme.textLight,
                                       ),
-                                      const SizedBox(height: 16),
+                                      SizedBox(height: 16),
                                       Text(
                                         'No medicines found',
                                         style: TextStyle(
@@ -1131,7 +1131,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
                                           color: HospitalTheme.textMedium,
                                         ),
                                       ),
-                                      const SizedBox(height: 8),
+                                      SizedBox(height: 8),
                                       Text(
                                         'Add a new medicine using the form',
                                         style: TextStyle(
@@ -1168,7 +1168,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
                                                         MainAxisAlignment
                                                             .center,
                                                     children: [
-                                                      Icon(
+                                                      const Icon(
                                                         Icons.search_off,
                                                         size: 60,
                                                         color: HospitalTheme
@@ -1176,7 +1176,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
                                                       ),
                                                       const SizedBox(
                                                           height: 16),
-                                                      Text(
+                                                      const Text(
                                                         'No medicines match your search',
                                                         style: TextStyle(
                                                           fontSize: 16,
@@ -1190,13 +1190,13 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
                                                           _searchController
                                                               .clear();
                                                         },
-                                                        icon: Icon(
+                                                        icon: const Icon(
                                                           Icons.clear,
                                                           color: HospitalTheme
                                                               .primary,
                                                           size: 18,
                                                         ),
-                                                        label: Text(
+                                                        label: const Text(
                                                           'Clear Search',
                                                           style: TextStyle(
                                                             color: HospitalTheme
@@ -1212,7 +1212,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
                                                       filteredMedicines.length,
                                                   separatorBuilder:
                                                       (context, index) =>
-                                                          Divider(
+                                                          const Divider(
                                                     color: HospitalTheme.border,
                                                     height: 1,
                                                   ),
@@ -1259,12 +1259,12 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: Icon(Icons.edit_outlined, color: HospitalTheme.info),
+            icon: const Icon(Icons.edit_outlined, color: HospitalTheme.info),
             onPressed: () => _showEditDialog(medicine),
             tooltip: 'Edit',
           ),
           IconButton(
-            icon: Icon(Icons.delete_outline, color: HospitalTheme.error),
+            icon: const Icon(Icons.delete_outline, color: HospitalTheme.error),
             onPressed: () => _showDeleteConfirmation(medicine),
             tooltip: 'Delete',
           ),
@@ -1301,7 +1301,7 @@ class _MedicineManagementScreenState extends State<MedicineManagementScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('Cancel',
+            child: const Text('Cancel',
                 style: TextStyle(color: HospitalTheme.textMedium)),
           ),
           ElevatedButton(

@@ -16,10 +16,10 @@ class AssignScreen extends StatefulWidget {
   final String admissionId;
 
   const AssignScreen({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
-  }) : super(key: key);
+  });
 
   @override
   State<AssignScreen> createState() => _AssignScreenState();
@@ -47,7 +47,7 @@ class _AssignScreenState extends State<AssignScreen> {
 
     try {
       final response =
-          await http.get(Uri.parse('${KVM_URL}/reception/listDoctors'));
+          await http.get(Uri.parse('$KVM_URL/reception/listDoctors'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -91,7 +91,7 @@ class _AssignScreenState extends State<AssignScreen> {
       });
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/assign-Doctor'),
+        Uri.parse('$KVM_URL/reception/assign-Doctor'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'patientId': widget.patientId,
@@ -116,7 +116,7 @@ class _AssignScreenState extends State<AssignScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => ReceptionDashBoard(),
+            builder: (context) => const ReceptionDashBoard(),
           ),
         );
       } else {
@@ -147,13 +147,13 @@ class _AssignScreenState extends State<AssignScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: Text('Doctor Assignment Required'),
-        content: Text(
+        title: const Text('Doctor Assignment Required'),
+        content: const Text(
             'Please assign a doctor to this patient before leaving this screen.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
       ),
@@ -169,7 +169,7 @@ class _AssignScreenState extends State<AssignScreen> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false, // Remove back button
-          title: Text(
+          title: const Text(
             'Assign Doctor to Patient',
             style: TextStyle(
               color: HospitalTheme.textDark,
@@ -181,20 +181,20 @@ class _AssignScreenState extends State<AssignScreen> {
           actions: [
             // Help button
             IconButton(
-              icon: Icon(Icons.help_outline, color: HospitalTheme.primary),
+              icon: const Icon(Icons.help_outline, color: HospitalTheme.primary),
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text('Doctor Assignment'),
-                    content: Text(
+                    title: const Text('Doctor Assignment'),
+                    content: const Text(
                         'Please assign a doctor to the patient to proceed. '
                         'This step is mandatory for patient registration. '
                         'Click on a doctor card to assign the patient to that doctor.'),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: Text('OK'),
+                        child: const Text('OK'),
                       ),
                     ],
                   ),
@@ -213,7 +213,7 @@ class _AssignScreenState extends State<AssignScreen> {
   }
 
   Widget _buildLoadingView() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -238,13 +238,13 @@ class _AssignScreenState extends State<AssignScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.error_outline,
             color: HospitalTheme.error,
             size: 60,
           ),
-          SizedBox(height: 16),
-          Text(
+          const SizedBox(height: 16),
+          const Text(
             'Failed to load doctors',
             style: TextStyle(
               fontSize: 18,
@@ -252,23 +252,23 @@ class _AssignScreenState extends State<AssignScreen> {
               color: HospitalTheme.textDark,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             _errorMessage,
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textMedium,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           ElevatedButton.icon(
             onPressed: _fetchDoctors,
-            icon: Icon(Icons.refresh),
-            label: Text('Try Again'),
+            icon: const Icon(Icons.refresh),
+            label: const Text('Try Again'),
             style: ElevatedButton.styleFrom(
               backgroundColor: HospitalTheme.primary,
               foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -299,9 +299,9 @@ class _AssignScreenState extends State<AssignScreen> {
               });
             },
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           ...specialities.map((speciality) => Padding(
-                padding: EdgeInsets.only(right: 8),
+                padding: const EdgeInsets.only(right: 8),
                 child: HospitalTheme.buildSpecialtyChip(
                   label: speciality,
                   icon: _getSpecialtyIcon(speciality),
@@ -348,8 +348,8 @@ class _AssignScreenState extends State<AssignScreen> {
         // Patient info panel
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.all(16),
+          decoration: const BoxDecoration(
             color: HospitalTheme.surfaceLight,
             border: Border(
               bottom: BorderSide(color: HospitalTheme.border),
@@ -357,26 +357,26 @@ class _AssignScreenState extends State<AssignScreen> {
           ),
           child: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.person,
                 color: HospitalTheme.primary,
                 size: 24,
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Patient ID: ${widget.patientId}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: HospitalTheme.textDark,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     'Admission ID: ${widget.admissionId}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.textMedium,
                       fontSize: 14,
                     ),
@@ -389,11 +389,11 @@ class _AssignScreenState extends State<AssignScreen> {
 
         // Doctor assignment instructions
         Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Assign Doctor',
                 style: TextStyle(
                   fontSize: 22,
@@ -401,14 +401,14 @@ class _AssignScreenState extends State<AssignScreen> {
                   color: HospitalTheme.textDark,
                 ),
               ),
-              SizedBox(height: 8),
-              Text(
+              const SizedBox(height: 8),
+              const Text(
                 'Please select a doctor to assign to this patient. The patient will be added to the doctor\'s assigned patients list.',
                 style: TextStyle(
                   color: HospitalTheme.textMedium,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildFilterChips(),
             ],
           ),
@@ -417,7 +417,7 @@ class _AssignScreenState extends State<AssignScreen> {
         // Doctors grid
         Expanded(
           child: filteredDoctors.isEmpty
-              ? Center(
+              ? const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -496,7 +496,7 @@ class _AssignScreenState extends State<AssignScreen> {
                           )
                         : null,
                     child: doctor['imageUrl'] == null
-                        ? Icon(
+                        ? const Icon(
                             Icons.person,
                             size: 50,
                             color: HospitalTheme.textMedium,
@@ -508,7 +508,7 @@ class _AssignScreenState extends State<AssignScreen> {
                       bottom: 0,
                       right: 0,
                       child: Container(
-                        padding: EdgeInsets.all(4),
+                        padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
                           color: HospitalTheme.success,
                           shape: BoxShape.circle,
@@ -517,7 +517,7 @@ class _AssignScreenState extends State<AssignScreen> {
                             width: 2,
                           ),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.check,
                           color: Colors.white,
                           size: 20,
@@ -526,12 +526,12 @@ class _AssignScreenState extends State<AssignScreen> {
                     ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // Doctor Name
               Text(
                 doctor['name'] ?? 'Unknown',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                   color: HospitalTheme.textDark,
@@ -543,15 +543,15 @@ class _AssignScreenState extends State<AssignScreen> {
 
               // Specialty
               Container(
-                margin: EdgeInsets.symmetric(vertical: 8),
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   color: HospitalTheme.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   doctor['speciality'] ?? 'General',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: HospitalTheme.primary,
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
@@ -568,12 +568,12 @@ class _AssignScreenState extends State<AssignScreen> {
                       Icons.email_outlined,
                       doctor['email'] ?? 'No email provided',
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     _buildInfoRow(
                       Icons.work_outline,
                       doctor['experience'] ?? 'Experience not specified',
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     _buildInfoRow(
                       Icons.people_outline,
                       '${doctor['patients']} assigned patients',
@@ -585,14 +585,14 @@ class _AssignScreenState extends State<AssignScreen> {
               // Assign Button
               ElevatedButton.icon(
                 onPressed: () => _showAssignConfirmation(doctor),
-                icon: Icon(Icons.person_add),
-                label: Text('Assign'),
+                icon: const Icon(Icons.person_add),
+                label: const Text('Assign'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: isSelected
                       ? HospitalTheme.success
                       : HospitalTheme.primary,
                   foregroundColor: Colors.white,
-                  minimumSize: Size(double.infinity, 40),
+                  minimumSize: const Size(double.infinity, 40),
                 ),
               ),
             ],
@@ -610,11 +610,11 @@ class _AssignScreenState extends State<AssignScreen> {
           size: 14,
           color: HospitalTheme.textMedium,
         ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Expanded(
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textMedium,
             ),
@@ -631,16 +631,16 @@ class _AssignScreenState extends State<AssignScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: Text('Confirm Doctor Assignment'),
+        title: const Text('Confirm Doctor Assignment'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Are you sure you want to assign this patient to:',
               style: TextStyle(color: HospitalTheme.textDark),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               children: [
                 CircleAvatar(
@@ -653,21 +653,21 @@ class _AssignScreenState extends State<AssignScreen> {
                         )
                       : null,
                   child: doctor['imageUrl'] == null
-                      ? Icon(
+                      ? const Icon(
                           Icons.person,
                           size: 25,
                           color: HospitalTheme.textMedium,
                         )
                       : null,
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         doctor['name'] ?? 'Unknown',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                           color: HospitalTheme.textDark,
@@ -675,7 +675,7 @@ class _AssignScreenState extends State<AssignScreen> {
                       ),
                       Text(
                         doctor['speciality'] ?? 'General',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: HospitalTheme.primary,
                           fontWeight: FontWeight.w500,
                         ),
@@ -685,10 +685,10 @@ class _AssignScreenState extends State<AssignScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               'Patient ID: ${widget.patientId}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 color: HospitalTheme.textMedium,
               ),
@@ -698,7 +698,7 @@ class _AssignScreenState extends State<AssignScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -711,7 +711,7 @@ class _AssignScreenState extends State<AssignScreen> {
             style: ElevatedButton.styleFrom(
               backgroundColor: HospitalTheme.success,
             ),
-            child: Text('Confirm Assignment'),
+            child: const Text('Confirm Assignment'),
           ),
         ],
       ),

@@ -235,15 +235,15 @@ class _NewChatScreenState extends ConsumerState<NewChatScreen> {
           fillColor: HospitalTheme.background,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(isTablet ? 16 : 12),
-            borderSide: BorderSide(color: HospitalTheme.border),
+            borderSide: const BorderSide(color: HospitalTheme.border),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(isTablet ? 16 : 12),
-            borderSide: BorderSide(color: HospitalTheme.border),
+            borderSide: const BorderSide(color: HospitalTheme.border),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(isTablet ? 16 : 12),
-            borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+            borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
           ),
           contentPadding: EdgeInsets.symmetric(
             horizontal: isTablet ? 20 : 16,
@@ -421,7 +421,7 @@ class _NewChatScreenState extends ConsumerState<NewChatScreen> {
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(isTablet ? 16 : 12),
-        side: BorderSide(color: HospitalTheme.border),
+        side: const BorderSide(color: HospitalTheme.border),
       ),
       child: InkWell(
         onTap: () => _startChatWithUser(user),

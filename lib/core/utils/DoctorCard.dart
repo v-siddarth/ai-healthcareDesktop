@@ -83,15 +83,15 @@ class DoctorCard extends ConsumerWidget {
                         color: Colors.amber[600],
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.notification_add,
+                          Icon(Icons.notification_add,
                               color: Colors.white, size: 16),
-                          const SizedBox(width: 4),
+                          SizedBox(width: 4),
                           Text(
                             'Added',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),

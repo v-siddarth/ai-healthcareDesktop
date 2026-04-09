@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// Theme Showcase Screen - Demonstrates all theme components
 /// Visual testing for the new theme files in the files/ folder
 class ThemeShowcaseScreen extends ConsumerWidget {
-  const ThemeShowcaseScreen({Key? key}) : super(key: key);
+  const ThemeShowcaseScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -68,12 +68,12 @@ class ThemeShowcaseScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: AppSpacing.s16,
                   children: [
-                    Text('Display 2XL', style: AppTypography.display2xl),
-                    Text('Display XL', style: AppTypography.displayXl),
-                    Text('Display Lg', style: AppTypography.displayLg),
-                    Text('Heading XL', style: AppTypography.headingXl),
-                    Text('Heading Lg', style: AppTypography.headingLg),
-                    Text('Body text - Regular', style: AppTypography.bodyLg),
+                    const Text('Display 2XL', style: AppTypography.display2xl),
+                    const Text('Display XL', style: AppTypography.displayXl),
+                    const Text('Display Lg', style: AppTypography.displayLg),
+                    const Text('Heading XL', style: AppTypography.headingXl),
+                    const Text('Heading Lg', style: AppTypography.headingLg),
+                    const Text('Body text - Regular', style: AppTypography.bodyLg),
                     Text('Body text - Secondary',
                         style: AppTypography.bodyMd.copyWith(
                           color: AppColors.textSecondary,
@@ -198,7 +198,7 @@ class ThemeShowcaseScreen extends ConsumerWidget {
                 ),
               ),
 
-              SizedBox(height: AppSpacing.s24),
+              const SizedBox(height: AppSpacing.s24),
             ],
           ),
         ),
@@ -287,7 +287,7 @@ class ThemeShowcaseScreen extends ConsumerWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: AppColors.textOnPrimary,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: AppRadius.button,
         ),
         padding: const EdgeInsets.symmetric(
@@ -304,7 +304,7 @@ class ThemeShowcaseScreen extends ConsumerWidget {
       onPressed: () {},
       style: OutlinedButton.styleFrom(
         side: const BorderSide(color: AppColors.primary, width: 1.5),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: AppRadius.button,
         ),
         padding: const EdgeInsets.symmetric(
@@ -358,7 +358,7 @@ class ThemeShowcaseScreen extends ConsumerWidget {
                   horizontal: AppSpacing.s8,
                   vertical: AppSpacing.s4,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.successLight,
                   borderRadius: AppRadius.radiusSm,
                 ),
@@ -372,7 +372,7 @@ class ThemeShowcaseScreen extends ConsumerWidget {
               ),
             ],
           ),
-          Divider(color: AppColors.divider, height: AppSpacing.s12),
+          const Divider(color: AppColors.divider, height: AppSpacing.s12),
           Row(
             spacing: AppSpacing.s16,
             children: [
@@ -388,7 +388,7 @@ class ThemeShowcaseScreen extends ConsumerWidget {
                         fontSize: 11,
                       ),
                     ),
-                    Text('35', style: AppTypography.bodySm),
+                    const Text('35', style: AppTypography.bodySm),
                   ],
                 ),
               ),
@@ -404,7 +404,7 @@ class ThemeShowcaseScreen extends ConsumerWidget {
                         fontSize: 11,
                       ),
                     ),
-                    Text('O+', style: AppTypography.bodySm),
+                    const Text('O+', style: AppTypography.bodySm),
                   ],
                 ),
               ),
@@ -447,11 +447,11 @@ class ThemeShowcaseScreen extends ConsumerWidget {
           Container(
             width: 56,
             height: 56,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.primaryLight,
               borderRadius: AppRadius.radiusXl,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.person,
               color: AppColors.primary,
               size: 28,
@@ -482,7 +482,7 @@ class ThemeShowcaseScreen extends ConsumerWidget {
           // Action Button
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.arrow_forward_ios,
+            icon: const Icon(Icons.arrow_forward_ios,
                 color: AppColors.primary, size: 16),
           ),
         ],
@@ -509,7 +509,7 @@ class ThemeShowcaseScreen extends ConsumerWidget {
           Container(
             width: 44,
             height: 44,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.primaryLight,
               borderRadius: AppRadius.radiusLg,
             ),
@@ -548,13 +548,13 @@ class ThemeShowcaseScreen extends ConsumerWidget {
               color: AppColors.textDisabled,
             ),
             contentPadding: const EdgeInsets.all(AppSpacing.s12),
-            border: OutlineInputBorder(
+            border: const OutlineInputBorder(
               borderRadius: AppRadius.input,
-              borderSide: const BorderSide(color: AppColors.border),
+              borderSide: BorderSide(color: AppColors.border),
             ),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderRadius: AppRadius.input,
-              borderSide: const BorderSide(color: AppColors.primary, width: 2),
+              borderSide: BorderSide(color: AppColors.primary, width: 2),
             ),
           ),
         ),
@@ -612,7 +612,7 @@ class ThemeShowcaseScreen extends ConsumerWidget {
         Container(
           width: size * 2,
           height: 24,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.primary,
             borderRadius: AppRadius.radiusXs,
           ),

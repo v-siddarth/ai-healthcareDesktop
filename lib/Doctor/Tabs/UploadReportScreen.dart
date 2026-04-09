@@ -14,9 +14,9 @@ class UploadReportScreen extends StatefulWidget {
   final String investigationId;
 
   const UploadReportScreen({
-    Key? key,
+    super.key,
     required this.investigationId,
-  }) : super(key: key);
+  });
 
   @override
   _UploadReportScreenState createState() => _UploadReportScreenState();
@@ -74,7 +74,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
 
       final response = await http.get(
         Uri.parse(
-            '${KVM_URL}/investigate/getInvestigationDetails/${widget.investigationId}'),
+            '$KVM_URL/investigate/getInvestigationDetails/${widget.investigationId}'),
         // headers: {
         //   'Authorization': 'Bearer $token',
         //   'Content-Type': 'application/json',
@@ -96,14 +96,18 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
             if (data['results'] != null) {
               final results = data['results'];
 
-              if (results['findings'] != null)
+              if (results['findings'] != null) {
                 _findingsController.text = results['findings'];
-              if (results['impression'] != null)
+              }
+              if (results['impression'] != null) {
                 _impressionController.text = results['impression'];
-              if (results['recommendations'] != null)
+              }
+              if (results['recommendations'] != null) {
                 _recommendationsController.text = results['recommendations'];
-              if (results['isAbnormal'] != null)
+              }
+              if (results['isAbnormal'] != null) {
                 _isAbnormal = results['isAbnormal'];
+              }
 
               // Handle normal ranges if they exist
               if (results['normalRanges'] != null) {
@@ -130,12 +134,15 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
             // Pre-fill other fields if they exist
             if (data['performedBy'] != null) {
               final performer = data['performedBy'];
-              if (performer['name'] != null)
+              if (performer['name'] != null) {
                 _performerNameController.text = performer['name'];
-              if (performer['designation'] != null)
+              }
+              if (performer['designation'] != null) {
                 _performerDesignationController.text = performer['designation'];
-              if (performer['facility'] != null)
+              }
+              if (performer['facility'] != null) {
                 _facilityNameController.text = performer['facility'];
+              }
             }
 
             if (data['billing'] != null && data['billing']['cost'] != null) {
@@ -237,7 +244,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
       final request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            '${KVM_URL}/investigate/${widget.investigationId}/upload-report'),
+            '$KVM_URL/investigate/${widget.investigationId}/upload-report'),
       );
 
       // Add headers
@@ -286,7 +293,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
 
         // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Report uploaded successfully'),
             backgroundColor: Colors.green,
           ),
@@ -354,7 +361,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
         onBackPressed: () => Navigator.of(context).pop(),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               padding: EdgeInsets.all(isDesktop ? 32.0 : 16.0),
               child: Container(
@@ -367,17 +374,17 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                     // Investigation details card
                     if (_investigationDetails != null)
                       _buildInvestigationDetailsCard(),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
 
                     // Upload form
                     HospitalTheme.buildCard(
                       child: Padding(
-                        padding: EdgeInsets.all(24.0),
+                        padding: const EdgeInsets.all(24.0),
                         child: Form(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Report Details',
                                 style: TextStyle(
                                   fontSize: 20,
@@ -385,11 +392,11 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                                   color: HospitalTheme.primary,
                                 ),
                               ),
-                              SizedBox(height: 24),
+                              const SizedBox(height: 24),
 
                               // File upload section
                               _buildFileUploadSection(),
-                              SizedBox(height: 32),
+                              const SizedBox(height: 32),
 
                               // Report sections - using responsive layout
                               isDesktop
@@ -399,7 +406,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                                       children: [
                                         Expanded(
                                             child: _buildPerformerSection()),
-                                        SizedBox(width: 32),
+                                        const SizedBox(width: 32),
                                         Expanded(
                                             child: _buildFindingsSection()),
                                       ],
@@ -407,11 +414,11 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                                   : Column(
                                       children: [
                                         _buildPerformerSection(),
-                                        SizedBox(height: 24),
+                                        const SizedBox(height: 24),
                                         _buildFindingsSection(),
                                       ],
                                     ),
-                              SizedBox(height: 32),
+                              const SizedBox(height: 32),
 
                               // Normal ranges and numerical results
                               isDesktop
@@ -421,7 +428,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                                       children: [
                                         Expanded(
                                             child: _buildNormalRangesSection()),
-                                        SizedBox(width: 32),
+                                        const SizedBox(width: 32),
                                         Expanded(
                                             child:
                                                 _buildNumericalResultsSection()),
@@ -430,11 +437,11 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                                   : Column(
                                       children: [
                                         _buildNormalRangesSection(),
-                                        SizedBox(height: 24),
+                                        const SizedBox(height: 24),
                                         _buildNumericalResultsSection(),
                                       ],
                                     ),
-                              SizedBox(height: 32),
+                              const SizedBox(height: 32),
 
                               // Cost and submission
                               Row(
@@ -443,7 +450,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                                     flex: isDesktop ? 1 : 2,
                                     child: _buildCostSection(),
                                   ),
-                                  SizedBox(width: 16),
+                                  const SizedBox(width: 16),
                                   Expanded(
                                     flex: isDesktop ? 3 : 2,
                                     child: _buildSubmitButton(),
@@ -467,11 +474,11 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
       hasShadow: true,
       backgroundColor: HospitalTheme.surfaceLight,
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
                 Icon(
                   Icons.science_outlined,
@@ -489,9 +496,9 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            Divider(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            const Divider(),
+            const SizedBox(height: 16),
 
             // Investigation details
             Wrap(
@@ -547,9 +554,9 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            Divider(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            const Divider(),
+            const SizedBox(height: 16),
 
             // Additional information sections
             if (_investigationDetails!['reasonForInvestigation'] != null)
@@ -557,7 +564,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
                   'Reason: ${_investigationDetails!['reasonForInvestigation']}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontStyle: FontStyle.italic,
                     color: HospitalTheme.textMedium,
@@ -570,7 +577,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
                   'Clinical History: ${_investigationDetails!['clinicalHistory']}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: HospitalTheme.textMedium,
                   ),
@@ -606,7 +613,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Parameters:',
                       style: TextStyle(
                         fontSize: 14,
@@ -614,7 +621,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                         color: HospitalTheme.textDark,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
@@ -641,7 +648,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
     required String value,
     required IconData icon,
   }) {
-    return Container(
+    return SizedBox(
       width: 200,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -651,23 +658,23 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
             color: HospitalTheme.medical,
             size: 18,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   label,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.textMedium,
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   value,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: HospitalTheme.textDark,
@@ -695,7 +702,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Upload Report File',
           style: TextStyle(
             fontSize: 16,
@@ -703,9 +710,9 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: HospitalTheme.surfaceLight.withOpacity(0.5),
             borderRadius: BorderRadius.circular(8),
@@ -713,12 +720,12 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
           ),
           child: Column(
             children: [
-              Icon(
+              const Icon(
                 Icons.upload_file,
                 size: 48,
                 color: HospitalTheme.secondary,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 _selectedFileName ?? 'No file selected',
                 style: TextStyle(
@@ -730,20 +737,20 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                       : HospitalTheme.textLight,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton.icon(
-                icon: Icon(Icons.attach_file),
-                label: Text('Choose File'),
+                icon: const Icon(Icons.attach_file),
+                label: const Text('Choose File'),
                 onPressed: _pickFile,
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),
-              SizedBox(height: 8),
-              Text(
+              const SizedBox(height: 8),
+              const Text(
                 'Supported formats: PDF, JPG, PNG, DOCX, XLSX',
                 style: TextStyle(
                   fontSize: 12,
@@ -761,7 +768,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Performer Information',
           style: TextStyle(
             fontSize: 16,
@@ -769,31 +776,31 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         TextFormField(
           controller: _performerNameController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Performer Name*',
             prefixIcon: Icon(Icons.person),
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         TextFormField(
           controller: _performerDesignationController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Performer Designation*',
             prefixIcon: Icon(Icons.work),
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         TextFormField(
           controller: _facilityNameController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Facility Name*',
             prefixIcon: Icon(Icons.business),
           ),
         ),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
         Row(
           children: [
             Checkbox(
@@ -823,7 +830,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Clinical Information',
           style: TextStyle(
             fontSize: 16,
@@ -831,30 +838,30 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         TextFormField(
           controller: _findingsController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Findings*',
             prefixIcon: Icon(Icons.find_in_page),
             alignLabelWithHint: true,
           ),
           maxLines: 3,
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         TextFormField(
           controller: _impressionController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Impression',
             prefixIcon: Icon(Icons.article),
             alignLabelWithHint: true,
           ),
           maxLines: 2,
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         TextFormField(
           controller: _recommendationsController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Recommendations',
             prefixIcon: Icon(Icons.recommend),
             alignLabelWithHint: true,
@@ -872,7 +879,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Normal Ranges',
               style: TextStyle(
                 fontSize: 16,
@@ -881,13 +888,13 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.add_circle, color: HospitalTheme.success),
+              icon: const Icon(Icons.add_circle, color: HospitalTheme.success),
               onPressed: _addNormalRangeField,
               tooltip: 'Add more normal ranges',
             ),
           ],
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
 
         // List of normal range fields
         Container(
@@ -898,19 +905,19 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
           ),
           child: ListView.separated(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: _normalRanges.length,
-            separatorBuilder: (context, index) => Divider(height: 1),
+            separatorBuilder: (context, index) => const Divider(height: 1),
             itemBuilder: (context, index) {
               return Padding(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: Row(
                   children: [
                     Expanded(
                       flex: 2,
                       child: TextFormField(
                         initialValue: _normalRanges[index].parameter,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Parameter',
                           isDense: true,
                           contentPadding: EdgeInsets.all(12),
@@ -922,12 +929,12 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                         },
                       ),
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     Expanded(
                       flex: 3,
                       child: TextFormField(
                         initialValue: _normalRanges[index].normalRange,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Normal Range',
                           isDense: true,
                           contentPadding: EdgeInsets.all(12),
@@ -940,7 +947,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.delete_outline,
+                      icon: const Icon(Icons.delete_outline,
                           color: HospitalTheme.error),
                       onPressed: () => _removeNormalRangeField(index),
                       tooltip: 'Remove',
@@ -962,7 +969,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Numerical Results',
               style: TextStyle(
                 fontSize: 16,
@@ -971,13 +978,13 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.add_circle, color: HospitalTheme.success),
+              icon: const Icon(Icons.add_circle, color: HospitalTheme.success),
               onPressed: _addNumericalResultField,
               tooltip: 'Add more results',
             ),
           ],
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
 
         // List of numerical result fields
         Container(
@@ -988,19 +995,19 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
           ),
           child: ListView.separated(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: _numericalResults.length,
-            separatorBuilder: (context, index) => Divider(height: 1),
+            separatorBuilder: (context, index) => const Divider(height: 1),
             itemBuilder: (context, index) {
               return Padding(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: Row(
                   children: [
                     Expanded(
                       flex: 2,
                       child: TextFormField(
                         initialValue: _numericalResults[index].parameter,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Parameter',
                           isDense: true,
                           contentPadding: EdgeInsets.all(12),
@@ -1012,18 +1019,18 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                         },
                       ),
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     Expanded(
                       flex: 3,
                       child: TextFormField(
                         initialValue: _numericalResults[index].value,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Value',
                           isDense: true,
                           contentPadding: EdgeInsets.all(12),
                         ),
                         keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                            const TextInputType.numberWithOptions(decimal: true),
                         onChanged: (value) {
                           setState(() {
                             _numericalResults[index].value = value;
@@ -1032,7 +1039,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.delete_outline,
+                      icon: const Icon(Icons.delete_outline,
                           color: HospitalTheme.error),
                       onPressed: () => _removeNumericalResultField(index),
                       tooltip: 'Remove',
@@ -1051,7 +1058,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Billing Information',
           style: TextStyle(
             fontSize: 16,
@@ -1059,15 +1066,15 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         TextFormField(
           controller: _costController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Cost',
             prefixIcon: Icon(Icons.attach_money),
             helperText: 'Enter the cost of this investigation',
           ),
-          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
         ),
       ],
     );
@@ -1077,7 +1084,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
+        const Text(
           'Submit Report',
           style: TextStyle(
             fontSize: 16,
@@ -1085,7 +1092,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         HospitalTheme.buildGradientButton(
           label: _isUploading ? 'Uploading...' : 'Upload Report',
           onPressed: _isUploading ? () {} : _uploadReport,
@@ -1099,7 +1106,7 @@ class _UploadReportScreenState extends State<UploadReportScreen> {
             padding: const EdgeInsets.only(top: 16.0),
             child: Text(
               _uploadError!,
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.error,
                 fontSize: 14,
               ),

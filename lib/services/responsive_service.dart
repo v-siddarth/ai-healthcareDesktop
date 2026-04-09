@@ -58,11 +58,11 @@ class ResponsiveHelper {
   // Get adaptive padding
   static EdgeInsets getAdaptivePadding(BuildContext context) {
     if (isMobile(context)) {
-      return EdgeInsets.all(20);
+      return const EdgeInsets.all(20);
     } else if (isTablet(context)) {
-      return EdgeInsets.all(32);
+      return const EdgeInsets.all(32);
     } else {
-      return EdgeInsets.all(40);
+      return const EdgeInsets.all(40);
     }
   }
 

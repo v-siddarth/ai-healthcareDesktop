@@ -3,7 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
 class HospitalDashboardApp extends StatelessWidget {
-  const HospitalDashboardApp({Key? key}) : super(key: key);
+  const HospitalDashboardApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class HospitalDashboardApp extends StatelessWidget {
 }
 
 class HospitalDashboard extends StatefulWidget {
-  const HospitalDashboard({Key? key}) : super(key: key);
+  const HospitalDashboard({super.key});
 
   @override
   State<HospitalDashboard> createState() => _HospitalDashboardState();
@@ -245,17 +245,17 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
                 top: BorderSide(color: Colors.blue, width: 1),
               ),
             ),
-            child: Row(
+            child: const Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 20,
                   backgroundImage:
                       NetworkImage('https://via.placeholder.com/150'),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       'Dr. Jane Smith',
                       style: TextStyle(
@@ -1254,10 +1254,10 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
                   color: Colors.grey[800],
                 ),
               ),
-              Badge(
+              const Badge(
                 backgroundColor: Colors.red,
-                label: const Text('4', style: TextStyle(color: Colors.white)),
-                child: const Icon(Icons.warning, color: Colors.red),
+                label: Text('4', style: TextStyle(color: Colors.white)),
+                child: Icon(Icons.warning, color: Colors.red),
               ),
             ],
           ),
@@ -1403,11 +1403,11 @@ class Badge extends StatelessWidget {
   final Color backgroundColor;
 
   const Badge({
-    Key? key,
+    super.key,
     required this.child,
     this.label,
     this.backgroundColor = Colors.red,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

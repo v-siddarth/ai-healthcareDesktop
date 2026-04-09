@@ -11,11 +11,11 @@ class SymptomsLayout extends StatefulWidget {
   final Function(String, String, String) addSymptomsByDoctor;
 
   const SymptomsLayout({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
     required this.addSymptomsByDoctor,
-  }) : super(key: key);
+  });
 
   @override
   _SymptomsLayoutState createState() => _SymptomsLayoutState();
@@ -42,7 +42,7 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getSymptomAnalytics'),
+        Uri.parse('$KVM_URL/doctors/getSymptomAnalytics'),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -148,7 +148,7 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
-          Text(
+          const Text(
             'Symptom Management',
             style: TextStyle(
               fontSize: 20,
@@ -156,7 +156,7 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
               color: Color(0xFF005F9E),
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
 
           // Description subtitle
           Text(
@@ -167,10 +167,10 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
             ),
           ),
 
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // Trending Symptoms Section
-          Text(
+          const Text(
             'Trending Symptoms',
             style: TextStyle(
               fontSize: 16,
@@ -178,7 +178,7 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
               color: Color(0xFF005F9E),
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
 
           // Trending Symptoms Chips
           if (isLoadingTrendingSymptoms)
@@ -186,12 +186,12 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: LinearProgressIndicator(
                 backgroundColor: Colors.grey.shade200,
-                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF005F9E)),
+                valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF005F9E)),
               ),
             )
           else if (trendingSymptoms.isEmpty)
             Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(8),
@@ -221,11 +221,11 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
               }).toList(),
             ),
 
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // Selected symptoms section
           if (selectedSymptoms.isNotEmpty) ...[
-            Text(
+            const Text(
               'Selected Symptoms',
               style: TextStyle(
                 fontSize: 16,
@@ -233,9 +233,9 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
                 color: Color(0xFF005F9E),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.grey.shade50,
                 borderRadius: BorderRadius.circular(8),
@@ -250,9 +250,9 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
                     .map((symptom) => Chip(
                           label: Text(
                             symptom,
-                            style: TextStyle(color: Colors.white, fontSize: 12),
+                            style: const TextStyle(color: Colors.white, fontSize: 12),
                           ),
-                          backgroundColor: Color(0xFF00B8D4),
+                          backgroundColor: const Color(0xFF00B8D4),
                           deleteIconColor: Colors.white,
                           onDeleted: () {
                             setState(() {
@@ -268,7 +268,7 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
             ),
           ],
 
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // Text field for manually entering symptoms
           TextField(
@@ -276,18 +276,18 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
             decoration: InputDecoration(
               hintText: 'Enter symptom name',
               prefixIcon:
-                  Icon(Icons.medical_information, color: Color(0xFF005F9E)),
+                  const Icon(Icons.medical_information, color: Color(0xFF005F9E)),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: Colors.grey.shade400),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Color(0xFF005F9E), width: 2),
+                borderSide: const BorderSide(color: Color(0xFF005F9E), width: 2),
               ),
               suffixIcon: symptomController.text.isNotEmpty
                   ? IconButton(
-                      icon: Icon(Icons.clear),
+                      icon: const Icon(Icons.clear),
                       onPressed: () {
                         setState(() {
                           symptomController.clear();
@@ -309,7 +309,7 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
 
           // Search functionality removed as requested
 
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
 
           // Add Button (Gradient)
           Center(
@@ -317,8 +317,8 @@ class _SymptomsLayoutState extends State<SymptomsLayout> {
               label: 'Add Symptoms',
               icon: Icons.add_circle,
               onPressed: _addSymptom,
-              startColor: Color(0xFF005F9E),
-              endColor: Color(0xFF00B8D4),
+              startColor: const Color(0xFF005F9E),
+              endColor: const Color(0xFF00B8D4),
             ),
           ),
         ],

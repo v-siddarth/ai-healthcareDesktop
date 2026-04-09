@@ -12,8 +12,8 @@ class FadeSlideTransition extends StatelessWidget {
     required this.animation,
     this.beginOffset = const Offset(0, 0.25),
     this.curve = Curves.easeOutCubic,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +54,8 @@ class StaggeredAnimations extends StatefulWidget {
     this.staggerDuration = const Duration(milliseconds: 50),
     this.curve = Curves.easeOutCubic,
     this.direction = Axis.vertical,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _StaggeredAnimationsState createState() => _StaggeredAnimationsState();

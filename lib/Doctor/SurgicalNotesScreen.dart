@@ -337,7 +337,7 @@ class SurgicalNotesNotifier extends StateNotifier<SurgicalNotesState> {
     try {
       final response = await http.get(
         Uri.parse(
-            '${BASE_URL}/doctors/getSurgicalNotes/$patientId/$admissionId'),
+            '$BASE_URL/doctors/getSurgicalNotes/$patientId/$admissionId'),
         headers: {'Content-Type': 'application/json'},
       );
 
@@ -380,7 +380,7 @@ class SurgicalNotesNotifier extends StateNotifier<SurgicalNotesState> {
 
       final response = await http.post(
         Uri.parse(
-            '${BASE_URL}/doctors/createSurgicalNotes/$patientId/$admissionId'),
+            '$BASE_URL/doctors/createSurgicalNotes/$patientId/$admissionId'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json'
@@ -413,7 +413,7 @@ class SurgicalNotesNotifier extends StateNotifier<SurgicalNotesState> {
 
       final response = await http.delete(
         Uri.parse(
-            '${BASE_URL}/doctors/deleteSurgicalNotes/$patientId/$admissionId/$noteId'),
+            '$BASE_URL/doctors/deleteSurgicalNotes/$patientId/$admissionId/$noteId'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json'
@@ -483,10 +483,10 @@ class SurgicalNotesScreen extends ConsumerStatefulWidget {
   final String admissionId;
 
   const SurgicalNotesScreen({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
-  }) : super(key: key);
+  });
 
   @override
   ConsumerState<SurgicalNotesScreen> createState() =>
@@ -607,11 +607,11 @@ class _SurgicalNotesScreenState extends ConsumerState<SurgicalNotesScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.warning, color: HospitalTheme.error),
-            const SizedBox(width: 8),
-            const Text('Delete Surgical Note'),
+            SizedBox(width: 8),
+            Text('Delete Surgical Note'),
           ],
         ),
         content: const Text(
@@ -667,13 +667,13 @@ class _MasterPanel extends StatelessWidget {
           // Header
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
               border: Border(bottom: BorderSide(color: HospitalTheme.border)),
             ),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: Text(
                     'Surgical Notes',
                     style: TextStyle(
@@ -685,12 +685,12 @@ class _MasterPanel extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: onAddNote,
-                  icon: Icon(Icons.add, color: HospitalTheme.primary),
+                  icon: const Icon(Icons.add, color: HospitalTheme.primary),
                   tooltip: 'Add Note (Ctrl+N)',
                 ),
                 IconButton(
                   onPressed: onRefresh,
-                  icon: Icon(Icons.refresh, color: HospitalTheme.primary),
+                  icon: const Icon(Icons.refresh, color: HospitalTheme.primary),
                   tooltip: 'Refresh (Ctrl+R)',
                 ),
               ],
@@ -727,9 +727,9 @@ class _MasterPanel extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.error_outline, size: 48, color: HospitalTheme.error),
+              const Icon(Icons.error_outline, size: 48, color: HospitalTheme.error),
               const SizedBox(height: 16),
-              Text(
+              const Text(
                 'Error',
                 style: TextStyle(
                   fontSize: 18,
@@ -741,7 +741,7 @@ class _MasterPanel extends StatelessWidget {
               Text(
                 state.error!,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: HospitalTheme.textMedium),
+                style: const TextStyle(color: HospitalTheme.textMedium),
               ),
               const SizedBox(height: 16),
               ElevatedButton.icon(
@@ -762,10 +762,10 @@ class _MasterPanel extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.note_alt_outlined,
+              const Icon(Icons.note_alt_outlined,
                   size: 48, color: HospitalTheme.textLight),
               const SizedBox(height: 16),
-              Text(
+              const Text(
                 'No Surgical Notes',
                 style: TextStyle(
                   fontSize: 18,
@@ -774,7 +774,7 @@ class _MasterPanel extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
+              const Text(
                 'Create your first surgical note to get started.',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: HospitalTheme.textLight),
@@ -882,7 +882,7 @@ class _SurgicalNoteCard extends StatelessWidget {
                   IconButton(
                     onPressed: isDeleting ? null : onDelete,
                     icon: isDeleting
-                        ? SizedBox(
+                        ? const SizedBox(
                             width: 16,
                             height: 16,
                             child: CircularProgressIndicator(
@@ -890,7 +890,7 @@ class _SurgicalNoteCard extends StatelessWidget {
                               color: HospitalTheme.error,
                             ),
                           )
-                        : Icon(
+                        : const Icon(
                             Icons.delete_outline,
                             color: HospitalTheme.error,
                             size: 20,
@@ -907,14 +907,14 @@ class _SurgicalNoteCard extends StatelessWidget {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(Icons.person, size: 14, color: HospitalTheme.textMedium),
+                  const Icon(Icons.person, size: 14, color: HospitalTheme.textMedium),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       note.surgeonName.isNotEmpty
                           ? 'Dr. ${note.surgeonName}'
                           : 'N/A',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
                         color: HospitalTheme.textMedium,
                       ),
@@ -925,12 +925,12 @@ class _SurgicalNoteCard extends StatelessWidget {
               const SizedBox(height: 4),
               Row(
                 children: [
-                  Icon(Icons.access_time,
+                  const Icon(Icons.access_time,
                       size: 14, color: HospitalTheme.textMedium),
                   const SizedBox(width: 4),
                   Text(
                     '${_formatDate(note.surgeryDate)} • ${note.surgeryTime.isNotEmpty ? note.surgeryTime : 'N/A'}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       color: HospitalTheme.textMedium,
                     ),
@@ -940,12 +940,12 @@ class _SurgicalNoteCard extends StatelessWidget {
               const SizedBox(height: 4),
               Row(
                 children: [
-                  Icon(Icons.location_on,
+                  const Icon(Icons.location_on,
                       size: 14, color: HospitalTheme.textMedium),
                   const SizedBox(width: 4),
                   Text(
                     note.operatingRoom.isNotEmpty ? note.operatingRoom : 'N/A',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       color: HospitalTheme.textMedium,
                     ),
@@ -955,7 +955,7 @@ class _SurgicalNoteCard extends StatelessWidget {
                     note.surgeryDuration.isNotEmpty
                         ? note.surgeryDuration
                         : 'N/A',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: HospitalTheme.textMedium,
@@ -997,13 +997,13 @@ class _DetailPanel extends StatelessWidget {
     }
 
     if (selectedNote == null) {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.note_alt_outlined,
                 size: 64, color: HospitalTheme.textLight),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'Select a Surgical Note',
               style: TextStyle(
@@ -1012,7 +1012,7 @@ class _DetailPanel extends StatelessWidget {
                 color: HospitalTheme.textMedium,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'Choose a surgical note from the list to view details',
               style: TextStyle(color: HospitalTheme.textLight),
@@ -1027,13 +1027,13 @@ class _DetailPanel extends StatelessWidget {
         // Header with close button
         Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             border: Border(bottom: BorderSide(color: HospitalTheme.border)),
           ),
           child: Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: Text(
                   'Surgical Note Details',
                   style: TextStyle(
@@ -1045,7 +1045,7 @@ class _DetailPanel extends StatelessWidget {
               ),
               IconButton(
                 onPressed: onClose,
-                icon: Icon(Icons.close, color: HospitalTheme.textMedium),
+                icon: const Icon(Icons.close, color: HospitalTheme.textMedium),
                 tooltip: 'Close Details',
               ),
             ],
@@ -1095,7 +1095,7 @@ class _SurgicalNoteDetails extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Surgery Date: ${_formatDate(note.surgeryDate)} at ${note.surgeryTime.isNotEmpty ? note.surgeryTime : 'N/A'}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       color: HospitalTheme.textMedium,
                     ),
@@ -1370,7 +1370,7 @@ class _SurgicalNoteDetails extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Record Information',
                 style: TextStyle(
                   fontSize: 16,
@@ -1405,7 +1405,7 @@ class _SurgicalNoteDetails extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: HospitalTheme.textDark,
@@ -1425,7 +1425,7 @@ class _SurgicalNoteDetails extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: HospitalTheme.textDark,
@@ -1457,7 +1457,7 @@ class _SurgicalNoteDetails extends StatelessWidget {
             width: 120,
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: HospitalTheme.textMedium,
@@ -1630,29 +1630,29 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
           filled: true,
           border: OutlineInputBorder(
             borderRadius: HospitalTheme.radiusSmall,
-            borderSide: BorderSide(color: HospitalTheme.border),
+            borderSide: const BorderSide(color: HospitalTheme.border),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: HospitalTheme.radiusSmall,
-            borderSide: BorderSide(color: HospitalTheme.border),
+            borderSide: const BorderSide(color: HospitalTheme.border),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: HospitalTheme.radiusSmall,
-            borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+            borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: HospitalTheme.radiusSmall,
-            borderSide: BorderSide(color: HospitalTheme.error, width: 1),
+            borderSide: const BorderSide(color: HospitalTheme.error, width: 1),
           ),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 16,
             vertical: 16,
           ),
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             color: HospitalTheme.textLight,
             fontSize: 14,
           ),
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             color: HospitalTheme.textMedium,
             fontSize: 14,
           ),
@@ -1673,7 +1673,7 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
               // Header
               Row(
                 children: [
-                  Icon(Icons.note_add, color: HospitalTheme.primary, size: 28),
+                  const Icon(Icons.note_add, color: HospitalTheme.primary, size: 28),
                   const SizedBox(width: 12),
                   const Expanded(
                     child: Text(
@@ -2186,12 +2186,12 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
                                       border: Border.all(
                                           color: HospitalTheme.border),
                                     ),
-                                    child: Row(
+                                    child: const Row(
                                       children: [
                                         Icon(Icons.info_outline,
                                             color: HospitalTheme.textMedium,
                                             size: 16),
-                                        const SizedBox(width: 8),
+                                        SizedBox(width: 8),
                                         Text(
                                           'No assistant surgeons added',
                                           style: TextStyle(
@@ -2224,7 +2224,7 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
                                         ),
                                         child: Row(
                                           children: [
-                                            Icon(Icons.person,
+                                            const Icon(Icons.person,
                                                 color: HospitalTheme.primary,
                                                 size: 20),
                                             const SizedBox(width: 12),
@@ -2241,7 +2241,7 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
                                               onPressed: () =>
                                                   _removeAssistantSurgeon(
                                                       index),
-                                              icon: Icon(
+                                              icon: const Icon(
                                                   Icons.remove_circle_outline,
                                                   color: HospitalTheme.error,
                                                   size: 20),
@@ -2353,7 +2353,7 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
               const SizedBox(width: 12),
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.textDark,
@@ -2372,14 +2372,13 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
     required String label,
     required DateTime selectedDate,
     required Function(DateTime) onDateSelected,
-    bool isRequired = false,
   }) {
     return TextFormField(
       readOnly: true,
       decoration: InputDecoration(
         labelText: label,
         hintText: 'Select date',
-        suffixIcon: Icon(Icons.calendar_today, color: HospitalTheme.primary),
+        suffixIcon: const Icon(Icons.calendar_today, color: HospitalTheme.primary),
       ),
       controller: TextEditingController(
         text:
@@ -2394,7 +2393,7 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
           builder: (context, child) {
             return Theme(
               data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.light(
+                colorScheme: const ColorScheme.light(
                   primary: HospitalTheme.primary,
                   onPrimary: Colors.white,
                   surface: Colors.white,
@@ -2423,10 +2422,10 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
       decoration: InputDecoration(
         labelText: label,
         hintText: 'Select time',
-        suffixIcon: Icon(Icons.access_time, color: HospitalTheme.primary),
+        suffixIcon: const Icon(Icons.access_time, color: HospitalTheme.primary),
       ),
       controller: TextEditingController(
-        text: selectedTime != null ? selectedTime!.format(context) : '',
+        text: selectedTime != null ? selectedTime.format(context) : '',
       ),
       onTap: () async {
         final TimeOfDay? picked = await showTimePicker(
@@ -2435,7 +2434,7 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
           builder: (context, child) {
             return Theme(
               data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.light(
+                colorScheme: const ColorScheme.light(
                   primary: HospitalTheme.primary,
                   onPrimary: Colors.white,
                   surface: Colors.white,
@@ -2476,16 +2475,16 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
                 hintText: 'Dr. John Smith',
                 border: OutlineInputBorder(
                   borderRadius: HospitalTheme.radiusSmall,
-                  borderSide: BorderSide(color: HospitalTheme.border),
+                  borderSide: const BorderSide(color: HospitalTheme.border),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: HospitalTheme.radiusSmall,
-                  borderSide: BorderSide(color: HospitalTheme.border),
+                  borderSide: const BorderSide(color: HospitalTheme.border),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: HospitalTheme.radiusSmall,
                   borderSide:
-                      BorderSide(color: HospitalTheme.primary, width: 2),
+                      const BorderSide(color: HospitalTheme.primary, width: 2),
                 ),
               ),
               autofocus: true,
@@ -2589,8 +2588,8 @@ class _AddSurgicalNoteDialogState extends State<_AddSurgicalNoteDialog> {
       if (mounted) {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Row(
+          const SnackBar(
+            content: Row(
               children: [
                 Icon(Icons.check_circle, color: Colors.white),
                 SizedBox(width: 8),

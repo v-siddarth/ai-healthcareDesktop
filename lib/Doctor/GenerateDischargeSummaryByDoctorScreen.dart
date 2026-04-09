@@ -265,7 +265,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
       final requestBody = _buildRequestBody();
       final response = await http.post(
         Uri.parse(
-            '${KVM_URL}/doctors/generateDischargeSummaryByDoctor/${widget.patientId}'),
+            '$KVM_URL/doctors/generateDischargeSummaryByDoctor/${widget.patientId}'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -390,7 +390,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
       };
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/doctors/confirmSaveSummaryToDB'),
+        Uri.parse('$KVM_URL/doctors/confirmSaveSummaryToDB'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -434,11 +434,11 @@ class _GenerateDischargeSummaryByDoctorScreenState
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.check_circle, color: HospitalTheme.success),
-            const SizedBox(width: 8),
-            const Text('Summary Generated'),
+            SizedBox(width: 8),
+            Text('Summary Generated'),
           ],
         ),
         content: SizedBox(
@@ -461,11 +461,11 @@ class _GenerateDischargeSummaryByDoctorScreenState
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: HospitalTheme.warning),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(Icons.info_outline, color: HospitalTheme.warning),
-                        const SizedBox(width: 8),
-                        const Expanded(
+                        SizedBox(width: 8),
+                        Expanded(
                           child: Text(
                             'This is a preview mode. Remember to save to database after review.',
                             style: TextStyle(fontSize: 13),
@@ -540,11 +540,11 @@ class _GenerateDischargeSummaryByDoctorScreenState
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.cloud_done, color: HospitalTheme.success),
-            const SizedBox(width: 8),
-            const Text('Saved Successfully'),
+            SizedBox(width: 8),
+            Text('Saved Successfully'),
           ],
         ),
         content: Column(
@@ -561,11 +561,11 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: HospitalTheme.success),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(Icons.check_circle, color: HospitalTheme.success),
-                  const SizedBox(width: 8),
-                  const Expanded(
+                  SizedBox(width: 8),
+                  Expanded(
                     child: Text(
                       'Discharge summary has been permanently saved to the database.',
                       style: TextStyle(fontSize: 13),
@@ -658,7 +658,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 const SizedBox(height: 12),
                 Text(
                   contextualMessage,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),
@@ -751,8 +751,8 @@ class _GenerateDischargeSummaryByDoctorScreenState
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text(
+          const SnackBar(
+            content: Text(
                 'No PDF available to preview. Please generate discharge summary first.'),
             backgroundColor: HospitalTheme.warning,
           ),
@@ -958,7 +958,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -1002,7 +1002,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -1051,7 +1051,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -1153,7 +1153,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -1196,7 +1196,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -1303,7 +1303,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -1346,7 +1346,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -1557,7 +1557,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
           Center(
             child: Column(
               children: [
-                Text(
+                const Text(
                   'DISCHARGE SUMMARY',
                   style: TextStyle(
                     fontSize: 24,
@@ -1636,7 +1636,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: HospitalTheme.primary,
@@ -1651,7 +1651,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                       style: const TextStyle(fontSize: 14),
                     ),
                   ))
-              .toList(),
+              ,
         ],
       ),
     );
@@ -1663,7 +1663,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'GENERAL EXAMINATION',
             style: TextStyle(
               fontSize: 16,
@@ -1693,7 +1693,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'OPERATION DETAILS',
             style: TextStyle(
               fontSize: 16,
@@ -1728,7 +1728,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                       child:
                           Text('• $step', style: const TextStyle(fontSize: 14)),
                     ))
-                .toList(),
+                ,
           ],
         ],
       ),
@@ -1759,11 +1759,11 @@ class _GenerateDischargeSummaryByDoctorScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.medical_services, color: HospitalTheme.primary),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'Doctor Actions',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -1810,11 +1810,11 @@ class _GenerateDischargeSummaryByDoctorScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.info_outline, color: HospitalTheme.info),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'Medical Guidelines',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -1843,12 +1843,12 @@ class _GenerateDischargeSummaryByDoctorScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.check_circle_outline,
                         color: HospitalTheme.success),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'Completion Status',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -1871,12 +1871,12 @@ class _GenerateDischargeSummaryByDoctorScreenState
                   value: _getCompletionProgress(),
                   backgroundColor: HospitalTheme.border,
                   valueColor:
-                      AlwaysStoppedAnimation<Color>(HospitalTheme.success),
+                      const AlwaysStoppedAnimation<Color>(HospitalTheme.success),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   '${(_getCompletionProgress() * 100).toInt()}% Complete',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.textMedium,
                   ),
@@ -1892,11 +1892,11 @@ class _GenerateDischargeSummaryByDoctorScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.lightbulb_outline, color: HospitalTheme.warning),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'Tips & Shortcuts',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -1955,7 +1955,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                   ),
                   Text(
                     subtitle,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: HospitalTheme.textMedium,
                     ),
@@ -1963,7 +1963,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios,
+            const Icon(Icons.arrow_forward_ios,
                 size: 16, color: HospitalTheme.textMedium),
           ],
         ),
@@ -1981,7 +1981,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
             width: 6,
             height: 6,
             margin: const EdgeInsets.only(top: 6),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.info,
               shape: BoxShape.circle,
             ),
@@ -2000,7 +2000,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                 ),
                 Text(
                   description,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.textMedium,
                   ),
@@ -2087,16 +2087,16 @@ class _GenerateDischargeSummaryByDoctorScreenState
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
-              borderRadius: const BorderRadius.only(
+              borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
             ),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.check_circle,
                   color: HospitalTheme.success,
                 ),
@@ -2120,7 +2120,7 @@ class _GenerateDischargeSummaryByDoctorScreenState
                       color: HospitalTheme.warning.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Preview',
                       style: TextStyle(
                         color: HospitalTheme.warning,
@@ -2375,7 +2375,7 @@ Tambe Hospital
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textMedium,
               fontWeight: FontWeight.w500,
@@ -2408,8 +2408,9 @@ Tambe Hospital
     if (size == null) return 'N/A';
     final sizeInBytes = size is int ? size : int.tryParse(size.toString()) ?? 0;
     if (sizeInBytes < 1024) return '$sizeInBytes B';
-    if (sizeInBytes < 1024 * 1024)
+    if (sizeInBytes < 1024 * 1024) {
       return '${(sizeInBytes / 1024).toStringAsFixed(1)} KB';
+    }
     return '${(sizeInBytes / (1024 * 1024)).toStringAsFixed(1)} MB';
   }
 }
@@ -2463,7 +2464,7 @@ class DoctorDischargeSummaryNotifier
       String? token = prefs.getString('auth_token');
       final response = await http.post(
         Uri.parse(
-            '${KVM_URL}/doctors/generateDischargeSummaryByDoctor/$patientId'),
+            '$KVM_URL/doctors/generateDischargeSummaryByDoctor/$patientId'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -2509,7 +2510,7 @@ class DoctorDischargeSummaryNotifier
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('auth_token');
       final response = await http.post(
-        Uri.parse('${KVM_URL}/doctors/confirmSaveSummaryToDB'),
+        Uri.parse('$KVM_URL/doctors/confirmSaveSummaryToDB'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',

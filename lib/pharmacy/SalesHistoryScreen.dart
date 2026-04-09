@@ -9,10 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SalesHistoryScreen extends ConsumerStatefulWidget {
   const SalesHistoryScreen(
-      {Key? key // Add this to main.dart to run the application
+      {super.key // Add this to main.dart to run the application
 
-      })
-      : super(key: key);
+      });
 
   @override
   ConsumerState<SalesHistoryScreen> createState() => _SalesHistoryScreenState();
@@ -84,7 +83,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
 
               // Auto-scroll to keep selected item visible
               if (_tableScrollController.hasClients) {
-                final itemHeight = 60.0; // Approximate height of each row
+                const itemHeight = 60.0; // Approximate height of each row
                 final viewportHeight =
                     _tableScrollController.position.viewportDimension;
                 final scrollOffset = _tableScrollController.offset;
@@ -111,7 +110,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
 
               // Auto-scroll to keep selected item visible
               if (_tableScrollController.hasClients) {
-                final itemHeight = 60.0; // Approximate height of each row
+                const itemHeight = 60.0; // Approximate height of each row
                 final scrollOffset = _tableScrollController.offset;
 
                 final itemPosition = (currentIndex - 1) * itemHeight;
@@ -141,7 +140,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/pharma/getSales'),
+        Uri.parse('$KVM_URL/pharma/getSales'),
       );
 
       if (response.statusCode == 200) {
@@ -442,7 +441,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
             focusNode: _searchFocusNode,
             decoration: InputDecoration(
               hintText: 'Search by invoice or customer...',
-              prefixIcon: Icon(Icons.search, color: PharmaTheme.primary),
+              prefixIcon: const Icon(Icons.search, color: PharmaTheme.primary),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               suffixIcon: _searchQuery.isNotEmpty
@@ -562,7 +561,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
               decoration: InputDecoration(
                 hintText:
                     'Search by invoice number or customer name... (Ctrl+F)',
-                prefixIcon: Icon(Icons.search, color: PharmaTheme.primary),
+                prefixIcon: const Icon(Icons.search, color: PharmaTheme.primary),
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                 suffixIcon: _searchQuery.isNotEmpty
@@ -766,7 +765,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
                           color: Colors.grey[400],
                         ),
                         const SizedBox(height: PharmaTheme.spacingM),
-                        Text(
+                        const Text(
                           'Select a sale to view details',
                           style: TextStyle(
                             color: PharmaTheme.textSecondary,
@@ -811,7 +810,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
             ),
             decoration: BoxDecoration(
               color: Colors.grey[50],
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(PharmaTheme.radiusM),
                 topRight: Radius.circular(PharmaTheme.radiusM),
               ),
@@ -854,7 +853,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
             ),
             decoration: BoxDecoration(
               color: Colors.grey[50],
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(PharmaTheme.radiusM),
                 bottomRight: Radius.circular(PharmaTheme.radiusM),
               ),
@@ -866,7 +865,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
               children: [
                 Text(
                   'Showing ${_filteredSales.length} of ${_sales.length} sales',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: PharmaTheme.textSecondary,
                     fontWeight: FontWeight.w500,
                   ),
@@ -919,7 +918,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
             color: Colors.grey[300],
           ),
           const SizedBox(height: PharmaTheme.spacingM),
-          Text(
+          const Text(
             'No sales found',
             style: TextStyle(
               color: PharmaTheme.textSecondary,
@@ -928,7 +927,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
             ),
           ),
           const SizedBox(height: PharmaTheme.spacingXs),
-          Text(
+          const Text(
             'Try adjusting your filters',
             style: TextStyle(
               color: PharmaTheme.textSecondary,
@@ -1027,7 +1026,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
                   sale['createdAt'] != null
                       ? _formatShortDate(sale['createdAt'])
                       : 'No date',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: PharmaTheme.textSecondary,
                   ),
@@ -1234,7 +1233,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
           // Enhanced Header
           Container(
             padding: const EdgeInsets.all(PharmaTheme.spacingL),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: PharmaTheme.primary,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(PharmaTheme.radiusM),
@@ -1548,7 +1547,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
+                const Icon(
                   Icons.event,
                   size: 18,
                   color: PharmaTheme.primary,
@@ -1636,7 +1635,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
           ),
           decoration: BoxDecoration(
             color: PharmaTheme.primary.withOpacity(0.05),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(PharmaTheme.radiusS),
               topRight: Radius.circular(PharmaTheme.radiusS),
             ),
@@ -1647,7 +1646,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
               ),
             ),
           ),
-          child: Row(
+          child: const Row(
             children: [
               // Item name column
               Expanded(
@@ -1723,7 +1722,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
         Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey[300]!),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(PharmaTheme.radiusS),
               bottomRight: Radius.circular(PharmaTheme.radiusS),
             ),
@@ -1868,7 +1867,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
                       const SizedBox(height: 4),
                       Text(
                         '${medicine['manufacturer'] ?? 'Unknown'} • ${medicine['category'] ?? 'Uncategorized'}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: PharmaTheme.textSecondary,
                         ),
@@ -1891,7 +1890,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
                             ),
                             child: Text(
                               'Batch: ${item['batchNumber'] ?? 'Unknown'}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 11,
                                 color: PharmaTheme.textPrimary,
                                 fontWeight: FontWeight.w500,
@@ -2119,7 +2118,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               color: PharmaTheme.textSecondary,
               fontSize: 13,
             ),
@@ -2137,7 +2136,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
     required String label,
     bool isFullWidth = false,
   }) {
-    return Container(
+    return SizedBox(
       width: isFullWidth ? double.infinity : null,
       child: Row(
         mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
@@ -2152,7 +2151,7 @@ class _SalesHistoryScreenState extends ConsumerState<SalesHistoryScreen> {
           Flexible(
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 color: PharmaTheme.textPrimary,
               ),
               overflow: TextOverflow.ellipsis,

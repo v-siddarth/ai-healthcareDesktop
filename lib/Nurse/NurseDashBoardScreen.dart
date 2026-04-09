@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:doctordesktop/Admin/BedManagement.dart';
-import 'package:doctordesktop/Check.dart';
+import 'package:doctordesktop/app/home_page.dart';
 import 'package:doctordesktop/Doctor/Dashboard/HomeScreen.dart';
 import 'package:doctordesktop/Doctor/SeeNurseAttendace.dart';
 import 'package:doctordesktop/Doctor/fetchDoctor.dart';
@@ -75,7 +75,7 @@ class LogoutNotifier extends StateNotifier<AsyncValue<bool>> {
 }
 
 class NurseDashBoardScreen extends ConsumerWidget {
-  const NurseDashBoardScreen({Key? key}) : super(key: key);
+  const NurseDashBoardScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -86,7 +86,7 @@ class NurseDashBoardScreen extends ConsumerWidget {
           if (success) {
             // Navigate back to login/home page
             Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (_) => HomePage()),
+              MaterialPageRoute(builder: (_) => const HomePage()),
               (route) => false,
             );
           }
@@ -94,9 +94,9 @@ class NurseDashBoardScreen extends ConsumerWidget {
         loading: () {
           // Show loading indicator in snackbar
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Row(
-                children: const [
+                children: [
                   SizedBox(
                     width: 16,
                     height: 16,
@@ -110,7 +110,7 @@ class NurseDashBoardScreen extends ConsumerWidget {
                 ],
               ),
               backgroundColor: HospitalTheme.info,
-              duration: const Duration(seconds: 2),
+              duration: Duration(seconds: 2),
             ),
           );
         },
@@ -144,7 +144,7 @@ class MainLayout extends ConsumerStatefulWidget {
   static final GlobalKey<_MainLayoutState> globalKey =
       GlobalKey<_MainLayoutState>();
 
-  const MainLayout({Key? key}) : super(key: key);
+  const MainLayout({super.key});
 
   @override
   ConsumerState<MainLayout> createState() => _MainLayoutState();
@@ -267,7 +267,7 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
   void _navigateToHome() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => const HomePage()),
     );
   }
 
@@ -377,14 +377,14 @@ class SidebarWidget extends StatelessWidget {
   final VoidCallback onBackToHome;
 
   const SidebarWidget({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.isCollapsed,
     required this.onItemSelected,
     required this.onToggle,
     required this.onLogout,
     required this.onBackToHome,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -395,7 +395,7 @@ class SidebarWidget extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       width: isCollapsed ? collapsedWidth : expandedWidth,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [HospitalTheme.primaryDark, HospitalTheme.primary],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -492,7 +492,7 @@ class SidebarWidget extends StatelessWidget {
           ? Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.local_hospital,
                   color: Colors.white,
                   size: 28,
@@ -799,11 +799,11 @@ class NavbarWidget extends StatefulWidget {
   final VoidCallback onBackToHome;
 
   const NavbarWidget({
-    Key? key,
+    super.key,
     required this.onMenuTap,
     required this.onLogout,
     required this.onBackToHome,
-  }) : super(key: key);
+  });
 
   @override
   State<NavbarWidget> createState() => _NavbarWidgetState();
@@ -844,10 +844,10 @@ class _NavbarWidgetState extends State<NavbarWidget> {
       height: 70,
       padding: EdgeInsets.symmetric(horizontal: isCompact ? 12 : 24),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [
             Colors.white,
-            const Color(0xFFF8FBFD),
+            Color(0xFFF8FBFD),
           ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
@@ -859,7 +859,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
             offset: const Offset(0, 5),
           ),
         ],
-        border: Border(
+        border: const Border(
           bottom: BorderSide(
             color: HospitalTheme.border,
             width: 1,
@@ -890,14 +890,14 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   width: 1,
                 ),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Icon(
                     Icons.local_hospital_outlined,
                     size: 16,
                     color: HospitalTheme.primary,
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Text(
                     'Hospital Management System',
                     style: TextStyle(
@@ -929,13 +929,13 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                   Container(
                     width: 8,
                     height: 8,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.green,
                       shape: BoxShape.circle,
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Text(
+                  const Text(
                     'Online',
                     style: TextStyle(
                       fontSize: 12,
@@ -1002,13 +1002,13 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                     ),
                   ),
                   const PopupMenuDivider(),
-                  PopupMenuItem(
+                  const PopupMenuItem(
                     value: 'back',
                     child: Row(
                       children: [
                         Icon(Icons.home_outlined,
                             size: 18, color: HospitalTheme.primary),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           'Back to Home',
                           style: TextStyle(color: HospitalTheme.primary),
@@ -1016,13 +1016,13 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                       ],
                     ),
                   ),
-                  PopupMenuItem(
+                  const PopupMenuItem(
                     value: 'logout',
                     child: Row(
                       children: [
                         Icon(Icons.logout,
                             size: 18, color: HospitalTheme.error),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text(
                           'Logout',
                           style: TextStyle(color: HospitalTheme.error),
@@ -1049,7 +1049,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
                           shape: BoxShape.circle,
                           color: HospitalTheme.primary.withOpacity(0.1),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.person,
                           color: HospitalTheme.primary,
                           size: 18,
@@ -1082,7 +1082,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [
                   HospitalTheme.primary,
                   HospitalTheme.primaryLight,
@@ -1134,10 +1134,10 @@ class LogoutDialog extends StatelessWidget {
   final VoidCallback onCancel;
 
   const LogoutDialog({
-    Key? key,
+    super.key,
     required this.onConfirm,
     required this.onCancel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1145,15 +1145,15 @@ class LogoutDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      title: Row(
+      title: const Row(
         children: [
           Icon(
             Icons.logout,
             color: HospitalTheme.error,
             size: 24,
           ),
-          const SizedBox(width: 12),
-          const Text('Confirm Logout'),
+          SizedBox(width: 12),
+          Text('Confirm Logout'),
         ],
       ),
       content: const Text(
@@ -1162,7 +1162,7 @@ class LogoutDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: onCancel,
-          child: Text(
+          child: const Text(
             'Cancel',
             style: TextStyle(color: HospitalTheme.textMedium),
           ),

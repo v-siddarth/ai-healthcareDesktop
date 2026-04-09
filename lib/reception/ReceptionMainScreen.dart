@@ -4,7 +4,7 @@ import 'package:doctordesktop/reception/Sidebar.dart';
 import 'package:flutter/material.dart';
 
 class ReceptionMainScreen extends StatefulWidget {
-  const ReceptionMainScreen({Key? key}) : super(key: key);
+  const ReceptionMainScreen({super.key});
 
   @override
   State<ReceptionMainScreen> createState() => _ReceptionMainScreenState();

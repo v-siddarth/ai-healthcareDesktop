@@ -63,8 +63,8 @@ class DoctorPrescriptionsScreen extends ConsumerStatefulWidget {
   const DoctorPrescriptionsScreen({
     required this.patientId,
     required this.admissionId,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _DoctorPrescriptionsScreenState createState() =>
@@ -189,7 +189,7 @@ class _DoctorPrescriptionsScreenState
 
     try {
       final url =
-          '${KVM_URL}/reception/getDoctorAdvice/${widget.patientId}/${widget.admissionId}';
+          '$KVM_URL/reception/getDoctorAdvice/${widget.patientId}/${widget.admissionId}';
 
       final response = await http.get(Uri.parse(url));
       final data = jsonDecode(response.body);
@@ -226,7 +226,7 @@ class _DoctorPrescriptionsScreenState
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [HospitalTheme.primary, HospitalTheme.accent],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -237,7 +237,7 @@ class _DoctorPrescriptionsScreenState
                 color: Colors.white, size: 24),
           ),
           const SizedBox(width: 16),
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -345,7 +345,7 @@ class _DoctorPrescriptionsScreenState
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             isLoading
-                ? SizedBox(
+                ? const SizedBox(
                     height: 28,
                     width: 28,
                     child: CustomLoadingAnimation(),
@@ -489,8 +489,7 @@ class _DoctorPrescriptionsScreenState
                       color: HospitalTheme.primary.withOpacity(0.7),
                       suffix: 'tablet(s)',
                     ),
-                    if (prescription.medicine.comment != null &&
-                        prescription.medicine.comment!.isNotEmpty) ...[
+                    if (prescription.medicine.comment.isNotEmpty) ...[
                       const SizedBox(height: 12),
                       const Divider(height: 1),
                       const SizedBox(height: 12),
@@ -542,7 +541,7 @@ class _DoctorPrescriptionsScreenState
             children: [
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 11,
                   color: HospitalTheme.textMedium,
                   fontWeight: FontWeight.w500,
@@ -612,7 +611,7 @@ class _DoctorPrescriptionsScreenState
           const SizedBox(height: 8),
           Text(
             error.toString(),
-            style: TextStyle(color: HospitalTheme.textMedium),
+            style: const TextStyle(color: HospitalTheme.textMedium),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
@@ -649,14 +648,14 @@ class _DoctorPrescriptionsScreenState
               color: HospitalTheme.primary.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               FontAwesomeIcons.pills,
               size: 48,
               color: HospitalTheme.primary,
             ),
           ),
           const SizedBox(height: 24),
-          Text(
+          const Text(
             'No Prescriptions',
             style: TextStyle(
               fontSize: 24,
@@ -665,7 +664,7 @@ class _DoctorPrescriptionsScreenState
             ),
           ),
           const SizedBox(height: 16),
-          Text(
+          const Text(
             'Start managing patient medications by adding the first prescription',
             style: TextStyle(
               fontSize: 16,
@@ -721,7 +720,7 @@ class _DoctorPrescriptionsScreenState
                   trailing: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [HospitalTheme.primary, HospitalTheme.accent],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -743,14 +742,14 @@ class _DoctorPrescriptionsScreenState
                     color: HospitalTheme.surfaceLight,
                     borderRadius: HospitalTheme.radiusSmall,
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(
                         Icons.info_outline,
                         color: HospitalTheme.textMedium,
                         size: 16,
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'Only Medicine Name is required. Other fields are optional.',
@@ -824,7 +823,7 @@ class _DoctorPrescriptionsScreenState
                   children: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: Text(
+                      child: const Text(
                         'Cancel',
                         style: TextStyle(color: HospitalTheme.textMedium),
                       ),
@@ -874,7 +873,7 @@ class _DoctorPrescriptionsScreenState
           children: [
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
@@ -882,7 +881,7 @@ class _DoctorPrescriptionsScreenState
             ),
             if (isRequired) ...[
               const SizedBox(width: 4),
-              Text(
+              const Text(
                 '*',
                 style: TextStyle(
                   fontSize: 14,
@@ -901,7 +900,7 @@ class _DoctorPrescriptionsScreenState
           decoration: InputDecoration(
             prefixIcon: Icon(prefix, size: 18, color: HospitalTheme.primary),
             suffixText: suffix,
-            suffixStyle: TextStyle(
+            suffixStyle: const TextStyle(
                 color: HospitalTheme.textMedium, fontWeight: FontWeight.bold),
             hintText: isRequired ? 'Required' : 'Optional',
             hintStyle: TextStyle(
@@ -910,15 +909,15 @@ class _DoctorPrescriptionsScreenState
             ),
             border: OutlineInputBorder(
               borderRadius: HospitalTheme.radiusMedium,
-              borderSide: BorderSide(color: HospitalTheme.border),
+              borderSide: const BorderSide(color: HospitalTheme.border),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: HospitalTheme.radiusMedium,
-              borderSide: BorderSide(color: HospitalTheme.border),
+              borderSide: const BorderSide(color: HospitalTheme.border),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: HospitalTheme.radiusMedium,
-              borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+              borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
             ),
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -934,8 +933,8 @@ class _DoctorPrescriptionsScreenState
     // Only medicine name is required
     if (medicineNameController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Please enter Medicine Name'),
+        const SnackBar(
+          content: Text('Please enter Medicine Name'),
           backgroundColor: HospitalTheme.error,
         ),
       );
@@ -975,8 +974,8 @@ class _DoctorPrescriptionsScreenState
           );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Prescription added successfully'),
+        const SnackBar(
+          content: Text('Prescription added successfully'),
           backgroundColor: HospitalTheme.success,
         ),
       );
@@ -1004,7 +1003,7 @@ class _DoctorPrescriptionsScreenState
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('Cancel',
+              child: const Text('Cancel',
                   style: TextStyle(color: HospitalTheme.textMedium)),
             ),
             ElevatedButton(

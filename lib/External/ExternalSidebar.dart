@@ -6,7 +6,7 @@ import 'package:doctordesktop/reception/Sidebar.dart';
 import 'package:flutter/material.dart';
 
 class ExternalSideBar extends StatefulWidget {
-  const ExternalSideBar({Key? key}) : super(key: key);
+  const ExternalSideBar({super.key});
 
   @override
   State<ExternalSideBar> createState() => _ExternalSideBarState();

@@ -400,9 +400,9 @@ class _ChatScreenDesktopState extends ConsumerState<ChatScreenDesktop>
     final socketConnectionStatus = ref.watch(socketConnectionProvider);
 
     if (_isLoadingAuth) {
-      return Scaffold(
+      return const Scaffold(
         backgroundColor: HospitalTheme.background,
-        body: const Center(
+        body: Center(
           child: CircularProgressIndicator(),
         ),
       );
@@ -759,7 +759,7 @@ class _ChatScreenDesktopState extends ConsumerState<ChatScreenDesktop>
             final isMe = message.senderId == _currentUserId;
 
             print(
-                'Message ${messageIndex}: senderId=${message.senderId}, currentUserId=$_currentUserId, isMe=$isMe');
+                'Message $messageIndex: senderId=${message.senderId}, currentUserId=$_currentUserId, isMe=$isMe');
 
             return _buildMessageBubble(message, isMe, isTablet);
           },
@@ -919,7 +919,7 @@ class _ChatScreenDesktopState extends ConsumerState<ChatScreenDesktop>
 
     return Container(
       padding: EdgeInsets.all(isTablet ? 16 : 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: HospitalTheme.surfaceLight,
         border: Border(
           top: BorderSide(color: HospitalTheme.border),
@@ -974,7 +974,7 @@ class _ChatScreenDesktopState extends ConsumerState<ChatScreenDesktop>
   Widget _buildMessageInput(BuildContext context, bool isTablet) {
     return Container(
       padding: EdgeInsets.all(isTablet ? 16 : 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
           top: BorderSide(color: HospitalTheme.border),
@@ -1080,8 +1080,8 @@ class _ChatScreenDesktopState extends ConsumerState<ChatScreenDesktop>
             ),
             if (isMe && !message.isDeleted)
               ListTile(
-                leading: Icon(Icons.delete, color: HospitalTheme.error),
-                title: Text(
+                leading: const Icon(Icons.delete, color: HospitalTheme.error),
+                title: const Text(
                   'Delete',
                   style: TextStyle(color: HospitalTheme.error),
                 ),
@@ -1108,7 +1108,7 @@ class _ChatScreenDesktopState extends ConsumerState<ChatScreenDesktop>
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.photo, color: HospitalTheme.primary),
+              leading: const Icon(Icons.photo, color: HospitalTheme.primary),
               title: const Text('Photo'),
               onTap: () {
                 Navigator.pop(context);
@@ -1116,7 +1116,7 @@ class _ChatScreenDesktopState extends ConsumerState<ChatScreenDesktop>
               },
             ),
             ListTile(
-              leading: Icon(Icons.videocam, color: HospitalTheme.primary),
+              leading: const Icon(Icons.videocam, color: HospitalTheme.primary),
               title: const Text('Video'),
               onTap: () {
                 Navigator.pop(context);
@@ -1125,7 +1125,7 @@ class _ChatScreenDesktopState extends ConsumerState<ChatScreenDesktop>
             ),
             ListTile(
               leading:
-                  Icon(Icons.insert_drive_file, color: HospitalTheme.primary),
+                  const Icon(Icons.insert_drive_file, color: HospitalTheme.primary),
               title: const Text('Document'),
               onTap: () {
                 Navigator.pop(context);

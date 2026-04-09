@@ -9,7 +9,7 @@ import 'dart:convert';
 import 'package:doctordesktop/constants/Url.dart';
 
 class ExternalDoctorListScreen extends StatefulWidget {
-  const ExternalDoctorListScreen({Key? key}) : super(key: key);
+  const ExternalDoctorListScreen({super.key});
 
   @override
   _ExternalDoctorListScreenState createState() =>
@@ -87,7 +87,7 @@ class _ExternalDoctorListScreenState extends State<ExternalDoctorListScreen> {
 
     try {
       final response =
-          await http.get(Uri.parse('${KVM_URL}/reception/listExternalDoctors'));
+          await http.get(Uri.parse('$KVM_URL/reception/listExternalDoctors'));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
@@ -392,7 +392,7 @@ class _ExternalDoctorListScreenState extends State<ExternalDoctorListScreen> {
       // For now, show an informational message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
+          content: const Text(
             'Please use the sidebar to navigate to the Doctor Registration screen',
             style: TextStyle(color: Colors.white),
           ),
@@ -556,7 +556,7 @@ class _ExternalDoctorListScreenState extends State<ExternalDoctorListScreen> {
         scrollDirection: Axis.horizontal,
         child: SingleChildScrollView(
           child: DataTable(
-            headingRowColor: MaterialStateColor.resolveWith(
+            headingRowColor: WidgetStateColor.resolveWith(
                 (states) => const Color(0xFFF8FAFC)),
             dataRowMinHeight: 80,
             dataRowMaxHeight: 80,
@@ -920,7 +920,7 @@ class _ExternalDoctorListScreenState extends State<ExternalDoctorListScreen> {
   Future<void> _deleteDoctor(String doctorId) async {
     try {
       final response = await http
-          .delete(Uri.parse('${KVM_URL}/reception/deleteDoctor/$doctorId'));
+          .delete(Uri.parse('$KVM_URL/reception/deleteDoctor/$doctorId'));
       if (response.statusCode == 200) {
         setState(() {
           _doctors.removeWhere((doctor) => doctor.id == doctorId);

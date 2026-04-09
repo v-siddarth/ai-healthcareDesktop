@@ -422,7 +422,7 @@ class ReturnsNotifier extends StateNotifier<ReturnsState> {
       queryParams['page'] = state.currentPage.toString();
       queryParams['limit'] = state.pageSize.toString();
 
-      final Uri uri = Uri.parse('${KVM_URL}/pharma/getReturns')
+      final Uri uri = Uri.parse('$KVM_URL/pharma/getReturns')
           .replace(queryParameters: queryParams);
 
       final response = await http.get(uri);
@@ -526,7 +526,7 @@ class CustomersNotifier extends StateNotifier<CustomersState> {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/pharma/getCustomers'),
+        Uri.parse('$KVM_URL/pharma/getCustomers'),
       );
 
       if (response.statusCode == 200) {
@@ -572,7 +572,7 @@ class CustomersNotifier extends StateNotifier<CustomersState> {
 
 // UI states provider for mobile layout
 final uiStateProvider = StateProvider<UIState>((ref) {
-  return UIState(
+  return const UIState(
     showFilterPanel: true,
   );
 });
@@ -619,20 +619,23 @@ class FilterOptions {
 
   Map<String, String> toQueryParameters() {
     Map<String, String> params = {};
-    if (startDate != null && startDate!.isNotEmpty)
+    if (startDate != null && startDate!.isNotEmpty) {
       params['startDate'] = startDate!;
+    }
     if (endDate != null && endDate!.isNotEmpty) params['endDate'] = endDate!;
-    if (customerId != null && customerId!.isNotEmpty)
+    if (customerId != null && customerId!.isNotEmpty) {
       params['customerId'] = customerId!;
-    if (returnNumber != null && returnNumber!.isNotEmpty)
+    }
+    if (returnNumber != null && returnNumber!.isNotEmpty) {
       params['returnNumber'] = returnNumber!;
+    }
     if (saleId != null && saleId!.isNotEmpty) params['saleId'] = saleId!;
     return params;
   }
 }
 
 class AllReturnsScreen extends ConsumerStatefulWidget {
-  const AllReturnsScreen({Key? key}) : super(key: key);
+  const AllReturnsScreen({super.key});
 
   @override
   ConsumerState<AllReturnsScreen> createState() => _AllReturnsScreenState();
@@ -727,7 +730,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
       SnackBar(
         content: Row(
           children: [
-            Icon(Icons.check_circle, color: Colors.white),
+            const Icon(Icons.check_circle, color: Colors.white),
             const SizedBox(width: 8),
             Text(message),
           ],
@@ -804,7 +807,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
     // Switch to returns list view on mobile
     if (_isMobile) {
       ref.read(uiStateProvider.notifier).state =
-          UIState(showFilterPanel: false);
+          const UIState(showFilterPanel: false);
     }
   }
 
@@ -918,8 +921,8 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                     _refreshData();
                   });
                 },
-                child: const Icon(Icons.add),
                 tooltip: 'Create New Return',
+                child: const Icon(Icons.add),
               ),
         body: Container(
           color: PharmaTheme.background,
@@ -974,7 +977,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
         // Header with stats and actions
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(PharmaTheme.spacingM),
+          padding: const EdgeInsets.all(PharmaTheme.spacingM),
           decoration: BoxDecoration(
             color: PharmaTheme.surface,
             boxShadow: PharmaTheme.shadowSmall,
@@ -994,7 +997,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                           color: PharmaTheme.primary,
                         ),
                       ),
-                      SizedBox(height: PharmaTheme.spacingXxs),
+                      const SizedBox(height: PharmaTheme.spacingXxs),
                       Text(
                         'Showing ${returnsState.returns.length} of ${returnsState.totalReturns} returns',
                         style: PharmaTheme.bodySmall,
@@ -1008,7 +1011,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                       label: const Text('Clear Filters'),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: PharmaTheme.accent,
-                        side: BorderSide(color: PharmaTheme.accent),
+                        side: const BorderSide(color: PharmaTheme.accent),
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(PharmaTheme.radiusCircular),
@@ -1018,7 +1021,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                 ],
               ),
               if (returnsState.hasAppliedFilters) ...[
-                SizedBox(height: PharmaTheme.spacingM),
+                const SizedBox(height: PharmaTheme.spacingM),
                 Wrap(
                   spacing: PharmaTheme.spacingXs,
                   runSpacing: PharmaTheme.spacingXs,
@@ -1053,8 +1056,8 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircularProgressIndicator(color: PharmaTheme.primary),
-                      SizedBox(height: PharmaTheme.spacingM),
+                      const CircularProgressIndicator(color: PharmaTheme.primary),
+                      const SizedBox(height: PharmaTheme.spacingM),
                       Text(
                         'Loading returns...',
                         style: PharmaTheme.bodyMedium.copyWith(
@@ -1074,14 +1077,14 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                             size: 64,
                             color: PharmaTheme.textSecondary.withOpacity(0.5),
                           ),
-                          SizedBox(height: PharmaTheme.spacingM),
+                          const SizedBox(height: PharmaTheme.spacingM),
                           Text(
                             'No returns found',
                             style: PharmaTheme.headingSmall.copyWith(
                               color: PharmaTheme.textSecondary,
                             ),
                           ),
-                          SizedBox(height: PharmaTheme.spacingXs),
+                          const SizedBox(height: PharmaTheme.spacingXs),
                           Text(
                             'Try adjusting your filters or create a new return',
                             style: PharmaTheme.bodyMedium.copyWith(
@@ -1089,18 +1092,18 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                             ),
                             textAlign: TextAlign.center,
                           ),
-                          SizedBox(height: PharmaTheme.spacingL),
+                          const SizedBox(height: PharmaTheme.spacingL),
                           OutlinedButton.icon(
                             onPressed: _resetFilters,
                             icon: const Icon(Icons.refresh),
                             label: const Text('Reset Filters'),
                             style: OutlinedButton.styleFrom(
                               foregroundColor: PharmaTheme.primary,
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: PharmaTheme.spacingL,
                                 vertical: PharmaTheme.spacingM,
                               ),
-                              side: BorderSide(color: PharmaTheme.primary),
+                              side: const BorderSide(color: PharmaTheme.primary),
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(PharmaTheme.radiusS),
@@ -1121,14 +1124,14 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                         return false;
                       },
                       child: ListView.separated(
-                        padding: EdgeInsets.all(PharmaTheme.spacingM),
+                        padding: const EdgeInsets.all(PharmaTheme.spacingM),
                         itemCount: returnsState.returns.length +
                             (returnsState.hasMorePages ? 1 : 0),
                         separatorBuilder: (context, index) =>
-                            SizedBox(height: PharmaTheme.spacingM),
+                            const SizedBox(height: PharmaTheme.spacingM),
                         itemBuilder: (context, index) {
                           if (index == returnsState.returns.length) {
-                            return Center(
+                            return const Center(
                               child: Padding(
                                 padding: EdgeInsets.all(PharmaTheme.spacingM),
                                 child: CircularProgressIndicator(
@@ -1158,7 +1161,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
         .format(DateTime.parse(returnData.originalSale.createdAt));
 
     return SingleChildScrollView(
-      padding: EdgeInsets.all(PharmaTheme.spacingL),
+      padding: const EdgeInsets.all(PharmaTheme.spacingL),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -1172,7 +1175,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                 label: const Text('Back to List'),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: PharmaTheme.textPrimary,
-                  side: BorderSide(color: PharmaTheme.border),
+                  side: const BorderSide(color: PharmaTheme.border),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(PharmaTheme.radiusS),
                   ),
@@ -1192,7 +1195,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                     ),
                   ),
                 ),
-              SizedBox(width: PharmaTheme.spacingM),
+              const SizedBox(width: PharmaTheme.spacingM),
               ElevatedButton.icon(
                 onPressed: () {
                   // Navigate to print receipt page
@@ -1210,11 +1213,11 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
             ],
           ),
 
-          SizedBox(height: PharmaTheme.spacingL),
+          const SizedBox(height: PharmaTheme.spacingL),
 
           // Return header
           Container(
-            padding: EdgeInsets.all(PharmaTheme.spacingL),
+            padding: const EdgeInsets.all(PharmaTheme.spacingL),
             decoration: BoxDecoration(
               gradient: PharmaTheme.primaryAccentGradient,
               borderRadius: BorderRadius.circular(PharmaTheme.radiusL),
@@ -1235,7 +1238,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                     size: 36,
                   ),
                 ),
-                SizedBox(width: PharmaTheme.spacingL),
+                const SizedBox(width: PharmaTheme.spacingL),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -1246,14 +1249,14 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                           color: PharmaTheme.textLight,
                         ),
                       ),
-                      SizedBox(height: PharmaTheme.spacingXs),
+                      const SizedBox(height: PharmaTheme.spacingXs),
                       Text(
                         'Total Amount: ₹${returnData.totalAmount.toStringAsFixed(2)}',
                         style: PharmaTheme.headingSmall.copyWith(
                           color: PharmaTheme.textLight,
                         ),
                       ),
-                      SizedBox(height: PharmaTheme.spacingXxs),
+                      const SizedBox(height: PharmaTheme.spacingXxs),
                       Text(
                         'Date: $formattedDate',
                         style: PharmaTheme.bodyMedium.copyWith(
@@ -1267,7 +1270,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
             ),
           ),
 
-          SizedBox(height: PharmaTheme.spacingL),
+          const SizedBox(height: PharmaTheme.spacingL),
 
           // Information cards
           Wrap(
@@ -1284,14 +1287,14 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                     borderRadius: BorderRadius.circular(PharmaTheme.radiusL),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(PharmaTheme.spacingL),
+                    padding: const EdgeInsets.all(PharmaTheme.spacingL),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.person, color: PharmaTheme.primary),
-                            SizedBox(width: PharmaTheme.spacingXs),
+                            const Icon(Icons.person, color: PharmaTheme.primary),
+                            const SizedBox(width: PharmaTheme.spacingXs),
                             Text(
                               'Customer Details',
                               style: PharmaTheme.headingSmall.copyWith(
@@ -1300,7 +1303,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: PharmaTheme.spacingM),
+                        const SizedBox(height: PharmaTheme.spacingM),
                         _buildInfoItem('Name', returnData.customer.name),
                         _buildInfoItem(
                             'Contact', returnData.customer.contactNumber),
@@ -1325,15 +1328,15 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                     borderRadius: BorderRadius.circular(PharmaTheme.radiusL),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(PharmaTheme.spacingL),
+                    padding: const EdgeInsets.all(PharmaTheme.spacingL),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.receipt_long,
+                            const Icon(Icons.receipt_long,
                                 color: PharmaTheme.primary),
-                            SizedBox(width: PharmaTheme.spacingXs),
+                            const SizedBox(width: PharmaTheme.spacingXs),
                             Text(
                               'Original Sale',
                               style: PharmaTheme.headingSmall.copyWith(
@@ -1342,7 +1345,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: PharmaTheme.spacingM),
+                        const SizedBox(height: PharmaTheme.spacingM),
                         _buildInfoItem(
                             'Bill Number', returnData.originalSale.billNumber),
                         _buildInfoItem('Date', originalSaleDate),
@@ -1352,12 +1355,12 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                           valueColor: PharmaTheme.primary,
                           valueFontWeight: FontWeight.bold,
                         ),
-                        SizedBox(height: PharmaTheme.spacingXs),
+                        const SizedBox(height: PharmaTheme.spacingXs),
                         if (returnData.originalSale.pdfLink != null)
                           TextButton.icon(
                             onPressed: () =>
                                 _launchPDF(returnData.originalSale.pdfLink),
-                            icon: Icon(Icons.picture_as_pdf,
+                            icon: const Icon(Icons.picture_as_pdf,
                                 color: PharmaTheme.accent, size: 18),
                             label: Text(
                               'View Original Invoice',
@@ -1379,7 +1382,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
             ],
           ),
 
-          SizedBox(height: PharmaTheme.spacingL),
+          const SizedBox(height: PharmaTheme.spacingL),
 
           // Returned items
           Card(
@@ -1391,11 +1394,11 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(PharmaTheme.spacingL),
+                  padding: const EdgeInsets.all(PharmaTheme.spacingL),
                   child: Row(
                     children: [
-                      Icon(Icons.inventory_2, color: PharmaTheme.primary),
-                      SizedBox(width: PharmaTheme.spacingXs),
+                      const Icon(Icons.inventory_2, color: PharmaTheme.primary),
+                      const SizedBox(width: PharmaTheme.spacingXs),
                       Text(
                         'Returned Items',
                         style: PharmaTheme.headingSmall.copyWith(
@@ -1415,7 +1418,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                   itemBuilder: (context, index) {
                     final item = returnData.items[index];
                     return ListTile(
-                      contentPadding: EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                         horizontal: PharmaTheme.spacingL,
                         vertical: PharmaTheme.spacingM,
                       ),
@@ -1445,12 +1448,12 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: PharmaTheme.spacingXxs),
+                          const SizedBox(height: PharmaTheme.spacingXxs),
                           Text(
                             'Batch: ${item.batchNumber}',
                             style: PharmaTheme.bodySmall,
                           ),
-                          SizedBox(height: PharmaTheme.spacingXxs),
+                          const SizedBox(height: PharmaTheme.spacingXxs),
                           Text(
                             'Reason: ${item.reason}',
                             style: PharmaTheme.bodySmall.copyWith(
@@ -1464,7 +1467,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: PharmaTheme.spacingM,
                               vertical: PharmaTheme.spacingXs,
                             ),
@@ -1481,7 +1484,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: PharmaTheme.spacingXxs),
+                          const SizedBox(height: PharmaTheme.spacingXxs),
                           Text(
                             '₹${item.totalAmount.toStringAsFixed(2)}',
                             style: PharmaTheme.bodyMedium.copyWith(
@@ -1519,7 +1522,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
             ref.read(returnsProvider.notifier).selectReturn(returnData),
         borderRadius: BorderRadius.circular(PharmaTheme.radiusM),
         child: Padding(
-          padding: EdgeInsets.all(PharmaTheme.spacingM),
+          padding: const EdgeInsets.all(PharmaTheme.spacingM),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -1530,19 +1533,19 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                   Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(PharmaTheme.spacingXs),
+                        padding: const EdgeInsets.all(PharmaTheme.spacingXs),
                         decoration: BoxDecoration(
                           color: PharmaTheme.primary.withOpacity(0.1),
                           borderRadius:
                               BorderRadius.circular(PharmaTheme.radiusS),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.assignment_return,
                           color: PharmaTheme.primary,
                           size: 20,
                         ),
                       ),
-                      SizedBox(width: PharmaTheme.spacingM),
+                      const SizedBox(width: PharmaTheme.spacingM),
                       Text(
                         returnData.returnNumber,
                         style: PharmaTheme.bodyLarge.copyWith(
@@ -1562,7 +1565,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: PharmaTheme.spacingXxs),
+                      const SizedBox(height: PharmaTheme.spacingXxs),
                       Text(
                         formattedTime,
                         style: PharmaTheme.caption.copyWith(
@@ -1574,9 +1577,9 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                 ],
               ),
 
-              SizedBox(height: PharmaTheme.spacingM),
+              const SizedBox(height: PharmaTheme.spacingM),
               const Divider(height: 1),
-              SizedBox(height: PharmaTheme.spacingM),
+              const SizedBox(height: PharmaTheme.spacingM),
 
               // Middle section with customer and original sale info
               Row(
@@ -1591,15 +1594,15 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                           'Customer',
                           style: PharmaTheme.caption,
                         ),
-                        SizedBox(height: PharmaTheme.spacingXxs),
+                        const SizedBox(height: PharmaTheme.spacingXxs),
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.person,
                               color: PharmaTheme.accent,
                               size: 16,
                             ),
-                            SizedBox(width: PharmaTheme.spacingXs),
+                            const SizedBox(width: PharmaTheme.spacingXs),
                             Flexible(
                               child: Text(
                                 returnData.customer.name,
@@ -1611,15 +1614,15 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: PharmaTheme.spacingXxs),
+                        const SizedBox(height: PharmaTheme.spacingXxs),
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.phone,
                               color: PharmaTheme.textSecondary,
                               size: 16,
                             ),
-                            SizedBox(width: PharmaTheme.spacingXs),
+                            const SizedBox(width: PharmaTheme.spacingXs),
                             Text(
                               returnData.customer.contactNumber,
                               style: PharmaTheme.bodySmall,
@@ -1636,7 +1639,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                     width: 1,
                     color: PharmaTheme.border,
                     margin:
-                        EdgeInsets.symmetric(horizontal: PharmaTheme.spacingM),
+                        const EdgeInsets.symmetric(horizontal: PharmaTheme.spacingM),
                   ),
 
                   // Original sale info
@@ -1648,15 +1651,15 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                           'Original Sale',
                           style: PharmaTheme.caption,
                         ),
-                        SizedBox(height: PharmaTheme.spacingXxs),
+                        const SizedBox(height: PharmaTheme.spacingXxs),
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.receipt,
                               color: PharmaTheme.accent,
                               size: 16,
                             ),
-                            SizedBox(width: PharmaTheme.spacingXs),
+                            const SizedBox(width: PharmaTheme.spacingXs),
                             Text(
                               returnData.originalSale.billNumber,
                               style: PharmaTheme.bodyMedium.copyWith(
@@ -1665,7 +1668,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: PharmaTheme.spacingXxs),
+                        const SizedBox(height: PharmaTheme.spacingXxs),
                         Text(
                           'Original Amount: ₹${returnData.originalSale.total.toStringAsFixed(2)}',
                           style: PharmaTheme.bodySmall,
@@ -1676,9 +1679,9 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                 ],
               ),
 
-              SizedBox(height: PharmaTheme.spacingM),
+              const SizedBox(height: PharmaTheme.spacingM),
               const Divider(height: 1),
-              SizedBox(height: PharmaTheme.spacingM),
+              const SizedBox(height: PharmaTheme.spacingM),
 
               // Bottom section with returned items summary and actions
               Row(
@@ -1694,9 +1697,9 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                           color: PharmaTheme.textSecondary,
                         ),
                       ),
-                      SizedBox(height: PharmaTheme.spacingXxs),
+                      const SizedBox(height: PharmaTheme.spacingXxs),
                       Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: PharmaTheme.spacingM,
                           vertical: PharmaTheme.spacingXs,
                         ),
@@ -1722,7 +1725,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                       if (returnData.pdfLink != null)
                         IconButton(
                           onPressed: () => _launchPDF(returnData.pdfLink),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.picture_as_pdf,
                             color: PharmaTheme.warning,
                           ),
@@ -1732,7 +1735,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                         onPressed: () {
                           // Print receipt functionality
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.print,
                           color: PharmaTheme.primary,
                         ),
@@ -1742,7 +1745,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                         onPressed: () => ref
                             .read(returnsProvider.notifier)
                             .selectReturn(returnData),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.visibility,
                           color: PharmaTheme.accent,
                         ),
@@ -1761,7 +1764,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
 
   Widget _buildFilterChip(String label, IconData icon) {
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: PharmaTheme.spacingM,
         vertical: PharmaTheme.spacingXs,
       ),
@@ -1778,7 +1781,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
             size: 16,
             color: PharmaTheme.accent,
           ),
-          SizedBox(width: PharmaTheme.spacingXs),
+          const SizedBox(width: PharmaTheme.spacingXs),
           Text(
             label,
             style: PharmaTheme.bodySmall.copyWith(
@@ -1805,17 +1808,17 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
         children: [
           // Header
           Container(
-            padding: EdgeInsets.all(PharmaTheme.spacingM),
+            padding: const EdgeInsets.all(PharmaTheme.spacingM),
             decoration: BoxDecoration(
               color: PharmaTheme.primary.withOpacity(0.05),
-              border: Border(
+              border: const Border(
                 bottom: BorderSide(color: PharmaTheme.border),
               ),
             ),
             child: Row(
               children: [
-                Icon(Icons.filter_list, color: PharmaTheme.primary),
-                SizedBox(width: PharmaTheme.spacingXs),
+                const Icon(Icons.filter_list, color: PharmaTheme.primary),
+                const SizedBox(width: PharmaTheme.spacingXs),
                 Text(
                   'Filters',
                   style: PharmaTheme.headingSmall.copyWith(
@@ -1829,7 +1832,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
           // Filter form
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(PharmaTheme.spacingM),
+              padding: const EdgeInsets.all(PharmaTheme.spacingM),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -1840,20 +1843,20 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: PharmaTheme.spacingXs),
+                  const SizedBox(height: PharmaTheme.spacingXs),
                   Row(
                     children: [
                       Expanded(
                         child: _buildDateField(_startDateController, 'From'),
                       ),
-                      SizedBox(width: PharmaTheme.spacingXs),
+                      const SizedBox(width: PharmaTheme.spacingXs),
                       Expanded(
                         child: _buildDateField(_endDateController, 'To'),
                       ),
                     ],
                   ),
 
-                  SizedBox(height: PharmaTheme.spacingL),
+                  const SizedBox(height: PharmaTheme.spacingL),
 
                   // Return Number
                   Text(
@@ -1862,38 +1865,38 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: PharmaTheme.spacingXs),
+                  const SizedBox(height: PharmaTheme.spacingXs),
                   TextFormField(
                     controller: _returnNumberController,
                     decoration: InputDecoration(
                       hintText: 'Enter return number',
                       prefixIcon:
-                          Icon(Icons.receipt, color: PharmaTheme.textSecondary),
+                          const Icon(Icons.receipt, color: PharmaTheme.textSecondary),
                       fillColor: PharmaTheme.surface,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.circular(PharmaTheme.radiusM),
-                        borderSide: BorderSide(color: PharmaTheme.border),
+                        borderSide: const BorderSide(color: PharmaTheme.border),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.circular(PharmaTheme.radiusM),
-                        borderSide: BorderSide(color: PharmaTheme.border),
+                        borderSide: const BorderSide(color: PharmaTheme.border),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.circular(PharmaTheme.radiusM),
-                        borderSide: BorderSide(color: PharmaTheme.primary),
+                        borderSide: const BorderSide(color: PharmaTheme.primary),
                       ),
-                      contentPadding: EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                         vertical: PharmaTheme.spacingM,
                         horizontal: PharmaTheme.spacingM,
                       ),
                     ),
                   ),
 
-                  SizedBox(height: PharmaTheme.spacingL),
+                  const SizedBox(height: PharmaTheme.spacingL),
 
                   // Customer
                   Text(
@@ -1902,31 +1905,31 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: PharmaTheme.spacingXs),
+                  const SizedBox(height: PharmaTheme.spacingXs),
                   TextFormField(
                     controller: _customerSearchController,
                     decoration: InputDecoration(
                       hintText: 'Search customers...',
                       prefixIcon:
-                          Icon(Icons.search, color: PharmaTheme.textSecondary),
+                          const Icon(Icons.search, color: PharmaTheme.textSecondary),
                       fillColor: PharmaTheme.surface,
                       filled: true,
                       border: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.circular(PharmaTheme.radiusM),
-                        borderSide: BorderSide(color: PharmaTheme.border),
+                        borderSide: const BorderSide(color: PharmaTheme.border),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.circular(PharmaTheme.radiusM),
-                        borderSide: BorderSide(color: PharmaTheme.border),
+                        borderSide: const BorderSide(color: PharmaTheme.border),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius:
                             BorderRadius.circular(PharmaTheme.radiusM),
-                        borderSide: BorderSide(color: PharmaTheme.primary),
+                        borderSide: const BorderSide(color: PharmaTheme.primary),
                       ),
-                      contentPadding: EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                         vertical: PharmaTheme.spacingM,
                         horizontal: PharmaTheme.spacingM,
                       ),
@@ -1935,7 +1938,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                         .read(customersProvider.notifier)
                         .filterCustomers(query),
                   ),
-                  SizedBox(height: PharmaTheme.spacingM),
+                  const SizedBox(height: PharmaTheme.spacingM),
 
                   // Customer list
                   Container(
@@ -1945,7 +1948,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                     ),
                     height: 200,
                     child: customersState.isLoading
-                        ? Center(
+                        ? const Center(
                             child: CircularProgressIndicator(
                               color: PharmaTheme.primary,
                             ),
@@ -1963,7 +1966,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                                 padding: EdgeInsets.zero,
                                 itemCount:
                                     customersState.filteredCustomers.length,
-                                separatorBuilder: (context, index) => Divider(
+                                separatorBuilder: (context, index) => const Divider(
                                   height: 1,
                                   color: PharmaTheme.border,
                                 ),
@@ -2008,11 +2011,11 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                                           ref
                                                   .read(uiStateProvider.notifier)
                                                   .state =
-                                              UIState(showFilterPanel: false);
+                                              const UIState(showFilterPanel: false);
                                         }
                                       },
                                       child: Padding(
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                           vertical: PharmaTheme.spacingM,
                                           horizontal: PharmaTheme.spacingM,
                                         ),
@@ -2040,7 +2043,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                                 width: PharmaTheme.spacingM),
                                             Expanded(
                                               child: Column(
@@ -2058,7 +2061,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                       height: PharmaTheme
                                                           .spacingXxs),
                                                   Text(
@@ -2069,7 +2072,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                                               ),
                                             ),
                                             if (isSelected)
-                                              Icon(
+                                              const Icon(
                                                 Icons.check_circle,
                                                 color: PharmaTheme.primary,
                                                 size: 20,
@@ -2089,10 +2092,10 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
 
           // Action buttons
           Container(
-            padding: EdgeInsets.all(PharmaTheme.spacingM),
+            padding: const EdgeInsets.all(PharmaTheme.spacingM),
             decoration: BoxDecoration(
               color: PharmaTheme.surface,
-              border: Border(
+              border: const Border(
                 top: BorderSide(color: PharmaTheme.border),
               ),
               boxShadow: [
@@ -2111,8 +2114,8 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                     style: OutlinedButton.styleFrom(
                       foregroundColor: PharmaTheme.textPrimary,
                       padding:
-                          EdgeInsets.symmetric(vertical: PharmaTheme.spacingM),
-                      side: BorderSide(color: PharmaTheme.border),
+                          const EdgeInsets.symmetric(vertical: PharmaTheme.spacingM),
+                      side: const BorderSide(color: PharmaTheme.border),
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(PharmaTheme.radiusS),
@@ -2121,7 +2124,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                     child: const Text('Reset'),
                   ),
                 ),
-                SizedBox(width: PharmaTheme.spacingM),
+                const SizedBox(width: PharmaTheme.spacingM),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _applyFilters,
@@ -2129,7 +2132,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
                       foregroundColor: PharmaTheme.textLight,
                       backgroundColor: PharmaTheme.primary,
                       padding:
-                          EdgeInsets.symmetric(vertical: PharmaTheme.spacingM),
+                          const EdgeInsets.symmetric(vertical: PharmaTheme.spacingM),
                       elevation: 2,
                       shape: RoundedRectangleBorder(
                         borderRadius:
@@ -2154,22 +2157,22 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
         labelText: label,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(PharmaTheme.radiusM),
-          borderSide: BorderSide(color: PharmaTheme.border),
+          borderSide: const BorderSide(color: PharmaTheme.border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(PharmaTheme.radiusM),
-          borderSide: BorderSide(color: PharmaTheme.border),
+          borderSide: const BorderSide(color: PharmaTheme.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(PharmaTheme.radiusM),
-          borderSide: BorderSide(color: PharmaTheme.primary),
+          borderSide: const BorderSide(color: PharmaTheme.primary),
         ),
-        contentPadding: EdgeInsets.symmetric(
+        contentPadding: const EdgeInsets.symmetric(
           horizontal: PharmaTheme.spacingM,
           vertical: PharmaTheme.spacingS,
         ),
         suffixIcon:
-            Icon(Icons.calendar_today, color: PharmaTheme.textSecondary),
+            const Icon(Icons.calendar_today, color: PharmaTheme.textSecondary),
         isDense: true,
         fillColor: PharmaTheme.surface,
         filled: true,
@@ -2207,7 +2210,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: PharmaTheme.primary,
               onPrimary: PharmaTheme.textLight,
               onSurface: PharmaTheme.textPrimary,
@@ -2232,7 +2235,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
     double valueSize = 14,
   }) {
     return Padding(
-      padding: EdgeInsets.only(bottom: PharmaTheme.spacingM),
+      padding: const EdgeInsets.only(bottom: PharmaTheme.spacingM),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -2240,7 +2243,7 @@ class _AllReturnsScreenState extends ConsumerState<AllReturnsScreen> {
             label,
             style: PharmaTheme.caption,
           ),
-          SizedBox(height: PharmaTheme.spacingXxs),
+          const SizedBox(height: PharmaTheme.spacingXxs),
           Text(
             value,
             style: TextStyle(

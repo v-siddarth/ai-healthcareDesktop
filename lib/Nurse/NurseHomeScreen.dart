@@ -395,7 +395,7 @@ class _NurseHomeScreenState extends ConsumerState<NurseHomeScreen> {
                   ),
                 ),
                 const SizedBox(width: 6.0),
-                Text(
+                const Text(
                   'Online',
                   style: TextStyle(
                     color: HospitalTheme.success,
@@ -417,7 +417,7 @@ class _NurseHomeScreenState extends ConsumerState<NurseHomeScreen> {
     return HospitalTheme.buildCard(
       padding: const EdgeInsets.all(16.0),
       backgroundColor: HospitalTheme.surfaceLight,
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -428,7 +428,7 @@ class _NurseHomeScreenState extends ConsumerState<NurseHomeScreen> {
               fontSize: 14.0,
             ),
           ),
-          const SizedBox(height: 8.0),
+          SizedBox(height: 8.0),
           Text(
             '• Ctrl+Q: Sign out\n• F11: Toggle fullscreen',
             style: TextStyle(

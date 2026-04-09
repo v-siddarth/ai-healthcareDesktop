@@ -33,14 +33,14 @@ class ImprovedSidebar extends StatefulWidget {
   final Widget? userProfile;
 
   const ImprovedSidebar({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.onDestinationSelected,
     required this.navigationItems,
     this.title,
     this.subtitle,
     this.userProfile,
-  }) : super(key: key);
+  });
 
   @override
   State<ImprovedSidebar> createState() => _ImprovedSidebarState();
@@ -174,7 +174,7 @@ class _PremiumSidebarContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
@@ -703,7 +703,7 @@ class _PremiumUserProfile extends StatelessWidget {
                 ),
               ],
             ),
-            child: Icon(
+            child: const Icon(
               Icons.local_hospital,
               color: HospitalTheme.primary,
               size: 28,
@@ -718,9 +718,9 @@ class _PremiumUserProfile extends StatelessWidget {
                   shaderCallback: (bounds) => const LinearGradient(
                     colors: [Colors.white, Color(0xFFe0e0e0)],
                   ).createShader(bounds),
-                  child: Text(
+                  child: const Text(
                     'DocNex.Care',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,

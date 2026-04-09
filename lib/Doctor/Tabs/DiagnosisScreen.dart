@@ -72,8 +72,8 @@ class DiagnosisScreen extends ConsumerStatefulWidget {
   const DiagnosisScreen({
     required this.patientId,
     required this.admissionId,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   ConsumerState<DiagnosisScreen> createState() => _DiagnosisScreenState();
@@ -200,11 +200,11 @@ class _DiagnosisScreenState extends ConsumerState<DiagnosisScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: HospitalTheme.radiusMedium,
         ),
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.keyboard, color: HospitalTheme.primary),
-            const SizedBox(width: 12),
-            const Text('Keyboard Shortcuts'),
+            SizedBox(width: 12),
+            Text('Keyboard Shortcuts'),
           ],
         ),
         content: Column(
@@ -219,7 +219,7 @@ class _DiagnosisScreenState extends ConsumerState<DiagnosisScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(
+            child: const Text(
               'Got it',
               style: TextStyle(color: HospitalTheme.primary),
             ),
@@ -243,7 +243,7 @@ class _DiagnosisScreenState extends ConsumerState<DiagnosisScreen> {
             ),
             child: Text(
               shortcut,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
@@ -254,7 +254,7 @@ class _DiagnosisScreenState extends ConsumerState<DiagnosisScreen> {
           Expanded(
             child: Text(
               description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: HospitalTheme.textMedium,
               ),
@@ -266,7 +266,7 @@ class _DiagnosisScreenState extends ConsumerState<DiagnosisScreen> {
   }
 
   Widget _buildLoadingState() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -274,7 +274,7 @@ class _DiagnosisScreenState extends ConsumerState<DiagnosisScreen> {
             color: HospitalTheme.primary,
             strokeWidth: 3,
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           Text(
             'Loading diagnosis data...',
             style: TextStyle(
@@ -301,13 +301,13 @@ class _DiagnosisScreenState extends ConsumerState<DiagnosisScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
+            const Icon(
               Icons.error_outline,
               size: 64,
               color: HospitalTheme.error,
             ),
             const SizedBox(height: 20),
-            Text(
+            const Text(
               'Error Loading Diagnosis',
               style: TextStyle(
                 fontSize: 20,
@@ -319,7 +319,7 @@ class _DiagnosisScreenState extends ConsumerState<DiagnosisScreen> {
             Text(
               error.toString(),
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: HospitalTheme.textMedium,
               ),
@@ -394,8 +394,8 @@ class DiagnosisContent extends ConsumerWidget {
     required this.admissionId,
     required this.gradientColors,
     required this.onRefresh,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -539,14 +539,14 @@ class DiagnosisContent extends ConsumerWidget {
               color: HospitalTheme.primary.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               FontAwesomeIcons.clipboardCheck,
               size: 48,
               color: HospitalTheme.primary,
             ),
           ),
           const SizedBox(height: 24),
-          Text(
+          const Text(
             'No Diagnosis Records Found',
             style: TextStyle(
               fontSize: 22,
@@ -555,7 +555,7 @@ class DiagnosisContent extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 12),
-          Text(
+          const Text(
             'There are currently no diagnosis records for this patient.\nClick "Add Diagnosis" to create the first diagnosis entry.',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -572,7 +572,7 @@ class DiagnosisContent extends ConsumerWidget {
               borderRadius: HospitalTheme.radiusSmall,
               border: Border.all(color: HospitalTheme.border),
             ),
-            child: Row(
+            child: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
@@ -580,7 +580,7 @@ class DiagnosisContent extends ConsumerWidget {
                   color: HospitalTheme.warning,
                   size: 20,
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Text(
                   'Use AI suggestions or manual entry to add diagnosis',
                   style: TextStyle(
@@ -612,7 +612,7 @@ class DiagnosisContent extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
@@ -622,7 +622,7 @@ class DiagnosisContent extends ConsumerWidget {
                     color: HospitalTheme.primary,
                     size: 20,
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Text(
                     'Diagnosis Records',
                     style: TextStyle(
@@ -655,7 +655,7 @@ class DiagnosisContent extends ConsumerWidget {
                 child: DataTable(
                   columnSpacing: isDesktop ? 40 : 20,
                   horizontalMargin: 0,
-                  headingRowColor: MaterialStateColor.resolveWith(
+                  headingRowColor: WidgetStateColor.resolveWith(
                     (states) => HospitalTheme.surfaceLight.withOpacity(0.5),
                   ),
                   decoration: BoxDecoration(
@@ -694,7 +694,7 @@ class DiagnosisContent extends ConsumerWidget {
                         return MapEntry(
                           index,
                           DataRow(
-                            color: MaterialStateColor.resolveWith(
+                            color: WidgetStateColor.resolveWith(
                               (states) => index.isEven
                                   ? Colors.transparent
                                   : HospitalTheme.surfaceLight.withOpacity(0.3),
@@ -786,7 +786,7 @@ class DiagnosisContent extends ConsumerWidget {
       ),
       child: Text(
         '$index',
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           color: HospitalTheme.primary,
         ),
@@ -810,7 +810,7 @@ class DiagnosisContent extends ConsumerWidget {
               message: text,
               child: Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: HospitalTheme.textDark,
                 ),
@@ -836,7 +836,7 @@ class DiagnosisContent extends ConsumerWidget {
         const SizedBox(width: 8),
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 13,
             color: HospitalTheme.textMedium,
           ),
@@ -855,7 +855,7 @@ class DiagnosisContent extends ConsumerWidget {
               color: HospitalTheme.error.withOpacity(0.1),
               borderRadius: BorderRadius.circular(6),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.delete_outline,
               color: HospitalTheme.error,
               size: 16,
@@ -876,11 +876,11 @@ class DiagnosisContent extends ConsumerWidget {
         shape: RoundedRectangleBorder(
           borderRadius: HospitalTheme.radiusMedium,
         ),
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.warning_amber, color: HospitalTheme.warning),
-            const SizedBox(width: 12),
-            const Text('Confirm Deletion'),
+            SizedBox(width: 12),
+            Text('Confirm Deletion'),
           ],
         ),
         content: Column(
@@ -897,14 +897,14 @@ class DiagnosisContent extends ConsumerWidget {
               ),
               child: Text(
                 diagnosis.split(' - Date: ')[0],
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   color: HospitalTheme.textDark,
                 ),
               ),
             ),
             const SizedBox(height: 12),
-            Text(
+            const Text(
               'This action cannot be undone.',
               style: TextStyle(
                 fontSize: 12,
@@ -917,7 +917,7 @@ class DiagnosisContent extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(
+            child: const Text(
               'Cancel',
               style: TextStyle(color: HospitalTheme.textMedium),
             ),

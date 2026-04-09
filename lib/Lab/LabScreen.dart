@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:doctordesktop/StateProvider.dart';
+import 'package:doctordesktop/providers/medical_state_provider.dart';
 import 'package:doctordesktop/constants/Methods.dart';
 import 'package:doctordesktop/constants/Url.dart';
 import 'package:doctordesktop/constants/HospitalTheme.dart';
@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class LabPatientsScreen extends ConsumerStatefulWidget {
-  const LabPatientsScreen({Key? key}) : super(key: key);
+  const LabPatientsScreen({super.key});
 
   @override
   ConsumerState<LabPatientsScreen> createState() => _LabPatientsScreenState();
@@ -67,7 +67,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -78,7 +78,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                             color: HospitalTheme.textDark,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: 4),
                         Text(
                           'View and manage all patient lab reports',
                           style: TextStyle(
@@ -122,21 +122,21 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                               setState(() => _searchQuery = value),
                           decoration: InputDecoration(
                             hintText: 'Search by patient name or test name...',
-                            prefixIcon: Icon(Icons.search,
+                            prefixIcon: const Icon(Icons.search,
                                 color: HospitalTheme.primary),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide:
-                                  BorderSide(color: HospitalTheme.border),
+                                  const BorderSide(color: HospitalTheme.border),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide:
-                                  BorderSide(color: HospitalTheme.border),
+                                  const BorderSide(color: HospitalTheme.border),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: HospitalTheme.primary, width: 2),
                             ),
                           ),
@@ -204,7 +204,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.science_outlined,
                           size: 80,
                           color: HospitalTheme.textLight,
@@ -214,7 +214,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                           _searchQuery.isEmpty
                               ? 'No lab reports available for the selected filters'
                               : 'No matching reports found',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             color: HospitalTheme.textMedium,
                           ),
@@ -252,12 +252,12 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                   ),
                 );
               },
-              loading: () => Center(
+              loading: () => const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircularProgressIndicator(color: HospitalTheme.primary),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Text('Loading lab reports...',
                         style: TextStyle(color: HospitalTheme.textMedium)),
                   ],
@@ -267,10 +267,10 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.error_outline,
+                    const Icon(Icons.error_outline,
                         size: 60, color: HospitalTheme.error),
                     const SizedBox(height: 16),
-                    Text(
+                    const Text(
                       'Error loading lab reports',
                       style:
                           TextStyle(fontSize: 18, color: HospitalTheme.error),
@@ -278,7 +278,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                     const SizedBox(height: 8),
                     Text(
                       error.toString(),
-                      style: TextStyle(color: HospitalTheme.textMedium),
+                      style: const TextStyle(color: HospitalTheme.textMedium),
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton.icon(
@@ -429,7 +429,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   color: HospitalTheme.textMedium,
                 ),
@@ -437,7 +437,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
               const SizedBox(height: 4),
               Text(
                 value,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.textDark,
@@ -470,7 +470,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                 : HospitalTheme.textMedium,
           ),
           avatar: _dischargeFilter == 'all'
-              ? Icon(Icons.check_circle, size: 16, color: HospitalTheme.primary)
+              ? const Icon(Icons.check_circle, size: 16, color: HospitalTheme.primary)
               : null,
         ),
         ChoiceChip(
@@ -489,7 +489,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                 : HospitalTheme.textMedium,
           ),
           avatar: _dischargeFilter == 'not_discharged'
-              ? Icon(Icons.person, size: 16, color: HospitalTheme.success)
+              ? const Icon(Icons.person, size: 16, color: HospitalTheme.success)
               : null,
         ),
         ChoiceChip(
@@ -508,7 +508,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                 : HospitalTheme.textMedium,
           ),
           avatar: _dischargeFilter == 'discharged'
-              ? Icon(Icons.check_circle, size: 16, color: HospitalTheme.info)
+              ? const Icon(Icons.check_circle, size: 16, color: HospitalTheme.info)
               : null,
         ),
       ],
@@ -532,17 +532,17 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
               setState(() => _sortOption = value);
             }
           },
-          icon: Icon(Icons.sort, color: HospitalTheme.primary),
-          style: TextStyle(color: HospitalTheme.textDark),
-          items: [
+          icon: const Icon(Icons.sort, color: HospitalTheme.primary),
+          style: const TextStyle(color: HospitalTheme.textDark),
+          items: const [
             DropdownMenuItem(
               value: 'date_desc',
               child: Row(
                 children: [
                   Icon(Icons.arrow_downward,
                       size: 16, color: HospitalTheme.textMedium),
-                  const SizedBox(width: 8),
-                  const Text('Newest First'),
+                  SizedBox(width: 8),
+                  Text('Newest First'),
                 ],
               ),
             ),
@@ -552,8 +552,8 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                 children: [
                   Icon(Icons.arrow_upward,
                       size: 16, color: HospitalTheme.textMedium),
-                  const SizedBox(width: 8),
-                  const Text('Oldest First'),
+                  SizedBox(width: 8),
+                  Text('Oldest First'),
                 ],
               ),
             ),
@@ -563,8 +563,8 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                 children: [
                   Icon(Icons.sort_by_alpha,
                       size: 16, color: HospitalTheme.textMedium),
-                  const SizedBox(width: 8),
-                  const Text('Name (A-Z)'),
+                  SizedBox(width: 8),
+                  Text('Name (A-Z)'),
                 ],
               ),
             ),
@@ -574,8 +574,8 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                 children: [
                   Icon(Icons.sort_by_alpha,
                       size: 16, color: HospitalTheme.textMedium),
-                  const SizedBox(width: 8),
-                  const Text('Name (Z-A)'),
+                  SizedBox(width: 8),
+                  Text('Name (Z-A)'),
                 ],
               ),
             ),
@@ -644,7 +644,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                         children: [
                           Text(
                             patient?.name ?? 'N/A',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: HospitalTheme.textDark,
@@ -652,7 +652,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                           ),
                           Text(
                             'ID: ${report.id ?? "N/A"}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               color: HospitalTheme.textMedium,
                             ),
@@ -668,12 +668,12 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                           color: HospitalTheme.info.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(Icons.check_circle,
                                 size: 14, color: HospitalTheme.info),
-                            const SizedBox(width: 4),
+                            SizedBox(width: 4),
                             Text(
                               'Discharged',
                               style: TextStyle(
@@ -731,7 +731,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                         child: Text(
                           report.labTestNameGivenByDoctor ??
                               "No test specified",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             color: HospitalTheme.textDark,
                             fontWeight: FontWeight.w500,
@@ -752,12 +752,12 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.description,
+                        const Icon(Icons.description,
                             size: 16, color: HospitalTheme.textLight),
                         const SizedBox(width: 4),
                         Text(
                           '${report.reports?.length ?? 0} reports',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             color: HospitalTheme.textMedium,
                           ),
@@ -767,7 +767,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                     Row(
                       children: [
                         IconButton(
-                          icon: Icon(Icons.visibility,
+                          icon: const Icon(Icons.visibility,
                               size: 20, color: HospitalTheme.primary),
                           onPressed: () => _showReportDetails(report),
                           tooltip: 'View Details',
@@ -806,7 +806,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
         Expanded(
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               color: HospitalTheme.textDark,
             ),
@@ -849,11 +849,11 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.download, color: HospitalTheme.primary),
-            const SizedBox(width: 8),
-            const Text('Export Reports'),
+            SizedBox(width: 8),
+            Text('Export Reports'),
           ],
         ),
         content: SizedBox(
@@ -934,7 +934,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                   children: [
                     Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
                       ),
@@ -942,7 +942,7 @@ class _LabPatientsScreenState extends ConsumerState<LabPatientsScreen> {
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: HospitalTheme.textMedium,
                       ),
@@ -977,10 +977,10 @@ class ReportDetailsDialog extends StatelessWidget {
   final VoidCallback onRefresh;
 
   const ReportDetailsDialog({
-    Key? key,
+    super.key,
     required this.report,
     required this.onRefresh,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -997,10 +997,10 @@ class ReportDetailsDialog extends StatelessWidget {
             // Header
             Container(
               padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.primary,
                 borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(16)),
+                    BorderRadius.vertical(top: Radius.circular(16)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1100,9 +1100,9 @@ class ReportDetailsDialog extends StatelessWidget {
                                   _buildReportItem(labReport, context))
                               .toList()
                         else
-                          Center(
+                          const Center(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              padding: EdgeInsets.symmetric(vertical: 16),
                               child: Text(
                                 'No reports uploaded yet',
                                 style: TextStyle(
@@ -1138,7 +1138,7 @@ class ReportDetailsDialog extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
@@ -1173,7 +1173,7 @@ class ReportDetailsDialog extends StatelessWidget {
             width: 150,
             child: Text(
               '$label:',
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 color: HospitalTheme.textMedium,
               ),
@@ -1182,7 +1182,7 @@ class ReportDetailsDialog extends StatelessWidget {
           Expanded(
             child: Text(
               value,
-              style: TextStyle(color: HospitalTheme.textDark),
+              style: const TextStyle(color: HospitalTheme.textDark),
             ),
           ),
         ],
@@ -1211,7 +1211,7 @@ class ReportDetailsDialog extends StatelessWidget {
                   children: [
                     Text(
                       labReport.labTestName ?? "Unknown Test",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
@@ -1220,7 +1220,7 @@ class ReportDetailsDialog extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       'Type: ${labReport.labType ?? "N/A"}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                       ),
                     ),
@@ -1230,12 +1230,12 @@ class ReportDetailsDialog extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.visibility, color: HospitalTheme.primary),
+                    icon: const Icon(Icons.visibility, color: HospitalTheme.primary),
                     onPressed: () => _openReport(labReport.reportUrl),
                     tooltip: 'View Report',
                   ),
                   IconButton(
-                    icon: Icon(Icons.delete, color: HospitalTheme.error),
+                    icon: const Icon(Icons.delete, color: HospitalTheme.error),
                     onPressed: () => _confirmDelete(context, labReport._id),
                     tooltip: 'Delete Report',
                   ),
@@ -1246,7 +1246,7 @@ class ReportDetailsDialog extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             'Uploaded: ${_formatDate(labReport.uploadedAt)}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textLight,
             ),
@@ -1320,7 +1320,7 @@ class ReportDetailsDialog extends StatelessWidget {
     try {
       final response = await http.delete(
         Uri.parse(
-            '${KVM_URL}/labs/deleteSpecificReport/${report.id}/$reportId'),
+            '$KVM_URL/labs/deleteSpecificReport/${report.id}/$reportId'),
       );
 
       if (response.statusCode == 200) {
@@ -1347,12 +1347,12 @@ class AddLabReportScreen extends StatefulWidget {
   final VoidCallback onReportUploaded;
 
   const AddLabReportScreen({
-    Key? key,
+    super.key,
     required this.admissionId,
     required this.patientId,
     required this.labReportId,
     required this.onReportUploaded,
-  }) : super(key: key);
+  });
 
   @override
   State<AddLabReportScreen> createState() => _AddLabReportScreenState();
@@ -1398,7 +1398,7 @@ class _AddLabReportScreenState extends State<AddLabReportScreen> {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('${KVM_URL}/labs/upload-lab-report'),
+        Uri.parse('$KVM_URL/labs/upload-lab-report'),
       );
 
       request.fields['admissionId'] = widget.admissionId;
@@ -1463,7 +1463,7 @@ class _AddLabReportScreenState extends State<AddLabReportScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                const Text(
                   'Upload Lab Report',
                   style: TextStyle(
                     fontSize: 24,
@@ -1508,7 +1508,7 @@ class _AddLabReportScreenState extends State<AddLabReportScreen> {
                   ),
                   child: Column(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.upload_file,
                         size: 48,
                         color: HospitalTheme.primary,
@@ -1576,12 +1576,12 @@ class StatCard extends StatelessWidget {
   final Color color;
 
   const StatCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.value,
     required this.icon,
     required this.color,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1614,7 +1614,7 @@ class StatCard extends StatelessWidget {
               ),
               Text(
                 value,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.textDark,
@@ -1625,7 +1625,7 @@ class StatCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: HospitalTheme.textMedium,
             ),
@@ -1639,7 +1639,7 @@ class StatCard extends StatelessWidget {
 class ReportStatusBadge extends StatelessWidget {
   final String status;
 
-  const ReportStatusBadge({Key? key, required this.status}) : super(key: key);
+  const ReportStatusBadge({super.key, required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -1700,10 +1700,10 @@ class FilterOptions extends StatelessWidget {
   final String currentFilter;
 
   const FilterOptions({
-    Key? key,
+    super.key,
     required this.onFilterChanged,
     required this.currentFilter,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1723,7 +1723,7 @@ class FilterOptions extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Filter By',
             style: TextStyle(
               fontSize: 16,
@@ -1782,10 +1782,10 @@ class SortOptions extends StatelessWidget {
   final String currentSort;
 
   const SortOptions({
-    Key? key,
+    super.key,
     required this.onSortChanged,
     required this.currentSort,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1839,10 +1839,10 @@ class SortOptions extends StatelessWidget {
           border: Border.all(color: HospitalTheme.border),
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Row(
+        child: const Row(
           children: [
             Icon(Icons.sort, size: 18, color: HospitalTheme.textMedium),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Text(
               'Sort',
               style: TextStyle(color: HospitalTheme.textMedium),

@@ -1,5 +1,5 @@
 import 'package:doctordesktop/Doctor/DoctorPatientDetailScreen.dart';
-import 'package:doctordesktop/StateProvider.dart';
+import 'package:doctordesktop/providers/medical_state_provider.dart';
 import 'package:doctordesktop/authProvider/auth_provider.dart';
 import 'package:doctordesktop/constants/HospitalTheme.dart';
 import 'package:doctordesktop/model/getNewPatientModel.dart';
@@ -29,7 +29,7 @@ final assignedPatientsProvider1 =
 );
 
 class AdmittedPatientsScreen extends ConsumerStatefulWidget {
-  const AdmittedPatientsScreen({Key? key}) : super(key: key);
+  const AdmittedPatientsScreen({super.key});
 
   @override
   _AdmittedPatientsScreenState createState() => _AdmittedPatientsScreenState();
@@ -129,18 +129,18 @@ class _AdmittedPatientsScreenState
                       },
                       decoration: InputDecoration(
                         hintText: 'Search patients by name, ID, or gender...',
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           color: HospitalTheme.textLight,
                           fontSize: 14,
                         ),
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.search_rounded,
                           color: HospitalTheme.textMedium,
                           size: 20,
                         ),
                         suffixIcon: _searchQuery.isNotEmpty
                             ? IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.clear_rounded,
                                   color: HospitalTheme.textMedium,
                                   size: 18,
@@ -231,9 +231,9 @@ class _AdmittedPatientsScreenState
           // Header
           Container(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
-              borderRadius: const BorderRadius.only(
+              borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
                 topRight: Radius.circular(16),
               ),
@@ -243,12 +243,12 @@ class _AdmittedPatientsScreenState
             ),
             child: Row(
               children: [
-                Icon(Icons.local_hospital_outlined,
+                const Icon(Icons.local_hospital_outlined,
                     color: HospitalTheme.textDark, size: 20),
                 const SizedBox(width: 12),
                 Text(
                   'Admitted Patients (${patients.length})',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: HospitalTheme.textDark,
@@ -261,13 +261,13 @@ class _AdmittedPatientsScreenState
           // Table Header
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF9FAFB),
+            decoration: const BoxDecoration(
+              color: Color(0xFFF9FAFB),
               border: Border(
                 bottom: BorderSide(color: HospitalTheme.border, width: 1),
               ),
             ),
-            child: Row(
+            child: const Row(
               children: [
                 Expanded(
                   flex: 3,
@@ -364,7 +364,7 @@ class _AdmittedPatientsScreenState
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
           color: index % 2 == 0 ? Colors.white : const Color(0xFFFAFAFA),
-          border: Border(
+          border: const Border(
             bottom: BorderSide(color: HospitalTheme.border, width: 1),
           ),
         ),
@@ -387,7 +387,7 @@ class _AdmittedPatientsScreenState
                         patient.name.isNotEmpty
                             ? patient.name[0].toUpperCase()
                             : '?',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: HospitalTheme.primary,
@@ -402,7 +402,7 @@ class _AdmittedPatientsScreenState
                       children: [
                         Text(
                           patient.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: HospitalTheme.textDark,
@@ -411,7 +411,7 @@ class _AdmittedPatientsScreenState
                         const SizedBox(height: 2),
                         Text(
                           'ID: ${patient.patientId}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             color: HospitalTheme.textMedium,
                           ),
@@ -431,12 +431,12 @@ class _AdmittedPatientsScreenState
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.cake_outlined,
+                      const Icon(Icons.cake_outlined,
                           size: 14, color: HospitalTheme.textMedium),
                       const SizedBox(width: 4),
                       Text(
                         '${patient.age} years',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
                           color: HospitalTheme.textDark,
                         ),
@@ -456,7 +456,7 @@ class _AdmittedPatientsScreenState
                       const SizedBox(width: 4),
                       Text(
                         patient.gender,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
                           color: HospitalTheme.textDark,
                         ),
@@ -575,14 +575,14 @@ class _AdmittedPatientsScreenState
                 color: HospitalTheme.primary.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.local_hospital_outlined,
                 size: 48,
                 color: HospitalTheme.primary,
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'No Admitted Patients',
               style: TextStyle(
                 fontSize: 20,
@@ -591,7 +591,7 @@ class _AdmittedPatientsScreenState
               ),
             ),
             const SizedBox(height: 8),
-            Text(
+            const Text(
               'There are currently no admitted patients.',
               style: TextStyle(
                 fontSize: 14,
@@ -624,7 +624,7 @@ class _AdmittedPatientsScreenState
     return Center(
       child: Container(
         padding: const EdgeInsets.all(48),
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
@@ -632,7 +632,7 @@ class _AdmittedPatientsScreenState
               size: 48,
               color: HospitalTheme.textLight,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'No patients found',
               style: TextStyle(
@@ -641,7 +641,7 @@ class _AdmittedPatientsScreenState
                 color: HospitalTheme.textDark,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'Try adjusting your search criteria',
               style: TextStyle(
@@ -656,14 +656,14 @@ class _AdmittedPatientsScreenState
   }
 
   Widget _buildLoadingState() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircularProgressIndicator(
             color: HospitalTheme.primary,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'Loading patients...',
             style: TextStyle(
@@ -689,14 +689,14 @@ class _AdmittedPatientsScreenState
                 color: HospitalTheme.error.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.people,
                 size: 48,
                 color: HospitalTheme.error,
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'No admitted Patient',
               style: TextStyle(
                 fontSize: 20,
@@ -790,11 +790,11 @@ class _AdmittedPatientsScreenState
                       color: HospitalTheme.primary.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(Icons.medical_information_rounded,
+                    child: const Icon(Icons.medical_information_rounded,
                         color: HospitalTheme.primary, size: 20),
                   ),
                   const SizedBox(width: 12),
-                  Text(
+                  const Text(
                     'Update Condition at Discharge',
                     style: TextStyle(
                       fontSize: 18,
@@ -812,12 +812,12 @@ class _AdmittedPatientsScreenState
                     _buildModernFormField(
                       child: DropdownButtonFormField<String>(
                         value: selectedCondition,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Condition at Discharge',
                           prefixIcon: Icon(Icons.assignment_turned_in_rounded,
                               color: HospitalTheme.primary),
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(
+                          contentPadding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
                         ),
                         items: [
@@ -847,12 +847,12 @@ class _AdmittedPatientsScreenState
                         onChanged: (text) {
                           additionalInfo = text;
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Additional Information',
                           prefixIcon: Icon(Icons.notes_rounded,
                               color: HospitalTheme.primary),
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(
+                          contentPadding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
                         ),
                         maxLines: 3,
@@ -865,12 +865,12 @@ class _AdmittedPatientsScreenState
                           amountToBePayed = text;
                         },
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Amount to be Paid',
                           prefixIcon: Icon(Icons.currency_rupee_rounded,
                               color: HospitalTheme.primary),
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(
+                          contentPadding: EdgeInsets.symmetric(
                               horizontal: 16, vertical: 16),
                         ),
                       ),
@@ -881,7 +881,7 @@ class _AdmittedPatientsScreenState
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: Text(
+                  child: const Text(
                     'Cancel',
                     style: TextStyle(
                       color: HospitalTheme.textMedium,
@@ -985,11 +985,11 @@ class _AdmittedPatientsScreenState
                   color: HospitalTheme.error.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(Icons.logout_rounded,
+                child: const Icon(Icons.logout_rounded,
                     color: HospitalTheme.error, size: 20),
               ),
               const SizedBox(width: 12),
-              Text(
+              const Text(
                 'Confirm Discharge',
                 style: TextStyle(
                   fontSize: 18,
@@ -1013,13 +1013,13 @@ class _AdmittedPatientsScreenState
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.warning_amber_rounded,
+                    const Icon(Icons.warning_amber_rounded,
                         color: HospitalTheme.warning, size: 20),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         'Are you sure you want to discharge ${patient.name}?',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: HospitalTheme.textDark,
                           fontWeight: FontWeight.w500,
@@ -1032,7 +1032,7 @@ class _AdmittedPatientsScreenState
               const SizedBox(height: 16),
               Text(
                 'Condition: $selectedCondition',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: HospitalTheme.textDark,
                 ),
@@ -1040,7 +1040,7 @@ class _AdmittedPatientsScreenState
               const SizedBox(height: 8),
               Text(
                 'Amount: ₹$amount',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: HospitalTheme.textDark,
                 ),
@@ -1050,7 +1050,7 @@ class _AdmittedPatientsScreenState
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text(
+              child: const Text(
                 'Cancel',
                 style: TextStyle(
                   color: HospitalTheme.textMedium,
@@ -1223,9 +1223,9 @@ class SelectAdmissionDialog extends StatelessWidget {
   final List<AdmissionRecord> admissionRecords;
 
   const SelectAdmissionDialog({
-    Key? key,
+    super.key,
     required this.admissionRecords,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1240,11 +1240,11 @@ class SelectAdmissionDialog extends StatelessWidget {
               color: HospitalTheme.primary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(Icons.assignment_rounded,
+            child: const Icon(Icons.assignment_rounded,
                 color: HospitalTheme.primary, size: 20),
           ),
           const SizedBox(width: 12),
-          Text(
+          const Text(
             'Select Admission Record',
             style: TextStyle(
               fontSize: 18,
@@ -1269,14 +1269,14 @@ class SelectAdmissionDialog extends StatelessWidget {
                 child: ListTile(
                   title: Text(
                     'Admission Date: ${admission.admissionDate}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w600,
                       color: HospitalTheme.textDark,
                     ),
                   ),
                   subtitle: Text(
                     'Reason: ${admission.reasonForAdmission}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.textMedium,
                     ),
                   ),
@@ -1292,7 +1292,7 @@ class SelectAdmissionDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(
+          child: const Text(
             'Cancel',
             style: TextStyle(
               color: HospitalTheme.textMedium,
@@ -1306,6 +1306,8 @@ class SelectAdmissionDialog extends StatelessWidget {
 }
 
 class AssignLabDialog extends StatefulWidget {
+  const AssignLabDialog({super.key});
+
   @override
   _AssignLabDialogState createState() => _AssignLabDialogState();
 }
@@ -1326,11 +1328,11 @@ class _AssignLabDialogState extends State<AssignLabDialog> {
               color: HospitalTheme.secondary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(Icons.science_rounded,
+            child: const Icon(Icons.science_rounded,
                 color: HospitalTheme.secondary, size: 20),
           ),
           const SizedBox(width: 12),
-          Text(
+          const Text(
             'Assign to Lab',
             style: TextStyle(
               fontSize: 18,
@@ -1349,20 +1351,20 @@ class _AssignLabDialogState extends State<AssignLabDialog> {
         ),
         child: TextField(
           controller: _controller,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Lab Test Name',
             prefixIcon:
                 Icon(Icons.assignment_rounded, color: HospitalTheme.secondary),
             border: InputBorder.none,
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           ),
         ),
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(
+          child: const Text(
             'Cancel',
             style: TextStyle(
               color: HospitalTheme.textMedium,

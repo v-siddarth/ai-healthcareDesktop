@@ -2,6 +2,8 @@ import 'package:doctordesktop/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 class InputForm extends StatefulWidget {
+  const InputForm({super.key});
+
   @override
   _InputFormState createState() => _InputFormState();
 }
@@ -16,7 +18,7 @@ class _InputFormState extends State<InputForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('User Input Form')),
+      appBar: AppBar(title: const Text('User Input Form')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -24,7 +26,7 @@ class _InputFormState extends State<InputForm> {
           child: Column(
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your email';
@@ -38,7 +40,7 @@ class _InputFormState extends State<InputForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true, // Hide password input
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -54,7 +56,7 @@ class _InputFormState extends State<InputForm> {
               ),
               DropdownButtonFormField<String>(
                 value: usertype,
-                decoration: InputDecoration(labelText: 'User Type'),
+                decoration: const InputDecoration(labelText: 'User Type'),
                 items: <String>['doctor', 'nurse', 'admin'].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -68,7 +70,7 @@ class _InputFormState extends State<InputForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Doctor Name'),
+                decoration: const InputDecoration(labelText: 'Doctor Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the doctor\'s name';
@@ -81,14 +83,14 @@ class _InputFormState extends State<InputForm> {
                   });
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     sendData(email, password, usertype, doctorName);
                   }
                 },
-                child: Text('Send Data'),
+                child: const Text('Send Data'),
               ),
             ],
           ),

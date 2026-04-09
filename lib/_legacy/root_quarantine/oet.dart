@@ -218,12 +218,12 @@ class _PetAdoptionHomeScreenState extends State<PetAdoptionHomeScreen>
     return Container(
       width: 280,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            const Color(0xFF6C63FF),
-            const Color(0xFF4ECDC4),
+            Color(0xFF6C63FF),
+            Color(0xFF4ECDC4),
           ],
         ),
         boxShadow: [
@@ -465,10 +465,10 @@ class _PetAdoptionHomeScreenState extends State<PetAdoptionHomeScreen>
           ),
           const SizedBox(width: 8),
           // Profile
-          CircleAvatar(
+          const CircleAvatar(
             radius: 20,
-            backgroundColor: const Color(0xFF6C63FF),
-            child: const Icon(Icons.person, color: Colors.white),
+            backgroundColor: Color(0xFF6C63FF),
+            child: Icon(Icons.person, color: Colors.white),
           ),
         ],
       ),

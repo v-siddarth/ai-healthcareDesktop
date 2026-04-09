@@ -247,7 +247,7 @@ class MasterDataNotifier extends StateNotifier<MasterDataState> {
     loadInitialData();
   }
 
-  static const String baseUrl = '${BASE_URL}/master';
+  static const String baseUrl = '$BASE_URL/master';
 
   Future<void> loadInitialData() async {
     await Future.wait([
@@ -444,7 +444,7 @@ final masterDataProvider =
 // ==================== MAIN SCREEN ====================
 
 class MasterDataOperationsScreen extends ConsumerStatefulWidget {
-  const MasterDataOperationsScreen({Key? key}) : super(key: key);
+  const MasterDataOperationsScreen({super.key});
 
   @override
   ConsumerState<MasterDataOperationsScreen> createState() =>
@@ -595,7 +595,7 @@ class _MasterDataOperationsScreenState
         // Search and Filters Header
         Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: HospitalTheme.surfaceLight,
             border: Border(bottom: BorderSide(color: HospitalTheme.border)),
           ),
@@ -744,7 +744,7 @@ class _MasterDataOperationsScreenState
                 ),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.textMedium,
                   ),
@@ -854,13 +854,13 @@ class _MasterDataOperationsScreenState
             Expanded(
               child: Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textDark,
                   fontWeight: FontWeight.w500,
                 ),
               ),
             ),
-            Icon(Icons.arrow_forward_ios,
+            const Icon(Icons.arrow_forward_ios,
                 size: 14, color: HospitalTheme.textLight),
           ],
         ),
@@ -948,9 +948,9 @@ class _MasterDataOperationsScreenState
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, size: 48, color: HospitalTheme.error),
+            const Icon(Icons.error_outline, size: 48, color: HospitalTheme.error),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'Error loading patients',
               style: TextStyle(
                 fontSize: 18,
@@ -962,7 +962,7 @@ class _MasterDataOperationsScreenState
             Text(
               state.error!,
               textAlign: TextAlign.center,
-              style: TextStyle(color: HospitalTheme.textMedium),
+              style: const TextStyle(color: HospitalTheme.textMedium),
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(
@@ -976,13 +976,13 @@ class _MasterDataOperationsScreenState
     }
 
     if (state.patients.isEmpty) {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.people_outline,
                 size: 48, color: HospitalTheme.textLight),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'No patients found',
               style: TextStyle(
@@ -990,7 +990,7 @@ class _MasterDataOperationsScreenState
                 color: HospitalTheme.textMedium,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'Try adjusting your search or filters',
               style: TextStyle(color: HospitalTheme.textLight),
@@ -1049,7 +1049,7 @@ class _MasterDataOperationsScreenState
                             const SizedBox(height: 4),
                             Text(
                               'ID: ${patient.patientId}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
                                 color: HospitalTheme.textMedium,
                               ),
@@ -1115,7 +1115,7 @@ class _MasterDataOperationsScreenState
                       ),
                       child: Text(
                         'Pending: ₹${patient.pendingAmount}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: HospitalTheme.warning,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -1165,7 +1165,7 @@ class _MasterDataOperationsScreenState
             ),
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 10,
                 color: HospitalTheme.textMedium,
               ),
@@ -1186,7 +1186,7 @@ class _MasterDataOperationsScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Current Admission',
             style: TextStyle(
               fontSize: 12,
@@ -1205,7 +1205,7 @@ class _MasterDataOperationsScreenState
           ),
           Text(
             _formatDate(admission.admissionDate),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 10,
               color: HospitalTheme.textMedium,
             ),
@@ -1225,7 +1225,7 @@ class _MasterDataOperationsScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Last Visit',
             style: TextStyle(
               fontSize: 12,
@@ -1246,7 +1246,7 @@ class _MasterDataOperationsScreenState
             history.dischargeDate != null
                 ? '${_formatDate(history.admissionDate)} - ${_formatDate(history.dischargeDate!)}'
                 : _formatDate(history.admissionDate),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 10,
               color: HospitalTheme.textMedium,
             ),
@@ -1265,7 +1265,7 @@ class _MasterDataOperationsScreenState
           // Header
           Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: Text(
                   'Patient Details',
                   style: TextStyle(
@@ -1294,7 +1294,7 @@ class _MasterDataOperationsScreenState
                     CircleAvatar(
                       radius: 30,
                       backgroundColor: HospitalTheme.primary.withOpacity(0.1),
-                      child: Icon(
+                      child: const Icon(
                         Icons.person,
                         size: 32,
                         color: HospitalTheme.primary,
@@ -1314,7 +1314,7 @@ class _MasterDataOperationsScreenState
                           ),
                           Text(
                             'ID: ${patient.patientId}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: HospitalTheme.textMedium,
                             ),
                           ),
@@ -1363,7 +1363,7 @@ class _MasterDataOperationsScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Current Admission',
                     style: TextStyle(
                       fontSize: 16,
@@ -1390,7 +1390,7 @@ class _MasterDataOperationsScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Last Visit',
                     style: TextStyle(
                       fontSize: 16,
@@ -1437,7 +1437,7 @@ class _MasterDataOperationsScreenState
             width: 120,
             child: Text(
               '$label:',
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontSize: 14,
               ),
@@ -1463,7 +1463,7 @@ class _MasterDataOperationsScreenState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Actions',
           style: TextStyle(
             fontSize: 16,
@@ -1529,7 +1529,7 @@ class _MasterDataOperationsScreenState
   }
 
   Widget _buildEmptyDetails() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -1538,7 +1538,7 @@ class _MasterDataOperationsScreenState
             size: 64,
             color: HospitalTheme.textLight,
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'Select a patient',
             style: TextStyle(
@@ -1546,7 +1546,7 @@ class _MasterDataOperationsScreenState
               color: HospitalTheme.textMedium,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             'Choose a patient from the list to view details',
             style: TextStyle(
@@ -1573,7 +1573,7 @@ class _MasterDataOperationsScreenState
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Patient Actions',
               style: TextStyle(
                 fontSize: 18,
@@ -1583,7 +1583,7 @@ class _MasterDataOperationsScreenState
             ),
             const SizedBox(height: 16),
             ListTile(
-              leading: Icon(Icons.edit, color: HospitalTheme.primary),
+              leading: const Icon(Icons.edit, color: HospitalTheme.primary),
               title: const Text('Update Patient Info'),
               onTap: () {
                 Navigator.pop(context);
@@ -1592,7 +1592,7 @@ class _MasterDataOperationsScreenState
             ),
             if (patient.discharged)
               ListTile(
-                leading: Icon(Icons.add_circle, color: HospitalTheme.success),
+                leading: const Icon(Icons.add_circle, color: HospitalTheme.success),
                 title: const Text('Re-admit Patient'),
                 onTap: () {
                   Navigator.pop(context);
@@ -1600,7 +1600,7 @@ class _MasterDataOperationsScreenState
                 },
               ),
             ListTile(
-              leading: Icon(Icons.history, color: HospitalTheme.info),
+              leading: const Icon(Icons.history, color: HospitalTheme.info),
               title: const Text('View History'),
               onTap: () {
                 Navigator.pop(context);
@@ -1608,7 +1608,7 @@ class _MasterDataOperationsScreenState
               },
             ),
             ListTile(
-              leading: Icon(Icons.picture_as_pdf, color: HospitalTheme.warning),
+              leading: const Icon(Icons.picture_as_pdf, color: HospitalTheme.warning),
               title: const Text('Generate Report'),
               onTap: () {
                 Navigator.pop(context);
@@ -1616,7 +1616,7 @@ class _MasterDataOperationsScreenState
               },
             ),
             ListTile(
-              leading: Icon(Icons.delete, color: HospitalTheme.error),
+              leading: const Icon(Icons.delete, color: HospitalTheme.error),
               title: const Text('Delete Patient'),
               onTap: () {
                 Navigator.pop(context);
@@ -1633,7 +1633,7 @@ class _MasterDataOperationsScreenState
       PatientOverview patient, MasterDataNotifier notifier) {
     // TODO: Implement update patient dialog
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text('Update patient feature coming soon'),
         backgroundColor: HospitalTheme.info,
       ),
@@ -1644,7 +1644,7 @@ class _MasterDataOperationsScreenState
       PatientOverview patient, MasterDataNotifier notifier) {
     // TODO: Implement readmission dialog
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text('Re-admission feature coming soon'),
         backgroundColor: HospitalTheme.success,
       ),
@@ -1691,7 +1691,7 @@ class _MasterDataOperationsScreenState
   void _viewPatientHistory(PatientOverview patient) {
     // TODO: Navigate to patient history screen
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text('Patient history feature coming soon'),
         backgroundColor: HospitalTheme.info,
       ),
@@ -1748,7 +1748,7 @@ class _MasterDataOperationsScreenState
 
   void _showSystemLogs() {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text('System logs feature coming soon'),
         backgroundColor: HospitalTheme.info,
       ),

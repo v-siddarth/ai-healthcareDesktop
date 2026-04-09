@@ -5,6 +5,8 @@ class PdfViewerExample extends StatelessWidget {
   final String pdfUrl =
       "https://drive.google.com/file/d/1TV5tlwj-7kLlAFj0yJIt7IIGdcePqrNT/view";
 
+  const PdfViewerExample({super.key});
+
   void openPdf() {
     if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
       Process.run('xdg-open', [pdfUrl]); // Linux
@@ -16,11 +18,11 @@ class PdfViewerExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("PDF Viewer Example")),
+      appBar: AppBar(title: const Text("PDF Viewer Example")),
       body: Center(
         child: ElevatedButton(
           onPressed: openPdf,
-          child: Text("Open PDF"),
+          child: const Text("Open PDF"),
         ),
       ),
     );

@@ -8,13 +8,13 @@ class NavigationSidebar extends StatefulWidget {
   final TextEditingController searchController;
 
   const NavigationSidebar({
-    Key? key,
+    super.key,
     required this.onPatientSelected,
     required this.patients,
     required this.currentPatient,
     required this.onSearch,
     required this.searchController,
-  }) : super(key: key);
+  });
 
   @override
   State<NavigationSidebar> createState() => _NavigationSidebarState();
@@ -72,7 +72,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                 hintText: 'Search patients...',
                 prefixIcon: const Icon(Icons.search),
                 filled: true,
-                fillColor: colorScheme.surfaceVariant.withOpacity(0.3),
+                fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.3),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -125,7 +125,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
             flex: 2,
             child: Container(
               padding: const EdgeInsets.all(16),
-              color: colorScheme.surfaceVariant.withOpacity(0.3),
+              color: colorScheme.surfaceContainerHighest.withOpacity(0.3),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -318,9 +318,9 @@ class PatientSummaryPanel extends StatelessWidget {
   final Map<String, dynamic> patient;
 
   const PatientSummaryPanel({
-    Key? key,
+    super.key,
     required this.patient,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -328,7 +328,7 @@ class PatientSummaryPanel extends StatelessWidget {
 
     return Container(
       width: 300,
-      color: colorScheme.surfaceVariant.withOpacity(0.2),
+      color: colorScheme.surfaceContainerHighest.withOpacity(0.2),
       child: Column(
         children: [
           // Patient header with actions
@@ -496,7 +496,7 @@ class PatientSummaryPanel extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.warning,
                               color: Colors.orange,
                               size: 20,
@@ -597,7 +597,7 @@ class PatientSummaryPanel extends StatelessWidget {
                               ],
                             ),
                           );
-                        }).toList(),
+                        }),
                       ],
                     ),
                   ),
@@ -619,7 +619,7 @@ class PatientSummaryPanel extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.medication,
                               color: Colors.green,
                               size: 20,
@@ -648,7 +648,7 @@ class PatientSummaryPanel extends StatelessWidget {
                                     color: Colors.green.withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.medication_liquid,
                                     color: Colors.green,
                                     size: 16,
@@ -688,7 +688,7 @@ class PatientSummaryPanel extends StatelessWidget {
                               ],
                             ),
                           );
-                        }).toList(),
+                        }),
                       ],
                     ),
                   ),

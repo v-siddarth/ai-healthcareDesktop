@@ -23,7 +23,7 @@ class NetworkService {
 
       // Use a timeout to prevent long waiting times
       final result = await InternetAddress.lookup('google.com')
-          .timeout(Duration(seconds: 5));
+          .timeout(const Duration(seconds: 5));
       return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
     } catch (e) {
       print("Connectivity check error: $e");

@@ -8,7 +8,7 @@ import 'dart:convert';
 import 'package:doctordesktop/constants/Url.dart';
 
 class DoctorListScreen extends StatefulWidget {
-  const DoctorListScreen({Key? key}) : super(key: key);
+  const DoctorListScreen({super.key});
 
   @override
   _DoctorListScreenState createState() => _DoctorListScreenState();
@@ -85,7 +85,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
 
     try {
       final response =
-          await http.get(Uri.parse('${KVM_URL}/reception/listDoctors'));
+          await http.get(Uri.parse('$KVM_URL/reception/listDoctors'));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
@@ -464,7 +464,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
         scrollDirection: Axis.horizontal,
         child: SingleChildScrollView(
           child: DataTable(
-            headingRowColor: MaterialStateColor.resolveWith(
+            headingRowColor: WidgetStateColor.resolveWith(
                 (states) => const Color(0xFFF8FAFC)),
             dataRowMinHeight: 80,
             dataRowMaxHeight: 80,
@@ -701,7 +701,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
   Future<void> _deleteDoctor(String doctorId) async {
     try {
       final response = await http
-          .delete(Uri.parse('${KVM_URL}/reception/deleteDoctor/$doctorId'));
+          .delete(Uri.parse('$KVM_URL/reception/deleteDoctor/$doctorId'));
       if (response.statusCode == 200) {
         setState(() {
           _doctors.removeWhere((doctor) => doctor.id == doctorId);

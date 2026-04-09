@@ -253,7 +253,7 @@ class _ManualDischargeSummaryScreenState
       final requestBody = _buildRequestBody();
       final response = await http.post(
         Uri.parse(
-            '${KVM_URL}/reception/generateManualDischargeSummary/${widget.patientId}'),
+            '$KVM_URL/reception/generateManualDischargeSummary/${widget.patientId}'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );
@@ -334,11 +334,11 @@ class _ManualDischargeSummaryScreenState
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.check_circle, color: HospitalTheme.success),
-            const SizedBox(width: 8),
-            const Text('Success'),
+            SizedBox(width: 8),
+            Text('Success'),
           ],
         ),
         content: SizedBox(
@@ -402,11 +402,11 @@ class _ManualDischargeSummaryScreenState
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.error, color: HospitalTheme.error),
-            const SizedBox(width: 8),
-            const Text('Error'),
+            SizedBox(width: 8),
+            Text('Error'),
           ],
         ),
         content: Text(message),
@@ -444,8 +444,8 @@ class _ManualDischargeSummaryScreenState
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text(
+          const SnackBar(
+            content: Text(
                 'No PDF available to preview. Please generate discharge summary first.'),
             backgroundColor: HospitalTheme.warning,
           ),
@@ -637,7 +637,7 @@ class _ManualDischargeSummaryScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -681,7 +681,7 @@ class _ManualDischargeSummaryScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -730,7 +730,7 @@ class _ManualDischargeSummaryScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -832,7 +832,7 @@ class _ManualDischargeSummaryScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -875,7 +875,7 @@ class _ManualDischargeSummaryScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -982,7 +982,7 @@ class _ManualDischargeSummaryScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -1025,7 +1025,7 @@ class _ManualDischargeSummaryScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -1234,7 +1234,7 @@ class _ManualDischargeSummaryScreenState
           Center(
             child: Column(
               children: [
-                Text(
+                const Text(
                   'DISCHARGE SUMMARY',
                   style: TextStyle(
                     fontSize: 24,
@@ -1313,7 +1313,7 @@ class _ManualDischargeSummaryScreenState
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: HospitalTheme.primary,
@@ -1328,7 +1328,7 @@ class _ManualDischargeSummaryScreenState
                       style: const TextStyle(fontSize: 14),
                     ),
                   ))
-              .toList(),
+              ,
         ],
       ),
     );
@@ -1340,7 +1340,7 @@ class _ManualDischargeSummaryScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'GENERAL EXAMINATION',
             style: TextStyle(
               fontSize: 16,
@@ -1370,7 +1370,7 @@ class _ManualDischargeSummaryScreenState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'OPERATION DETAILS',
             style: TextStyle(
               fontSize: 16,
@@ -1405,7 +1405,7 @@ class _ManualDischargeSummaryScreenState
                       child:
                           Text('• $step', style: const TextStyle(fontSize: 14)),
                     ))
-                .toList(),
+                ,
           ],
         ],
       ),
@@ -1436,11 +1436,11 @@ class _ManualDischargeSummaryScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.medical_services, color: HospitalTheme.primary),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'Quick Actions',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -1492,11 +1492,11 @@ class _ManualDischargeSummaryScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.info_outline, color: HospitalTheme.info),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'Medical Guidelines',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -1525,12 +1525,12 @@ class _ManualDischargeSummaryScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.check_circle_outline,
                         color: HospitalTheme.success),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'Completion Status',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -1553,12 +1553,12 @@ class _ManualDischargeSummaryScreenState
                   value: _getCompletionProgress(),
                   backgroundColor: HospitalTheme.border,
                   valueColor:
-                      AlwaysStoppedAnimation<Color>(HospitalTheme.success),
+                      const AlwaysStoppedAnimation<Color>(HospitalTheme.success),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   '${(_getCompletionProgress() * 100).toInt()}% Complete',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.textMedium,
                   ),
@@ -1574,11 +1574,11 @@ class _ManualDischargeSummaryScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
                     Icon(Icons.lightbulb_outline, color: HospitalTheme.warning),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8),
+                    Text(
                       'Tips & Shortcuts',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -1636,7 +1636,7 @@ class _ManualDischargeSummaryScreenState
                   ),
                   Text(
                     subtitle,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: HospitalTheme.textMedium,
                     ),
@@ -1644,7 +1644,7 @@ class _ManualDischargeSummaryScreenState
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios,
+            const Icon(Icons.arrow_forward_ios,
                 size: 16, color: HospitalTheme.textMedium),
           ],
         ),
@@ -1662,7 +1662,7 @@ class _ManualDischargeSummaryScreenState
             width: 6,
             height: 6,
             margin: const EdgeInsets.only(top: 6),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.info,
               shape: BoxShape.circle,
             ),
@@ -1681,7 +1681,7 @@ class _ManualDischargeSummaryScreenState
                 ),
                 Text(
                   description,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.textMedium,
                   ),
@@ -1852,21 +1852,21 @@ class _ManualDischargeSummaryScreenState
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
-              borderRadius: const BorderRadius.only(
+              borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
             ),
-            child: Row(
+            child: const Row(
               children: [
                 Icon(
                   Icons.check_circle,
                   color: HospitalTheme.success,
                 ),
-                const SizedBox(width: 8),
-                const Expanded(
+                SizedBox(width: 8),
+                Expanded(
                   child: Text(
                     'Generated Successfully',
                     style: TextStyle(
@@ -2089,7 +2089,7 @@ Tambe Hospital Team
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textMedium,
               fontWeight: FontWeight.w500,
@@ -2122,8 +2122,9 @@ Tambe Hospital Team
     if (size == null) return 'N/A';
     final sizeInBytes = size is int ? size : int.tryParse(size.toString()) ?? 0;
     if (sizeInBytes < 1024) return '$sizeInBytes B';
-    if (sizeInBytes < 1024 * 1024)
+    if (sizeInBytes < 1024 * 1024) {
       return '${(sizeInBytes / 1024).toStringAsFixed(1)} KB';
+    }
     return '${(sizeInBytes / (1024 * 1024)).toStringAsFixed(1)} MB';
   }
 }
@@ -2170,7 +2171,7 @@ class DischargeSummaryNotifier extends StateNotifier<DischargeSummaryState> {
     try {
       final response = await http.post(
         Uri.parse(
-            '${KVM_URL}/reception/generateManualDischargeSummary/$patientId'),
+            '$KVM_URL/reception/generateManualDischargeSummary/$patientId'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );

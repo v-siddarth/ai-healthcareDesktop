@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:doctordesktop/Check.dart';
+import 'package:doctordesktop/app/home_page.dart';
 import 'package:doctordesktop/constants/Methods.dart';
 import 'package:doctordesktop/constants/Url.dart';
 import 'package:doctordesktop/pharmacy/PharmacyDashboard.dart';
@@ -96,7 +96,7 @@ class CreateSaleNotifier extends StateNotifier<CreateSaleState> {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/pharma/getCustomers'),
+        Uri.parse('$KVM_URL/pharma/getCustomers'),
       );
 
       if (response.statusCode == 200) {
@@ -123,7 +123,7 @@ class CreateSaleNotifier extends StateNotifier<CreateSaleState> {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/pharma/getInventory'),
+        Uri.parse('$KVM_URL/pharma/getInventory'),
       );
 
       if (response.statusCode == 200) {
@@ -388,7 +388,7 @@ class CreateSaleNotifier extends StateNotifier<CreateSaleState> {
 
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/pharma/createSale'),
+        Uri.parse('$KVM_URL/pharma/createSale'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );
@@ -437,7 +437,7 @@ class CreateSaleNotifier extends StateNotifier<CreateSaleState> {
 }
 
 class CreateSaleScreen extends ConsumerStatefulWidget {
-  const CreateSaleScreen({Key? key}) : super(key: key);
+  const CreateSaleScreen({super.key});
 
   @override
   ConsumerState<CreateSaleScreen> createState() => _CreateSaleScreenState();
@@ -575,20 +575,20 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
             },
           ),
-          title: Text('Create Sle'),
+          title: const Text('Create Sle'),
           backgroundColor: PharmaTheme.primary,
           foregroundColor: PharmaTheme.textLight,
           elevation: 0,
         ),
         body: state.isLoading
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(color: PharmaTheme.accent))
             : Row(
                 children: [
@@ -597,14 +597,14 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                     flex: 3,
                     child: Container(
                       color: PharmaTheme.surface,
-                      padding: EdgeInsets.all(PharmaTheme.spacingM),
+                      padding: const EdgeInsets.all(PharmaTheme.spacingM),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Customer selection
                           _buildSectionTitle('Select Customer'),
                           _buildCustomerDropdown(),
-                          SizedBox(height: PharmaTheme.spacingL),
+                          const SizedBox(height: PharmaTheme.spacingL),
 
                           // Cart items
                           _buildSectionTitle('Cart Items'),
@@ -650,7 +650,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
             ? FloatingActionButton.extended(
                 onPressed: state.isSubmitting ? null : _createSale,
                 label: state.isSubmitting
-                    ? SizedBox(
+                    ? const SizedBox(
                         height: 20,
                         width: 20,
                         child: CircularProgressIndicator(
@@ -658,8 +658,8 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                           strokeWidth: 2,
                         ),
                       )
-                    : Text('Complete Sale'),
-                icon: Icon(Icons.shopping_cart_checkout),
+                    : const Text('Complete Sale'),
+                icon: const Icon(Icons.shopping_cart_checkout),
                 backgroundColor: PharmaTheme.accent,
               )
             : null,
@@ -673,7 +673,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
   // Section title
   Widget _buildSectionTitle(String title) {
     return Padding(
-      padding: EdgeInsets.only(bottom: PharmaTheme.spacingM),
+      padding: const EdgeInsets.only(bottom: PharmaTheme.spacingM),
       child: Text(
         title,
         style: PharmaTheme.headingSmall.copyWith(
@@ -692,11 +692,11 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
         border: Border.all(color: PharmaTheme.border),
         borderRadius: BorderRadius.circular(PharmaTheme.radiusM),
       ),
-      padding: EdgeInsets.symmetric(horizontal: PharmaTheme.spacingM),
+      padding: const EdgeInsets.symmetric(horizontal: PharmaTheme.spacingM),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           isExpanded: true,
-          hint: Text('Select a customer'),
+          hint: const Text('Select a customer'),
           value: state.selectedCustomerId,
           onChanged: (value) {
             ref.read(createSaleProvider.notifier).setSelectedCustomer(value);
@@ -706,8 +706,8 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
               value: customer['_id'],
               child: Row(
                 children: [
-                  Icon(Icons.person, color: PharmaTheme.primary, size: 20),
-                  SizedBox(width: PharmaTheme.spacingXs),
+                  const Icon(Icons.person, color: PharmaTheme.primary, size: 20),
+                  const SizedBox(width: PharmaTheme.spacingXs),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -732,7 +732,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                   ),
                   if (customer['isPatient'] == true)
                     Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: PharmaTheme.spacingXs,
                         vertical: PharmaTheme.spacingXxs,
                       ),
@@ -768,14 +768,14 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
             size: 64,
             color: PharmaTheme.textSecondary.withOpacity(0.4),
           ),
-          SizedBox(height: PharmaTheme.spacingM),
+          const SizedBox(height: PharmaTheme.spacingM),
           Text(
             'Your cart is empty',
             style: PharmaTheme.headingSmall.copyWith(
               color: PharmaTheme.textSecondary,
             ),
           ),
-          SizedBox(height: PharmaTheme.spacingXs),
+          const SizedBox(height: PharmaTheme.spacingXs),
           Text(
             'Add items from the inventory on the right',
             style: PharmaTheme.bodyMedium.copyWith(
@@ -793,7 +793,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
 
     return ListView.separated(
       itemCount: state.selectedItems.length,
-      separatorBuilder: (context, index) => Divider(color: PharmaTheme.border),
+      separatorBuilder: (context, index) => const Divider(color: PharmaTheme.border),
       itemBuilder: (context, index) {
         final item = state.selectedItems[index];
         final medicine = item['medicine'] as Map<String, dynamic>;
@@ -806,7 +806,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
         final totalAmount = item['totalAmount'];
 
         return ListTile(
-          contentPadding: EdgeInsets.symmetric(vertical: PharmaTheme.spacingXs),
+          contentPadding: const EdgeInsets.symmetric(vertical: PharmaTheme.spacingXs),
           title: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -818,13 +818,13 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                   color: PharmaTheme.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(PharmaTheme.radiusS),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.medication_outlined,
                   color: PharmaTheme.primary,
                   size: 24,
                 ),
               ),
-              SizedBox(width: PharmaTheme.spacingM),
+              const SizedBox(width: PharmaTheme.spacingM),
 
               // Medicine details
               Expanded(
@@ -837,21 +837,21 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: PharmaTheme.spacingXxs),
+                    const SizedBox(height: PharmaTheme.spacingXxs),
                     Text(
                       '$manufacturer • $category',
                       style: PharmaTheme.caption.copyWith(
                         color: PharmaTheme.textSecondary,
                       ),
                     ),
-                    SizedBox(height: PharmaTheme.spacingXxs),
+                    const SizedBox(height: PharmaTheme.spacingXxs),
                     Text(
                       'Batch: ${item['batchNumber']} • Expires: ${_formatDate(item['expiryDate'])}',
                       style: PharmaTheme.caption.copyWith(
                         color: PharmaTheme.textSecondary,
                       ),
                     ),
-                    SizedBox(height: PharmaTheme.spacingXs),
+                    const SizedBox(height: PharmaTheme.spacingXs),
 
                     // Price and quantity
                     Row(
@@ -865,7 +865,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                           ),
                         ),
 
-                        Spacer(),
+                        const Spacer(),
 
                         // Quantity controls
                         Container(
@@ -887,14 +887,14 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                                     ),
                                 child: Container(
                                   padding:
-                                      EdgeInsets.all(PharmaTheme.spacingXxs),
-                                  child: Icon(Icons.remove, size: 16),
+                                      const EdgeInsets.all(PharmaTheme.spacingXxs),
+                                  child: const Icon(Icons.remove, size: 16),
                                 ),
                               ),
 
                               // Quantity
                               Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: PharmaTheme.spacingXs),
                                 child: Text(
                                   quantity.toString(),
@@ -915,18 +915,18 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                                     ),
                                 child: Container(
                                   padding:
-                                      EdgeInsets.all(PharmaTheme.spacingXxs),
-                                  child: Icon(Icons.add, size: 16),
+                                      const EdgeInsets.all(PharmaTheme.spacingXxs),
+                                  child: const Icon(Icons.add, size: 16),
                                 ),
                               ),
                             ],
                           ),
                         ),
 
-                        SizedBox(width: PharmaTheme.spacingM),
+                        const SizedBox(width: PharmaTheme.spacingM),
 
                         // Discount field
-                        Container(
+                        SizedBox(
                           width: 80,
                           height: 32,
                           child: TextFormField(
@@ -934,7 +934,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
+                              contentPadding: const EdgeInsets.symmetric(
                                 horizontal: PharmaTheme.spacingXs,
                                 vertical: PharmaTheme.spacingXs,
                               ),
@@ -959,7 +959,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                           ),
                         ),
 
-                        SizedBox(width: PharmaTheme.spacingM),
+                        const SizedBox(width: PharmaTheme.spacingM),
 
                         // Total
                         Text(
@@ -969,11 +969,11 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                           ),
                         ),
 
-                        SizedBox(width: PharmaTheme.spacingXs),
+                        const SizedBox(width: PharmaTheme.spacingXs),
 
                         // Remove button
                         IconButton(
-                          icon: Icon(Icons.delete_outline,
+                          icon: const Icon(Icons.delete_outline,
                               color: PharmaTheme.error),
                           onPressed: () => ref
                               .read(createSaleProvider.notifier)
@@ -996,7 +996,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
     final state = ref.watch(createSaleProvider);
 
     return Container(
-      padding: EdgeInsets.all(PharmaTheme.spacingM),
+      padding: const EdgeInsets.all(PharmaTheme.spacingM),
       decoration: BoxDecoration(
         color: PharmaTheme.background,
         borderRadius: BorderRadius.circular(PharmaTheme.radiusS),
@@ -1013,14 +1013,14 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(width: PharmaTheme.spacingXs),
+              const SizedBox(width: PharmaTheme.spacingXs),
               Text(
                 '(${state.selectedItems.length} items)',
                 style: PharmaTheme.bodyMedium.copyWith(
                   color: PharmaTheme.textSecondary,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
 
               // Payment method selection
               DropdownButtonHideUnderline(
@@ -1057,7 +1057,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                       child: Row(
                         children: [
                           Icon(icon, size: 16, color: PharmaTheme.primary),
-                          SizedBox(width: PharmaTheme.spacingXs),
+                          const SizedBox(width: PharmaTheme.spacingXs),
                           Text(method.toUpperCase()),
                         ],
                       ),
@@ -1068,7 +1068,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
             ],
           ),
 
-          SizedBox(height: PharmaTheme.spacingM),
+          const SizedBox(height: PharmaTheme.spacingM),
 
           // Summary details
           Row(
@@ -1082,14 +1082,14 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                       'Subtotal',
                       _formatCurrency(state.subtotal),
                     ),
-                    SizedBox(height: PharmaTheme.spacingXs),
+                    const SizedBox(height: PharmaTheme.spacingXs),
 
                     // Discount row with input
                     Row(
                       children: [
-                        Text('Discount'),
-                        SizedBox(width: PharmaTheme.spacingXs),
-                        Container(
+                        const Text('Discount'),
+                        const SizedBox(width: PharmaTheme.spacingXs),
+                        SizedBox(
                           width: 60,
                           height: 32,
                           child: TextField(
@@ -1098,34 +1098,34 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
+                              contentPadding: const EdgeInsets.symmetric(
                                 horizontal: PharmaTheme.spacingXs,
                                 vertical: PharmaTheme.spacingXs,
                               ),
-                              border: OutlineInputBorder(),
+                              border: const OutlineInputBorder(),
                               hintText: '%',
                               hintStyle: PharmaTheme.caption,
                             ),
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           _formatCurrency(state.discount),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: PharmaTheme.error,
                           ),
                         ),
                       ],
                     ),
 
-                    SizedBox(height: PharmaTheme.spacingXs),
+                    const SizedBox(height: PharmaTheme.spacingXs),
 
                     // Tax row with input
                     Row(
                       children: [
-                        Text('Tax'),
-                        SizedBox(width: PharmaTheme.spacingXs),
-                        Container(
+                        const Text('Tax'),
+                        const SizedBox(width: PharmaTheme.spacingXs),
+                        SizedBox(
                           width: 60,
                           height: 32,
                           child: TextField(
@@ -1134,17 +1134,17 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
+                              contentPadding: const EdgeInsets.symmetric(
                                 horizontal: PharmaTheme.spacingXs,
                                 vertical: PharmaTheme.spacingXs,
                               ),
-                              border: OutlineInputBorder(),
+                              border: const OutlineInputBorder(),
                               hintText: '%',
                               hintStyle: PharmaTheme.caption,
                             ),
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(_formatCurrency(state.tax)),
                       ],
                     ),
@@ -1152,13 +1152,13 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                 ),
               ),
 
-              SizedBox(width: PharmaTheme.spacingL),
+              const SizedBox(width: PharmaTheme.spacingL),
 
               // Right column with total
               Expanded(
                 flex: 2,
                 child: Container(
-                  padding: EdgeInsets.all(PharmaTheme.spacingM),
+                  padding: const EdgeInsets.all(PharmaTheme.spacingM),
                   decoration: BoxDecoration(
                     gradient: PharmaTheme.primaryGradient,
                     borderRadius: BorderRadius.circular(PharmaTheme.radiusS),
@@ -1173,7 +1173,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: PharmaTheme.spacingXs),
+                      const SizedBox(height: PharmaTheme.spacingXs),
                       Text(
                         _formatCurrency(state.total),
                         style: PharmaTheme.headingLarge.copyWith(
@@ -1206,7 +1206,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
   // Search bar
   Widget _buildSearchBar() {
     return Container(
-      padding: EdgeInsets.all(PharmaTheme.spacingM),
+      padding: const EdgeInsets.all(PharmaTheme.spacingM),
       color: PharmaTheme.primary,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1217,7 +1217,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
               color: PharmaTheme.textLight,
             ),
           ),
-          SizedBox(height: PharmaTheme.spacingM),
+          const SizedBox(height: PharmaTheme.spacingM),
           Container(
             decoration: BoxDecoration(
               color: PharmaTheme.surface,
@@ -1225,7 +1225,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
             ),
             child: TextField(
               controller: _searchMedicineController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search medicines...',
                 prefixIcon: Icon(Icons.search),
                 border: InputBorder.none,
@@ -1252,14 +1252,14 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
             size: 64,
             color: PharmaTheme.textSecondary.withOpacity(0.4),
           ),
-          SizedBox(height: PharmaTheme.spacingM),
+          const SizedBox(height: PharmaTheme.spacingM),
           Text(
             'No items found',
             style: PharmaTheme.headingSmall.copyWith(
               color: PharmaTheme.textSecondary,
             ),
           ),
-          SizedBox(height: PharmaTheme.spacingXs),
+          const SizedBox(height: PharmaTheme.spacingXs),
           Text(
             'Try a different search term',
             style: PharmaTheme.bodyMedium.copyWith(
@@ -1276,7 +1276,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
     final state = ref.watch(createSaleProvider);
 
     return ListView.builder(
-      padding: EdgeInsets.all(PharmaTheme.spacingM),
+      padding: const EdgeInsets.all(PharmaTheme.spacingM),
       itemCount: state.filteredInventory.length,
       itemBuilder: (context, index) {
         final item = state.filteredInventory[index];
@@ -1308,17 +1308,17 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
 
         return Card(
           elevation: 0,
-          margin: EdgeInsets.only(bottom: PharmaTheme.spacingXs),
+          margin: const EdgeInsets.only(bottom: PharmaTheme.spacingXs),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(PharmaTheme.radiusS),
-            side: BorderSide(color: PharmaTheme.border),
+            side: const BorderSide(color: PharmaTheme.border),
           ),
           child: InkWell(
             borderRadius: BorderRadius.circular(PharmaTheme.radiusS),
             onTap: () =>
                 ref.read(createSaleProvider.notifier).addItemToCart(item),
             child: Padding(
-              padding: EdgeInsets.all(PharmaTheme.spacingM),
+              padding: const EdgeInsets.all(PharmaTheme.spacingM),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -1334,7 +1334,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.add_circle, color: PharmaTheme.accent),
+                        icon: const Icon(Icons.add_circle, color: PharmaTheme.accent),
                         onPressed: () => ref
                             .read(createSaleProvider.notifier)
                             .addItemToCart(item),
@@ -1342,7 +1342,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                     ],
                   ),
 
-                  SizedBox(height: PharmaTheme.spacingXs),
+                  const SizedBox(height: PharmaTheme.spacingXs),
 
                   // Medicine details
                   Text(
@@ -1352,13 +1352,13 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                     ),
                   ),
 
-                  SizedBox(height: PharmaTheme.spacingXs),
+                  const SizedBox(height: PharmaTheme.spacingXs),
 
                   // Batch and expiry
                   Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: PharmaTheme.spacingXs,
                           vertical: PharmaTheme.spacingXxs,
                         ),
@@ -1374,9 +1374,9 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(width: PharmaTheme.spacingXs),
+                      const SizedBox(width: PharmaTheme.spacingXs),
                       Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: PharmaTheme.spacingXs,
                           vertical: PharmaTheme.spacingXxs,
                         ),
@@ -1395,7 +1395,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                                 shape: BoxShape.circle,
                               ),
                             ),
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Text(
                               'Exp: $expiryDate',
                               style: PharmaTheme.caption.copyWith(
@@ -1409,7 +1409,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                     ],
                   ),
 
-                  SizedBox(height: PharmaTheme.spacingM),
+                  const SizedBox(height: PharmaTheme.spacingM),
 
                   // Price and stock
                   Row(
@@ -1423,7 +1423,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: PharmaTheme.spacingXs,
                           vertical: PharmaTheme.spacingXxs,
                         ),
@@ -1454,7 +1454,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
   // Success card
   Widget _buildSuccessCard() {
     final state = ref.watch(createSaleProvider);
-    if (state.saleResponse == null) return SizedBox.shrink();
+    if (state.saleResponse == null) return const SizedBox.shrink();
 
     return Container(
       width: double.infinity,
@@ -1467,7 +1467,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
         children: [
           // Top success bar
           Container(
-            padding: EdgeInsets.symmetric(vertical: PharmaTheme.spacingM),
+            padding: const EdgeInsets.symmetric(vertical: PharmaTheme.spacingM),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
@@ -1481,8 +1481,8 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.check_circle, color: PharmaTheme.textLight),
-                SizedBox(width: PharmaTheme.spacingXs),
+                const Icon(Icons.check_circle, color: PharmaTheme.textLight),
+                const SizedBox(width: PharmaTheme.spacingXs),
                 Text(
                   'Sale Completed Successfully',
                   style: PharmaTheme.bodyLarge.copyWith(
@@ -1496,7 +1496,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
 
           // Sale details
           Padding(
-            padding: EdgeInsets.all(PharmaTheme.spacingM),
+            padding: const EdgeInsets.all(PharmaTheme.spacingM),
             child: Column(
               children: [
                 // Invoice details
@@ -1512,7 +1512,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: PharmaTheme.spacingXxs),
+                        const SizedBox(height: PharmaTheme.spacingXxs),
                         Text(
                           'Date: ${_formatDate(state.saleResponse!['createdAt'])}',
                           style: PharmaTheme.caption.copyWith(
@@ -1525,8 +1525,8 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                     // PDF button
                     if (state.saleResponse!['pdfLink'] != null)
                       ElevatedButton.icon(
-                        icon: Icon(Icons.receipt_long),
-                        label: Text('View Invoice'),
+                        icon: const Icon(Icons.receipt_long),
+                        label: const Text('View Invoice'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: PharmaTheme.primary,
                           foregroundColor: PharmaTheme.textLight,
@@ -1538,7 +1538,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                   ],
                 ),
 
-                SizedBox(height: PharmaTheme.spacingM),
+                const SizedBox(height: PharmaTheme.spacingM),
 
                 // Customer info and amount
                 Row(
@@ -1554,7 +1554,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: PharmaTheme.spacingXxs),
+                          const SizedBox(height: PharmaTheme.spacingXxs),
                           Text(
                             state.saleResponse!['customer']['name'],
                             style: PharmaTheme.bodyMedium,
@@ -1583,7 +1583,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: PharmaTheme.spacingXxs),
+                          const SizedBox(height: PharmaTheme.spacingXxs),
                           Row(
                             children: [
                               Icon(
@@ -1597,7 +1597,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                                 size: 16,
                                 color: PharmaTheme.primary,
                               ),
-                              SizedBox(width: PharmaTheme.spacingXs),
+                              const SizedBox(width: PharmaTheme.spacingXs),
                               Text(
                                 state.selectedPaymentMethod!.toUpperCase(),
                                 style: PharmaTheme.bodyMedium,
@@ -1619,7 +1619,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: PharmaTheme.spacingXxs),
+                          const SizedBox(height: PharmaTheme.spacingXxs),
                           Text(
                             _formatCurrency(
                                 _convertToDouble(state.saleResponse!['total'])),
@@ -1633,7 +1633,7 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                   ],
                 ),
 
-                SizedBox(height: PharmaTheme.spacingL),
+                const SizedBox(height: PharmaTheme.spacingL),
 
                 // Action buttons
                 Row(
@@ -1645,12 +1645,12 @@ class _CreateSaleScreenState extends ConsumerState<CreateSaleScreen> {
                             .read(createSaleProvider.notifier)
                             .closeSuccessCard();
                       },
-                      child: Text('Close'),
+                      child: const Text('Close'),
                     ),
-                    SizedBox(width: PharmaTheme.spacingM),
+                    const SizedBox(width: PharmaTheme.spacingM),
                     ElevatedButton.icon(
-                      icon: Icon(Icons.add_shopping_cart),
-                      label: Text('New Sale'),
+                      icon: const Icon(Icons.add_shopping_cart),
+                      label: const Text('New Sale'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: PharmaTheme.accent,
                         foregroundColor: PharmaTheme.textLight,

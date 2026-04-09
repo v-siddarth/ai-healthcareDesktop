@@ -9,7 +9,7 @@ import 'package:doctordesktop/Admin/Master/PatientListPanel.dart';
 import 'package:doctordesktop/Admin/PatientBillingScreen.dart';
 import 'package:doctordesktop/Admin/PatientManagement.dart';
 import 'package:doctordesktop/Admin/SummaryTrackScreen.dart';
-import 'package:doctordesktop/Check.dart';
+import 'package:doctordesktop/app/home_page.dart';
 import 'package:doctordesktop/Doctor/Dashboard/HomeScreen.dart';
 import 'package:doctordesktop/Doctor/PatientListScreen.dart';
 import 'package:doctordesktop/Doctor/SeeNurseAttendace.dart';
@@ -36,7 +36,7 @@ import 'package:doctordesktop/screens/NurseRegister.dart';
 import 'package:flutter/material.dart';
 
 class AdminDashBoardScreen extends StatelessWidget {
-  const AdminDashBoardScreen({Key? key}) : super(key: key);
+  const AdminDashBoardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class MainLayout extends StatefulWidget {
   static final GlobalKey<_MainLayoutState> globalKey =
       GlobalKey<_MainLayoutState>();
 
-  const MainLayout({Key? key}) : super(key: key);
+  const MainLayout({super.key});
 
   @override
   State<MainLayout> createState() => _MainLayoutState();
@@ -72,18 +72,18 @@ class _MainLayoutState extends State<MainLayout> {
     // const DashboardScreen(),
     const BedManagementDashboard(),
     PatientAssignmentScreen(),
-    DoctorListScreen(),
-    PatientListScreen1(),
-    DoctorRegisterScreen(),
+    const DoctorListScreen(),
+    const PatientListScreen1(),
+    const DoctorRegisterScreen(),
     NurseRegisterScreen(),
-    AdmissionManagementScreen(),
-    BillingAnalyticsDashboard(),
-    BillsTrackScreen(),
-    BillsTableScreen(),
+    const AdmissionManagementScreen(),
+    const BillingAnalyticsDashboard(),
+    const BillsTrackScreen(),
+    const BillsTableScreen(),
     // DepositsTrackingScreen(),
-    PatientDepositsScreen(),
-    DischargeSummariesScreen(),
-    AdminRegistrationSideBar(),
+    const PatientDepositsScreen(),
+    const DischargeSummariesScreen(),
+    const AdminRegistrationSideBar(),
     // PatientRecordsManagementScreen(),
     // PatientCounterScreen(),
   ];
@@ -147,24 +147,24 @@ class SidebarWidget extends StatelessWidget {
   final VoidCallback onToggle;
 
   const SidebarWidget({
-    Key? key,
+    super.key,
     required this.selectedIndex,
     required this.isCollapsed,
     required this.onItemSelected,
     required this.onToggle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     // Improved widths for better visibility and usability
-    final double collapsedWidth = 80; // Increased for better visibility
-    final double expandedWidth = 260;
+    const double collapsedWidth = 80; // Increased for better visibility
+    const double expandedWidth = 260;
 
     // Using AnimatedContainer for smooth transitions
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       width: isCollapsed ? collapsedWidth : expandedWidth,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [Color(0xFF1E2843), Color(0xFF1E2843)],
           begin: Alignment.topCenter,
@@ -351,7 +351,7 @@ class SidebarWidget extends StatelessWidget {
         vertical: 12,
       ),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [
             HospitalTheme.primary,
             PharmaTheme.accent,
@@ -458,7 +458,7 @@ class SidebarWidget extends StatelessWidget {
               height: 42,
               color: PharmaTheme.primary.withOpacity(0.2),
               child: const Center(
-                child: Image(image: AssetImage('${AppImages.logo}')),
+                child: Image(image: AssetImage(AppImages.logo)),
               ),
             ),
           ),
@@ -468,7 +468,7 @@ class SidebarWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${AppStrings.hospitalName}",
+                  AppStrings.hospitalName,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -499,8 +499,8 @@ class SidebarWidget extends StatelessWidget {
     required bool isSelected,
     required VoidCallback onTap,
   }) {
-    final Color activeColor = HospitalTheme.primary;
-    final Color inactiveColor = Colors.white;
+    const Color activeColor = HospitalTheme.primary;
+    const Color inactiveColor = Colors.white;
 
     if (isCollapsed) {
       // Enhanced collapsed view WITH mini labels for better usability
@@ -535,7 +535,7 @@ class SidebarWidget extends StatelessWidget {
                 // Mini label - truncated if needed
                 Text(
                   // Show abbreviated version of label
-                  label.length > 10 ? label.substring(0, 7) + '...' : label,
+                  label.length > 10 ? '${label.substring(0, 7)}...' : label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -562,7 +562,7 @@ class SidebarWidget extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
           decoration: BoxDecoration(
             gradient: isSelected
-                ? LinearGradient(
+                ? const LinearGradient(
                     colors: [HospitalTheme.primary, HospitalTheme.primaryLight],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
@@ -636,7 +636,7 @@ class SidebarWidget extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomePage(),
+                builder: (context) => const HomePage(),
               ),
             );
           },
@@ -646,16 +646,16 @@ class SidebarWidget extends StatelessWidget {
               color: Colors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(PharmaTheme.radiusM),
             ),
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.logout,
                   color: Colors.white,
                   size: 20,
                 ),
-                const SizedBox(height: 2),
-                const Text(
+                SizedBox(height: 2),
+                Text(
                   'Back',
                   style: TextStyle(
                     color: Colors.white,
@@ -676,7 +676,7 @@ class SidebarWidget extends StatelessWidget {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => const HomePage(),
             ),
           );
         },
@@ -703,9 +703,9 @@ class NavbarWidget extends StatelessWidget {
   final VoidCallback onMenuTap;
 
   const NavbarWidget({
-    Key? key,
+    super.key,
     required this.onMenuTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -722,7 +722,7 @@ class NavbarWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
+      child: const Row(
         children: [
           // Menu toggle button
           // IconButton(

@@ -1,13 +1,15 @@
 import 'package:doctordesktop/constants/ToastMessage.dart';
+import 'package:doctordesktop/core/theme/google_fonts_compat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:doctordesktop/constants/Url.dart';
 import 'package:toastification/toastification.dart';
 
 class NurseRegisterScreen extends StatefulWidget {
+  const NurseRegisterScreen({super.key});
+
   @override
   _NurseRegisterScreenState createState() => _NurseRegisterScreenState();
 }
@@ -27,8 +29,7 @@ class _NurseRegisterScreenState extends State<NurseRegisterScreen> {
   String doctorName = '';
 
   Future<void> submitData() async {
-    final url =
-        '${KVM_URL}/reception/addNurse'; // Replace with your backend URL
+    const url = '$KVM_URL/reception/addNurse'; // Replace with your backend URL
     try {
       final response = await http.post(
         Uri.parse(url),

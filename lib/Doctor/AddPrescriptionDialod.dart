@@ -14,10 +14,10 @@ class AddPrescriptionScreen extends StatefulWidget {
   final String admissionId;
 
   const AddPrescriptionScreen({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
-  }) : super(key: key);
+  });
 
   @override
   State<AddPrescriptionScreen> createState() => _AddPrescriptionScreenState();
@@ -99,7 +99,7 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen>
           if (selectedMedicines.isEmpty) {
             selectedMedicines = medicineName;
           } else {
-            selectedMedicines += ', ' + medicineName;
+            selectedMedicines += ', $medicineName';
           }
           medicineNameController.clear();
           medicineSuggestions = [];
@@ -122,7 +122,7 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen>
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/search?q=$query'),
+        Uri.parse('$KVM_URL/search?q=$query'),
       );
 
       if (response.statusCode == 200) {
@@ -316,7 +316,7 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen>
         if (selectedMedicines.isEmpty) {
           selectedMedicines = medicineName;
         } else {
-          selectedMedicines += ', ' + medicineName;
+          selectedMedicines += ', $medicineName';
         }
         medicineNameController.clear();
         medicineSuggestions = [];
@@ -1027,8 +1027,7 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen>
                 ),
 
                 // Notes if available
-                if (prescription.medicine.comment != null &&
-                    prescription.medicine.comment!.isNotEmpty) ...[
+                if (prescription.medicine.comment.isNotEmpty) ...[
                   const SizedBox(height: 12),
                   const Divider(height: 1),
                   const SizedBox(height: 12),
@@ -1244,7 +1243,7 @@ class _AddPrescriptionScreenState extends State<AddPrescriptionScreen>
                 if (selectedMedicines.isEmpty) {
                   selectedMedicines = suggestion;
                 } else {
-                  selectedMedicines += ', ' + suggestion;
+                  selectedMedicines += ', $suggestion';
                 }
                 medicineNameController.clear();
                 medicineSuggestions = [];

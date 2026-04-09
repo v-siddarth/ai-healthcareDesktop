@@ -302,7 +302,7 @@ class _AdmissionManagementScreenState
   final _searchController = TextEditingController();
 
   Patient _createEmptyPatient() {
-    return Patient(
+    return const Patient(
       id: '',
       patientId: '',
       name: '',
@@ -424,7 +424,7 @@ class _AdmissionManagementScreenState
       children: [
         Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             border: Border(
               bottom: BorderSide(color: HospitalTheme.border),
@@ -594,7 +594,7 @@ class _AdmissionManagementScreenState
                 const SizedBox(height: 2),
                 Text(
                   'Pending: ₹${patient.pendingAmount.toStringAsFixed(2)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.warning,
                     fontWeight: FontWeight.w500,
@@ -616,7 +616,7 @@ class _AdmissionManagementScreenState
                 const SizedBox(height: 4),
                 Text(
                   '${patient.admissionCount} visits',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 10,
                     color: HospitalTheme.textLight,
                   ),
@@ -645,7 +645,7 @@ class _AdmissionManagementScreenState
                   : null,
             ),
             child: patient.imageUrl.trim().isEmpty
-                ? Icon(
+                ? const Icon(
                     Icons.person,
                     size: 40,
                     color: HospitalTheme.primary,
@@ -678,7 +678,7 @@ class _AdmissionManagementScreenState
                 const SizedBox(height: 8),
                 Text(
                   'Patient ID: ${patient.patientId}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: HospitalTheme.textMedium,
                     fontWeight: FontWeight.w500,
@@ -687,7 +687,7 @@ class _AdmissionManagementScreenState
                 const SizedBox(height: 4),
                 Text(
                   '${patient.age} years • ${patient.gender}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),
@@ -704,7 +704,7 @@ class _AdmissionManagementScreenState
                     ),
                     child: Text(
                       'Pending Amount: ₹${patient.pendingAmount.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.warning,
                         fontWeight: FontWeight.w600,
                         fontSize: 12,
@@ -791,7 +791,7 @@ class _AdmissionManagementScreenState
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             color: HospitalTheme.textMedium,
             fontWeight: FontWeight.w500,
@@ -818,9 +818,9 @@ class _AdmissionManagementScreenState
             'Admission Records (${patient.admissionRecords.length})',
           ),
           if (patient.admissionRecords.isEmpty)
-            Center(
+            const Center(
               child: Padding(
-                padding: const EdgeInsets.all(32),
+                padding: EdgeInsets.all(32),
                 child: Column(
                   children: [
                     Icon(
@@ -828,7 +828,7 @@ class _AdmissionManagementScreenState
                       size: 64,
                       color: HospitalTheme.textLight,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Text(
                       'No admission records found',
                       style: TextStyle(
@@ -877,7 +877,7 @@ class _AdmissionManagementScreenState
               ),
               const SizedBox(width: 8),
               IconButton(
-                icon: Icon(Icons.delete_outline, color: HospitalTheme.error),
+                icon: const Icon(Icons.delete_outline, color: HospitalTheme.error),
                 onPressed: () => _showDeleteConfirmation(patient, admission),
                 tooltip: 'Delete Admission Record',
               ),
@@ -933,7 +933,7 @@ class _AdmissionManagementScreenState
           width: 100,
           child: Text(
             '$label:',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textMedium,
             ),
@@ -970,9 +970,9 @@ class _AdmissionManagementScreenState
   }
 
   Widget _buildEmptyState() {
-    return Center(
+    return const Center(
       child: Padding(
-        padding: const EdgeInsets.all(32),
+        padding: EdgeInsets.all(32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -981,7 +981,7 @@ class _AdmissionManagementScreenState
               size: 64,
               color: HospitalTheme.textLight,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'No patients found',
               style: TextStyle(
@@ -990,7 +990,7 @@ class _AdmissionManagementScreenState
                 color: HospitalTheme.textMedium,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'Try adjusting your search criteria',
               style: TextStyle(
@@ -1011,13 +1011,13 @@ class _AdmissionManagementScreenState
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.error_outline,
               size: 64,
               color: HospitalTheme.error,
             ),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'Error loading patients',
               style: TextStyle(
                 fontSize: 18,
@@ -1028,7 +1028,7 @@ class _AdmissionManagementScreenState
             const SizedBox(height: 8),
             Text(
               error,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: HospitalTheme.textMedium,
               ),
@@ -1047,9 +1047,9 @@ class _AdmissionManagementScreenState
   }
 
   Widget _buildSelectPatientState() {
-    return Center(
+    return const Center(
       child: Padding(
-        padding: const EdgeInsets.all(32),
+        padding: EdgeInsets.all(32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -1058,7 +1058,7 @@ class _AdmissionManagementScreenState
               size: 80,
               color: HospitalTheme.textLight,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             Text(
               'Select a patient to view details',
               style: TextStyle(
@@ -1067,7 +1067,7 @@ class _AdmissionManagementScreenState
                 color: HospitalTheme.textMedium,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'Choose a patient from the list to see their admission records and details',
               style: TextStyle(
@@ -1087,7 +1087,7 @@ class _AdmissionManagementScreenState
 
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
           top: BorderSide(color: HospitalTheme.border),
@@ -1098,7 +1098,7 @@ class _AdmissionManagementScreenState
         children: [
           Text(
             'Page ${pagination.currentPage} of ${pagination.totalPages}',
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textMedium,
               fontSize: 14,
             ),
@@ -1175,8 +1175,8 @@ class _AdmissionManagementScreenState
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Admission record deleted successfully'),
+          const SnackBar(
+            content: Text('Admission record deleted successfully'),
             backgroundColor: HospitalTheme.success,
           ),
         );
@@ -1256,13 +1256,13 @@ class _EditPatientDialogState extends ConsumerState<EditPatientDialog> {
             // Header
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.edit,
                   color: HospitalTheme.primary,
                   size: 24,
                 ),
                 const SizedBox(width: 12),
-                Expanded(
+                const Expanded(
                   child: Text(
                     'Edit Patient Information',
                     style: TextStyle(
@@ -1397,7 +1397,7 @@ class _EditPatientDialogState extends ConsumerState<EditPatientDialog> {
                           prefixText: '₹ ',
                         ),
                         keyboardType:
-                            TextInputType.numberWithOptions(decimal: true),
+                            const TextInputType.numberWithOptions(decimal: true),
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Pending amount is required';
@@ -1481,8 +1481,8 @@ class _EditPatientDialogState extends ConsumerState<EditPatientDialog> {
         ref.invalidate(patientsProvider);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Patient information updated successfully'),
+          const SnackBar(
+            content: Text('Patient information updated successfully'),
             backgroundColor: HospitalTheme.success,
           ),
         );

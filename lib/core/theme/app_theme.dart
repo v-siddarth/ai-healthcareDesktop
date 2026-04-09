@@ -67,14 +67,14 @@ class AppTheme {
     ),
 
     // ── Card ────────────────────────────────────────────────────────────────
-    cardTheme: CardThemeData(
+    cardTheme: const CardThemeData(
       elevation:        0,
       color:            AppColors.surface,
       shadowColor:      Colors.transparent,
       surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(
         borderRadius: AppRadius.card,
-        side: const BorderSide(color: AppColors.border, width: 1),
+        side: BorderSide(color: AppColors.border, width: 1),
       ),
       margin: EdgeInsets.zero,
     ),
@@ -90,7 +90,7 @@ class AppTheme {
         shadowColor:       Colors.transparent,
         padding:           AppSpacing.buttonPaddingAll,
         minimumSize:       const Size(80, 40),
-        shape: RoundedRectangleBorder(borderRadius: AppRadius.button),
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.button),
         textStyle:         AppTypography.labelLg,
       ).copyWith(
         elevation: WidgetStateProperty.resolveWith((states) {
@@ -113,7 +113,7 @@ class AppTheme {
         padding: AppSpacing.buttonPaddingAll,
         minimumSize: const Size(80, 40),
         side: const BorderSide(color: AppColors.border),
-        shape: RoundedRectangleBorder(borderRadius: AppRadius.button),
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.button),
         textStyle: AppTypography.labelLg,
       ).copyWith(
         side: WidgetStateProperty.resolveWith((states) {
@@ -131,7 +131,7 @@ class AppTheme {
         foregroundColor: AppColors.primary,
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         minimumSize: const Size(48, 36),
-        shape: RoundedRectangleBorder(borderRadius: AppRadius.button),
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.button),
         textStyle: AppTypography.labelLg,
       ),
     ),
@@ -145,29 +145,29 @@ class AppTheme {
       labelStyle:      AppTypography.labelMd.copyWith(color: AppColors.textSecondary),
       floatingLabelStyle: AppTypography.labelSm.copyWith(color: AppColors.primary),
       errorStyle:      AppTypography.bodyXs.copyWith(color: AppColors.danger),
-      border: OutlineInputBorder(
+      border: const OutlineInputBorder(
         borderRadius: AppRadius.input,
-        borderSide: const BorderSide(color: AppColors.border),
+        borderSide: BorderSide(color: AppColors.border),
       ),
-      enabledBorder: OutlineInputBorder(
+      enabledBorder: const OutlineInputBorder(
         borderRadius: AppRadius.input,
-        borderSide: const BorderSide(color: AppColors.border),
+        borderSide: BorderSide(color: AppColors.border),
       ),
-      focusedBorder: OutlineInputBorder(
+      focusedBorder: const OutlineInputBorder(
         borderRadius: AppRadius.input,
-        borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+        borderSide: BorderSide(color: AppColors.primary, width: 1.5),
       ),
-      errorBorder: OutlineInputBorder(
+      errorBorder: const OutlineInputBorder(
         borderRadius: AppRadius.input,
-        borderSide: const BorderSide(color: AppColors.danger),
+        borderSide: BorderSide(color: AppColors.danger),
       ),
-      focusedErrorBorder: OutlineInputBorder(
+      focusedErrorBorder: const OutlineInputBorder(
         borderRadius: AppRadius.input,
-        borderSide: const BorderSide(color: AppColors.danger, width: 1.5),
+        borderSide: BorderSide(color: AppColors.danger, width: 1.5),
       ),
-      disabledBorder: OutlineInputBorder(
+      disabledBorder: const OutlineInputBorder(
         borderRadius: AppRadius.input,
-        borderSide: const BorderSide(color: AppColors.grey200),
+        borderSide: BorderSide(color: AppColors.grey200),
       ),
     ),
 
@@ -179,16 +179,16 @@ class AppTheme {
       labelStyle:         AppTypography.labelSm.copyWith(color: AppColors.textPrimary),
       secondaryLabelStyle: AppTypography.labelSm.copyWith(color: AppColors.primary),
       padding:            const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: AppRadius.chip,
-        side: const BorderSide(color: AppColors.border),
+        side: BorderSide(color: AppColors.border),
       ),
       elevation: 0,
       pressElevation: 0,
     ),
 
     // ── Dialog ──────────────────────────────────────────────────────────────
-    dialogTheme: DialogThemeData(
+    dialogTheme: const DialogThemeData(
       backgroundColor:  AppColors.surface,
       surfaceTintColor: Colors.transparent,
       elevation:        0,
@@ -226,7 +226,7 @@ class AppTheme {
       selectedLabelTextStyle:   AppTypography.labelSm.copyWith(color: AppColors.primary),
       unselectedLabelTextStyle: AppTypography.labelSm.copyWith(color: AppColors.textSecondary),
       indicatorColor:           AppColors.primarySurface,
-      indicatorShape: RoundedRectangleBorder(borderRadius: AppRadius.radiusMd),
+      indicatorShape: const RoundedRectangleBorder(borderRadius: AppRadius.radiusMd),
       useIndicator: true,
     ),
 
@@ -239,7 +239,7 @@ class AppTheme {
 
     // ── Tooltip ─────────────────────────────────────────────────────────────
     tooltipTheme: TooltipThemeData(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.grey800,
         borderRadius: AppRadius.tooltip,
       ),
@@ -252,7 +252,7 @@ class AppTheme {
       backgroundColor:    AppColors.grey800,
       contentTextStyle:   AppTypography.bodyMd.copyWith(color: AppColors.textOnPrimary),
       actionTextColor:    AppColors.primaryLight,
-      shape: RoundedRectangleBorder(borderRadius: AppRadius.radiusMd),
+      shape: const RoundedRectangleBorder(borderRadius: AppRadius.radiusMd),
       behavior: SnackBarBehavior.floating,
       elevation: 0,
     ),
@@ -278,7 +278,7 @@ class AppTheme {
       }),
       checkColor: WidgetStateProperty.all(AppColors.textOnPrimary),
       side: const BorderSide(color: AppColors.border, width: 1.5),
-      shape: RoundedRectangleBorder(borderRadius: AppRadius.radiusXs),
+      shape: const RoundedRectangleBorder(borderRadius: AppRadius.radiusXs),
     ),
 
     // ── Radio ────────────────────────────────────────────────────────────────
@@ -322,9 +322,9 @@ class AppTheme {
       surfaceTintColor: Colors.transparent,
       elevation:        0,
       shadowColor:      Colors.transparent,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: AppRadius.radiusLg,
-        side: const BorderSide(color: AppColors.border),
+        side: BorderSide(color: AppColors.border),
       ),
       textStyle: AppTypography.bodyMd,
       labelTextStyle: WidgetStateProperty.all(AppTypography.bodyMd),

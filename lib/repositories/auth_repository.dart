@@ -23,7 +23,7 @@ class AuthRepository {
     }
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/users/signin'),
+        Uri.parse('$KVM_URL/users/signin'),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -60,7 +60,7 @@ class AuthRepository {
   Future<String?> loginNurse(String email, String password) async {
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/nurse/signin'), // Different URL for nurse
+        Uri.parse('$KVM_URL/nurse/signin'), // Different URL for nurse
         headers: {
           'Content-Type': 'application/json',
         },
@@ -136,7 +136,7 @@ class AuthRepository {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getAssignedPatients'),
+        Uri.parse('$KVM_URL/doctors/getAssignedPatients'),
         headers: {
           'Authorization': 'Bearer $token',
         },
@@ -166,7 +166,7 @@ class AuthRepository {
     }
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getDoctorProfile'),
+        Uri.parse('$KVM_URL/doctors/getDoctorProfile'),
         headers: {
           'Authorization': 'Bearer $token',
         },
@@ -197,7 +197,7 @@ class AuthRepository {
   Future<List<Patient1>> fetchPatients() async {
     try {
       final response =
-          await http.get(Uri.parse('${KVM_URL}/reception/listPatients'));
+          await http.get(Uri.parse('$KVM_URL/reception/listPatients'));
       print(response.body);
 
       if (response.statusCode == 200) {
@@ -225,7 +225,7 @@ class AuthRepository {
       }
 
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getAssignedPatients'),
+        Uri.parse('$KVM_URL/doctors/getAssignedPatients'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -292,7 +292,7 @@ class AuthRepository {
     required String labTestNameGivenByDoctor,
   }) async {
     final token = await getToken(); // Retrieve the token from storage
-    final url = Uri.parse('${KVM_URL}/doctors/assignPatient');
+    final url = Uri.parse('$KVM_URL/doctors/assignPatient');
 
     try {
       final response = await http.post(
@@ -352,7 +352,7 @@ class AuthRepository {
     };
 
     final response = await http.patch(
-      Uri.parse('${KVM_URL}/doctors/updateProfile'),
+      Uri.parse('$KVM_URL/doctors/updateProfile'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -380,7 +380,7 @@ class AuthRepository {
       }
 
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getAdmittedPatient'),
+        Uri.parse('$KVM_URL/doctors/getAdmittedPatient'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -408,7 +408,7 @@ class AuthRepository {
       throw Exception('Token not found in SharedPreferences');
     }
     final response = await http.get(
-      Uri.parse('${KVM_URL}/doctors/getDoctorAssignedPatient'),
+      Uri.parse('$KVM_URL/doctors/getDoctorAssignedPatient'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -430,7 +430,7 @@ class AuthRepository {
     final token = await getToken(); // Retrieve the token from storage
 
     final response = await http.post(
-      Uri.parse('${KVM_URL}/doctors/dischargePatient'),
+      Uri.parse('$KVM_URL/doctors/dischargePatient'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -447,7 +447,7 @@ class AuthRepository {
     final token = await getToken(); // Retrieve the token from storage
 
     final response = await http.post(
-      Uri.parse('${KVM_URL}/storeFcmToken'),
+      Uri.parse('$KVM_URL/storeFcmToken'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
@@ -477,7 +477,7 @@ class AuthRepository {
     }
 
     final response = await http.post(
-      Uri.parse('${KVM_URL}/doctors/admitPatient'),
+      Uri.parse('$KVM_URL/doctors/admitPatient'),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token'
@@ -499,7 +499,7 @@ class AuthRepository {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('auth_token');
     final response = await http.get(
-      Uri.parse('${KVM_URL}/doctors/getadmittedPatient'),
+      Uri.parse('$KVM_URL/doctors/getadmittedPatient'),
       headers: {
         'Authorization': 'Bearer $token',
       },

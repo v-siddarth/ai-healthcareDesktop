@@ -79,7 +79,7 @@ class CustomerNotifier extends StateNotifier<CustomerState> {
 
       // Make API call
       final response = await http.post(
-        Uri.parse('${KVM_URL}/pharma/createCustomer'),
+        Uri.parse('$KVM_URL/pharma/createCustomer'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );
@@ -129,7 +129,7 @@ final customerProvider =
 });
 
 class CreateCustomerScreen extends ConsumerStatefulWidget {
-  const CreateCustomerScreen({Key? key}) : super(key: key);
+  const CreateCustomerScreen({super.key});
 
   @override
   ConsumerState<CreateCustomerScreen> createState() =>
@@ -206,15 +206,15 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
         elevation: 0,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: PharmaTheme.background,
         ),
         child: Center(
           child: SingleChildScrollView(
             child: Container(
-              constraints: BoxConstraints(maxWidth: 600),
-              margin: EdgeInsets.all(PharmaTheme.spacingL),
-              padding: EdgeInsets.all(PharmaTheme.spacingL),
+              constraints: const BoxConstraints(maxWidth: 600),
+              margin: const EdgeInsets.all(PharmaTheme.spacingL),
+              padding: const EdgeInsets.all(PharmaTheme.spacingL),
               decoration: BoxDecoration(
                 color: PharmaTheme.surface,
                 borderRadius: BorderRadius.circular(PharmaTheme.radiusM),
@@ -231,12 +231,12 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                         CircleAvatar(
                           backgroundColor: PharmaTheme.primary.withOpacity(0.1),
                           radius: 20,
-                          child: Icon(
+                          child: const Icon(
                             Icons.person_add_alt_1,
                             color: PharmaTheme.primary,
                           ),
                         ),
-                        SizedBox(width: PharmaTheme.spacingM),
+                        const SizedBox(width: PharmaTheme.spacingM),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -255,7 +255,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       ],
                     ),
 
-                    SizedBox(height: PharmaTheme.spacingL),
+                    const SizedBox(height: PharmaTheme.spacingL),
 
                     // Customer name
                     TextFormField(
@@ -263,7 +263,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       decoration: InputDecoration(
                         labelText: 'Customer Name *',
                         hintText: 'Enter full name',
-                        prefixIcon: Icon(Icons.person),
+                        prefixIcon: const Icon(Icons.person),
                         border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(PharmaTheme.radiusM),
@@ -277,7 +277,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       },
                     ),
 
-                    SizedBox(height: PharmaTheme.spacingM),
+                    const SizedBox(height: PharmaTheme.spacingM),
 
                     // Contact number
                     TextFormField(
@@ -285,7 +285,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       decoration: InputDecoration(
                         labelText: 'Contact Number *',
                         hintText: 'Enter mobile number',
-                        prefixIcon: Icon(Icons.phone),
+                        prefixIcon: const Icon(Icons.phone),
                         border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(PharmaTheme.radiusM),
@@ -300,7 +300,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       },
                     ),
 
-                    SizedBox(height: PharmaTheme.spacingM),
+                    const SizedBox(height: PharmaTheme.spacingM),
 
                     // Email (optional)
                     TextFormField(
@@ -308,7 +308,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       decoration: InputDecoration(
                         labelText: 'Email (Optional)',
                         hintText: 'Enter email address',
-                        prefixIcon: Icon(Icons.email),
+                        prefixIcon: const Icon(Icons.email),
                         border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(PharmaTheme.radiusM),
@@ -317,7 +317,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       keyboardType: TextInputType.emailAddress,
                     ),
 
-                    SizedBox(height: PharmaTheme.spacingM),
+                    const SizedBox(height: PharmaTheme.spacingM),
 
                     // Address (optional)
                     TextFormField(
@@ -325,7 +325,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       decoration: InputDecoration(
                         labelText: 'Address (Optional)',
                         hintText: 'Enter address',
-                        prefixIcon: Icon(Icons.location_on),
+                        prefixIcon: const Icon(Icons.location_on),
                         border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.circular(PharmaTheme.radiusM),
@@ -334,11 +334,11 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       maxLines: 2,
                     ),
 
-                    SizedBox(height: PharmaTheme.spacingM),
+                    const SizedBox(height: PharmaTheme.spacingM),
 
                     // Patient toggle
                     SwitchListTile(
-                      title: Text('Is this customer a patient?'),
+                      title: const Text('Is this customer a patient?'),
                       subtitle: Text(
                         'Toggle this if the customer is also a patient',
                         style: PharmaTheme.bodySmall.copyWith(
@@ -355,7 +355,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       },
                     ),
 
-                    SizedBox(height: PharmaTheme.spacingL),
+                    const SizedBox(height: PharmaTheme.spacingL),
 
                     // Submit button
                     Row(
@@ -364,7 +364,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: PharmaTheme.accent,
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 vertical: PharmaTheme.spacingM,
                               ),
                               shape: RoundedRectangleBorder(
@@ -376,7 +376,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                                 ? null
                                 : _createCustomer,
                             child: customerState.isLoading
-                                ? SizedBox(
+                                ? const SizedBox(
                                     width: 24,
                                     height: 24,
                                     child: CircularProgressIndicator(
@@ -387,8 +387,8 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                                 : Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(Icons.save),
-                                      SizedBox(width: PharmaTheme.spacingXs),
+                                      const Icon(Icons.save),
+                                      const SizedBox(width: PharmaTheme.spacingXs),
                                       Text(
                                         'Save & Continue',
                                         style: PharmaTheme.bodyLarge.copyWith(
@@ -402,7 +402,7 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                       ],
                     ),
 
-                    SizedBox(height: PharmaTheme.spacingM),
+                    const SizedBox(height: PharmaTheme.spacingM),
 
                     // Cancel button
                     Row(
@@ -410,12 +410,12 @@ class _CreateCustomerScreenState extends ConsumerState<CreateCustomerScreen> {
                         Expanded(
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 vertical: PharmaTheme.spacingM,
                               ),
                             ),
                             onPressed: () => Navigator.pop(context),
-                            child: Text('Cancel'),
+                            child: const Text('Cancel'),
                           ),
                         ),
                       ],
@@ -436,9 +436,9 @@ class CreateSaleScreenWithCustomer extends ConsumerStatefulWidget {
   final Map<String, dynamic> customer;
 
   const CreateSaleScreenWithCustomer({
-    Key? key,
+    super.key,
     required this.customer,
-  }) : super(key: key);
+  });
 
   @override
   ConsumerState<CreateSaleScreenWithCustomer> createState() =>
@@ -472,13 +472,13 @@ class _CreateSaleScreenWithCustomerState
         SnackBar(
           content: Row(
             children: [
-              Icon(Icons.check_circle, color: Colors.white),
-              SizedBox(width: 8),
+              const Icon(Icons.check_circle, color: Colors.white),
+              const SizedBox(width: 8),
               Text('Customer "${widget.customer['name']}" has been added'),
             ],
           ),
           backgroundColor: PharmaTheme.success,
-          duration: Duration(seconds: 3),
+          duration: const Duration(seconds: 3),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(PharmaTheme.radiusS),
@@ -491,6 +491,6 @@ class _CreateSaleScreenWithCustomerState
   @override
   Widget build(BuildContext context) {
     // Return the regular CreateSaleScreen
-    return CreateSaleScreen();
+    return const CreateSaleScreen();
   }
 }

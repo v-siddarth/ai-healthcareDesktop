@@ -80,14 +80,14 @@ class InternetStatusNotifier extends StateNotifier<InternetStatus> {
   }
 
   void _startPeriodicCheck() {
-    _timer = Timer.periodic(Duration(seconds: 60), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 60), (_) {
       _checkInternetStatus();
     });
   }
 
   void _startQuickConnectivityCheck() {
     // Quick connectivity check every 10 seconds (no network requests)
-    _quickTimer = Timer.periodic(Duration(seconds: 10), (_) {
+    _quickTimer = Timer.periodic(const Duration(seconds: 10), (_) {
       _checkBasicConnectivity();
     });
   }
@@ -201,7 +201,7 @@ class InternetStatusNotifier extends StateNotifier<InternetStatus> {
       final response = await http.head(
         Uri.parse('https://www.google.com'),
         headers: {'Connection': 'close'},
-      ).timeout(Duration(seconds: 3));
+      ).timeout(const Duration(seconds: 3));
 
       stopwatch.stop();
 
@@ -230,7 +230,7 @@ class InternetStatusNotifier extends StateNotifier<InternetStatus> {
       final response = await http.head(
         Uri.parse('$KVM_URL/health'),
         headers: {'Connection': 'close'},
-      ).timeout(Duration(seconds: 5));
+      ).timeout(const Duration(seconds: 5));
 
       stopwatch.stop();
 

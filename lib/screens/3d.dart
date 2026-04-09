@@ -6,6 +6,8 @@ import 'package:vector_math/vector_math_64.dart' as vector;
 import 'dart:math' as math;
 
 class Desktop3DScreen extends StatefulWidget {
+  const Desktop3DScreen({super.key});
+
   @override
   _MovingCubeState createState() => _MovingCubeState();
 }
@@ -18,14 +20,14 @@ class _MovingCubeState extends State<Desktop3DScreen>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
       vsync: this,
     )..forward();
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => PatientRegistrationScreen(),
+            builder: (context) => const PatientRegistrationScreen(),
           ),
         );
       }

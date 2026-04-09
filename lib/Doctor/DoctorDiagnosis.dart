@@ -8,10 +8,10 @@ class DoctorDiagnosisSection extends StatefulWidget {
   final String patientId;
 
   const DoctorDiagnosisSection({
-    Key? key,
+    super.key,
     required this.admissionId,
     required this.patientId,
-  }) : super(key: key);
+  });
 
   @override
   DoctorDiagnosisSectionState createState() => DoctorDiagnosisSectionState();
@@ -197,7 +197,7 @@ class DoctorDiagnosisSectionState extends State<DoctorDiagnosisSection> {
   }
 
   void _openAddDiagnosisDialog(String admissionId) {
-    final TextEditingController _symptomsController = TextEditingController();
+    final TextEditingController symptomsController = TextEditingController();
 
     showDialog(
       context: context,
@@ -205,7 +205,7 @@ class DoctorDiagnosisSectionState extends State<DoctorDiagnosisSection> {
         return AlertDialog(
           title: const Text('Add Diagnosis by Doctor'),
           content: TextField(
-            controller: _symptomsController,
+            controller: symptomsController,
             decoration: const InputDecoration(
               labelText: 'Enter diagnosis',
               border: OutlineInputBorder(),
@@ -218,7 +218,7 @@ class DoctorDiagnosisSectionState extends State<DoctorDiagnosisSection> {
             ),
             ElevatedButton(
               onPressed: () async {
-                final newSymptom = _symptomsController.text.trim();
+                final newSymptom = symptomsController.text.trim();
                 if (newSymptom.isNotEmpty) {
                   // Get current date
                   final String currentDateTime =

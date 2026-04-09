@@ -7,11 +7,13 @@ class AssignedPatientsScreen2 extends StatelessWidget {
         'Jane Smith', '9123456789', 'Discharged', '9123456789', '2025-04-20'),
   ];
 
+  AssignedPatientsScreen2({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Assigned Patients'),
+        title: const Text('Assigned Patients'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -38,15 +40,15 @@ class AssignedPatientsScreen2 extends StatelessWidget {
                     onPressed: () {
                       // View patient details
                     },
-                    child: Text("View"),
+                    child: const Text("View"),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   if (patient.status == "Admitted")
                     TextButton(
                       onPressed: () {
                         // Discharge action
                       },
-                      child: Text("Discharge"),
+                      child: const Text("Discharge"),
                     ),
                 ],
               )),

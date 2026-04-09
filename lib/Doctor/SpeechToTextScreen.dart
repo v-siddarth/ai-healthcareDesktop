@@ -508,10 +508,10 @@ JSON format:
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('auth_token');
       final response = await http.post(
-        Uri.parse('${BASE_URL}/doctors/updatePatientMedicalInfo'),
+        Uri.parse('$BASE_URL/doctors/updatePatientMedicalInfo'),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${token}'
+          'Authorization': 'Bearer $token'
         },
         body: jsonEncode(requestBody),
       );
@@ -639,7 +639,7 @@ class _GoogleSpeechToTextMedicalScreenState
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: HospitalTheme.success.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -648,9 +648,9 @@ class _GoogleSpeechToTextMedicalScreenState
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.verified,
+                    const Icon(Icons.verified,
                         color: HospitalTheme.success, size: 16),
-                    SizedBox(width: 4),
+                    const SizedBox(width: 4),
                     Text(
                       'Medical AI',
                       style: TextStyle(
@@ -689,10 +689,10 @@ class _GoogleSpeechToTextMedicalScreenState
                 _buildMicButton(context, state, isTablet),
               ],
               if (state.isProcessing || state.isInitializing)
-                Container(
+                SizedBox(
                   width: isTablet ? 80 : 60,
                   height: isTablet ? 80 : 60,
-                  child: CircularProgressIndicator(
+                  child: const CircularProgressIndicator(
                     valueColor:
                         AlwaysStoppedAnimation<Color>(HospitalTheme.primary),
                     strokeWidth: 4,
@@ -703,7 +703,7 @@ class _GoogleSpeechToTextMedicalScreenState
           if (state.confidence != null) ...[
             SizedBox(height: isTablet ? 16 : 12),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
                 color: HospitalTheme.info.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(16),
@@ -729,16 +729,16 @@ class _GoogleSpeechToTextMedicalScreenState
               ),
               child: Row(
                 children: [
-                  Icon(Icons.error_outline, color: HospitalTheme.error),
+                  const Icon(Icons.error_outline, color: HospitalTheme.error),
                   SizedBox(width: isTablet ? 12 : 8),
                   Expanded(
                     child: Text(
                       state.error!,
-                      style: TextStyle(color: HospitalTheme.error),
+                      style: const TextStyle(color: HospitalTheme.error),
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.close, color: HospitalTheme.error),
+                    icon: const Icon(Icons.close, color: HospitalTheme.error),
                     onPressed: () => ref
                         .read(googleSpeechToTextProvider.notifier)
                         .clearError(),
@@ -793,9 +793,9 @@ class _GoogleSpeechToTextMedicalScreenState
                   color: HospitalTheme.textDark,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: HospitalTheme.medical.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -803,9 +803,9 @@ class _GoogleSpeechToTextMedicalScreenState
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.psychology,
+                    const Icon(Icons.psychology,
                         color: HospitalTheme.medical, size: 16),
-                    SizedBox(width: 4),
+                    const SizedBox(width: 4),
                     Text(
                       'Google AI',
                       style: TextStyle(
@@ -879,7 +879,7 @@ class _GoogleSpeechToTextMedicalScreenState
                     foregroundColor: Colors.white,
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
               ],
               if (state.isEditing) ...[
                 ElevatedButton.icon(
@@ -896,7 +896,7 @@ class _GoogleSpeechToTextMedicalScreenState
                     foregroundColor: Colors.white,
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
               ],
               ElevatedButton.icon(
                 onPressed: state.isUpdating
@@ -908,7 +908,7 @@ class _GoogleSpeechToTextMedicalScreenState
                                 widget.patientId, widget.admissionId);
                       },
                 icon: state.isUpdating
-                    ? SizedBox(
+                    ? const SizedBox(
                         width: 16,
                         height: 16,
                         child: CircularProgressIndicator(
@@ -1023,7 +1023,7 @@ class _GoogleSpeechToTextMedicalScreenState
                       },
                       isTablet,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     _buildEditableField(
                       'Pulse',
                       data.vitals.pulse,
@@ -1038,7 +1038,7 @@ class _GoogleSpeechToTextMedicalScreenState
                       },
                       isTablet,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     _buildEditableField(
                       'Blood Pressure',
                       data.vitals.bloodPressure,
@@ -1053,7 +1053,7 @@ class _GoogleSpeechToTextMedicalScreenState
                       },
                       isTablet,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     _buildEditableField(
                       'Blood Sugar',
                       data.vitals.bloodSugarLevel,
@@ -1068,7 +1068,7 @@ class _GoogleSpeechToTextMedicalScreenState
                       },
                       isTablet,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     _buildEditableField(
                       'Other',
                       data.vitals.other,
@@ -1090,16 +1090,16 @@ class _GoogleSpeechToTextMedicalScreenState
                   children: [
                     Text('• Temperature: ${data.vitals.temperature}',
                         style: TextStyle(fontSize: isTablet ? 14 : 12)),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text('• Pulse: ${data.vitals.pulse}',
                         style: TextStyle(fontSize: isTablet ? 14 : 12)),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text('• Blood Pressure: ${data.vitals.bloodPressure}',
                         style: TextStyle(fontSize: isTablet ? 14 : 12)),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text('• Blood Sugar: ${data.vitals.bloodSugarLevel}',
                         style: TextStyle(fontSize: isTablet ? 14 : 12)),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text('• Other: ${data.vitals.other}',
                         style: TextStyle(fontSize: isTablet ? 14 : 12)),
                   ],
@@ -1151,13 +1151,13 @@ class _GoogleSpeechToTextMedicalScreenState
                       final index = entry.key;
                       final item = entry.value;
                       return Padding(
-                        padding: EdgeInsets.only(bottom: 8),
+                        padding: const EdgeInsets.only(bottom: 8),
                         child: Row(
                           children: [
                             Expanded(
                               child: TextFormField(
                                 initialValue: item,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   isDense: true,
                                   contentPadding: EdgeInsets.symmetric(
                                       horizontal: 12, vertical: 8),
@@ -1170,9 +1170,9 @@ class _GoogleSpeechToTextMedicalScreenState
                                 },
                               ),
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             IconButton(
-                              icon: Icon(Icons.delete,
+                              icon: const Icon(Icons.delete,
                                   color: HospitalTheme.error, size: 20),
                               onPressed: () {
                                 final updatedItems = List<String>.from(items);
@@ -1183,14 +1183,14 @@ class _GoogleSpeechToTextMedicalScreenState
                           ],
                         ),
                       );
-                    }).toList(),
+                    }),
                     ElevatedButton.icon(
                       onPressed: () {
                         final updatedItems = List<String>.from(items);
                         updatedItems.add('New item');
                         onUpdate(updatedItems);
                       },
-                      icon: Icon(Icons.add, size: 16),
+                      icon: const Icon(Icons.add, size: 16),
                       label: Text('Add Item',
                           style: TextStyle(fontSize: isTablet ? 14 : 12)),
                       style: ElevatedButton.styleFrom(
@@ -1276,7 +1276,7 @@ class _GoogleSpeechToTextMedicalScreenState
                       Expanded(
                         child: TextFormField(
                           initialValue: prescription.medicine.name,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Medicine Name',
                             isDense: true,
                           ),
@@ -1300,7 +1300,7 @@ class _GoogleSpeechToTextMedicalScreenState
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.delete, color: HospitalTheme.error),
+                        icon: const Icon(Icons.delete, color: HospitalTheme.error),
                         onPressed: () {
                           final updatedPrescriptions =
                               List<ParsedPrescription>.from(prescriptions);
@@ -1314,13 +1314,13 @@ class _GoogleSpeechToTextMedicalScreenState
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
                       Expanded(
                         child: TextFormField(
                           initialValue: prescription.medicine.morning,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Morning',
                             isDense: true,
                           ),
@@ -1341,11 +1341,11 @@ class _GoogleSpeechToTextMedicalScreenState
                           },
                         ),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: TextFormField(
                           initialValue: prescription.medicine.afternoon,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Afternoon',
                             isDense: true,
                           ),
@@ -1366,11 +1366,11 @@ class _GoogleSpeechToTextMedicalScreenState
                           },
                         ),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: TextFormField(
                           initialValue: prescription.medicine.night,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Night',
                             isDense: true,
                           ),
@@ -1393,10 +1393,10 @@ class _GoogleSpeechToTextMedicalScreenState
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   TextFormField(
                     initialValue: prescription.medicine.comment,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Comment',
                       isDense: true,
                     ),
@@ -1420,11 +1420,11 @@ class _GoogleSpeechToTextMedicalScreenState
                 ],
               ),
             );
-          }).toList(),
+          }),
         if (state.isEditing)
           ElevatedButton.icon(
             onPressed: () {
-              final newPrescription = ParsedPrescription(
+              final newPrescription = const ParsedPrescription(
                 medicine: ParsedMedicine(
                   name: 'New Medicine',
                   morning: '',
@@ -1442,7 +1442,7 @@ class _GoogleSpeechToTextMedicalScreenState
                   .read(googleSpeechToTextProvider.notifier)
                   .updateParsedData(updatedData);
             },
-            icon: Icon(Icons.add, size: 16),
+            icon: const Icon(Icons.add, size: 16),
             label: Text('Add Prescription',
                 style: TextStyle(fontSize: isTablet ? 14 : 12)),
             style: ElevatedButton.styleFrom(
@@ -1537,7 +1537,7 @@ class _GoogleSpeechToTextMedicalScreenState
       decoration: InputDecoration(
         labelText: label,
         isDense: true,
-        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       ),
       style: TextStyle(fontSize: isTablet ? 14 : 12),
       onChanged: onChanged,

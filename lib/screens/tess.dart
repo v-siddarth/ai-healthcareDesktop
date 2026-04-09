@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:doctordesktop/files/theme.dart';
+import 'package:doctordesktop/core/theme/theme.dart';
 
 void main() => runApp(const HmsApp());
 
@@ -191,10 +191,12 @@ class _Sidebar extends StatelessWidget {
                     color: Colors.white, size: 18),
               ),
               const SizedBox(width: 10),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('MediCare', style: AppTypography.headingXs),
-                Text('HMS v2.0', style: AppTypography.bodyXs),
-              ]),
+              const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('MediCare', style: AppTypography.headingXs),
+                    Text('HMS v2.0', style: AppTypography.bodyXs),
+                  ]),
             ]),
           ),
 
@@ -204,8 +206,8 @@ class _Sidebar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   vertical: AppSpacing.s12, horizontal: AppSpacing.s10),
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, bottom: 6, top: 4),
+                const Padding(
+                  padding: EdgeInsets.only(left: 8, bottom: 6, top: 4),
                   child: Text('MAIN MENU', style: AppTypography.overline),
                 ),
                 ...List.generate(
@@ -238,7 +240,7 @@ class _Sidebar extends StatelessWidget {
                         .copyWith(color: AppColors.primary)),
               ),
               const SizedBox(width: 10),
-              Expanded(
+              const Expanded(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -333,7 +335,7 @@ class _TopBar extends StatelessWidget {
                 style: AppTypography.bodyMd
                     .copyWith(color: AppColors.textDisabled)),
           ),
-          Text('Queue Management', style: AppTypography.labelLg),
+          const Text('Queue Management', style: AppTypography.labelLg),
           const Spacer(),
 
           // Search
@@ -449,28 +451,28 @@ class _MainContent extends StatelessWidget {
         padding: const EdgeInsets.all(AppSpacing.pagePadding),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           // Stats row
-          Row(children: [
+          const Row(children: [
             _StatCard(
                 label: 'Total Today',
                 value: '127',
                 icon: Icons.people_alt_rounded,
                 color: AppColors.primary,
                 bg: AppColors.primaryLight),
-            const SizedBox(width: AppSpacing.cardGap),
+            SizedBox(width: AppSpacing.cardGap),
             _StatCard(
                 label: 'In Consultation',
                 value: '8',
                 icon: Icons.medical_services_rounded,
                 color: AppColors.info,
                 bg: AppColors.infoLight),
-            const SizedBox(width: AppSpacing.cardGap),
+            SizedBox(width: AppSpacing.cardGap),
             _StatCard(
                 label: 'Waiting',
                 value: '34',
                 icon: Icons.hourglass_top_rounded,
                 color: AppColors.warning,
                 bg: AppColors.warningLight),
-            const SizedBox(width: AppSpacing.cardGap),
+            SizedBox(width: AppSpacing.cardGap),
             _StatCard(
                 label: 'Completed',
                 value: '85',
@@ -482,7 +484,7 @@ class _MainContent extends StatelessWidget {
 
           // Queue header row
           Row(children: [
-            Text('OPD Queue', style: AppTypography.headingSm),
+            const Text('OPD Queue', style: AppTypography.headingSm),
             const Spacer(),
             _FilterChip(
                 label: 'All',
@@ -838,7 +840,7 @@ class _PatientPanel extends StatelessWidget {
             decoration: const BoxDecoration(
                 border: Border(bottom: BorderSide(color: AppColors.border))),
             child: Row(children: [
-              Text('Patient Details', style: AppTypography.headingXs),
+              const Text('Patient Details', style: AppTypography.headingXs),
               const Spacer(),
               GestureDetector(
                 onTap: onClose,
@@ -876,7 +878,7 @@ class _PatientPanel extends StatelessWidget {
                 _InfoRow(
                     label: 'Gender',
                     value: patient.gender == 'M' ? 'Male' : 'Female'),
-                _InfoRow(label: 'Visit', value: 'OPD'),
+                const _InfoRow(label: 'Visit', value: 'OPD'),
               ]),
               const SizedBox(height: AppSpacing.s20),
 
@@ -891,7 +893,7 @@ class _PatientPanel extends StatelessWidget {
               ]),
               const SizedBox(height: AppSpacing.s20),
 
-              _PanelSection(title: 'Vitals', items: [
+              const _PanelSection(title: 'Vitals', items: [
                 _InfoRow(label: 'BP', value: '122/80 mmHg'),
                 _InfoRow(label: 'Temp', value: '98.6 °F'),
                 _InfoRow(label: 'SpO2', value: '98%'),

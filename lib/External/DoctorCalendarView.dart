@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:doctordesktop/constants/HospitalTheme.dart';
 
 class DoctorAppointmentsListView extends StatefulWidget {
-  const DoctorAppointmentsListView({Key? key}) : super(key: key);
+  const DoctorAppointmentsListView({super.key});
 
   @override
   _DoctorAppointmentsListViewState createState() =>
@@ -47,13 +47,13 @@ class _DoctorAppointmentsListViewState
     try {
       // Fetch doctors
       final doctorsResponse = await http.get(
-        Uri.parse('${KVM_URL}/reception/listExternalDoctors'),
+        Uri.parse('$KVM_URL/reception/listExternalDoctors'),
         headers: {'Content-Type': 'application/json'},
       );
 
       // Fetch appointments
       final appointmentsResponse = await http.get(
-        Uri.parse('${KVM_URL}/reception/getAllAppointments'),
+        Uri.parse('$KVM_URL/reception/getAllAppointments'),
         headers: {'Content-Type': 'application/json'},
       );
 
@@ -135,13 +135,13 @@ class _DoctorAppointmentsListViewState
       case 'This Week':
         final now = DateTime.now();
         final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
-        final endOfWeek = startOfWeek.add(Duration(days: 6));
+        final endOfWeek = startOfWeek.add(const Duration(days: 6));
 
         return filteredAppointments.where((a) {
           final appointmentDate = DateTime.parse(a.date);
           return appointmentDate
-                  .isAfter(startOfWeek.subtract(Duration(days: 1))) &&
-              appointmentDate.isBefore(endOfWeek.add(Duration(days: 1)));
+                  .isAfter(startOfWeek.subtract(const Duration(days: 1))) &&
+              appointmentDate.isBefore(endOfWeek.add(const Duration(days: 1)));
         }).toList();
 
       case 'This Month':
@@ -157,8 +157,9 @@ class _DoctorAppointmentsListViewState
         final todayStr = DateFormat('yyyy-MM-dd').format(now);
 
         return filteredAppointments.where((a) {
-          if (DateTime.parse(a.date).isAfter(DateTime.parse(todayStr)))
+          if (DateTime.parse(a.date).isAfter(DateTime.parse(todayStr))) {
             return true;
+          }
           if (a.date == todayStr) {
             // Compare time if it's today
             try {
@@ -195,7 +196,7 @@ class _DoctorAppointmentsListViewState
     return Scaffold(
       backgroundColor: HospitalTheme.background,
       body: _isLoading
-          ? Center(
+          ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -203,7 +204,7 @@ class _DoctorAppointmentsListViewState
                     valueColor:
                         AlwaysStoppedAnimation<Color>(HospitalTheme.primary),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Text(
                     'Loading appointments...',
                     style: TextStyle(
@@ -272,7 +273,7 @@ class _DoctorAppointmentsListViewState
                 vertical: isSmallScreen ? 16 : 20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF1E2843), Color(0xFF1E2843).withOpacity(0.9)],
+                colors: [const Color(0xFF1E2843), const Color(0xFF1E2843).withOpacity(0.9)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -335,7 +336,7 @@ class _DoctorAppointmentsListViewState
           Expanded(
             child: ListView.builder(
               itemCount: _doctors.length,
-              padding: EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.symmetric(vertical: 8),
               itemBuilder: (context, index) {
                 final doctor = _doctors[index];
                 final isSelected = _selectedDoctor?.id == doctor.id;
@@ -443,7 +444,7 @@ class _DoctorAppointmentsListViewState
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Text(
                                   doctor.speciality ??
                                       doctor.department ??
@@ -511,7 +512,7 @@ class _DoctorAppointmentsListViewState
 
   Widget _buildHeader(bool isSmallScreen) {
     if (_selectedDoctor == null) {
-      return SizedBox.shrink();
+      return const SizedBox.shrink();
     }
 
     final filteredAppointments = _getFilteredAppointments();
@@ -653,7 +654,7 @@ class _DoctorAppointmentsListViewState
             ],
           ),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Stats row in a horizontally scrollable container
           SizedBox(
@@ -700,7 +701,7 @@ class _DoctorAppointmentsListViewState
             ),
           ),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Filters and search row - increased text size
           Row(
@@ -745,7 +746,7 @@ class _DoctorAppointmentsListViewState
                               size: isSmallScreen ? 16 : 18,
                               color: HospitalTheme.primary,
                             ),
-                            SizedBox(width: 6),
+                            const SizedBox(width: 6),
                             Text(value),
                           ],
                         ),
@@ -755,7 +756,7 @@ class _DoctorAppointmentsListViewState
                 ),
               ),
 
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
 
               // Search box - larger text
               Expanded(
@@ -771,7 +772,7 @@ class _DoctorAppointmentsListViewState
                     fillColor: HospitalTheme.surfaceLight,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: HospitalTheme.border),
+                      borderSide: const BorderSide(color: HospitalTheme.border),
                     ),
                     contentPadding:
                         EdgeInsets.symmetric(vertical: isSmallScreen ? 8 : 12),
@@ -786,7 +787,7 @@ class _DoctorAppointmentsListViewState
                 ),
               ),
 
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
 
               // Display info - larger text
               Container(
@@ -818,7 +819,7 @@ class _DoctorAppointmentsListViewState
       bool isSmallScreen) {
     return Container(
       width: isSmallScreen ? 130 : 150,
-      margin: EdgeInsets.only(right: 12),
+      margin: const EdgeInsets.only(right: 12),
       padding: EdgeInsets.symmetric(
           vertical: isSmallScreen ? 10 : 12,
           horizontal: isSmallScreen ? 10 : 14),
@@ -900,7 +901,7 @@ class _DoctorAppointmentsListViewState
 
   Widget _buildAppointmentsList() {
     if (_selectedDoctor == null) {
-      return Center(
+      return const Center(
         child: Text(
           'Select a doctor to view appointments',
           style: TextStyle(
@@ -918,13 +919,13 @@ class _DoctorAppointmentsListViewState
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.calendar_today_outlined,
               size: 64,
               color: HospitalTheme.textLight,
             ),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'No appointments found',
               style: TextStyle(
                 fontSize: 18,
@@ -933,7 +934,7 @@ class _DoctorAppointmentsListViewState
               ),
             ),
             const SizedBox(height: 8),
-            Text(
+            const Text(
               'Try changing the filter or select another doctor',
               style: TextStyle(
                 fontSize: 14,
@@ -996,7 +997,7 @@ class _DoctorAppointmentsListViewState
                 // Appointments for this date
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: appointments.length,
                   itemBuilder: (context, index) {
                     return _buildAppointmentCard(
@@ -1017,7 +1018,7 @@ class _DoctorAppointmentsListViewState
     final date = DateTime.parse(dateStr);
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final tomorrow = today.add(Duration(days: 1));
+    final tomorrow = today.add(const Duration(days: 1));
 
     String dateLabel;
     if (date.isAtSameMomentAs(today)) {
@@ -1040,7 +1041,7 @@ class _DoctorAppointmentsListViewState
             ),
             child: Text(
               dateLabel,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
@@ -1105,14 +1106,14 @@ class _DoctorAppointmentsListViewState
               Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
                       color: HospitalTheme.primary.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       appointment.time,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                         color: HospitalTheme.primary,
@@ -1132,7 +1133,7 @@ class _DoctorAppointmentsListViewState
               // Patient info
               Text(
                 appointment.patientName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                   color: HospitalTheme.textDark,
@@ -1145,13 +1146,13 @@ class _DoctorAppointmentsListViewState
               // ID and Contact info
               Row(
                 children: [
-                  Icon(Icons.person_outline,
+                  const Icon(Icons.person_outline,
                       size: 14, color: HospitalTheme.textMedium),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       'ID: ${appointment.patientId}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: HospitalTheme.textMedium,
                       ),
@@ -1165,13 +1166,13 @@ class _DoctorAppointmentsListViewState
 
               Row(
                 children: [
-                  Icon(Icons.phone_outlined,
+                  const Icon(Icons.phone_outlined,
                       size: 14, color: HospitalTheme.textMedium),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       appointment.patientContact,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: HospitalTheme.textMedium,
                       ),
@@ -1186,13 +1187,13 @@ class _DoctorAppointmentsListViewState
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.medical_information_outlined,
+                    const Icon(Icons.medical_information_outlined,
                         size: 14, color: HospitalTheme.textMedium),
                     const SizedBox(width: 4),
                     Expanded(
                       child: Text(
                         'Symptoms: ${appointment.symptoms}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: HospitalTheme.textMedium,
                         ),
@@ -1289,20 +1290,20 @@ class _DoctorAppointmentsListViewState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Time column
-            Container(
+            SizedBox(
               width: 80,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                     decoration: BoxDecoration(
                       color: HospitalTheme.primary.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       appointment.time,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                         color: HospitalTheme.primary,
@@ -1322,7 +1323,7 @@ class _DoctorAppointmentsListViewState
                 children: [
                   Text(
                     appointment.patientName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: HospitalTheme.textDark,
@@ -1331,23 +1332,23 @@ class _DoctorAppointmentsListViewState
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      Icon(Icons.person_outline,
+                      const Icon(Icons.person_outline,
                           size: 14, color: HospitalTheme.textMedium),
                       const SizedBox(width: 4),
                       Text(
                         'ID: ${appointment.patientId}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: HospitalTheme.textMedium,
                         ),
                       ),
                       const SizedBox(width: 16),
-                      Icon(Icons.phone_outlined,
+                      const Icon(Icons.phone_outlined,
                           size: 14, color: HospitalTheme.textMedium),
                       const SizedBox(width: 4),
                       Text(
                         appointment.patientContact,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: HospitalTheme.textMedium,
                         ),
@@ -1358,13 +1359,13 @@ class _DoctorAppointmentsListViewState
                     const SizedBox(height: 6),
                     Row(
                       children: [
-                        Icon(Icons.medical_information_outlined,
+                        const Icon(Icons.medical_information_outlined,
                             size: 14, color: HospitalTheme.textMedium),
                         const SizedBox(width: 4),
                         Expanded(
                           child: Text(
                             'Symptoms: ${appointment.symptoms}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               color: HospitalTheme.textMedium,
                             ),
@@ -1452,7 +1453,7 @@ class _DoctorAppointmentsListViewState
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(8),

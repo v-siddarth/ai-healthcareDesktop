@@ -87,19 +87,19 @@ class PharmaTheme {
       ];
 
   // Common gradients
-  static LinearGradient get primaryGradient => LinearGradient(
+  static LinearGradient get primaryGradient => const LinearGradient(
         colors: [primary, primaryLight],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
 
-  static LinearGradient get accentGradient => LinearGradient(
+  static LinearGradient get accentGradient => const LinearGradient(
         colors: [accent, accentLight],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       );
 
-  static LinearGradient get primaryAccentGradient => LinearGradient(
+  static LinearGradient get primaryAccentGradient => const LinearGradient(
         colors: [primary, accent],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -115,12 +115,10 @@ class PharmaTheme {
       colorScheme: baseTheme.colorScheme.copyWith(
         primary: primary,
         secondary: accent,
-        background: background,
         surface: surface,
         error: error,
         onPrimary: textLight,
         onSecondary: textLight,
-        onBackground: textPrimary,
         onSurface: textPrimary,
         onError: textLight,
       ),
@@ -167,7 +165,7 @@ class PharmaTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: textPrimary,
-          side: BorderSide(color: border),
+          side: const BorderSide(color: border),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radiusS),
           ),
@@ -197,19 +195,19 @@ class PharmaTheme {
         filled: true,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radiusM),
-          borderSide: BorderSide(color: border),
+          borderSide: const BorderSide(color: border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radiusM),
-          borderSide: BorderSide(color: border),
+          borderSide: const BorderSide(color: border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radiusM),
-          borderSide: BorderSide(color: primary),
+          borderSide: const BorderSide(color: primary),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radiusM),
-          borderSide: BorderSide(color: error),
+          borderSide: const BorderSide(color: error),
         ),
         contentPadding: const EdgeInsets.symmetric(
           vertical: spacingS,
@@ -218,7 +216,7 @@ class PharmaTheme {
       ),
 
       // Divider
-      dividerTheme: DividerThemeData(
+      dividerTheme: const DividerThemeData(
         color: border,
         thickness: 1,
         space: 1,

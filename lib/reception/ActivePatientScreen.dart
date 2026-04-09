@@ -253,7 +253,7 @@ class ActivePatientsNotifier extends StateNotifier<ActivePatientsState> {
   }
 
   static const String baseUrl =
-      '${BASE_URL}/reception/getActivePatientsWithAdmissions';
+      '$BASE_URL/reception/getActivePatientsWithAdmissions';
 
   // Add debounce timer for search
   Timer? _debounceTimer;
@@ -931,7 +931,7 @@ class _ActivePatientScreenState extends ConsumerState<ActivePatientScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.people_outline,
+            const Icon(Icons.people_outline,
                 size: 64, color: HospitalTheme.textLight),
             const SizedBox(height: 16),
             const Text(
@@ -943,7 +943,7 @@ class _ActivePatientScreenState extends ConsumerState<ActivePatientScreen> {
               ),
             ),
             const SizedBox(height: 8),
-            Text(
+            const Text(
               'No patients match your current filters.',
               style: TextStyle(
                 fontSize: 14,
@@ -1089,14 +1089,14 @@ class _ActivePatientScreenState extends ConsumerState<ActivePatientScreen> {
     if (state.selectedPatient == null) {
       return Container(
         color: HospitalTheme.background,
-        child: Center(
+        child: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.person_search,
                   size: 80, color: HospitalTheme.textLight),
-              const SizedBox(height: 16),
-              const Text(
+              SizedBox(height: 16),
+              Text(
                 'Select a Patient',
                 style: TextStyle(
                   fontSize: 20,
@@ -1104,7 +1104,7 @@ class _ActivePatientScreenState extends ConsumerState<ActivePatientScreen> {
                   color: HospitalTheme.textMedium,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
               Text(
                 'Choose a patient from the list to view details',
                 style: TextStyle(

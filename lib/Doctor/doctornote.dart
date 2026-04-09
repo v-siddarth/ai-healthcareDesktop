@@ -30,7 +30,7 @@ class DoctorNote {
 
 // API Service for Doctor Notes
 class DoctorNotesService {
-  final String baseUrl = '${KVM_URL}/doctors';
+  final String baseUrl = '$KVM_URL/doctors';
 
   // Fetch notes for a patient admission
   Future<List<DoctorNote>> fetchNotes(
@@ -38,7 +38,7 @@ class DoctorNotesService {
     try {
       final response = await http.get(
         Uri.parse(
-            '${KVM_URL}/getNotes?patientId=$patientId&admissionId=$admissionId'),
+            '$KVM_URL/getNotes?patientId=$patientId&admissionId=$admissionId'),
       );
 
       if (response.statusCode == 200) {
@@ -58,7 +58,7 @@ class DoctorNotesService {
       String doctorName) async {
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/doctors/addNotes'),
+        Uri.parse('$KVM_URL/doctors/addNotes'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'patientId': patientId,
@@ -81,7 +81,7 @@ class DoctorNotesService {
       String patientId, String admissionId, String noteId) async {
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/deleteNote'),
+        Uri.parse('$KVM_URL/deleteNote'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'patientId': patientId,
@@ -105,11 +105,11 @@ class DoctorNotesSection extends StatefulWidget {
   final String doctorName;
 
   const DoctorNotesSection({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
     required this.doctorName,
-  }) : super(key: key);
+  });
 
   @override
   _DoctorNotesSectionState createState() => _DoctorNotesSectionState();
@@ -151,11 +151,11 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
     if (success) {
       _loadNotes();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Note added successfully')),
+        const SnackBar(content: Text('Note added successfully')),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to add note')),
+        const SnackBar(content: Text('Failed to add note')),
       );
     }
   }
@@ -170,25 +170,25 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
     if (success) {
       _loadNotes();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Note deleted successfully')),
+        const SnackBar(content: Text('Note deleted successfully')),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to delete note')),
+        const SnackBar(content: Text('Failed to delete note')),
       );
     }
   }
 
   void _showAddNoteDialog() {
-    final TextEditingController _textController = TextEditingController();
+    final TextEditingController textController = TextEditingController();
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Add New Note'),
+        title: const Text('Add New Note'),
         content: TextField(
-          controller: _textController,
-          decoration: InputDecoration(
+          controller: textController,
+          decoration: const InputDecoration(
             hintText: 'Enter note text...',
             border: OutlineInputBorder(),
           ),
@@ -197,16 +197,16 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () {
-              if (_textController.text.trim().isNotEmpty) {
+              if (textController.text.trim().isNotEmpty) {
                 Navigator.pop(context);
-                _addNewNote(_textController.text.trim());
+                _addNewNote(textController.text.trim());
               }
             },
-            child: Text('Save'),
+            child: const Text('Save'),
           ),
         ],
       ),
@@ -217,19 +217,19 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Doctor Notes',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
 
         if (_isLoading)
-          Center(child: CircularProgressIndicator())
+          const Center(child: CircularProgressIndicator())
         else if (_notes.isEmpty)
-          Text('No notes available'),
+          const Text('No notes available'),
 
         ..._notes
             .map((note) => Column(
@@ -240,12 +240,12 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
                       note: note.text,
                       doctor: note.doctor,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                   ],
                 ))
-            .toList(),
+            ,
 
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
 
         // Add note button
         _buildGradientButton(
@@ -264,7 +264,7 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
     required String doctor,
   }) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
@@ -293,7 +293,7 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
                       color: Colors.blue.shade700,
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   GestureDetector(
                     onTap: () => _showDeleteConfirmation(id),
                     child: Icon(
@@ -306,10 +306,10 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
               ),
             ],
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             note,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
             ),
           ),
@@ -322,12 +322,12 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Delete Note'),
-        content: Text('Are you sure you want to delete this note?'),
+        title: const Text('Delete Note'),
+        content: const Text('Are you sure you want to delete this note?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
@@ -337,7 +337,7 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
             style: TextButton.styleFrom(
               foregroundColor: Colors.red,
             ),
-            child: Text('Delete'),
+            child: const Text('Delete'),
           ),
         ],
       ),
@@ -352,7 +352,7 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
@@ -369,15 +369,15 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(icon, color: Colors.white, size: 18),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
                 ),

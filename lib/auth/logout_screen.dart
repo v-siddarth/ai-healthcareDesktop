@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LogoutScreen extends ConsumerWidget {
+  const LogoutScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authController = ref.read(authControllerProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(title: Text("Logout")),
+      appBar: AppBar(title: const Text("Logout")),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
@@ -22,7 +24,7 @@ class LogoutScreen extends ConsumerWidget {
               (route) => false,
             );
           },
-          child: Text("Logout"),
+          child: const Text("Logout"),
         ),
       ),
     );

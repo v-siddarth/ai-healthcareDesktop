@@ -2,7 +2,6 @@ import 'package:doctordesktop/Doctor/fetchDoctor.dart';
 import 'package:doctordesktop/Patient/fetchPatient.dart';
 import 'package:doctordesktop/constants/Assets.dart';
 import 'package:doctordesktop/reception/PatientAllDischargedScreen.dart';
-import 'package:doctordesktop/reception/PatientDischarge.dart';
 import 'package:doctordesktop/reception/PatientRegister.dart';
 import 'package:doctordesktop/reception/ReceptionDashboard.dart';
 import 'package:doctordesktop/screens/DoctorRegister.dart';
@@ -11,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ReceptionAuthDialog extends StatefulWidget {
+  const ReceptionAuthDialog({super.key});
+
   @override
   _ReceptionAuthDialogState createState() => _ReceptionAuthDialogState();
 }
@@ -18,8 +19,8 @@ class ReceptionAuthDialog extends StatefulWidget {
 class _ReceptionAuthDialogState extends State<ReceptionAuthDialog> {
   final TextEditingController _userIdController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final String correctUserId = "${AllUserPassword.receptionUser}";
-  final String correctPassword = "${AllUserPassword.receptionPassword}";
+  final String correctUserId = AllUserPassword.receptionUser;
+  final String correctPassword = AllUserPassword.receptionPassword;
 
   @override
   void dispose() {
@@ -40,7 +41,7 @@ class _ReceptionAuthDialogState extends State<ReceptionAuthDialog> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Invalid User ID or Password'),
           backgroundColor: Colors.red,
         ),
@@ -60,7 +61,7 @@ class _ReceptionAuthDialogState extends State<ReceptionAuthDialog> {
       },
       child: AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text(
+        title: const Text(
           'Reception Login',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
@@ -69,17 +70,17 @@ class _ReceptionAuthDialogState extends State<ReceptionAuthDialog> {
           children: [
             TextField(
               controller: _userIdController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'User ID',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.person),
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.lock),
@@ -92,7 +93,7 @@ class _ReceptionAuthDialogState extends State<ReceptionAuthDialog> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text(
+            child: const Text(
               'Cancel',
               style: TextStyle(color: Colors.red),
             ),
@@ -102,7 +103,7 @@ class _ReceptionAuthDialogState extends State<ReceptionAuthDialog> {
               // Handle button 1 press
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ReceptionDashBoard()),
+                MaterialPageRoute(builder: (context) => const ReceptionDashBoard()),
               );
               // _authenticate(context);
             },
@@ -112,7 +113,7 @@ class _ReceptionAuthDialogState extends State<ReceptionAuthDialog> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: Text('Login'),
+            child: const Text('Login'),
           ),
         ],
       ),
@@ -121,28 +122,30 @@ class _ReceptionAuthDialogState extends State<ReceptionAuthDialog> {
 }
 
 class DesktopButtonScreen extends StatelessWidget {
+  const DesktopButtonScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE6FCFF),
+      backgroundColor: const Color(0xFFE6FCFF),
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           'Reception Panel',
           style: TextStyle(color: Colors.cyan),
         ),
-        backgroundColor: Color(0xFF2A79B4),
+        backgroundColor: const Color(0xFF2A79B4),
         elevation: 2,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('${AppImages.reception}'),
+            image: AssetImage(AppImages.reception),
             fit: BoxFit.contain,
           ),
         ),
@@ -163,14 +166,14 @@ class DesktopButtonScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  PatientRegistrationScreen()),
+                                  const PatientRegistrationScreen()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0XFF7CDCE8), // Background color
+                        backgroundColor: const Color(0XFF7CDCE8), // Background color
                         padding:
-                            EdgeInsets.symmetric(horizontal: 60, vertical: 30),
-                        textStyle: TextStyle(fontSize: 20),
+                            const EdgeInsets.symmetric(horizontal: 60, vertical: 30),
+                        textStyle: const TextStyle(fontSize: 20),
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(8), // Rectangular shape
@@ -186,14 +189,14 @@ class DesktopButtonScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  DischargedPatientsScreen1()),
+                                  const DischargedPatientsScreen1()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0XFF7CDCE8), // Background color
+                        backgroundColor: const Color(0XFF7CDCE8), // Background color
                         padding:
-                            EdgeInsets.symmetric(horizontal: 80, vertical: 30),
-                        textStyle: TextStyle(fontSize: 20),
+                            const EdgeInsets.symmetric(horizontal: 80, vertical: 30),
+                        textStyle: const TextStyle(fontSize: 20),
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(8), // Rectangular shape
@@ -233,15 +236,15 @@ class DesktopButtonScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => PatientListScreen()),
+                              builder: (context) => const PatientListScreen()),
                         );
                         // Handle button 4 press
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0XFF7CDCE8), // Background color
+                        backgroundColor: const Color(0XFF7CDCE8), // Background color
                         padding:
-                            EdgeInsets.symmetric(horizontal: 90, vertical: 30),
-                        textStyle: TextStyle(fontSize: 20),
+                            const EdgeInsets.symmetric(horizontal: 90, vertical: 30),
+                        textStyle: const TextStyle(fontSize: 20),
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(8), // Rectangular shape
@@ -249,7 +252,7 @@ class DesktopButtonScreen extends StatelessWidget {
                       ),
                       child: const Text('Patients'),
                     ),
-                    SizedBox(width: 30),
+                    const SizedBox(width: 30),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -260,10 +263,10 @@ class DesktopButtonScreen extends StatelessWidget {
                         // Handle button 4 press
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0XFF7CDCE8), // Background color
+                        backgroundColor: const Color(0XFF7CDCE8), // Background color
                         padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 30),
-                        textStyle: TextStyle(fontSize: 20),
+                            const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
+                        textStyle: const TextStyle(fontSize: 20),
                         shape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.circular(8), // Rectangular shape

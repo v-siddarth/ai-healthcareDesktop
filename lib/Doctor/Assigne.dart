@@ -9,13 +9,13 @@ class AssignedPatientsWidget extends StatelessWidget {
   final Function(Map<String, dynamic>)? onPatientTap;
 
   const AssignedPatientsWidget({
-    Key? key,
+    super.key,
     required this.patients,
     required this.title,
     required this.icon,
     required this.iconColor,
     this.onPatientTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class AssignedPatientsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildHeader(),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Expanded(
               child:
                   patients.isEmpty ? _buildEmptyState() : _buildPatientsList(),
@@ -53,10 +53,10 @@ class AssignedPatientsWidget extends StatelessWidget {
               color: iconColor,
               size: 24,
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
@@ -65,7 +65,7 @@ class AssignedPatientsWidget extends StatelessWidget {
           ],
         ),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
           decoration: BoxDecoration(
             color: iconColor.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
@@ -93,7 +93,7 @@ class AssignedPatientsWidget extends StatelessWidget {
             size: 48,
             color: Colors.grey.shade400,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
             'No patients found',
             style: TextStyle(
@@ -110,7 +110,7 @@ class AssignedPatientsWidget extends StatelessWidget {
   Widget _buildPatientsList() {
     return ListView.separated(
       itemCount: patients.length,
-      separatorBuilder: (context, index) => Divider(height: 1),
+      separatorBuilder: (context, index) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final patient = patients[index];
         return _buildPatientItem(patient);
@@ -127,7 +127,7 @@ class AssignedPatientsWidget extends StatelessWidget {
         : 'Unknown';
 
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       leading: CircleAvatar(
         backgroundColor: iconColor.withOpacity(0.2),
         child: Text(
@@ -140,7 +140,7 @@ class AssignedPatientsWidget extends StatelessWidget {
       ),
       title: Text(
         patientName,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 16,
         ),
@@ -148,23 +148,23 @@ class AssignedPatientsWidget extends StatelessWidget {
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             'Patient ID: $patientId',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textMedium,
             ),
           ),
-          SizedBox(height: 2),
+          const SizedBox(height: 2),
           Row(
             children: [
-              Icon(Icons.calendar_today_outlined,
+              const Icon(Icons.calendar_today_outlined,
                   size: 12, color: HospitalTheme.textMedium),
-              SizedBox(width: 4),
+              const SizedBox(width: 4),
               Text(
                 'Admission: $admissionDate',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   color: HospitalTheme.textMedium,
                 ),
@@ -174,7 +174,7 @@ class AssignedPatientsWidget extends StatelessWidget {
         ],
       ),
       trailing: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
           color: _getStatusColor(status).withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),

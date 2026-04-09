@@ -5,7 +5,7 @@ import 'package:doctordesktop/constants/Url.dart';
 class ApiConstants {
   // Base URL - Replace with your actual API base URL
   static const String baseUrl =
-      '${BASE_URL}/master'; // Replace this with your actual base URL
+      '$BASE_URL/master'; // Replace this with your actual base URL
 
   // API Endpoints
   static const String patients = '/patients';

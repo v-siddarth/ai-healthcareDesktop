@@ -8,10 +8,10 @@ class BookOpenAnimation extends StatefulWidget {
   final Widget contentPage;
 
   const BookOpenAnimation({
-    Key? key,
+    super.key,
     required this.frontPage,
     required this.contentPage,
-  }) : super(key: key);
+  });
 
   @override
   State<BookOpenAnimation> createState() => _BookOpenAnimationState();
@@ -142,7 +142,7 @@ Widget buildLogoFrontPage(
       isSystemOnline ? const Color(0xFF4CAF50) : const Color(0xFFF44336);
 
   // Premium gold gradient colors
-  final List<Color> goldGradientColors = const [
+  const List<Color> goldGradientColors = [
     Color(0xFFF9DB9D), // Lighter gold
     Color(0xFFEABF56), // Medium gold
     Color(0xFFEACF5E), // Rich gold
@@ -285,7 +285,7 @@ Widget buildLogoFrontPage(
               );
             },
             child: Image.asset(
-              '${AppImages.logo}',
+              AppImages.logo,
               fit: BoxFit.contain,
             ),
           ),
@@ -294,8 +294,8 @@ Widget buildLogoFrontPage(
 
           // DocNeX.care text with gold gradient
           ShaderMask(
-            shaderCallback: (bounds) => LinearGradient(
-              colors: const [
+            shaderCallback: (bounds) => const LinearGradient(
+              colors: [
                 Colors.black,
                 Colors.black,
               ],
@@ -351,16 +351,16 @@ Widget buildLogoFrontPage(
                   ),
                 ],
               ),
-              child: Row(
+              child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     Icons.verified,
-                    color: const Color(0xFFEABF56), // Gold icon
+                    color: Color(0xFFEABF56), // Gold icon
                     size: 14,
                   ),
-                  const SizedBox(width: 5),
-                  const Text(
+                  SizedBox(width: 5),
+                  Text(
                     'Trusted Healthcare Partner',
                     style: TextStyle(
                       color: Colors.white,
@@ -658,8 +658,8 @@ Widget buildContentPage(
               children: [
                 // Book title with gold gradient
                 ShaderMask(
-                  shaderCallback: (bounds) => LinearGradient(
-                    colors: const [
+                  shaderCallback: (bounds) => const LinearGradient(
+                    colors: [
                       Color(0xFF5D4037),
                       Color(0xFF8D6E63),
                     ],
@@ -697,7 +697,7 @@ Widget buildContentPage(
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: bodyFontSize - 2,
-                    color: Color(0xFF8D6E63),
+                    color: const Color(0xFF8D6E63),
                     height: 1.5,
                   ),
                 ),
@@ -734,13 +734,13 @@ Widget buildContentPage(
                   panelHeight: panelHeight,
                   primaryColor: primaryColor,
                   textColor: textColor,
-                  panel1: _PanelInfo(
+                  panel1: const _PanelInfo(
                     icon: Icons.person_add,
                     title: 'Registration',
                     description: '',
                     isPremium: true,
                   ),
-                  panel2: _PanelInfo(
+                  panel2: const _PanelInfo(
                     icon: Icons.event_note,
                     title: 'Appointments',
                     description: '',
@@ -757,13 +757,13 @@ Widget buildContentPage(
                   panelHeight: panelHeight,
                   primaryColor: primaryColor,
                   textColor: textColor,
-                  panel1: _PanelInfo(
+                  panel1: const _PanelInfo(
                     icon: Icons.medical_services,
                     title: 'Electronic Health Records',
                     description: '',
                     isPremium: true,
                   ),
-                  panel2: _PanelInfo(
+                  panel2: const _PanelInfo(
                     icon: Icons.healing,
                     title: 'Treatment Plans',
                     description: '',
@@ -780,13 +780,13 @@ Widget buildContentPage(
                   panelHeight: panelHeight,
                   primaryColor: primaryColor,
                   textColor: textColor,
-                  panel1: _PanelInfo(
+                  panel1: const _PanelInfo(
                     icon: Icons.medication,
                     title: 'E-Prescriptions',
                     description: '',
                     isPremium: true,
                   ),
-                  panel2: _PanelInfo(
+                  panel2: const _PanelInfo(
                     icon: Icons.receipt_long,
                     title: 'Billing',
                     description: '',
@@ -803,13 +803,13 @@ Widget buildContentPage(
                   panelHeight: panelHeight,
                   primaryColor: primaryColor,
                   textColor: textColor,
-                  panel1: _PanelInfo(
+                  panel1: const _PanelInfo(
                     icon: Icons.analytics,
                     title: 'Analytics',
                     description: '',
                     isPremium: true,
                   ),
-                  panel2: _PanelInfo(
+                  panel2: const _PanelInfo(
                     icon: Icons.inventory,
                     title: 'Inventory',
                     description: '',
@@ -826,13 +826,13 @@ Widget buildContentPage(
                   panelHeight: panelHeight,
                   primaryColor: primaryColor,
                   textColor: textColor,
-                  panel1: _PanelInfo(
+                  panel1: const _PanelInfo(
                     icon: Icons.message,
                     title: 'Patient Portal',
                     description: '',
                     isPremium: true,
                   ),
-                  panel2: _PanelInfo(
+                  panel2: const _PanelInfo(
                     icon: Icons.description,
                     title: 'Documentation',
                     description: '',
@@ -849,13 +849,13 @@ Widget buildContentPage(
                   panelHeight: panelHeight,
                   primaryColor: primaryColor,
                   textColor: textColor,
-                  panel1: _PanelInfo(
+                  panel1: const _PanelInfo(
                     icon: Icons.biotech,
                     title: 'Lab Integration',
                     description: 'Connect with laboratories',
                     isPremium: true,
                   ),
-                  panel2: _PanelInfo(
+                  panel2: const _PanelInfo(
                     icon: Icons.notifications,
                     title: 'Reminders',
                     description: 'Appointment and medication alerts',
@@ -969,7 +969,7 @@ Widget _buildPanel({
   required Color textColor,
 }) {
   // Premium gold gradient colors
-  final List<Color> goldGradientColors = const [
+  const List<Color> goldGradientColors = [
     Color(0xFFF9DB9D), // Lighter gold
     Color(0xFFEABF56), // Medium gold
     Color(0xFFEACF5E), // Rich gold

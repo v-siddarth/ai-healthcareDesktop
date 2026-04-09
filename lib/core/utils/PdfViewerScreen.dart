@@ -305,11 +305,11 @@ class PdfViewerWidget extends ConsumerWidget {
   final String? appBarTitle;
 
   const PdfViewerWidget({
-    Key? key,
+    super.key,
     required this.child,
     this.primaryColor,
     this.appBarTitle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -331,10 +331,10 @@ class PdfViewerScreen extends ConsumerWidget {
   final String? appBarTitle;
 
   const PdfViewerScreen({
-    Key? key,
+    super.key,
     this.primaryColor,
     this.appBarTitle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -541,10 +541,10 @@ class PdfStatusBar extends ConsumerWidget {
   final Color? infoColor;
 
   const PdfStatusBar({
-    Key? key,
+    super.key,
     this.errorColor,
     this.infoColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -617,13 +617,13 @@ class PdfActionButton extends ConsumerWidget {
   final bool autoShow;
 
   const PdfActionButton({
-    Key? key,
+    super.key,
     required this.url,
     this.title,
     required this.child,
     this.onPressed,
     this.autoShow = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

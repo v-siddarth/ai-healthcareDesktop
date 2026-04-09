@@ -22,7 +22,7 @@ class InvestigationRepository {
     }
 
     final url = Uri.parse(
-        '${KVM_URL}/doctors/getDoctorInvestigations?page=$page&limit=$limit');
+        '$KVM_URL/doctors/getDoctorInvestigations?page=$page&limit=$limit');
 
     final response = await http.get(
       url,
@@ -47,7 +47,7 @@ class InvestigationRepository {
       throw Exception('Authentication token not found');
     }
 
-    final url = Uri.parse('${KVM_URL}/doctors/createInvestigation');
+    final url = Uri.parse('$KVM_URL/doctors/createInvestigation');
 
     final response = await http.post(
       url,
@@ -72,7 +72,7 @@ class InvestigationRepository {
       throw Exception('Authentication token not found');
     }
 
-    final url = Uri.parse('${KVM_URL}/doctors/getInvestigation/$id');
+    final url = Uri.parse('$KVM_URL/doctors/getInvestigation/$id');
 
     final response = await http.get(
       url,
@@ -99,7 +99,7 @@ class InvestigationRepository {
     }
 
     final url = Uri.parse(
-        '${KVM_URL}/doctors/getPatientInvestigations/$patientId?page=$page&limit=$limit');
+        '$KVM_URL/doctors/getPatientInvestigations/$patientId?page=$page&limit=$limit');
 
     final response = await http.get(
       url,
@@ -125,7 +125,7 @@ class InvestigationRepository {
       throw Exception('Authentication token not found');
     }
 
-    final url = Uri.parse('${KVM_URL}/doctors/updateInvestigationStatus/$id');
+    final url = Uri.parse('$KVM_URL/doctors/updateInvestigationStatus/$id');
 
     final response = await http.patch(
       url,

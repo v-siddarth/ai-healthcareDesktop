@@ -15,8 +15,8 @@ class VitalsChartScreen extends ConsumerStatefulWidget {
     required this.patientId,
     required this.admissionId,
     required this.vitals,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _VitalsChartScreenState createState() => _VitalsChartScreenState();
@@ -227,12 +227,12 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide:
-                              BorderSide(color: const Color(0xFFDFEAF4)),
+                              const BorderSide(color: Color(0xFFDFEAF4)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide:
-                              BorderSide(color: const Color(0xFFDFEAF4)),
+                              const BorderSide(color: Color(0xFFDFEAF4)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -241,7 +241,7 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
                         filled: true,
                         fillColor: Colors.white,
                       ),
-                      items: [
+                      items: const [
                         DropdownMenuItem(
                             value: 'temperature', child: Text('Temperature')),
                         DropdownMenuItem(
@@ -285,12 +285,12 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide:
-                              BorderSide(color: const Color(0xFFDFEAF4)),
+                              const BorderSide(color: Color(0xFFDFEAF4)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide:
-                              BorderSide(color: const Color(0xFFDFEAF4)),
+                              const BorderSide(color: Color(0xFFDFEAF4)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -299,7 +299,7 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
                         filled: true,
                         fillColor: Colors.white,
                       ),
-                      items: [
+                      items: const [
                         DropdownMenuItem(
                             value: '7days', child: Text('Last 7 Days')),
                         DropdownMenuItem(
@@ -491,7 +491,7 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
               },
             ),
           ),
-          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
           rightTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
@@ -545,7 +545,7 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
               color: success.withOpacity(0.2),
               barWidth: 0,
               isStrokeCapRound: false,
-              dotData: FlDotData(show: false),
+              dotData: const FlDotData(show: false),
               belowBarData: BarAreaData(
                 show: true,
                 color: success.withOpacity(0.1),
@@ -730,7 +730,7 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
             break;
         }
       } catch (e) {
-        print('Error parsing ${vitalType} value: ${e}');
+        print('Error parsing $vitalType value: $e');
         extractedValue = null;
       }
 
@@ -996,8 +996,8 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
     }
 
     // Set min and max values for BP chart
-    final double minValue = 40.0; // Lower than any normal diastolic
-    final double maxValue = 180.0; // Higher than any normal systolic
+    const double minValue = 40.0; // Lower than any normal diastolic
+    const double maxValue = 180.0; // Higher than any normal systolic
 
     // Get normal ranges
     final Map<String, double>? systolicRange = normalRanges['systolic'];
@@ -1114,7 +1114,7 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
               },
             ),
           ),
-          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
           rightTitles: AxisTitles(
             sideTitles: SideTitles(
               showTitles: true,
@@ -1154,7 +1154,7 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
 
                 return LineTooltipItem(
                   '$label: ${spot.y.toInt()} mmHg\n$dateLabel',
-                  TextStyle(
+                  const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -1176,7 +1176,7 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
               color: success.withOpacity(0.1),
               barWidth: 0,
               isStrokeCapRound: false,
-              dotData: FlDotData(show: false),
+              dotData: const FlDotData(show: false),
               belowBarData: BarAreaData(
                 show: true,
                 color: success.withOpacity(0.1),
@@ -1195,7 +1195,7 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
               color: success.withOpacity(0.1),
               barWidth: 0,
               isStrokeCapRound: false,
-              dotData: FlDotData(show: false),
+              dotData: const FlDotData(show: false),
               belowBarData: BarAreaData(
                 show: true,
                 color: success.withOpacity(0.1),
@@ -1355,10 +1355,10 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
     if (data.length < 2) {
       // Return a dummy transparent line
       return LineChartBarData(
-        spots: [FlSpot(0, 0), FlSpot(1, 0)],
+        spots: [const FlSpot(0, 0), const FlSpot(1, 0)],
         color: Colors.transparent,
         barWidth: 0,
-        dotData: FlDotData(show: false),
+        dotData: const FlDotData(show: false),
       );
     }
 
@@ -1408,7 +1408,7 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
           color: color ?? Colors.purple.withOpacity(0.7),
           barWidth: 2,
           isStrokeCapRound: true,
-          dotData: FlDotData(show: false),
+          dotData: const FlDotData(show: false),
           dashArray: [4, 4],
         );
       }
@@ -1428,17 +1428,17 @@ class _VitalsChartScreenState extends ConsumerState<VitalsChartScreen> {
         color: color ?? Colors.purple.withOpacity(0.7),
         barWidth: 2,
         isStrokeCapRound: true,
-        dotData: FlDotData(show: false),
+        dotData: const FlDotData(show: false),
         dashArray: [4, 4],
       );
     } catch (e) {
       print('Error building trend line: $e');
       // Return an empty transparent line in case of any error
       return LineChartBarData(
-        spots: [FlSpot(0, 0), FlSpot(1, 0)],
+        spots: [const FlSpot(0, 0), const FlSpot(1, 0)],
         color: Colors.transparent,
         barWidth: 0,
-        dotData: FlDotData(show: false),
+        dotData: const FlDotData(show: false),
       );
     }
   }

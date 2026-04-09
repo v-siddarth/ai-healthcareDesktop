@@ -18,7 +18,7 @@ class PatientModel {
 }
 
 class PatientDetailsScreen3 extends StatefulWidget {
-  const PatientDetailsScreen3({Key? key}) : super(key: key);
+  const PatientDetailsScreen3({super.key});
 
   @override
   State<PatientDetailsScreen3> createState() => _PatientDetailsScreenState();
@@ -418,7 +418,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen3>
 
 // Advanced implementation for true 360-degree viewing with multiple images
 class MultiAnglePatientViewer extends StatefulWidget {
-  const MultiAnglePatientViewer({Key? key}) : super(key: key);
+  const MultiAnglePatientViewer({super.key});
 
   @override
   State<MultiAnglePatientViewer> createState() =>

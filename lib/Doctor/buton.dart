@@ -13,7 +13,7 @@ class CustomActionButton extends StatelessWidget {
   final EdgeInsets padding;
 
   const CustomActionButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     required this.color,
@@ -24,7 +24,7 @@ class CustomActionButton extends StatelessWidget {
     this.iconSize = 24, // Slightly larger icon
     this.fontSize = 12, // Adjustable font size
     this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class CustomActionButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               isLoading
-                  ? CircularProgressIndicator(
+                  ? const CircularProgressIndicator(
                       color: Colors.white,
                       strokeWidth: 2,
                     )

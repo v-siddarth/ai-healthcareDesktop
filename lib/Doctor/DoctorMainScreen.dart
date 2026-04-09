@@ -1,8 +1,8 @@
-import 'package:doctordesktop/Check.dart';
+import 'package:doctordesktop/app/home_page.dart';
 import 'package:doctordesktop/Doctor/AssignedLabScreen.dart';
 import 'package:doctordesktop/Doctor/AssignedPatientScreen.dart';
 import 'package:doctordesktop/Doctor/DoctorProfile.dart';
-import 'package:doctordesktop/LogoutScreen.dart';
+import 'package:doctordesktop/auth/logout_screen.dart';
 import 'package:doctordesktop/Patient/fetchPatient.dart';
 import 'package:doctordesktop/authProvider/auth_provider.dart';
 import 'package:doctordesktop/constants/Assets.dart';
@@ -60,7 +60,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
       'screen': LaboratoryAssignmentsScreen(),
       'color': HospitalTheme.laboratory,
       'icon': Icons.science_outlined,
-      'gradient': [const Color(0xFF667eea), const Color(0xFF764ba2)],
+      'gradient': [Color(0xFF667eea), Color(0xFF764ba2)],
       'category': 'diagnostics',
       'priority': 'medium',
       'status': 'pending',
@@ -75,7 +75,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
       'screen': PatientListScreen(),
       'color': HospitalTheme.pharmacy,
       'icon': Icons.people_alt_outlined,
-      'gradient': [const Color(0xFFf093fb), const Color(0xFFf5576c)],
+      'gradient': [Color(0xFFf093fb), Color(0xFFf5576c)],
       'category': 'records',
       'priority': 'low',
       'status': 'active',
@@ -90,7 +90,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
       'screen': HomePage(),
       'color': HospitalTheme.primary,
       'icon': Icons.dashboard_outlined,
-      'gradient': [const Color(0xFFfb2b69), const Color(0xFFff5858)],
+      'gradient': [Color(0xFFfb2b69), Color(0xFFff5858)],
       'category': 'overview',
       'priority': 'medium',
       'status': 'active',
@@ -845,7 +845,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
     return Container(
       height: isWideScreen ? 120 : 100,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
@@ -853,7 +853,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
             HospitalTheme.primaryDark,
             HospitalTheme.secondary,
           ],
-          stops: const [0.0, 0.7, 1.0],
+          stops: [0.0, 0.7, 1.0],
         ),
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(24),
@@ -990,7 +990,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
                                         Container(
                                           width: 5,
                                           height: 5,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             color: HospitalTheme.success,
                                             shape: BoxShape.circle,
                                           ),
@@ -1114,7 +1114,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) =>
-                  HomePage(),
+                  const HomePage(),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return SlideTransition(
@@ -1194,14 +1194,14 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
               ),
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.shield_outlined,
               size: 32,
               color: HospitalTheme.warning,
             ),
           ),
           const SizedBox(width: 16),
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -1213,7 +1213,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
                     color: HospitalTheme.textDark,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   "Please login to access the doctor portal",
                   style: TextStyle(
@@ -1331,7 +1331,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
               children: [
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Welcome back,",
                       style: TextStyle(
                         fontSize: 12,
@@ -1354,7 +1354,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
                         ),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Online',
                         style: TextStyle(
                           fontSize: 10,
@@ -1368,7 +1368,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
                 const SizedBox(height: 2),
                 Text(
                   "Dr. ${doctorProfile.doctorName ?? 'Doctor'}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.textDark,
@@ -1400,7 +1400,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          DoctorProfileScreen(),
+                          const DoctorProfileScreen(),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
                         return SlideTransition(
@@ -1483,14 +1483,14 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
                     ),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.logout_rounded,
                     color: HospitalTheme.error,
                     size: 32,
                   ),
                 ),
                 const SizedBox(height: 20),
-                Text(
+                const Text(
                   "Confirm Logout",
                   style: TextStyle(
                     fontSize: 20,
@@ -1499,7 +1499,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
                   ),
                 ),
                 const SizedBox(height: 12),
-                Text(
+                const Text(
                   "Are you sure you want to logout from the doctor portal?",
                   style: TextStyle(
                     fontSize: 14,
@@ -1602,7 +1602,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
                     width: 3,
                     height: 20,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [
                           HospitalTheme.primary,
                           HospitalTheme.secondary
@@ -1612,7 +1612,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Icon(
+                  const Icon(
                     Icons.dashboard_customize_outlined,
                     color: HospitalTheme.primary,
                     size: 20,
@@ -1641,7 +1641,7 @@ class _DoctorHomeScreenState extends ConsumerState<DoctorHomeScreen>
                     ),
                     child: Text(
                       '${doctorCards.length} modules',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w600,
                         color: HospitalTheme.success,

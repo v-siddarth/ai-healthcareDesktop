@@ -244,7 +244,7 @@ class PatientRecordsState {
 
 // API Service
 class PatientRecordsService {
-  static const String baseUrl = '${BASE_URL}';
+  static const String baseUrl = BASE_URL;
 
   static Future<List<Patient>> getAllPatientsLastRecords() async {
     try {
@@ -412,7 +412,7 @@ class DateTimeUtils {
 
 // Main Screen
 class PatientRecordsManagementScreen extends ConsumerStatefulWidget {
-  const PatientRecordsManagementScreen({Key? key}) : super(key: key);
+  const PatientRecordsManagementScreen({super.key});
 
   @override
   ConsumerState<PatientRecordsManagementScreen> createState() =>
@@ -1141,7 +1141,7 @@ class _PatientDetailsPanel extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                                 Container(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 12,
@@ -1469,8 +1469,9 @@ class _RecordEditorPanelState extends State<_RecordEditorPanel> {
                             keyboardType: TextInputType.number,
                             validator: (value) {
                               if (value?.isEmpty ?? true) return 'Required';
-                              if (int.tryParse(value!) == null)
+                              if (int.tryParse(value!) == null) {
                                 return 'Invalid number';
+                              }
                               return null;
                             },
                           ),
@@ -1571,8 +1572,9 @@ class _RecordEditorPanelState extends State<_RecordEditorPanel> {
                             keyboardType: TextInputType.number,
                             validator: (value) {
                               if (value?.isEmpty ?? true) return 'Required';
-                              if (double.tryParse(value!) == null)
+                              if (double.tryParse(value!) == null) {
                                 return 'Invalid amount';
+                              }
                               return null;
                             },
                           ),

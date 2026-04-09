@@ -13,10 +13,10 @@ class AddSymptomScreen extends StatefulWidget {
   final String admissionId;
 
   const AddSymptomScreen({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
-  }) : super(key: key);
+  });
 
   @override
   State<AddSymptomScreen> createState() => _AddSymptomScreenState();
@@ -47,7 +47,7 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getSymptomAnalytics'),
+        Uri.parse('$KVM_URL/doctors/getSymptomAnalytics'),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -167,7 +167,7 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Symptoms'),
-        backgroundColor: Color(0xFF005F9E),
+        backgroundColor: const Color(0xFF005F9E),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -185,7 +185,7 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Header
-                Text(
+                const Text(
                   'Symptom Management',
                   style: TextStyle(
                     fontSize: 24,
@@ -207,7 +207,7 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
                 const SizedBox(height: 24),
 
                 // Trending Symptoms Section
-                Text(
+                const Text(
                   'Trending Symptoms',
                   style: TextStyle(
                     fontSize: 16,
@@ -224,12 +224,12 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
                     child: LinearProgressIndicator(
                       backgroundColor: Colors.grey.shade200,
                       valueColor:
-                          AlwaysStoppedAnimation<Color>(Color(0xFF005F9E)),
+                          const AlwaysStoppedAnimation<Color>(Color(0xFF005F9E)),
                     ),
                   )
                 else if (trendingSymptoms.isEmpty)
                   Container(
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Colors.grey.shade100,
                       borderRadius: BorderRadius.circular(8),
@@ -264,7 +264,7 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
 
                 // Selected symptoms section
                 if (selectedSymptoms.isNotEmpty) ...[
-                  Text(
+                  const Text(
                     'Selected Symptoms',
                     style: TextStyle(
                       fontSize: 16,
@@ -274,7 +274,7 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
                   ),
                   const SizedBox(height: 8),
                   Container(
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Colors.grey.shade50,
                       borderRadius: BorderRadius.circular(8),
@@ -289,10 +289,10 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
                           .map((symptom) => Chip(
                                 label: Text(
                                   symptom,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 12),
                                 ),
-                                backgroundColor: Color(0xFF00B8D4),
+                                backgroundColor: const Color(0xFF00B8D4),
                                 deleteIconColor: Colors.white,
                                 onDeleted: () {
                                   setState(() {
@@ -315,7 +315,7 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
                   controller: symptomController,
                   decoration: InputDecoration(
                     hintText: 'Enter symptom name',
-                    prefixIcon: Icon(Icons.medical_information,
+                    prefixIcon: const Icon(Icons.medical_information,
                         color: Color(0xFF005F9E)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -324,11 +324,11 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide:
-                          BorderSide(color: Color(0xFF005F9E), width: 2),
+                          const BorderSide(color: Color(0xFF005F9E), width: 2),
                     ),
                     suffixIcon: symptomController.text.isNotEmpty
                         ? IconButton(
-                            icon: Icon(Icons.clear),
+                            icon: const Icon(Icons.clear),
                             onPressed: () {
                               setState(() {
                                 symptomController.clear();
@@ -358,8 +358,8 @@ class _AddSymptomScreenState extends State<AddSymptomScreen> {
                     label: 'Add Symptoms',
                     icon: Icons.add_circle,
                     onPressed: _addSymptom,
-                    startColor: Color(0xFF005F9E),
-                    endColor: Color(0xFF00B8D4),
+                    startColor: const Color(0xFF005F9E),
+                    endColor: const Color(0xFF00B8D4),
                     width: double.infinity,
                     height: 56,
                   ),

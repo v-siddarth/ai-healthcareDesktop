@@ -9,14 +9,14 @@ class HorizontalCenterDrawer extends StatefulWidget {
   final Duration animationDuration;
 
   const HorizontalCenterDrawer({
-    Key? key,
+    super.key,
     required this.child,
     this.closedWidth = 50.0,
     this.openWidth = 300.0,
     this.backgroundColor = Colors.white,
     this.borderRadius = const BorderRadius.all(Radius.circular(8.0)),
     this.animationDuration = const Duration(milliseconds: 300),
-  }) : super(key: key);
+  });
 
   @override
   _HorizontalCenterDrawerState createState() => _HorizontalCenterDrawerState();
@@ -95,7 +95,7 @@ class _HorizontalCenterDrawerState extends State<HorizontalCenterDrawer>
                     Container(
                       height: 40,
                       width: double.infinity, // Ensure width is set
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient: LinearGradient(
                           colors: [Color(0xFF005F9E), Color(0xFF00B8D4)],
                           begin: Alignment.centerLeft,
@@ -109,8 +109,8 @@ class _HorizontalCenterDrawerState extends State<HorizontalCenterDrawer>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 16.0),
                             child: Text(
                               "Doctor Notes",
                               style: TextStyle(
@@ -120,17 +120,17 @@ class _HorizontalCenterDrawerState extends State<HorizontalCenterDrawer>
                             ),
                           ),
                           IconButton(
-                            icon: Icon(Icons.close, color: Colors.white),
+                            icon: const Icon(Icons.close, color: Colors.white),
                             onPressed: _toggleDrawer,
                             padding: EdgeInsets.zero,
-                            constraints: BoxConstraints(), // Remove constraints
+                            constraints: const BoxConstraints(), // Remove constraints
                           ),
                         ],
                       ),
                     ),
                     // Content
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity, // Ensure width is set
                         child: SingleChildScrollView(
                           padding: const EdgeInsets.all(16.0),
@@ -147,18 +147,18 @@ class _HorizontalCenterDrawerState extends State<HorizontalCenterDrawer>
                     width: double.infinity, // Ensure width is set
                     height: double.infinity, // Ensure height is set
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [Color(0xFF005F9E), Color(0xFF00B8D4)],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ),
                       borderRadius: widget.borderRadius,
                     ),
-                    child: Center(
+                    child: const Center(
                       child: RotatedBox(
                         quarterTurns: 3,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [

@@ -68,7 +68,7 @@ class OfflineBanner extends StatelessWidget {
   final Widget? icon;
 
   const OfflineBanner({
-    Key? key,
+    super.key,
     this.message = 'No Internet Connection',
     this.backgroundColor = const Color(0xFFE53935),
     this.height = 50,
@@ -78,7 +78,7 @@ class OfflineBanner extends StatelessWidget {
       fontWeight: FontWeight.bold,
     ),
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -121,13 +121,13 @@ class NetworkAwarenessWrapper extends StatefulWidget {
   final bool blockInteractionWhenOffline;
 
   const NetworkAwarenessWrapper({
-    Key? key,
+    super.key,
     required this.child,
     this.offlineScreen,
     this.showOfflineBanner = true,
     this.offlineBannerMessage = 'No Internet Connection',
     this.blockInteractionWhenOffline = false,
-  }) : super(key: key);
+  });
 
   @override
   State<NetworkAwarenessWrapper> createState() =>
@@ -269,12 +269,12 @@ class NetworkAwareButton extends StatelessWidget {
   final BuildContext? toastContext;
 
   const NetworkAwareButton({
-    Key? key,
+    super.key,
     required this.child,
     required this.onPressed,
     this.offlineMessage = 'This action requires an internet connection',
     this.toastContext,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

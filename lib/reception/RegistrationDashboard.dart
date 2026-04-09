@@ -4,7 +4,7 @@ import 'package:doctordesktop/reception/Sidebar.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationDashboard extends StatefulWidget {
-  const RegistrationDashboard({Key? key}) : super(key: key);
+  const RegistrationDashboard({super.key});
 
   @override
   State<RegistrationDashboard> createState() =>
@@ -12,7 +12,7 @@ class RegistrationDashboard extends StatefulWidget {
 }
 
 class _RegistrationDashboardScreenState extends State<RegistrationDashboard> {
-  int _selectedNavIndex = 0;
+  final int _selectedNavIndex = 0;
 
   // Map of screen widgets indexed by their navigation index
   late final Map<int, Widget> _screens;

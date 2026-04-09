@@ -509,7 +509,7 @@ class GeneratedBillNotifier extends StateNotifier<GeneratedBillData?> {
 }
 
 class IpdDetailScreen extends ConsumerStatefulWidget {
-  const IpdDetailScreen({Key? key}) : super(key: key);
+  const IpdDetailScreen({super.key});
 
   @override
   ConsumerState<IpdDetailScreen> createState() => _IpdDetailScreenState();
@@ -629,7 +629,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
   Future<void> fetchAdmittedPatients() async {
     try {
       final response =
-          await http.get(Uri.parse('${KVM_URL}/reception/getAdmittedPatients'));
+          await http.get(Uri.parse('$KVM_URL/reception/getAdmittedPatients'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -649,7 +649,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
   Future<void> fetchAvailableSections() async {
     try {
       final response =
-          await http.get(Uri.parse('${KVM_URL}/admin/getAllSections'));
+          await http.get(Uri.parse('$KVM_URL/admin/getAllSections'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -672,7 +672,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/reception/availableBeds/$sectionId'),
+        Uri.parse('$KVM_URL/reception/availableBeds/$sectionId'),
       );
 
       if (response.statusCode == 200) {
@@ -697,7 +697,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
     try {
       final response = await http.get(
         Uri.parse(
-            '${KVM_URL}/reception/getAdmissionDepositSummary/$admissionId'),
+            '$KVM_URL/reception/getAdmissionDepositSummary/$admissionId'),
       );
 
       if (response.statusCode == 200) {
@@ -764,7 +764,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
       }
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/createDepositReceipt'),
+        Uri.parse('$KVM_URL/reception/createDepositReceipt'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );
@@ -828,7 +828,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
       };
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/generateIpdBill/${patient.patientId}'),
+        Uri.parse('$KVM_URL/reception/generateIpdBill/${patient.patientId}'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );
@@ -868,7 +868,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/storeIpdBill'),
+        Uri.parse('$KVM_URL/reception/storeIpdBill'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'billData': billData}),
       );
@@ -1406,7 +1406,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/addIpdDetails'),
+        Uri.parse('$KVM_URL/reception/addIpdDetails'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'patientId': patient.patientId,
@@ -1467,7 +1467,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/assignBedToPatient'),
+        Uri.parse('$KVM_URL/reception/assignBedToPatient'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'patientId': patient.patientId,
@@ -1640,7 +1640,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
 
         return Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: HospitalTheme.surfaceLight,
             border: Border(
               bottom: BorderSide(color: HospitalTheme.border),
@@ -1743,7 +1743,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
 
     final sectionInfo =
         hasAdmission && patient.admissionRecords.first.section != null
-            ? '${patient.admissionRecords.first.section!.name}'
+            ? patient.admissionRecords.first.section!.name
             : '';
 
     return Card(
@@ -2501,7 +2501,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'First Deposit',
                                     style: TextStyle(
                                       fontSize: 12,
@@ -2526,7 +2526,7 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Last Deposit',
                                       style: TextStyle(
                                         fontSize: 12,
@@ -2795,15 +2795,15 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.receipt_long,
                         color: HospitalTheme.primary,
                         size: 24,
                       ),
-                      const SizedBox(width: 12),
-                      const Text(
+                      SizedBox(width: 12),
+                      Text(
                         'Generate IPD Discharge Bill',
                         style: TextStyle(
                           fontSize: 18,
@@ -2865,15 +2865,15 @@ class _IpdDetailScreenState extends ConsumerState<IpdDetailScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
+                          const Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.check_circle,
                                 color: HospitalTheme.success,
                                 size: 20,
                               ),
-                              const SizedBox(width: 8),
-                              const Text(
+                              SizedBox(width: 8),
+                              Text(
                                 'Bill Generated Successfully',
                                 style: TextStyle(
                                   fontSize: 16,

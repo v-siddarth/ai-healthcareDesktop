@@ -622,15 +622,15 @@ class _PatientDashboardState extends State<PatientDashboard> {
                             child: _buildTabContent(),
                           ),
                           // Medication History
-                          Center(child: Text('Medication History')),
+                          const Center(child: Text('Medication History')),
                           // Visit History
-                          Center(child: Text('Visit History')),
+                          const Center(child: Text('Visit History')),
                           // Lab Reports
-                          Center(child: Text('Lab Reports')),
+                          const Center(child: Text('Lab Reports')),
                           // Alerts
-                          Center(child: Text('Alerts')),
+                          const Center(child: Text('Alerts')),
                           // Documents
-                          Center(child: Text('Documents')),
+                          const Center(child: Text('Documents')),
                         ],
                       ),
                     ),
@@ -864,8 +864,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                         Expanded(
                           child: LineChart(
                             LineChartData(
-                              gridData: FlGridData(show: true),
-                              titlesData: FlTitlesData(
+                              gridData: const FlGridData(show: true),
+                              titlesData: const FlTitlesData(
                                 leftTitles: AxisTitles(
                                   sideTitles: SideTitles(
                                     showTitles: true,
@@ -903,7 +903,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                   isCurved: true,
                                   color: Colors.orange,
                                   barWidth: 3,
-                                  dotData: FlDotData(show: false),
+                                  dotData: const FlDotData(show: false),
                                   belowBarData: BarAreaData(
                                     show: true,
                                     color: Colors.orange.withOpacity(0.1),
@@ -950,8 +950,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                         Expanded(
                           child: LineChart(
                             LineChartData(
-                              gridData: FlGridData(show: true),
-                              titlesData: FlTitlesData(
+                              gridData: const FlGridData(show: true),
+                              titlesData: const FlTitlesData(
                                 leftTitles: AxisTitles(
                                   sideTitles: SideTitles(
                                     showTitles: true,
@@ -989,7 +989,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                   isCurved: true,
                                   color: Colors.red,
                                   barWidth: 3,
-                                  dotData: FlDotData(show: false),
+                                  dotData: const FlDotData(show: false),
                                   belowBarData: BarAreaData(
                                     show: true,
                                     color: Colors.red.withOpacity(0.1),
@@ -1041,8 +1041,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                         Expanded(
                           child: LineChart(
                             LineChartData(
-                              gridData: FlGridData(show: true),
-                              titlesData: FlTitlesData(
+                              gridData: const FlGridData(show: true),
+                              titlesData: const FlTitlesData(
                                 leftTitles: AxisTitles(
                                   sideTitles: SideTitles(
                                     showTitles: true,
@@ -1081,7 +1081,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                   isCurved: true,
                                   color: Colors.blue,
                                   barWidth: 3,
-                                  dotData: FlDotData(show: false),
+                                  dotData: const FlDotData(show: false),
                                 ),
                                 // Diastolic
                                 LineChartBarData(
@@ -1101,7 +1101,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                   isCurved: true,
                                   color: Colors.green,
                                   barWidth: 3,
-                                  dotData: FlDotData(show: false),
+                                  dotData: const FlDotData(show: false),
                                 ),
                               ],
                             ),
@@ -1144,8 +1144,8 @@ class _PatientDashboardState extends State<PatientDashboard> {
                         Expanded(
                           child: LineChart(
                             LineChartData(
-                              gridData: FlGridData(show: true),
-                              titlesData: FlTitlesData(
+                              gridData: const FlGridData(show: true),
+                              titlesData: const FlTitlesData(
                                 leftTitles: AxisTitles(
                                   sideTitles: SideTitles(
                                     showTitles: true,
@@ -1183,7 +1183,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
                                   isCurved: true,
                                   color: Colors.purple,
                                   barWidth: 3,
-                                  dotData: FlDotData(show: false),
+                                  dotData: const FlDotData(show: false),
                                   belowBarData: BarAreaData(
                                     show: true,
                                     color: Colors.purple.withOpacity(0.1),

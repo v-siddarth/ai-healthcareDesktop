@@ -56,11 +56,9 @@ class NurseTheme {
         onError: textOnPrimaryColor,
         errorContainer: errorColor.withOpacity(0.2),
         onErrorContainer: errorColor,
-        background: backgroundColor,
-        onBackground: textPrimaryColor,
         surface: surfaceColor,
         onSurface: textPrimaryColor,
-        surfaceVariant: cardColor,
+        surfaceContainerHighest: cardColor,
         onSurfaceVariant: textSecondaryColor,
         outline: borderColor,
         brightness: Brightness.light,
@@ -121,7 +119,7 @@ class NurseTheme {
             fontSize: 18, fontWeight: FontWeight.w600, color: textPrimaryColor),
       ),
 
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: cardColor,
         elevation: 2,
         shadowColor: shadowColor,
@@ -173,15 +171,15 @@ class NurseTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: primaryColor, width: 2),
+          borderSide: const BorderSide(color: primaryColor, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: errorColor, width: 1),
+          borderSide: const BorderSide(color: errorColor, width: 1),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: errorColor, width: 2),
+          borderSide: const BorderSide(color: errorColor, width: 2),
         ),
         labelStyle: const TextStyle(color: textSecondaryColor),
         hintStyle: const TextStyle(color: textSecondaryColor),
@@ -200,14 +198,14 @@ class NurseTheme {
       ),
 
       switchTheme: SwitchThemeData(
-        thumbColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return primaryColor;
           }
           return Colors.grey.shade400;
         }),
-        trackColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return primaryLightColor;
           }
           return Colors.grey.shade300;
@@ -215,32 +213,32 @@ class NurseTheme {
       ),
 
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return primaryColor;
           }
           return Colors.transparent;
         }),
-        checkColor: MaterialStateProperty.all(textOnPrimaryColor),
+        checkColor: WidgetStateProperty.all(textOnPrimaryColor),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-        side: BorderSide(color: textSecondaryColor),
+        side: const BorderSide(color: textSecondaryColor),
       ),
 
       radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return primaryColor;
           }
           return textSecondaryColor;
         }),
       ),
 
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: const TabBarThemeData(
         labelColor: primaryColor,
         unselectedLabelColor: textSecondaryColor,
         indicatorColor: primaryColor,
-        labelStyle: const TextStyle(fontWeight: FontWeight.w600),
-        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+        labelStyle: TextStyle(fontWeight: FontWeight.w600),
+        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
       ),
 
       dividerTheme: const DividerThemeData(
@@ -249,7 +247,7 @@ class NurseTheme {
         space: 1,
       ),
 
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         backgroundColor: surfaceColor,
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

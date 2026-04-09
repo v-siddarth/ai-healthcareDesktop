@@ -5,7 +5,6 @@ import 'package:doctordesktop/Patient/fetchPatient.dart';
 import 'package:doctordesktop/constants/Assets.dart';
 import 'package:doctordesktop/constants/HospitalTheme.dart';
 import 'package:doctordesktop/reception/PatientAllDischargedScreen.dart';
-import 'package:doctordesktop/reception/PatientDischarge.dart';
 import 'package:doctordesktop/reception/PatientRegister.dart';
 import 'package:doctordesktop/screens/DoctorRegister.dart';
 import 'package:doctordesktop/screens/ListPatienAssignToDoctor.dart';
@@ -14,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AdminAuthDialog extends StatefulWidget {
-  const AdminAuthDialog({Key? key}) : super(key: key);
+  const AdminAuthDialog({super.key});
 
   @override
   State<AdminAuthDialog> createState() => _AdminAuthDialogState();
@@ -30,8 +29,8 @@ class _AdminAuthDialogState extends State<AdminAuthDialog> {
   bool _isLoading = false;
   String? _errorMessage;
 
-  static const String correctUserId = "${AllUserPassword.adminUser}";
-  static const String correctPassword = "${AllUserPassword.adminPassword}";
+  static const String correctUserId = AllUserPassword.adminUser;
+  static const String correctPassword = AllUserPassword.adminPassword;
 
   @override
   void initState() {
@@ -144,7 +143,7 @@ class _AdminAuthDialogState extends State<AdminAuthDialog> {
                 color: HospitalTheme.primary.withOpacity(0.1),
                 borderRadius: HospitalTheme.radiusSmall,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.admin_panel_settings,
                 color: HospitalTheme.primary,
                 size: 24,
@@ -180,7 +179,7 @@ class _AdminAuthDialogState extends State<AdminAuthDialog> {
                   ),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.error_outline,
                         color: HospitalTheme.error,
                         size: 20,
@@ -189,7 +188,7 @@ class _AdminAuthDialogState extends State<AdminAuthDialog> {
                       Expanded(
                         child: Text(
                           _errorMessage!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: HospitalTheme.error,
                             fontSize: 14,
                           ),
@@ -217,7 +216,7 @@ class _AdminAuthDialogState extends State<AdminAuthDialog> {
                 enabled: !_isLoading,
               ),
               const SizedBox(height: 8),
-              Text(
+              const Text(
                 'Press Enter to login or Escape to cancel',
                 style: TextStyle(
                   fontSize: 12,
@@ -254,7 +253,7 @@ class _AdminAuthDialogState extends State<AdminAuthDialog> {
               ),
             ),
             child: _isLoading
-                ? SizedBox(
+                ? const SizedBox(
                     width: 20,
                     height: 20,
                     child: CircularProgressIndicator(
@@ -299,15 +298,15 @@ class _AdminAuthDialogState extends State<AdminAuthDialog> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: HospitalTheme.radiusSmall,
-          borderSide: BorderSide(color: HospitalTheme.border),
+          borderSide: const BorderSide(color: HospitalTheme.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: HospitalTheme.radiusSmall,
-          borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+          borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: HospitalTheme.radiusSmall,
-          borderSide: BorderSide(color: HospitalTheme.error),
+          borderSide: const BorderSide(color: HospitalTheme.error),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -322,7 +321,7 @@ class _AdminAuthDialogState extends State<AdminAuthDialog> {
 }
 
 class DesktopButtonScreen extends StatelessWidget {
-  const DesktopButtonScreen({Key? key}) : super(key: key);
+  const DesktopButtonScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -342,7 +341,7 @@ class DesktopButtonScreen extends StatelessWidget {
           return Container(
             width: double.infinity,
             height: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(AppImages.admin),
                 fit: BoxFit.contain,
@@ -377,7 +376,7 @@ class DesktopButtonScreen extends StatelessWidget {
     final buttonsPerRow = isLargeScreen ? 3 : (isMediumScreen ? 2 : 1);
     final buttonWidth =
         isLargeScreen ? 200.0 : (isMediumScreen ? 180.0 : 160.0);
-    final buttonHeight = 60.0;
+    const buttonHeight = 60.0;
 
     final buttons = [
       _AdminButton(
@@ -447,13 +446,13 @@ class _AdminButton extends StatelessWidget {
   final double height;
 
   const _AdminButton({
-    Key? key,
+    super.key,
     required this.title,
     required this.icon,
     required this.onPressed,
     required this.width,
     required this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -472,7 +471,7 @@ class _AdminButton extends StatelessWidget {
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ).copyWith(
-          overlayColor: MaterialStateProperty.all(
+          overlayColor: WidgetStateProperty.all(
             HospitalTheme.primary.withOpacity(0.1),
           ),
         ),

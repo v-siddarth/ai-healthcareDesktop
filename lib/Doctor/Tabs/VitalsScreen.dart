@@ -54,8 +54,8 @@ class VitalsScreen extends ConsumerStatefulWidget {
   const VitalsScreen({
     required this.patientId,
     required this.admissionId,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _VitalsScreenState createState() => _VitalsScreenState();
@@ -190,7 +190,7 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
       thumbVisibility: true,
       child: SingleChildScrollView(
         controller: _verticalController,
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: DataTable(
             showCheckboxColumn: true,
@@ -210,7 +210,7 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
               color: HospitalTheme.textDark,
             ),
             headingRowColor:
-                MaterialStateProperty.all(HospitalTheme.surfaceLight),
+                WidgetStateProperty.all(HospitalTheme.surfaceLight),
             columns: _buildOptimizedColumns(),
             rows: vitalsList
                 .map((vital) => _buildOptimizedDataRow(vital))
@@ -247,8 +247,8 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
           }
         });
       },
-      color: MaterialStateProperty.resolveWith<Color?>((states) {
-        if (states.contains(MaterialState.selected)) {
+      color: WidgetStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(WidgetState.selected)) {
           return HospitalTheme.primary.withOpacity(0.08);
         }
         return null;
@@ -603,9 +603,9 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
   Widget _buildTableHeader(List<Vitals> vitalsList) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: HospitalTheme.surfaceLight,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),
@@ -681,7 +681,7 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [HospitalTheme.primary, HospitalTheme.accent],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -695,11 +695,11 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
             ),
           ),
           const SizedBox(width: 16),
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Patient Vitals',
                   style: TextStyle(
                     fontSize: 24,
@@ -707,15 +707,15 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
                     color: HospitalTheme.textDark,
                   ),
                 ),
-                const SizedBox(height: 4),
-                const Text(
+                SizedBox(height: 4),
+                Text(
                   'Track and monitor patient vital sign',
                   style: TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   'Tip: Use Ctrl+A to select all, Delete key to remove selected items',
                   style: TextStyle(
@@ -762,9 +762,9 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
           // Header shimmer
           Container(
             height: 60,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
-              borderRadius: const BorderRadius.only(
+              borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
@@ -812,7 +812,7 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
             ),
           ),
           const SizedBox(height: 8),
-          Text(
+          const Text(
             'Please check your connection and try again',
             style: TextStyle(color: HospitalTheme.textMedium),
             textAlign: TextAlign.center,
@@ -946,7 +946,7 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           colors: [HospitalTheme.primary, HospitalTheme.accent],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -1142,15 +1142,15 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
-                  const Icon(
+                  Icon(
                     FontAwesomeIcons.heartPulse,
                     color: HospitalTheme.primary,
                     size: 20,
                   ),
-                  const SizedBox(width: 12),
-                  const Text(
+                  SizedBox(width: 12),
+                  Text(
                     'Vital Signs Details',
                     style: TextStyle(
                       fontSize: 18,
@@ -1364,7 +1364,7 @@ class _VitalsScreenState extends ConsumerState<VitalsScreen> {
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Failed to add vitals record. Please try again.'),
           backgroundColor: HospitalTheme.error,
         ),

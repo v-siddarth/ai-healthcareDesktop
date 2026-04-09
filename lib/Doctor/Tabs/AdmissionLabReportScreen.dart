@@ -12,10 +12,10 @@ class AdmissionLabReportsScreen extends StatefulWidget {
   final String patientName;
 
   const AdmissionLabReportsScreen({
-    Key? key,
+    super.key,
     required this.admissionId,
     this.patientName = '',
-  }) : super(key: key);
+  });
 
   @override
   _AdmissionLabReportsScreenState createState() =>
@@ -59,7 +59,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
 
       final response = await http.get(
         Uri.parse(
-            '${KVM_URL}/doctors/getLabReportsByAdmissionId/${widget.admissionId}'),
+            '$KVM_URL/doctors/getLabReportsByAdmissionId/${widget.admissionId}'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -174,7 +174,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
               color: HospitalTheme.laboratory.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
+            child: const Icon(
               Icons.biotech,
               color: HospitalTheme.laboratory,
               size: 24,
@@ -187,7 +187,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
               children: [
                 Text(
                   'Laboratory Reports for $_patientName',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.textDark,
@@ -196,7 +196,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
                 ),
                 Text(
                   'Patient ID: $_patientId | Admission ID: ${widget.admissionId.substring(0, 10)}...',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),
@@ -214,12 +214,12 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
               border: Border.all(color: HospitalTheme.border),
             ),
             child: TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search lab tests...',
                 prefixIcon:
-                    const Icon(Icons.search, color: HospitalTheme.textMedium),
+                    Icon(Icons.search, color: HospitalTheme.textMedium),
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                contentPadding: EdgeInsets.symmetric(vertical: 10),
                 isDense: true,
               ),
               onChanged: (value) {
@@ -252,7 +252,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
   Widget _buildFilterSection() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: HospitalTheme.background,
         border: Border(
           bottom: BorderSide(color: HospitalTheme.border),
@@ -260,7 +260,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
       ),
       child: Row(
         children: [
-          Text(
+          const Text(
             'Filter: ',
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -276,7 +276,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
           const Spacer(),
           Text(
             'Total: ${_filteredReports.length} lab tests',
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textMedium,
               fontWeight: FontWeight.w500,
             ),
@@ -316,12 +316,12 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
 
   Widget _buildContent() {
     if (_isLoading) {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircularProgressIndicator(color: HospitalTheme.laboratory),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'Loading lab reports...',
               style: TextStyle(color: HospitalTheme.textMedium),
@@ -336,11 +336,11 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, color: HospitalTheme.error, size: 48),
+            const Icon(Icons.error_outline, color: HospitalTheme.error, size: 48),
             const SizedBox(height: 16),
             Text(
               _errorMessage,
-              style: TextStyle(color: HospitalTheme.error),
+              style: const TextStyle(color: HospitalTheme.error),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
@@ -363,10 +363,10 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.science_outlined,
+            const Icon(Icons.science_outlined,
                 color: HospitalTheme.textLight, size: 64),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'No lab reports found',
               style: TextStyle(
                 fontSize: 18,
@@ -379,7 +379,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
               _searchQuery.isNotEmpty || _selectedFilter != 'All'
                   ? 'Try adjusting your filters'
                   : 'Lab reports will appear here when available',
-              style: TextStyle(color: HospitalTheme.textMedium),
+              style: const TextStyle(color: HospitalTheme.textMedium),
             ),
             const SizedBox(height: 24),
             if (_searchQuery.isNotEmpty || _selectedFilter != 'All')
@@ -406,7 +406,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 1.6,
           crossAxisSpacing: 24,
@@ -486,7 +486,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
                       children: [
                         Text(
                           testName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: HospitalTheme.textDark,
@@ -495,7 +495,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
                         ),
                         Text(
                           'Ordered: $orderDate',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             color: HospitalTheme.textMedium,
                           ),
@@ -549,11 +549,11 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
       children: [
         Row(
           children: [
-            Icon(Icons.assessment, size: 16, color: HospitalTheme.laboratory),
+            const Icon(Icons.assessment, size: 16, color: HospitalTheme.laboratory),
             const SizedBox(width: 8),
             Text(
               'Lab Test: ${result.labTestName}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 color: HospitalTheme.textDark,
               ),
@@ -564,11 +564,11 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
         if (result.labType.isNotEmpty) ...[
           Row(
             children: [
-              Icon(Icons.category, size: 16, color: HospitalTheme.medical),
+              const Icon(Icons.category, size: 16, color: HospitalTheme.medical),
               const SizedBox(width: 8),
               Text(
                 'Type: ${result.labType}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textDark,
                 ),
               ),
@@ -578,11 +578,11 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
         ],
         Row(
           children: [
-            Icon(Icons.calendar_today, size: 16, color: HospitalTheme.info),
+            const Icon(Icons.calendar_today, size: 16, color: HospitalTheme.info),
             const SizedBox(width: 8),
             Text(
               'Uploaded: $uploadDate',
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontSize: 12,
               ),
@@ -590,7 +590,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
           ],
         ),
         const Spacer(),
-        Text(
+        const Text(
           'Click to view the full report',
           style: TextStyle(
             color: HospitalTheme.textLight,
@@ -603,7 +603,7 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
   }
 
   Widget _buildPendingDetails() {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -612,11 +612,11 @@ class _AdmissionLabReportsScreenState extends State<AdmissionLabReportsScreen> {
             color: HospitalTheme.textMedium,
           ),
         ),
-        const Spacer(),
+        Spacer(),
         Row(
           children: [
             Icon(Icons.info_outline, size: 16, color: HospitalTheme.warning),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
             Text(
               'Results pending from laboratory',
               style: TextStyle(

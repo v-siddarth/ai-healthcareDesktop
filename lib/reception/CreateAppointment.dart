@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 
 class AppointmentCreationScreen extends StatefulWidget {
-  const AppointmentCreationScreen({Key? key}) : super(key: key);
+  const AppointmentCreationScreen({super.key});
 
   @override
   State<AppointmentCreationScreen> createState() =>
@@ -20,7 +20,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
   final _formKey = GlobalKey<FormState>();
 
   // Form controllers
-  int _selectedNavIndex = 1;
+  final int _selectedNavIndex = 1;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _contactController = TextEditingController();
   final TextEditingController _symptomsController = TextEditingController();
@@ -73,7 +73,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
     try {
       final response = await http
           .get(
-        Uri.parse('${KVM_URL}/reception/listExternalDoctors'),
+        Uri.parse('$KVM_URL/reception/listExternalDoctors'),
       )
           .timeout(
         const Duration(seconds: 10),
@@ -132,7 +132,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
     try {
       final response = await http
           .get(
-        Uri.parse('${KVM_URL}/reception/searchPatientAppointment?query=$query'),
+        Uri.parse('$KVM_URL/reception/searchPatientAppointment?query=$query'),
       )
           .timeout(
         const Duration(seconds: 10),
@@ -159,8 +159,8 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
         _searchResults = [];
         _isSearching = false;
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Unable to search patients. Please try again.'),
+          const SnackBar(
+            content: Text('Unable to search patients. Please try again.'),
             backgroundColor: HospitalTheme.error,
           ),
         );
@@ -198,8 +198,8 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
   Future<void> _submitAppointment() async {
     if (!_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Please fill all required fields'),
+        const SnackBar(
+          content: Text('Please fill all required fields'),
           backgroundColor: HospitalTheme.error,
         ),
       );
@@ -208,8 +208,8 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
 
     if (_selectedDoctor == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Please select a doctor'),
+        const SnackBar(
+          content: Text('Please select a doctor'),
           backgroundColor: HospitalTheme.error,
         ),
       );
@@ -218,8 +218,8 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
 
     if (_isReadmission && _patientIdController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Patient ID is required for readmission'),
+        const SnackBar(
+          content: Text('Patient ID is required for readmission'),
           backgroundColor: HospitalTheme.error,
         ),
       );
@@ -251,7 +251,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
     try {
       final response = await http
           .post(
-        Uri.parse('${KVM_URL}/reception/createAppointment'),
+        Uri.parse('$KVM_URL/reception/createAppointment'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(appointmentData),
       )
@@ -264,8 +264,8 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Appointment created successfully!'),
+          const SnackBar(
+            content: Text('Appointment created successfully!'),
             backgroundColor: HospitalTheme.success,
           ),
         );
@@ -329,18 +329,18 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
             Container(
               width: 120,
               height: 120,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.surfaceLight,
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.person_add_disabled,
                 size: 60,
                 color: HospitalTheme.textMedium,
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'No Doctors Available',
               style: TextStyle(
                 fontSize: 24,
@@ -349,7 +349,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
               ),
             ),
             const SizedBox(height: 12),
-            Text(
+            const Text(
               'You need to add doctors before creating appointments.',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -402,14 +402,14 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                 color: HospitalTheme.error.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.error_outline,
                 size: 60,
                 color: HospitalTheme.error,
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'Something Went Wrong',
               style: TextStyle(
                 fontSize: 24,
@@ -421,7 +421,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
             Text(
               _errorMessage ?? 'An unexpected error occurred.',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: HospitalTheme.textMedium,
               ),
@@ -473,7 +473,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 _isSearching ? 'Searching...' : 'No patients found',
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textMedium,
                 ),
               ),
@@ -499,7 +499,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                             ),
                           ),
                           IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.person_add,
                               color: HospitalTheme.primary,
                             ),
@@ -515,7 +515,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                           children: [
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.badge,
                                   size: 14,
                                   color: HospitalTheme.textMedium,
@@ -528,7 +528,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                                   ),
                                 ),
                                 const SizedBox(width: 16),
-                                Icon(
+                                const Icon(
                                   Icons.phone,
                                   size: 14,
                                   color: HospitalTheme.textMedium,
@@ -545,7 +545,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                             const SizedBox(height: 4),
                             Text(
                               '${patient.appointments.length} previous appointment(s)',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: HospitalTheme.primary,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -556,8 +556,8 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                       isThreeLine: true,
                     ),
                     if (patient.appointments.isNotEmpty) ...[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           'Appointment History',
                           style: TextStyle(
@@ -639,7 +639,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                                   const SizedBox(height: 8),
                                   Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.event,
                                         size: 16,
                                         color: HospitalTheme.textMedium,
@@ -647,12 +647,12 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                                       const SizedBox(width: 8),
                                       Text(
                                         '${appointment.date} at ${appointment.time}',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: HospitalTheme.textDark,
                                         ),
                                       ),
                                       const SizedBox(width: 8),
-                                      Icon(
+                                      const Icon(
                                         Icons.payments_outlined,
                                         size: 16,
                                         color: HospitalTheme.textMedium,
@@ -683,7 +683,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.update,
                                             size: 16,
                                             color: HospitalTheme.warning,
@@ -692,7 +692,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                                           Expanded(
                                             child: Text(
                                               'Rescheduled to: ${appointment.rescheduledTo}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: HospitalTheme.warning,
                                                 fontWeight: FontWeight.w500,
                                               ),
@@ -706,7 +706,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                                     const SizedBox(height: 8),
                                     Text(
                                       'Symptoms: ${appointment.symptoms}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: HospitalTheme.textMedium,
                                         fontSize: 12,
                                       ),
@@ -728,14 +728,14 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                             onPressed: () {
                               _applyPatientData(patient);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.history,
                               size: 16,
                               color: HospitalTheme.primary,
                             ),
                             label: Text(
                               'See all ${patient.appointments.length} appointments',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: HospitalTheme.primary,
                               ),
                             ),
@@ -786,7 +786,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                 children: [
                   HospitalTheme.buildSectionHeader(
                     'Patient Search',
-                    trailing: Text(
+                    trailing: const Text(
                       'Find existing patients',
                       style: TextStyle(
                         color: HospitalTheme.textMedium,
@@ -936,7 +936,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
                                   if (_isReadmission)
-                                    Text(
+                                    const Text(
                                       'Patient ID is required for readmission',
                                       style: TextStyle(
                                         color: HospitalTheme.warning,
@@ -1049,7 +1049,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                             const SizedBox(height: 16),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.calendar_today,
                                   color: HospitalTheme.primary,
                                 ),
@@ -1242,7 +1242,7 @@ class _AppointmentCreationScreenState extends State<AppointmentCreationScreen> {
                     // Main content with proper state handling
                     Expanded(
                       child: _isLoading
-                          ? Center(
+                          ? const Center(
                               child: CircularProgressIndicator(
                                   color: HospitalTheme.primary))
                           : _errorMessage != null
@@ -1300,7 +1300,7 @@ class Doctor {
 class DoctorCard extends StatelessWidget {
   final Doctor doctor;
 
-  const DoctorCard({Key? key, required this.doctor}) : super(key: key);
+  const DoctorCard({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -1331,21 +1331,21 @@ class DoctorCard extends StatelessWidget {
                 ),
                 Text(
                   doctor.speciality,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: HospitalTheme.primary,
                   ),
                 ),
                 Text(
                   'Experience: ${doctor.experience}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),
                 ),
                 Text(
                   'Department: ${doctor.department}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),

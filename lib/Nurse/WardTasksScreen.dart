@@ -631,7 +631,7 @@ class _WardTreatmentTasksScreenState
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Add Administration Notes'),
+        title: const Text('Add Administration Notes'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -765,7 +765,7 @@ class _WardTreatmentTasksScreenState
         Expanded(
           flex: 5,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               border: Border(
                 right: BorderSide(color: HospitalTheme.border),
@@ -820,7 +820,7 @@ class _WardTreatmentTasksScreenState
           child: SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.all(isDesktop ? 24.0 : 16.0),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 border: Border(
                   bottom: BorderSide(color: HospitalTheme.border),
@@ -879,7 +879,7 @@ class _WardTreatmentTasksScreenState
         // Detail Header - Fixed at top
         Container(
           padding: EdgeInsets.all(isDesktop ? 24.0 : 16.0),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
             border: Border(
               bottom: BorderSide(color: HospitalTheme.border),
@@ -940,11 +940,11 @@ class _WardTreatmentTasksScreenState
             Container(
               width: 120.0,
               height: 120.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.surfaceLight,
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.assignment_outlined,
                 size: 60.0,
                 color: HospitalTheme.textMedium,
@@ -1113,7 +1113,7 @@ class _WardTreatmentTasksScreenState
             children: [
               Row(
                 children: [
-                  Icon(Icons.person, size: 20.0, color: HospitalTheme.primary),
+                  const Icon(Icons.person, size: 20.0, color: HospitalTheme.primary),
                   const SizedBox(width: 8.0),
                   Text(
                     'Patient Information',
@@ -1172,7 +1172,7 @@ class _WardTreatmentTasksScreenState
                 child: SingleChildScrollView(
                   child: Text(
                     task.details,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.textDark,
                       fontSize: 14.0,
                       height: 1.5,
@@ -1193,7 +1193,7 @@ class _WardTreatmentTasksScreenState
             children: [
               Row(
                 children: [
-                  Icon(Icons.schedule, size: 20.0, color: HospitalTheme.info),
+                  const Icon(Icons.schedule, size: 20.0, color: HospitalTheme.info),
                   const SizedBox(width: 8.0),
                   Text(
                     'Schedule Information',
@@ -1224,7 +1224,7 @@ class _WardTreatmentTasksScreenState
             children: [
               Row(
                 children: [
-                  Icon(Icons.touch_app,
+                  const Icon(Icons.touch_app,
                       size: 20.0, color: HospitalTheme.primary),
                   const SizedBox(width: 8.0),
                   Text(
@@ -1249,7 +1249,7 @@ class _WardTreatmentTasksScreenState
                               ? null
                               : () => _showTaskNotesDialog(task),
                           icon: isTaskLoading
-                              ? SizedBox(
+                              ? const SizedBox(
                                   width: 16.0,
                                   height: 16.0,
                                   child: CircularProgressIndicator(
@@ -1276,7 +1276,7 @@ class _WardTreatmentTasksScreenState
                               ? null
                               : () => _showTaskNotesDialog(task),
                           icon: isTaskLoading
-                              ? SizedBox(
+                              ? const SizedBox(
                                   width: 16.0,
                                   height: 16.0,
                                   child: CircularProgressIndicator(
@@ -1310,7 +1310,7 @@ class _WardTreatmentTasksScreenState
                             borderRadius: HospitalTheme.radiusSmall,
                             border: Border.all(color: HospitalTheme.success),
                           ),
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
@@ -1318,7 +1318,7 @@ class _WardTreatmentTasksScreenState
                                 color: HospitalTheme.success,
                                 size: 18.0,
                               ),
-                              const SizedBox(width: 8.0),
+                              SizedBox(width: 8.0),
                               Text(
                                 'Task Completed',
                                 style: TextStyle(
@@ -1391,7 +1391,7 @@ class _WardTreatmentTasksScreenState
         children: [
           Text(
             item.label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12.0,
               color: HospitalTheme.textMedium,
               fontWeight: FontWeight.w500,
@@ -1400,7 +1400,7 @@ class _WardTreatmentTasksScreenState
           const SizedBox(height: 4.0),
           Text(
             item.value,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14.0,
               color: HospitalTheme.textDark,
               fontWeight: FontWeight.w600,
@@ -1552,7 +1552,7 @@ class _WardTreatmentTasksScreenState
     return Column(
       children: [
         treatmentDataAsync.when(
-          data: (data) => Container(
+          data: (data) => SizedBox(
             width: double.infinity,
             child: DropdownButtonFormField<String?>(
               value: selectedWard,
@@ -1718,7 +1718,7 @@ class _WardTreatmentTasksScreenState
                       children: [
                         Text(
                           task.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: HospitalTheme.textDark,
                             fontSize: 14.0,
@@ -1729,7 +1729,7 @@ class _WardTreatmentTasksScreenState
                         const SizedBox(height: 2.0),
                         Text(
                           '${task.patientName} - Bed ${task.bedNumber}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: HospitalTheme.textMedium,
                             fontSize: 12.0,
                           ),
@@ -1793,25 +1793,25 @@ class _WardTreatmentTasksScreenState
               const SizedBox(height: 12.0),
               Row(
                 children: [
-                  Icon(Icons.location_on,
+                  const Icon(Icons.location_on,
                       size: 14.0, color: HospitalTheme.textMedium),
                   const SizedBox(width: 4.0),
                   Expanded(
                     child: Text(
                       task.wardName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                         fontSize: 12.0,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  Icon(Icons.access_time,
+                  const Icon(Icons.access_time,
                       size: 14.0, color: HospitalTheme.textMedium),
                   const SizedBox(width: 4.0),
                   Text(
                     _formatTime(task.time),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.textMedium,
                       fontSize: 12.0,
                     ),
@@ -1839,7 +1839,7 @@ class _WardTreatmentTasksScreenState
             Container(
               width: isDesktop ? 120.0 : 100.0,
               height: isDesktop ? 120.0 : 100.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.surfaceLight,
                 shape: BoxShape.circle,
               ),
@@ -1949,7 +1949,7 @@ class _WardTreatmentTasksScreenState
       child: HospitalTheme.buildCard(
         padding: const EdgeInsets.all(12.0),
         backgroundColor: HospitalTheme.surfaceLight,
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -1960,7 +1960,7 @@ class _WardTreatmentTasksScreenState
                 fontSize: 12.0,
               ),
             ),
-            const SizedBox(height: 4.0),
+            SizedBox(height: 4.0),
             Text(
               '• Ctrl+F: Focus search • F5: Refresh • Esc: Clear search',
               style: TextStyle(

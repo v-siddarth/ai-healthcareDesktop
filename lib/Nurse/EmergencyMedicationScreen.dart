@@ -298,7 +298,7 @@ class _EmergencyMedicationScreenState
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Emergency medication recorded successfully'),
               backgroundColor: HospitalTheme.success,
               behavior: SnackBarBehavior.floating,
@@ -375,7 +375,7 @@ class _EmergencyMedicationScreenState
                   color: HospitalTheme.success.withOpacity(0.2),
                   borderRadius: HospitalTheme.radiusSmall,
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
@@ -383,7 +383,7 @@ class _EmergencyMedicationScreenState
                       color: HospitalTheme.success,
                       size: 16.0,
                     ),
-                    const SizedBox(width: 4.0),
+                    SizedBox(width: 4.0),
                     Text(
                       'Recorded',
                       style: TextStyle(
@@ -493,7 +493,7 @@ class _EmergencyMedicationScreenState
               color: HospitalTheme.emergency.withOpacity(0.1),
               borderRadius: HospitalTheme.radiusSmall,
             ),
-            child: Text(
+            child: const Text(
               'EMERGENCY',
               style: TextStyle(
                 color: HospitalTheme.emergency,
@@ -602,7 +602,7 @@ class _EmergencyMedicationScreenState
                 const SizedBox(height: 12.0),
 
                 // Quick Selection for Medications
-                Text(
+                const Text(
                   'Quick Select:',
                   style: TextStyle(
                     color: HospitalTheme.textMedium,
@@ -685,7 +685,7 @@ class _EmergencyMedicationScreenState
                 const SizedBox(height: 12.0),
 
                 // Quick Selection for Dosages
-                Text(
+                const Text(
                   'Common Dosages:',
                   style: TextStyle(
                     color: HospitalTheme.textMedium,
@@ -785,7 +785,7 @@ class _EmergencyMedicationScreenState
             ? null
             : _handleSubmit,
         icon: formState.isLoading
-            ? SizedBox(
+            ? const SizedBox(
                 width: 20.0,
                 height: 20.0,
                 child: CircularProgressIndicator(
@@ -794,8 +794,8 @@ class _EmergencyMedicationScreenState
                 ),
               )
             : formState.isSubmitted
-                ? Icon(Icons.check_circle)
-                : Icon(Icons.emergency),
+                ? const Icon(Icons.check_circle)
+                : const Icon(Icons.emergency),
         label: Text(
           formState.isLoading
               ? 'Recording Emergency Medication...'
@@ -821,7 +821,7 @@ class _EmergencyMedicationScreenState
     return HospitalTheme.buildCard(
       padding: const EdgeInsets.all(16.0),
       backgroundColor: HospitalTheme.surfaceLight,
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -832,7 +832,7 @@ class _EmergencyMedicationScreenState
               fontSize: 14.0,
             ),
           ),
-          const SizedBox(height: 8.0),
+          SizedBox(height: 8.0),
           Text(
             '• Ctrl+Enter: Submit form • Esc: Go back',
             style: TextStyle(

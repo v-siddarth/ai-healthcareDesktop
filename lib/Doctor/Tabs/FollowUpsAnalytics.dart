@@ -13,11 +13,11 @@ class FollowUpAnalyticsScreen extends StatefulWidget {
   final List<FourHourFollowUp> fourHrFollowUps;
 
   const FollowUpAnalyticsScreen({
-    Key? key,
+    super.key,
     required this.patientInfo,
     required this.twoHrFollowUps,
     required this.fourHrFollowUps,
-  }) : super(key: key);
+  });
 
   @override
   State<FollowUpAnalyticsScreen> createState() =>
@@ -72,7 +72,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
             bottom: TabBar(
               unselectedLabelColor: Colors.white,
               overlayColor:
-                  MaterialStateProperty.all(Colors.white.withOpacity(0.1)),
+                  WidgetStateProperty.all(Colors.white.withOpacity(0.1)),
               controller: _tabController,
               tabs: const [
                 // Tab(icon: Icon(Icons.analytics), text: 'Vitals Trends'),
@@ -100,8 +100,8 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
     // This would typically implement fullscreen functionality
     // For now, just show a message
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Fullscreen toggle (implementation needed)'),
+      const SnackBar(
+        content: Text('Fullscreen toggle (implementation needed)'),
         backgroundColor: HospitalTheme.info,
       ),
     );
@@ -110,8 +110,8 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
   void _exportData() {
     // This would typically implement data export functionality
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Export functionality (implementation needed)'),
+      const SnackBar(
+        content: Text('Export functionality (implementation needed)'),
         backgroundColor: HospitalTheme.success,
       ),
     );
@@ -127,7 +127,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
         final screenWidth = constraints.maxWidth;
         final isWideScreen = screenWidth > 1200;
 
-        return Container(
+        return SizedBox(
           height: screenHeight,
           child: Column(
             children: [
@@ -148,7 +148,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
                             // Chart takes most space
                             Expanded(
                               flex: 7,
-                              child: Container(
+                              child: SizedBox(
                                 height: screenHeight - 200,
                                 child: _buildVitalsChart(),
                               ),
@@ -157,7 +157,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
                             // Stats sidebar
                             Expanded(
                               flex: 3,
-                              child: Container(
+                              child: SizedBox(
                                 height: screenHeight - 200,
                                 child: Column(
                                   children: [
@@ -179,7 +179,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
                       : Column(
                           children: [
                             // Chart takes 60% on smaller screens
-                            Container(
+                            SizedBox(
                               height: (screenHeight - 200) * 0.6,
                               child: _buildVitalsChart(),
                             ),
@@ -336,7 +336,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
                       if (data.isNotEmpty)
                         Text(
                           '${data.length} data points over time',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                             color: HospitalTheme.textMedium,
                           ),
@@ -446,7 +446,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
                           ),
                           borderData: FlBorderData(
                             show: true,
-                            border: Border(
+                            border: const Border(
                               left: BorderSide(
                                   color: HospitalTheme.border, width: 1),
                               bottom: BorderSide(
@@ -533,7 +533,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
             ),
           ),
           const SizedBox(height: 8),
-          Text(
+          const Text(
             'Data will appear here once follow-ups are recorded',
             style: TextStyle(
               color: HospitalTheme.textLight,
@@ -563,7 +563,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
             ),
             const SizedBox(height: 16),
             if (data.isEmpty)
-              Expanded(
+              const Expanded(
                 child: Center(
                   child: Text(
                     'No statistics available',
@@ -697,7 +697,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
           const SizedBox(height: 2),
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 11,
               color: HospitalTheme.textMedium,
             ),
@@ -1118,7 +1118,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
             ),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.access_time,
                   color: HospitalTheme.medical,
                   size: 20,
@@ -1156,7 +1156,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: twoHrEvents.isEmpty
-                  ? Center(
+                  ? const Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -1165,7 +1165,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
                             size: 48,
                             color: HospitalTheme.textLight,
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           Text(
                             'No 2-hour follow-ups available',
                             style: TextStyle(
@@ -1209,7 +1209,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
             ),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.schedule,
                   color: HospitalTheme.pharmacy,
                   size: 20,
@@ -1247,7 +1247,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: fourHrEvents.isEmpty
-                  ? Center(
+                  ? const Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -1256,7 +1256,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
                             size: 48,
                             color: HospitalTheme.textLight,
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           Text(
                             'No 4-hour follow-ups available',
                             style: TextStyle(
@@ -1367,7 +1367,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
                   const SizedBox(height: 6),
                   Text(
                     event.description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: HospitalTheme.textMedium,
                       height: 1.3,
@@ -1392,7 +1392,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
                         ),
                         child: Text(
                           '${entry.key}: ${entry.value}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 9,
                             fontWeight: FontWeight.w500,
                             color: HospitalTheme.textDark,
@@ -1534,7 +1534,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
           Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textMedium,
             ),
@@ -1695,7 +1695,7 @@ class _FollowUpAnalyticsScreenState extends State<FollowUpAnalyticsScreen>
                             const SizedBox(height: 4),
                             Text(
                               recommendation['description'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
                                 color: HospitalTheme.textMedium,
                               ),

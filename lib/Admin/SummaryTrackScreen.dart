@@ -271,7 +271,7 @@ class SummaryFilters {
 
 // API Service
 class DischargeSummaryService {
-  static const String baseUrl = '${KVM_URL}';
+  static const String baseUrl = KVM_URL;
 
   static Future<DischargeSummariesResponse> getAllDischargeSummaries(
       SummaryFilters filters) async {
@@ -783,7 +783,7 @@ class SummaryMasterList extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.error_outline,
                 size: 48,
                 color: HospitalTheme.error,
@@ -875,7 +875,7 @@ class SummaryMasterList extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.description_outlined,
               size: 64,
               color: HospitalTheme.textLight,
@@ -1010,7 +1010,7 @@ class SummaryListItem extends StatelessWidget {
               // Generated date
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.schedule,
                     size: 14,
                     color: HospitalTheme.textLight,
@@ -1030,7 +1030,7 @@ class SummaryListItem extends StatelessWidget {
               // File info
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.description,
                     size: 14,
                     color: HospitalTheme.textLight,
@@ -1060,7 +1060,7 @@ class SummaryListItem extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.medical_information,
                         size: 14,
                         color: HospitalTheme.medical,

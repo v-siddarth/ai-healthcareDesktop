@@ -93,10 +93,10 @@ class MusicTile extends StatelessWidget {
   final int i;
   final VoidCallback onTap;
   const MusicTile({
-    Key? key,
+    super.key,
     required this.i,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -105,9 +105,9 @@ class MusicTile extends StatelessWidget {
       onTap: onTap,
       dense: true,
       leading: i <= 9
-          ? Text(
+          ? const Text(
               '0i',
-              style: const TextStyle(
+              style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w600),

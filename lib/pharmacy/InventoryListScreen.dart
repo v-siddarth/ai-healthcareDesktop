@@ -378,7 +378,7 @@ final filteredInventoryProvider =
 
 // Screen
 class InventoryListScreen extends ConsumerStatefulWidget {
-  const InventoryListScreen({Key? key}) : super(key: key);
+  const InventoryListScreen({super.key});
 
   @override
   ConsumerState<InventoryListScreen> createState() =>
@@ -439,13 +439,13 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
   Widget _buildDetailsCard(InventoryItem item) {
     return Card(
       color: Colors.white,
-      margin: EdgeInsets.all(PharmaTheme.spacingM),
+      margin: const EdgeInsets.all(PharmaTheme.spacingM),
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(PharmaTheme.radiusM),
       ),
       child: Padding(
-        padding: EdgeInsets.all(PharmaTheme.spacingM),
+        padding: const EdgeInsets.all(PharmaTheme.spacingM),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -465,7 +465,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                 ),
               ],
             ),
-            Divider(color: PharmaTheme.border),
+            const Divider(color: PharmaTheme.border),
             const SizedBox(height: 8),
 
             // Medicine info
@@ -529,7 +529,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                   onPressed: () => _showDeleteConfirmation(item),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: PharmaTheme.error,
-                    side: BorderSide(color: PharmaTheme.error),
+                    side: const BorderSide(color: PharmaTheme.error),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -559,7 +559,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
           SizedBox(
             width: 120,
             child: Text(
-              label + ':',
+              '$label:',
               style: PharmaTheme.bodyMedium.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -603,7 +603,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
             ),
             child: Container(
               width: 550, // Fixed width for better form layout
-              padding: EdgeInsets.all(PharmaTheme.spacingL),
+              padding: const EdgeInsets.all(PharmaTheme.spacingL),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -723,7 +723,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                                 builder: (context, child) {
                                   return Theme(
                                     data: Theme.of(context).copyWith(
-                                      colorScheme: ColorScheme.light(
+                                      colorScheme: const ColorScheme.light(
                                         primary: PharmaTheme.primary,
                                         onPrimary: PharmaTheme.textLight,
                                         surface: PharmaTheme.surface,
@@ -802,7 +802,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                       OutlinedButton(
                         onPressed: () => Navigator.of(context).pop(),
                         style: OutlinedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: PharmaTheme.spacingM,
                             vertical: PharmaTheme.spacingS,
                           ),
@@ -882,7 +882,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: PharmaTheme.primary,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: PharmaTheme.spacingM,
                             vertical: PharmaTheme.spacingS,
                           ),
@@ -907,11 +907,11 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(PharmaTheme.radiusM),
         ),
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.warning_amber_rounded, color: PharmaTheme.warning),
-            const SizedBox(width: 8),
-            const Text('Delete Inventory Item'),
+            SizedBox(width: 8),
+            Text('Delete Inventory Item'),
           ],
         ),
         content: Column(
@@ -924,7 +924,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
             ),
             const SizedBox(height: 16),
             Container(
-              padding: EdgeInsets.all(PharmaTheme.spacingS),
+              padding: const EdgeInsets.all(PharmaTheme.spacingS),
               decoration: BoxDecoration(
                 color: PharmaTheme.background,
                 borderRadius: BorderRadius.circular(PharmaTheme.radiusS),
@@ -963,7 +963,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
           OutlinedButton(
             onPressed: () => Navigator.of(context).pop(),
             style: OutlinedButton.styleFrom(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: PharmaTheme.spacingM,
                 vertical: PharmaTheme.spacingS,
               ),
@@ -998,7 +998,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: PharmaTheme.error,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: PharmaTheme.spacingM,
                 vertical: PharmaTheme.spacingS,
               ),
@@ -1137,7 +1137,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                   color: PharmaTheme.primary,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Text(
+                child: const Text(
                   'Filters Applied',
                   style: TextStyle(
                     color: PharmaTheme.textLight,
@@ -1154,7 +1154,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
         backgroundColor: PharmaTheme.background,
         children: [
           Padding(
-            padding: EdgeInsets.all(PharmaTheme.spacingM),
+            padding: const EdgeInsets.all(PharmaTheme.spacingM),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -1292,7 +1292,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                                                       : PharmaTheme.textPrimary,
                                             ),
                                           ))
-                                      .toList(),
+                                      ,
                                 ],
                               );
                             },
@@ -1393,7 +1393,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                       onPressed: _clearFilters,
                       style: OutlinedButton.styleFrom(
                         foregroundColor: PharmaTheme.primary,
-                        side: BorderSide(color: PharmaTheme.primary),
+                        side: const BorderSide(color: PharmaTheme.primary),
                       ),
                     ),
                   ],
@@ -1548,7 +1548,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.inventory_2_outlined,
                                 size: 64,
                                 color: PharmaTheme.textSecondary,
@@ -1801,7 +1801,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
 
                 // Pagination and Summary Footer
                 Container(
-                  padding: EdgeInsets.all(PharmaTheme.spacingM),
+                  padding: const EdgeInsets.all(PharmaTheme.spacingM),
                   decoration: BoxDecoration(
                     color: PharmaTheme.background,
                     boxShadow: PharmaTheme.shadowSmall,
@@ -1826,7 +1826,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                       PharmaTheme.radiusM),
-                                  side: BorderSide(color: PharmaTheme.border),
+                                  side: const BorderSide(color: PharmaTheme.border),
                                 ),
                                 child: Row(
                                   children: [
@@ -1841,7 +1841,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                                           .withOpacity(0.5),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                         horizontal: PharmaTheme.spacingS,
                                       ),
                                       child: Text(
@@ -1891,11 +1891,11 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                                             .read(selectedCategoryProvider)!
                                             .isNotEmpty))
                                   Container(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                       horizontal: PharmaTheme.spacingS,
                                       vertical: PharmaTheme.spacingXxs,
                                     ),
-                                    margin: EdgeInsets.only(
+                                    margin: const EdgeInsets.only(
                                         right: PharmaTheme.spacingM),
                                     decoration: BoxDecoration(
                                       color:
@@ -1908,17 +1908,16 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
                                     ),
                                     child: Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.filter_alt,
                                           size: 14,
                                           color: PharmaTheme.accent,
                                         ),
                                         const SizedBox(width: 4),
                                         Text(
-                                          filteredItems.asData?.value.length ==
-                                                  0
+                                          filteredItems.asData?.value.isEmpty ?? false
                                               ? 'No matches'
-                                              : 'Showing ${filteredItems.asData?.value.length} of ${response.count}',
+                                              : 'Showing ${filteredItems.asData?.value.length ?? 0} of ${response.count}',
                                           style: PharmaTheme.bodySmall.copyWith(
                                             color: PharmaTheme.accent,
                                             fontWeight: FontWeight.bold,
@@ -1930,7 +1929,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
 
                                 // Total info
                                 Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                     horizontal: PharmaTheme.spacingM,
                                     vertical: PharmaTheme.spacingS,
                                   ),
@@ -2023,7 +2022,7 @@ class _InventoryListScreenState extends ConsumerState<InventoryListScreen> {
         const SizedBox(width: 4),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: PharmaTheme.primary,
           ),

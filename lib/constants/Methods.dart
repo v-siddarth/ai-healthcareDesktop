@@ -40,7 +40,7 @@ class Methods {
       }
     } catch (e) {
       print('Error printing PDF: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -64,7 +64,7 @@ class Methods {
       }
     } catch (e) {
       print('Error showing print preview: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -157,7 +157,7 @@ class Methods {
       }
     } catch (e) {
       print('Error printing: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -194,7 +194,7 @@ class Methods {
         }
 
         // Clean up temp file after a delay
-        Future.delayed(Duration(seconds: 30), () {
+        Future.delayed(const Duration(seconds: 30), () {
           try {
             if (tempFile.existsSync()) {
               tempFile.deleteSync();
@@ -206,7 +206,7 @@ class Methods {
       }
     } catch (e) {
       print('Error printing via system: $e');
-      throw e;
+      rethrow;
     }
   }
 

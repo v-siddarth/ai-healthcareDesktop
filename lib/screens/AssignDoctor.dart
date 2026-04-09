@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class AssignDoctorScreen extends StatefulWidget {
+  const AssignDoctorScreen({super.key});
+
   @override
   _AssignDoctorScreenState createState() => _AssignDoctorScreenState();
 }
@@ -32,7 +34,7 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
 
   Future<void> _fetchPatients() async {
     final response =
-        await http.get(Uri.parse('${KVM_URL}/reception/listPatients'));
+        await http.get(Uri.parse('$KVM_URL/reception/listPatients'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -51,7 +53,7 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
 
   Future<void> _fetchDoctors() async {
     final response =
-        await http.get(Uri.parse('${KVM_URL}/reception/listDoctors'));
+        await http.get(Uri.parse('$KVM_URL/reception/listDoctors'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       setState(() {
@@ -72,7 +74,7 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
         _selectedDoctorId != null &&
         _selectedAdmissionId != null) {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/assign-Doctor'),
+        Uri.parse('$KVM_URL/reception/assign-Doctor'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'patientId': _selectedPatientId,
@@ -92,7 +94,7 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
 
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
               content: Text('Doctor assigned successfully!'),
               backgroundColor: Colors.green),
         );
@@ -100,14 +102,14 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
         print(response.body);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
               content: Text('Failed to assign doctor'),
               backgroundColor: Colors.red),
         );
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
             content: Text('Please select patient, admission, and doctor'),
             backgroundColor: Colors.red),
       );
@@ -118,11 +120,11 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Assign Doctor'),
+        title: const Text('Assign Doctor'),
         backgroundColor: Colors.blue,
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -130,7 +132,7 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
                 children: [
                   DropdownButtonFormField<String>(
                     value: _selectedPatientId,
-                    decoration: InputDecoration(labelText: 'Select Patient'),
+                    decoration: const InputDecoration(labelText: 'Select Patient'),
                     items: _patients.map((patient) {
                       return DropdownMenuItem<String>(
                         value: patient['id'],
@@ -151,7 +153,7 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
                     DropdownButtonFormField<String>(
                       value: _selectedAdmissionId,
                       decoration:
-                          InputDecoration(labelText: 'Select Admission'),
+                          const InputDecoration(labelText: 'Select Admission'),
                       items: _patients
                           .firstWhere((p) => p['id'] == _selectedPatientId)[
                               'admissionRecords']
@@ -171,7 +173,7 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
                     ),
                   DropdownButtonFormField<String>(
                     value: _selectedDoctorId,
-                    decoration: InputDecoration(labelText: 'Select Doctor'),
+                    decoration: const InputDecoration(labelText: 'Select Doctor'),
                     items: _doctors.map((doctor) {
                       return DropdownMenuItem<String>(
                         value: doctor['id'],
@@ -187,7 +189,7 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
                         value == null ? 'Please select a doctor' : null,
                   ),
                   SwitchListTile(
-                    title: Text('Is Readmission'),
+                    title: const Text('Is Readmission'),
                     value: _isReadmission,
                     onChanged: (bool value) {
                       setState(() {
@@ -195,10 +197,10 @@ class _AssignDoctorScreenState extends State<AssignDoctorScreen> {
                       });
                     },
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _assignDoctor,
-                    child: Text('Assign Doctor'),
+                    child: const Text('Assign Doctor'),
                   ),
                 ],
               ),

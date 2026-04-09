@@ -549,7 +549,7 @@ class _PatientCounterScreenState extends ConsumerState<PatientCounterScreen> {
   Widget _buildActionBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: HospitalTheme.surfaceLight,
         border: Border(
           bottom: BorderSide(color: HospitalTheme.border),
@@ -577,7 +577,7 @@ class _PatientCounterScreenState extends ConsumerState<PatientCounterScreen> {
             isLoading: false,
           ),
           const Spacer(),
-          Text(
+          const Text(
             'Use Ctrl+N to add patient, F5 to refresh',
             style: TextStyle(
               fontSize: 12,
@@ -600,18 +600,18 @@ class _PatientCounterScreenState extends ConsumerState<PatientCounterScreen> {
       ),
       child: Row(
         children: [
-          Icon(Icons.check_circle, color: HospitalTheme.success, size: 20),
+          const Icon(Icons.check_circle, color: HospitalTheme.success, size: 20),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: TextStyle(color: HospitalTheme.success, fontSize: 14),
+              style: const TextStyle(color: HospitalTheme.success, fontSize: 14),
             ),
           ),
           IconButton(
             onPressed: () =>
                 ref.read(counterProvider.notifier).clearSuccessMessage(),
-            icon: Icon(Icons.close, size: 16, color: HospitalTheme.success),
+            icon: const Icon(Icons.close, size: 16, color: HospitalTheme.success),
           ),
         ],
       ),
@@ -629,17 +629,17 @@ class _PatientCounterScreenState extends ConsumerState<PatientCounterScreen> {
       ),
       child: Row(
         children: [
-          Icon(Icons.error_outline, color: HospitalTheme.error, size: 20),
+          const Icon(Icons.error_outline, color: HospitalTheme.error, size: 20),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               error,
-              style: TextStyle(color: HospitalTheme.error, fontSize: 14),
+              style: const TextStyle(color: HospitalTheme.error, fontSize: 14),
             ),
           ),
           IconButton(
             onPressed: () => ref.read(counterProvider.notifier).clearError(),
-            icon: Icon(Icons.close, size: 16, color: HospitalTheme.error),
+            icon: const Icon(Icons.close, size: 16, color: HospitalTheme.error),
           ),
         ],
       ),
@@ -720,13 +720,13 @@ class _PatientCounterScreenState extends ConsumerState<PatientCounterScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.numbers,
               size: 64,
               color: HospitalTheme.textLight,
             ),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'Select a counter to view details',
               style: TextStyle(
                 fontSize: 16,
@@ -805,13 +805,13 @@ class _PatientCounterScreenState extends ConsumerState<PatientCounterScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.numbers,
               size: 64,
               color: HospitalTheme.textLight,
             ),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               'No counters found',
               style: TextStyle(
                 fontSize: 16,
@@ -1088,10 +1088,10 @@ class _CounterDetailPanelState extends ConsumerState<_CounterDetailPanel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
               Icon(Icons.history, color: HospitalTheme.primary, size: 20),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 'Last Updated',
                 style: TextStyle(
@@ -1105,7 +1105,7 @@ class _CounterDetailPanelState extends ConsumerState<_CounterDetailPanel> {
           const SizedBox(height: 12),
           Text(
             _formatDateTime(widget.counter.changedAt!),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: HospitalTheme.textMedium,
             ),
@@ -1114,7 +1114,7 @@ class _CounterDetailPanelState extends ConsumerState<_CounterDetailPanel> {
             const SizedBox(height: 8),
             Text(
               'Previous value: ${widget.counter.previousValue}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: HospitalTheme.textMedium,
               ),
@@ -1550,7 +1550,7 @@ class _AddPatientFormState extends ConsumerState<_AddPatientForm> {
         children: [
           Row(
             children: [
-              Icon(Icons.check_circle, color: HospitalTheme.success),
+              const Icon(Icons.check_circle, color: HospitalTheme.success),
               const SizedBox(width: 8),
               const Text(
                 'Recently Added Patient',

@@ -10,7 +10,7 @@ class DoctorNotesSection extends StatefulWidget {
   final String patientId;
   final String admissionId;
 
-  DoctorNotesSection({required this.patientId, required this.admissionId});
+  const DoctorNotesSection({super.key, required this.patientId, required this.admissionId});
 
   @override
   _DoctorNotesSectionState createState() => _DoctorNotesSectionState();
@@ -47,23 +47,23 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
       future: _fetchDoctorNotes(patientId, admissionId),
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Doctor Notes',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 12),
-              Text('No notes available'),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
+              const Text('No notes available'),
+              const SizedBox(height: 12),
               _buildGradientButton(
                 icon: Icons.add,
                 text: 'Add Note',
@@ -78,14 +78,14 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Doctor Notes',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Display all notes from the API
             ...snapshot.data!.map((note) => Column(
                   children: [
@@ -97,10 +97,10 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
                       onDelete: () =>
                           _deleteNote(patientId, admissionId, note['_id']),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                   ],
                 )),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             // Add note button
             _buildGradientButton(
               icon: Icons.add,
@@ -123,7 +123,7 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
     required Function onDelete,
   }) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
@@ -152,7 +152,7 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
                       color: Colors.blue.shade700,
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   GestureDetector(
                     onTap: () => onDelete(),
                     child: Icon(
@@ -165,10 +165,10 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
               ),
             ],
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             note,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
             ),
           ),
@@ -185,10 +185,10 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Add Doctor Note'),
+        title: const Text('Add Doctor Note'),
         content: TextField(
           controller: textController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Enter your note here',
             border: OutlineInputBorder(),
           ),
@@ -197,7 +197,7 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -216,7 +216,7 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
                 _refreshNotes();
               }
             },
-            child: Text('Save'),
+            child: const Text('Save'),
           ),
         ],
       ),
@@ -227,7 +227,7 @@ class _DoctorNotesSectionState extends State<DoctorNotesSection> {
   Future<List<dynamic>> _fetchDoctorNotes(
       String patientId, String admissionId) async {
     final url =
-        Uri.parse('${KVM_URL}/doctors/fetchNotes/$patientId/$admissionId');
+        Uri.parse('$KVM_URL/doctors/fetchNotes/$patientId/$admissionId');
     print(url);
     try {
       final response = await http.get(url);

@@ -16,12 +16,12 @@ class AddDiagnosisDoctorScreen extends StatefulWidget {
       fetchDoctorDiagnosis;
 
   const AddDiagnosisDoctorScreen({
-    Key? key,
+    super.key,
     required this.admissionId,
     required this.patientId,
     required this.addDoctorDiagnosis,
     required this.fetchDoctorDiagnosis,
-  }) : super(key: key);
+  });
 
   @override
   _AddDiagnosisDoctorScreenState createState() =>
@@ -79,7 +79,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
 
     try {
       final response = await http.get(
-          Uri.parse('${KVM_URL}/doctors/getDiagnosis/${widget.patientId}'));
+          Uri.parse('$KVM_URL/doctors/getDiagnosis/${widget.patientId}'));
       print(response.body);
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
@@ -136,11 +136,11 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Row(
+              content: const Row(
                 children: [
                   Icon(Icons.check_circle, color: Colors.white, size: 20),
-                  const SizedBox(width: 12),
-                  const Text('Diagnosis added successfully!'),
+                  SizedBox(width: 12),
+                  Text('Diagnosis added successfully!'),
                 ],
               ),
               backgroundColor: HospitalTheme.success,
@@ -204,7 +204,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
                   color: HospitalTheme.primary.withOpacity(0.1),
                   borderRadius: HospitalTheme.radiusSmall,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.checklist_rtl,
                   color: HospitalTheme.primary,
                   size: 20,
@@ -213,7 +213,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
               const SizedBox(width: 12),
               Text(
                 'Selected Diagnoses (${selectedDiagnoses.length})',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: HospitalTheme.textDark,
@@ -275,7 +275,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
                       color: HospitalTheme.medical.withOpacity(0.1),
                       borderRadius: HospitalTheme.radiusSmall,
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.psychology,
                       color: HospitalTheme.medical,
                       size: 20,
@@ -306,14 +306,14 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
           if (isLoadingSuggestions)
             Container(
               padding: const EdgeInsets.all(32),
-              child: Center(
+              child: const Center(
                 child: Column(
                   children: [
                     CircularProgressIndicator(
                       color: HospitalTheme.primary,
                       strokeWidth: 3,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Text(
                       'Analyzing patient data...',
                       style: TextStyle(
@@ -330,7 +330,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
               padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.error_outline,
                     color: HospitalTheme.error,
                     size: 48,
@@ -339,7 +339,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
                   Text(
                     errorMessage!,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.error,
                       fontSize: 14,
                     ),
@@ -350,14 +350,14 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
           else if (diagnosisSuggestions.isEmpty)
             Container(
               padding: const EdgeInsets.all(24),
-              child: Column(
+              child: const Column(
                 children: [
                   Icon(
                     Icons.search_off,
                     color: HospitalTheme.textLight,
                     size: 48,
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: 12),
                   Text(
                     'No AI suggestions available for this patient',
                     textAlign: TextAlign.center,
@@ -379,7 +379,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
                   controller: _scrollController,
                   shrinkWrap: true,
                   itemCount: diagnosisSuggestions.length,
-                  separatorBuilder: (context, index) => Divider(
+                  separatorBuilder: (context, index) => const Divider(
                     color: HospitalTheme.border,
                     height: 1,
                   ),
@@ -436,7 +436,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
                   color: HospitalTheme.secondary.withOpacity(0.1),
                   borderRadius: HospitalTheme.radiusSmall,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.edit_note,
                   color: HospitalTheme.secondary,
                   size: 20,
@@ -459,19 +459,19 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
             focusNode: _textFieldFocusNode,
             maxLines: 3,
             decoration: InputDecoration(
-              labelStyle: TextStyle(
+              labelStyle: const TextStyle(
                 color: Colors.black,
                 fontSize: 14,
               ),
               labelText: 'Enter diagnosis manually',
               hintText: 'Type your diagnosis here... (Ctrl+F to focus)',
-              prefixIcon: Icon(
+              prefixIcon: const Icon(
                 Icons.medical_information_outlined,
                 color: HospitalTheme.primary,
               ),
               suffixIcon: _symptomsController.text.isNotEmpty
                   ? IconButton(
-                      icon: Icon(Icons.clear, color: HospitalTheme.textMedium),
+                      icon: const Icon(Icons.clear, color: HospitalTheme.textMedium),
                       onPressed: () {
                         _symptomsController.clear();
                         setState(() {});
@@ -482,7 +482,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
             onChanged: (value) => setState(() {}),
           ),
           const SizedBox(height: 8),
-          Text(
+          const Text(
             'Tip: Press Ctrl+Enter to add diagnosis',
             style: TextStyle(
               fontSize: 12,
@@ -508,12 +508,12 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
       ),
       child: Row(
         children: [
-          Icon(Icons.error_outline, color: HospitalTheme.error, size: 20),
+          const Icon(Icons.error_outline, color: HospitalTheme.error, size: 20),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
               errorMessage!,
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.error,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
@@ -521,7 +521,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
             ),
           ),
           IconButton(
-            icon: Icon(Icons.close, color: HospitalTheme.error, size: 18),
+            icon: const Icon(Icons.close, color: HospitalTheme.error, size: 18),
             onPressed: () => setState(() => errorMessage = null),
           ),
         ],
@@ -544,7 +544,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
           Tooltip(
             message: 'Keyboard Shortcuts',
             child: IconButton(
-              icon: Icon(Icons.keyboard, color: HospitalTheme.primary),
+              icon: const Icon(Icons.keyboard, color: HospitalTheme.primary),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -605,7 +605,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
                     ),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.person_outline,
                           color: HospitalTheme.primary,
                           size: 24,
@@ -616,7 +616,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
                           children: [
                             Text(
                               'Patient ID: ${widget.patientId}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: HospitalTheme.textDark,
@@ -624,7 +624,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
                             ),
                             Text(
                               'Admission ID: ${widget.admissionId}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 color: HospitalTheme.textMedium,
                               ),
@@ -685,7 +685,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
   }
 
   Widget _buildActionButtons(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         children: [
@@ -710,7 +710,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
               icon: const Icon(Icons.arrow_back),
               label: const Text('Back to Patient'),
               style: OutlinedButton.styleFrom(
-                side: BorderSide(color: HospitalTheme.textMedium),
+                side: const BorderSide(color: HospitalTheme.textMedium),
                 foregroundColor: HospitalTheme.textMedium,
                 shape: RoundedRectangleBorder(
                   borderRadius: HospitalTheme.radiusSmall,
@@ -737,7 +737,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
             ),
             child: Text(
               shortcut,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
@@ -747,7 +747,7 @@ class _AddDiagnosisDoctorScreenState extends State<AddDiagnosisDoctorScreen>
           const SizedBox(width: 12),
           Text(
             description,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: HospitalTheme.textMedium,
             ),

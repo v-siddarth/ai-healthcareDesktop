@@ -9,13 +9,13 @@ class EnhancedSearchBar extends StatefulWidget {
   final double maxWidth;
 
   const EnhancedSearchBar({
-    Key? key,
+    super.key,
     required this.isDarkMode,
     required this.primaryColor,
     required this.onSearch,
     this.quickAccessSites = const ['Google', 'DocNeX.care', 'Portal'],
     this.maxWidth = 800,
-  }) : super(key: key);
+  });
 
   @override
   _EnhancedSearchBarState createState() => _EnhancedSearchBarState();
@@ -28,7 +28,7 @@ class _EnhancedSearchBarState extends State<EnhancedSearchBar>
   bool _isFocused = false;
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
-  List<String> _recentSearches = [
+  final List<String> _recentSearches = [
     'Patient records',
     'Medical procedures',
     'Appointment schedule',
@@ -544,7 +544,7 @@ class _EnhancedSearchBarState extends State<EnhancedSearchBar>
 
 // Example usage class
 class SearchBarImplementation extends StatefulWidget {
-  const SearchBarImplementation({Key? key}) : super(key: key);
+  const SearchBarImplementation({super.key});
 
   @override
   _SearchBarImplementationState createState() =>
@@ -580,7 +580,7 @@ class _SearchBarImplementationState extends State<SearchBarImplementation> {
           isDarkMode: _isDarkMode,
           primaryColor: primaryColor,
           onSearch: _handleSearch,
-          quickAccessSites: [
+          quickAccessSites: const [
             'Google',
             'DocNeX.care',
             'Portal',

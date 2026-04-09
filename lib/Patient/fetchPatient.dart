@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:doctordesktop/constants/Url.dart';
 
 class PatientListScreen extends StatefulWidget {
-  const PatientListScreen({Key? key}) : super(key: key);
+  const PatientListScreen({super.key});
 
   @override
   _PatientListScreenState createState() => _PatientListScreenState();
@@ -49,7 +49,7 @@ class _PatientListScreenState extends State<PatientListScreen> {
 
     try {
       final response =
-          await http.get(Uri.parse('${KVM_URL}/reception/listPatients'));
+          await http.get(Uri.parse('$KVM_URL/reception/listPatients'));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
@@ -911,7 +911,7 @@ class _PatientListScreenState extends State<PatientListScreen> {
               ],
             ),
           );
-        }).toList(),
+        }),
       ],
     );
   }

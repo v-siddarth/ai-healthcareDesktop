@@ -211,7 +211,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
           'Adding vitals for patient: $patientId, admission: $admissionId');
 
       final response = await http.post(
-        Uri.parse('${BASE_URL}/doctors/addVitals'),
+        Uri.parse('$BASE_URL/doctors/addVitals'),
         headers: _headers,
         body: jsonEncode({
           'patientId': patientId,
@@ -260,7 +260,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
       debugPrint('Request body: ${jsonEncode(requestBody)}');
 
       final response = await http.post(
-        Uri.parse('${BASE_URL}/doctors/addPresciption'),
+        Uri.parse('$BASE_URL/doctors/addPresciption'),
         headers: _headers,
         body: jsonEncode(requestBody),
       );
@@ -317,7 +317,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
           'Adding diagnosis for patient: $patientId, admission: $admissionId');
 
       final response = await http.post(
-        Uri.parse('${BASE_URL}/doctors/addDiagnosis'),
+        Uri.parse('$BASE_URL/doctors/addDiagnosis'),
         headers: _headers,
         body: jsonEncode({
           'patientId': patientId,
@@ -355,7 +355,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
           'Adding symptoms for patient: $patientId, admission: $admissionId');
 
       final response = await http.post(
-        Uri.parse('${BASE_URL}/doctors/addSymptoms'),
+        Uri.parse('$BASE_URL/doctors/addSymptoms'),
         headers: _headers,
         body: jsonEncode({
           'patientId': patientId,
@@ -391,7 +391,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
     try {
       final response = await http.delete(
         Uri.parse(
-            '${BASE_URL}/doctors/deleteVitals/$patientId/$admissionId/$vitalId'),
+            '$BASE_URL/doctors/deleteVitals/$patientId/$admissionId/$vitalId'),
         headers: _headers,
       );
 
@@ -417,7 +417,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
 
     try {
       final response = await http.get(
-        Uri.parse('${BASE_URL}/doctors/fetchVitals/$patientId/$admissionId'),
+        Uri.parse('$BASE_URL/doctors/fetchVitals/$patientId/$admissionId'),
         headers: _headers,
       );
 
@@ -455,7 +455,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
     try {
       final response = await http.delete(
         Uri.parse(
-            '${BASE_URL}/doctors/deletePrescription/$patientId/$admissionId/$prescriptionId'),
+            '$BASE_URL/doctors/deletePrescription/$patientId/$admissionId/$prescriptionId'),
         headers: _headers,
       );
 
@@ -481,7 +481,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
     try {
       final response = await http.get(
         Uri.parse(
-            '${BASE_URL}/doctors/getPrescription/$patientId/$admissionId'),
+            '$BASE_URL/doctors/getPrescription/$patientId/$admissionId'),
         headers: _headers,
       );
 
@@ -518,7 +518,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
 
     try {
       final response = await http.get(
-        Uri.parse('${BASE_URL}/doctors/fetchDiagnosis/$patientId/$admissionId'),
+        Uri.parse('$BASE_URL/doctors/fetchDiagnosis/$patientId/$admissionId'),
         headers: _headers,
       );
 
@@ -554,7 +554,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
 
     try {
       final response = await http.get(
-        Uri.parse('${BASE_URL}/doctors/fetchSymptoms/$patientId/$admissionId'),
+        Uri.parse('$BASE_URL/doctors/fetchSymptoms/$patientId/$admissionId'),
         headers: _headers,
       );
 
@@ -609,7 +609,7 @@ class MedicalRecordsNotifier extends StateNotifier<MedicalRecordsState> {
 
     try {
       final response = await http.get(
-        Uri.parse('${BASE_URL}/search?q=$query'),
+        Uri.parse('$BASE_URL/search?q=$query'),
         headers: _headers,
       );
 
@@ -666,32 +666,32 @@ class MedicalRecordsScreen extends ConsumerStatefulWidget {
 
 class _MedicalRecordsScreenState extends ConsumerState<MedicalRecordsScreen> {
   final List<_TabData> _tabs = [
-    _TabData(
+    const _TabData(
       icon: Icons.favorite_border,
       label: 'Vitals',
       color: HospitalTheme.medical,
     ),
-    _TabData(
+    const _TabData(
       icon: Icons.medication,
       label: 'Prescription',
       color: HospitalTheme.pharmacy,
     ),
-    _TabData(
+    const _TabData(
       icon: Icons.medical_services,
       label: 'Diagnosis',
       color: HospitalTheme.laboratory,
     ),
-    _TabData(
+    const _TabData(
       icon: Icons.sick,
       label: 'Symptoms',
       color: HospitalTheme.warning,
     ),
-    _TabData(
+    const _TabData(
       icon: Icons.chat,
       label: 'Consulting',
       color: HospitalTheme.info,
     ),
-    _TabData(
+    const _TabData(
       icon: Icons.psychology,
       label: 'Voice AI',
       color: HospitalTheme.accent,
@@ -851,7 +851,7 @@ class _MedicalRecordsScreenState extends ConsumerState<MedicalRecordsScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: HospitalTheme.shadowSmall,
-            border: Border(
+            border: const Border(
               right: BorderSide(color: HospitalTheme.border, width: 1),
             ),
           ),
@@ -912,19 +912,19 @@ class _MedicalRecordsScreenState extends ConsumerState<MedicalRecordsScreen> {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: HospitalTheme.primaryLight.withOpacity(0.1),
-            border: Border(
+            border: const Border(
               bottom: BorderSide(color: HospitalTheme.border, width: 1),
             ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.medical_information,
                       color: HospitalTheme.primary, size: 24),
-                  const SizedBox(width: 12),
-                  const Expanded(
+                  SizedBox(width: 12),
+                  Expanded(
                     child: Text(
                       'Medical Records',
                       style: TextStyle(
@@ -976,7 +976,7 @@ class _MedicalRecordsScreenState extends ConsumerState<MedicalRecordsScreen> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: HospitalTheme.surfaceLight.withOpacity(0.3),
-            border: Border(
+            border: const Border(
               top: BorderSide(color: HospitalTheme.border, width: 1),
             ),
           ),
@@ -1101,7 +1101,7 @@ class _MedicalRecordsScreenState extends ConsumerState<MedicalRecordsScreen> {
   }
 
   Widget _buildHorizontalTabs(MedicalRecordsState state, bool isTablet) {
-    return Container(
+    return SizedBox(
       height: isTablet ? 60 : 55,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

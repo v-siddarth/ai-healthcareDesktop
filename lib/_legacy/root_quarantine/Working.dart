@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Doct extends ConsumerStatefulWidget {
+  const Doct({super.key});
+
   @override
   _DoctState createState() => _DoctState();
 }
@@ -34,7 +36,7 @@ Widget AuthenticatedNavigation(WidgetRef ref) {
     future: ref.read(authControllerProvider.notifier).getUsertype(),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return Scaffold(
+        return const Scaffold(
           body: Center(
             child: CircularProgressIndicator(),
           ),
@@ -45,10 +47,10 @@ Widget AuthenticatedNavigation(WidgetRef ref) {
       print("User type from provider: $userType");
 
       if (userType == 'doctor') {
-        return DoctorMainScreen();
+        return const DoctorMainScreen();
       } else if (userType == 'nurse') {
         // return NurseMainScreen();
-        return Scaffold(
+        return const Scaffold(
           body: Center(
             child: Text("Nurse Dashboard - Not Implemented"),
           ),
@@ -70,7 +72,7 @@ Widget AuthenticatedNavigation(WidgetRef ref) {
                     MaterialPageRoute(builder: (context) => LoginScreen1()),
                   );
                 },
-                child: Text("Go to Login"),
+                child: const Text("Go to Login"),
               ),
             ],
           ),

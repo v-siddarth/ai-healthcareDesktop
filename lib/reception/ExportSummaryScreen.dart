@@ -10,10 +10,10 @@ class FourButtonScreen extends StatelessWidget {
   final String admissionId;
 
   const FourButtonScreen({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class FourButtonScreen extends StatelessWidget {
   }
 
   Future<void> _fetchDoctorAdvice(BuildContext context, patientId) async {
-    final url = '${KVM_URL}/reception/doctorSheet/${patientId}';
+    final url = '$KVM_URL/reception/doctorSheet/$patientId';
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
@@ -76,12 +76,12 @@ class FourButtonScreen extends StatelessWidget {
           Methods().downloadFile(fileLink, 'doctor_advice.pdf', context);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('No file link found in the response')),
+            const SnackBar(content: Text('No file link found in the response')),
           );
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to fetch doctor advice')),
+          const SnackBar(content: Text('Failed to fetch doctor advice')),
         );
       }
     } catch (e) {
@@ -92,7 +92,7 @@ class FourButtonScreen extends StatelessWidget {
   }
 
   Future<void> _declarationForm(BuildContext context) async {
-    final url = 'https://ai-healthcare-as85.onrender.com/reception/declaration';
+    const url = 'https://ai-healthcare-as85.onrender.com/reception/declaration';
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
@@ -103,12 +103,12 @@ class FourButtonScreen extends StatelessWidget {
           Methods().downloadFile(fileLink, 'doctor_advice.pdf', context);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('No file link found in the response')),
+            const SnackBar(content: Text('No file link found in the response')),
           );
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to fetch doctor advice')),
+          const SnackBar(content: Text('Failed to fetch doctor advice')),
         );
       }
     } catch (e) {

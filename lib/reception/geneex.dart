@@ -23,7 +23,7 @@ class BillNotifier extends StateNotifier<AsyncValue<Map<String, dynamic>>> {
     state = const AsyncValue.loading();
     try {
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/bill'),
+        Uri.parse('$KVM_URL/reception/bill'),
         body: json.encode(billData),
         headers: {'Content-Type': 'application/json'},
       );
@@ -43,8 +43,7 @@ class BillNotifier extends StateNotifier<AsyncValue<Map<String, dynamic>>> {
 class GenerateBillScreen extends ConsumerStatefulWidget {
   final String patientId;
 
-  const GenerateBillScreen({Key? key, required this.patientId})
-      : super(key: key);
+  const GenerateBillScreen({super.key, required this.patientId});
 
   @override
   ConsumerState<GenerateBillScreen> createState() => _GenerateBillScreenState();
@@ -448,104 +447,104 @@ Widget _buildBillResponse(Map<String, dynamic> response, BuildContext context) {
   return SingleChildScrollView(
     padding: const EdgeInsets.all(16.0),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      if (response != null) ...[
+      ...[
+      Text(
+        response['message'] ?? '',
+        style: const TextStyle(
+            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
+      ),
+      const SizedBox(height: 20),
+      if (response['billDetails'] != null) ...[
+        Text('Patient Details',
+            style:
+                const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        const Divider(),
+        Text('Name: ${response['billDetails']['name']}'),
+        Text('Patient ID: ${response['billDetails']['patientId']}'),
+        Text('Gender: ${response['billDetails']['gender']}'),
+        Text('Contact: ${response['billDetails']['contact']}'),
+        Text('Weight: ${response['billDetails']['weight']}'),
+        Text('Age: ${response['billDetails']['age']}'),
+        Text('Admission Date: ${response['billDetails']['admissionDate']}'),
+        Text('Discharge Date: ${response['billDetails']['dischargeDate']}'),
         Text(
-          response['message'] ?? '',
-          style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
-        ),
+            'Reason for Admission: ${response['billDetails']['reasonForAdmission']}'),
+        Text(
+            'Condition at Discharge: ${response['billDetails']['conditionAtDischarge']}'),
         const SizedBox(height: 20),
-        if (response['billDetails'] != null) ...[
-          Text('Patient Details',
-              style:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          const Divider(),
-          Text('Name: ${response['billDetails']['name']}'),
-          Text('Patient ID: ${response['billDetails']['patientId']}'),
-          Text('Gender: ${response['billDetails']['gender']}'),
-          Text('Contact: ${response['billDetails']['contact']}'),
-          Text('Weight: ${response['billDetails']['weight']}'),
-          Text('Age: ${response['billDetails']['age']}'),
-          Text('Admission Date: ${response['billDetails']['admissionDate']}'),
-          Text('Discharge Date: ${response['billDetails']['dischargeDate']}'),
-          Text(
-              'Reason for Admission: ${response['billDetails']['reasonForAdmission']}'),
-          Text(
-              'Condition at Discharge: ${response['billDetails']['conditionAtDischarge']}'),
-          const SizedBox(height: 20),
-          Text('Doctor: ${response['billDetails']['doctorName']}'),
-          const SizedBox(height: 20),
-          Text('Charges Breakdown',
-              style:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          const Divider(),
-          Text('Bed Charges',
-              style:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          Text('ICU: ${response['billDetails']['bedCharges']['icu']['total']}'),
-          Text(
-              'Single AC: ${response['billDetails']['bedCharges']['singleAc']['total']}'),
-          Text(
-              'Total Bed Charges: ${response['billDetails']['bedCharges']['total']}'),
-          const Divider(),
-          Text('Procedure Charges',
-              style:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          Text(
-              'Oxygen: ${response['billDetails']['procedureCharges']['oxygen']['total']}'),
-          Text(
-              'Total Procedure Charges: ${response['billDetails']['procedureCharges']['total']}'),
-          const Divider(),
-          Text('Doctor Charges',
-              style:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          Text(
-              'ICU Visiting: ${response['billDetails']['doctorCharges']['icuVisiting']['total']}'),
-          Text(
-              'General Visiting: ${response['billDetails']['doctorCharges']['generalVisiting']['total']}'),
-          Text(
-              'Total Doctor Charges: ${response['billDetails']['doctorCharges']['total']}'),
-          const Divider(),
-          Text('Investigation Charges',
-              style:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          Text(
-              'ECG: ${response['billDetails']['investigationCharges']['ecg']['total']}'),
-          Text(
-              'X-Ray: ${response['billDetails']['investigationCharges']['xray']['total']}'),
-          Text(
-              'Total Investigation Charges: ${response['billDetails']['investigationCharges']['total']}'),
-          const Divider(),
-          Text(
-              'Medicine Charges: ${response['billDetails']['medicineCharges']['total']}'),
-          const Divider(),
-          Text(
-              'Total Amount Due: ${response['billDetails']['totalAmountDue']}'),
-          Text('Amount Paid: ${response['billDetails']['amountPaid']}'),
-          Text(
-              'Remaining Balance: ${response['billDetails']['remainingBalance']}'),
-          Text(
-              'Discharge Status: ${response['billDetails']['dischargeStatus']}'),
-          Text('Payment Mode: ${response['billDetails']['paymentMode']}'),
-          Text(
-              'Insurance Company: ${response['billDetails']['insuranceCompany']}'),
-          Text(
-              'Condition at Discharge Point: ${response['billDetails']['conditionAtDischargePoint']}'),
-        ],
-        if (response != null && response['fileLink'] != null) ...[
-          const SizedBox(height: 20),
-          Text('PDF Link: ${response['fileLink']}',
-              style:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        ],
+        Text('Doctor: ${response['billDetails']['doctorName']}'),
         const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            Methods().openPdf(fileLink);
-          },
-          child: const Text('Download Bill PDF'),
-        ),
+        Text('Charges Breakdown',
+            style:
+                const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        const Divider(),
+        Text('Bed Charges',
+            style:
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        Text('ICU: ${response['billDetails']['bedCharges']['icu']['total']}'),
+        Text(
+            'Single AC: ${response['billDetails']['bedCharges']['singleAc']['total']}'),
+        Text(
+            'Total Bed Charges: ${response['billDetails']['bedCharges']['total']}'),
+        const Divider(),
+        Text('Procedure Charges',
+            style:
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        Text(
+            'Oxygen: ${response['billDetails']['procedureCharges']['oxygen']['total']}'),
+        Text(
+            'Total Procedure Charges: ${response['billDetails']['procedureCharges']['total']}'),
+        const Divider(),
+        Text('Doctor Charges',
+            style:
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        Text(
+            'ICU Visiting: ${response['billDetails']['doctorCharges']['icuVisiting']['total']}'),
+        Text(
+            'General Visiting: ${response['billDetails']['doctorCharges']['generalVisiting']['total']}'),
+        Text(
+            'Total Doctor Charges: ${response['billDetails']['doctorCharges']['total']}'),
+        const Divider(),
+        Text('Investigation Charges',
+            style:
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        Text(
+            'ECG: ${response['billDetails']['investigationCharges']['ecg']['total']}'),
+        Text(
+            'X-Ray: ${response['billDetails']['investigationCharges']['xray']['total']}'),
+        Text(
+            'Total Investigation Charges: ${response['billDetails']['investigationCharges']['total']}'),
+        const Divider(),
+        Text(
+            'Medicine Charges: ${response['billDetails']['medicineCharges']['total']}'),
+        const Divider(),
+        Text(
+            'Total Amount Due: ${response['billDetails']['totalAmountDue']}'),
+        Text('Amount Paid: ${response['billDetails']['amountPaid']}'),
+        Text(
+            'Remaining Balance: ${response['billDetails']['remainingBalance']}'),
+        Text(
+            'Discharge Status: ${response['billDetails']['dischargeStatus']}'),
+        Text('Payment Mode: ${response['billDetails']['paymentMode']}'),
+        Text(
+            'Insurance Company: ${response['billDetails']['insuranceCompany']}'),
+        Text(
+            'Condition at Discharge Point: ${response['billDetails']['conditionAtDischargePoint']}'),
       ],
+      if (response != null && response['fileLink'] != null) ...[
+        const SizedBox(height: 20),
+        Text('PDF Link: ${response['fileLink']}',
+            style:
+                const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+      ],
+      const SizedBox(height: 20),
+      ElevatedButton(
+        onPressed: () {
+          Methods().openPdf(fileLink);
+        },
+        child: const Text('Download Bill PDF'),
+      ),
+    ],
     ]),
   );
 }

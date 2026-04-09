@@ -6,7 +6,7 @@ import 'package:doctordesktop/reception/Sidebar.dart';
 import 'package:flutter/material.dart';
 
 class LabDashBoardScreen extends StatefulWidget {
-  const LabDashBoardScreen({Key? key}) : super(key: key);
+  const LabDashBoardScreen({super.key});
 
   @override
   State<LabDashBoardScreen> createState() =>

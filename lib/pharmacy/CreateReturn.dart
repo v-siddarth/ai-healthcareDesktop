@@ -158,7 +158,7 @@ class ReturnItem {
 }
 
 class CreateReturnScreen extends StatefulWidget {
-  const CreateReturnScreen({Key? key}) : super(key: key);
+  const CreateReturnScreen({super.key});
 
   @override
   _CreateReturnScreenState createState() => _CreateReturnScreenState();
@@ -236,7 +236,7 @@ class _CreateReturnScreenState extends State<CreateReturnScreen> {
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/pharma/getCustomers'),
+        Uri.parse('$KVM_URL/pharma/getCustomers'),
       );
 
       if (response.statusCode == 200) {
@@ -267,7 +267,7 @@ class _CreateReturnScreenState extends State<CreateReturnScreen> {
       SnackBar(
         content: Row(
           children: [
-            Icon(Icons.check_circle, color: Colors.white),
+            const Icon(Icons.check_circle, color: Colors.white),
             const SizedBox(width: 8),
             Text(message),
           ],
@@ -313,7 +313,7 @@ class _CreateReturnScreenState extends State<CreateReturnScreen> {
     });
 
     try {
-      final Uri uri = Uri.parse('${KVM_URL}/pharma/getSales').replace(
+      final Uri uri = Uri.parse('$KVM_URL/pharma/getSales').replace(
         queryParameters: {
           'startDate': _startDateController.text,
           'endDate': _endDateController.text,
@@ -402,10 +402,10 @@ class _CreateReturnScreenState extends State<CreateReturnScreen> {
 
     // Scroll to the top to show the confirmation
     if (_isMobile) {
-      Future.delayed(Duration(milliseconds: 100), () {
+      Future.delayed(const Duration(milliseconds: 100), () {
         Scrollable.ensureVisible(
           _formKey.currentContext!,
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
         );
       });
     }
@@ -462,7 +462,7 @@ class _CreateReturnScreenState extends State<CreateReturnScreen> {
         };
 
         final response = await http.post(
-          Uri.parse('${KVM_URL}/pharma/createReturn'),
+          Uri.parse('$KVM_URL/pharma/createReturn'),
           headers: {'Content-Type': 'application/json'},
           body: json.encode(body),
         );
@@ -619,7 +619,7 @@ class _CreateReturnScreenState extends State<CreateReturnScreen> {
   }
 
   Widget _buildReturnConfirmationPanel() {
-    if (_returnData == null) return SizedBox.shrink();
+    if (_returnData == null) return const SizedBox.shrink();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
@@ -664,9 +664,9 @@ class _CreateReturnScreenState extends State<CreateReturnScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Return Created Successfully',
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
@@ -892,9 +892,9 @@ class _CreateReturnScreenState extends State<CreateReturnScreen> {
                 const Divider(height: 1),
                 ListView.separated(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: _returnData!['items'].length,
-                  separatorBuilder: (context, index) => Divider(height: 1),
+                  separatorBuilder: (context, index) => const Divider(height: 1),
                   itemBuilder: (context, index) {
                     final item = _returnData!['items'][index];
                     return ListTile(
@@ -1659,7 +1659,7 @@ class _CreateReturnScreenState extends State<CreateReturnScreen> {
                       scrollDirection: Axis.horizontal,
                       child: DataTable(
                         columnSpacing: 20,
-                        headingRowColor: MaterialStateProperty.all(
+                        headingRowColor: WidgetStateProperty.all(
                           Colors.grey.shade50,
                         ),
                         headingRowHeight: 50,

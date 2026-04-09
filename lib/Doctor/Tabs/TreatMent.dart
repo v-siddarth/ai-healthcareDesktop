@@ -409,10 +409,10 @@ class EnhancedTreatmentScreen extends ConsumerStatefulWidget {
   final String admissionId;
 
   const EnhancedTreatmentScreen({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
-  }) : super(key: key);
+  });
 
   @override
   ConsumerState<EnhancedTreatmentScreen> createState() =>
@@ -468,12 +468,12 @@ class _EnhancedTreatmentScreenState
     try {
       final treatmentResponse = await http.get(
         Uri.parse(
-            '${KVM_URL}/doctors/getDoctorTreatment/${widget.patientId}/${widget.admissionId}'),
+            '$KVM_URL/doctors/getDoctorTreatment/${widget.patientId}/${widget.admissionId}'),
       );
 
       final medicationResponse = await http.get(
         Uri.parse(
-            '${KVM_URL}/doctors/getMedicationStatus/${widget.patientId}/${widget.admissionId}'),
+            '$KVM_URL/doctors/getMedicationStatus/${widget.patientId}/${widget.admissionId}'),
       );
 
       if (treatmentResponse.statusCode == 200) {
@@ -510,7 +510,7 @@ class _EnhancedTreatmentScreenState
       String treatmentType, String treatmentId) async {
     try {
       final response = await http.delete(
-        Uri.parse('${KVM_URL}/doctors/deleteDoctorTreatment'),
+        Uri.parse('$KVM_URL/doctors/deleteDoctorTreatment'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'patientId': widget.patientId,
@@ -687,14 +687,14 @@ class _EnhancedTreatmentScreenState
                 ),
                 shape: BoxShape.circle,
               ),
-              child: CircularProgressIndicator(
+              child: const CircularProgressIndicator(
                 valueColor:
                     AlwaysStoppedAnimation<Color>(HospitalTheme.primary),
                 strokeWidth: 3,
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'Loading treatment data...',
               style: TextStyle(
                 fontSize: 18,
@@ -727,14 +727,14 @@ class _EnhancedTreatmentScreenState
                 color: HospitalTheme.error.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.error_outline_rounded,
                 size: 64,
                 color: HospitalTheme.error,
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'Failed to Load Data',
               style: TextStyle(
                 fontSize: 24,
@@ -745,7 +745,7 @@ class _EnhancedTreatmentScreenState
             const SizedBox(height: 12),
             Text(
               errorMessage,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: HospitalTheme.textMedium,
                 height: 1.5,
@@ -781,7 +781,7 @@ class _EnhancedTreatmentScreenState
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [
             HospitalTheme.surfaceLight,
             HospitalTheme.cardBackground,
@@ -797,7 +797,7 @@ class _EnhancedTreatmentScreenState
           Container(
             width: 60,
             height: 60,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [HospitalTheme.primary, HospitalTheme.secondary],
                 begin: Alignment.topLeft,
@@ -830,7 +830,7 @@ class _EnhancedTreatmentScreenState
               children: [
                 Text(
                   patientInfo!.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.textDark,
@@ -839,7 +839,7 @@ class _EnhancedTreatmentScreenState
                 const SizedBox(height: 4),
                 Text(
                   'ID: ${patientInfo!.patientId} • ${admissionInfo!.section.name} • Bed ${admissionInfo!.bedNumber}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),
@@ -859,12 +859,12 @@ class _EnhancedTreatmentScreenState
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.medical_services_rounded,
+                  const Icon(Icons.medical_services_rounded,
                       color: HospitalTheme.primary, size: 16),
                   const SizedBox(width: 8),
                   Text(
                     '${treatmentData!.totalItems} Items',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: HospitalTheme.primary,
@@ -1027,14 +1027,14 @@ class _EnhancedTreatmentScreenState
             const SizedBox(height: 20),
             Text(
               message,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
               ),
             ),
             const SizedBox(height: 8),
-            Text(
+            const Text(
               'Tap the + button to add new items',
               style: TextStyle(
                 fontSize: 14,
@@ -1080,7 +1080,7 @@ class _EnhancedTreatmentScreenState
                   children: [
                     Text(
                       medication.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
@@ -1088,7 +1088,7 @@ class _EnhancedTreatmentScreenState
                     ),
                     Text(
                       medication.dosage,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
                         color: HospitalTheme.textMedium,
                       ),
@@ -1125,7 +1125,7 @@ class _EnhancedTreatmentScreenState
                   medication.id,
                   medication.name,
                 ),
-                icon: Icon(Icons.delete_outline, color: HospitalTheme.error),
+                icon: const Icon(Icons.delete_outline, color: HospitalTheme.error),
                 tooltip: 'Delete Medication',
               ),
             ],
@@ -1156,11 +1156,11 @@ class _EnhancedTreatmentScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Icon(Icons.check_circle,
                           color: HospitalTheme.success, size: 16),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
                         'Administration Details',
                         style: TextStyle(
@@ -1233,7 +1233,7 @@ class _EnhancedTreatmentScreenState
                   children: [
                     Text(
                       fluid.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
@@ -1241,7 +1241,7 @@ class _EnhancedTreatmentScreenState
                     ),
                     Text(
                       '${fluid.quantity} • ${fluid.duration}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
                         color: HospitalTheme.textMedium,
                       ),
@@ -1271,7 +1271,7 @@ class _EnhancedTreatmentScreenState
                   fluid.id,
                   fluid.name,
                 ),
-                icon: Icon(Icons.delete_outline, color: HospitalTheme.error),
+                icon: const Icon(Icons.delete_outline, color: HospitalTheme.error),
                 tooltip: 'Delete IV Fluid',
               ),
             ],
@@ -1298,11 +1298,11 @@ class _EnhancedTreatmentScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Icon(Icons.check_circle,
                           color: HospitalTheme.success, size: 16),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
                         'Administration Details',
                         style: TextStyle(
@@ -1375,7 +1375,7 @@ class _EnhancedTreatmentScreenState
                   children: [
                     Text(
                       procedure.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.textDark,
@@ -1383,7 +1383,7 @@ class _EnhancedTreatmentScreenState
                     ),
                     Text(
                       procedure.frequency,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
                         color: HospitalTheme.textMedium,
                       ),
@@ -1413,7 +1413,7 @@ class _EnhancedTreatmentScreenState
                   procedure.id,
                   procedure.name,
                 ),
-                icon: Icon(Icons.delete_outline, color: HospitalTheme.error),
+                icon: const Icon(Icons.delete_outline, color: HospitalTheme.error),
                 tooltip: 'Delete Procedure',
               ),
             ],
@@ -1432,11 +1432,11 @@ class _EnhancedTreatmentScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       Icon(Icons.check_circle,
                           color: HospitalTheme.success, size: 16),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
                         'Administration Details',
                         style: TextStyle(
@@ -1487,7 +1487,7 @@ class _EnhancedTreatmentScreenState
             children: [
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 10,
                   color: HospitalTheme.textMedium,
                   fontWeight: FontWeight.w500,
@@ -1495,7 +1495,7 @@ class _EnhancedTreatmentScreenState
               ),
               Text(
                 value,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 11,
                   color: HospitalTheme.textDark,
                   fontWeight: FontWeight.w600,
@@ -1535,7 +1535,7 @@ class _EnhancedTreatmentScreenState
           Expanded(
             child: Text(
               instruction.instruction,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: HospitalTheme.textDark,
               ),
@@ -1562,7 +1562,7 @@ class _EnhancedTreatmentScreenState
               instruction.id,
               instruction.instruction,
             ),
-            icon: Icon(Icons.delete_outline, color: HospitalTheme.error),
+            icon: const Icon(Icons.delete_outline, color: HospitalTheme.error),
             tooltip: 'Delete Instruction',
           ),
         ],
@@ -1585,7 +1585,7 @@ class _EnhancedTreatmentScreenState
           const SizedBox(width: 4),
           Text(
             '$label: $value',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 10,
               color: HospitalTheme.textMedium,
               fontWeight: FontWeight.w500,
@@ -1602,11 +1602,11 @@ class _EnhancedTreatmentScreenState
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Row(
+        title: const Row(
           children: [
             Icon(Icons.warning_rounded, color: HospitalTheme.error),
-            const SizedBox(width: 12),
-            const Text(
+            SizedBox(width: 12),
+            Text(
               'Delete Treatment',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -1674,11 +1674,11 @@ class AddTreatmentDialog extends StatefulWidget {
   final VoidCallback onTreatmentAdded;
 
   const AddTreatmentDialog({
-    Key? key,
+    super.key,
     required this.patientId,
     required this.admissionId,
     required this.onTreatmentAdded,
-  }) : super(key: key);
+  });
 
   @override
   State<AddTreatmentDialog> createState() => _AddTreatmentDialogState();
@@ -1789,7 +1789,7 @@ class _AddTreatmentDialogState extends State<AddTreatmentDialog>
       }
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/doctors/addDoctorTreatment'),
+        Uri.parse('$KVM_URL/doctors/addDoctorTreatment'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );
@@ -1860,10 +1860,10 @@ class _AddTreatmentDialogState extends State<AddTreatmentDialog>
           children: [
             Row(
               children: [
-                Icon(Icons.add_circle_rounded,
+                const Icon(Icons.add_circle_rounded,
                     color: HospitalTheme.primary, size: 28),
                 const SizedBox(width: 12),
-                Text(
+                const Text(
                   'Add New Treatment',
                   style: TextStyle(
                     fontSize: 24,
@@ -1874,7 +1874,7 @@ class _AddTreatmentDialogState extends State<AddTreatmentDialog>
                 const Spacer(),
                 IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: Icon(Icons.close_rounded,
+                  icon: const Icon(Icons.close_rounded,
                       color: HospitalTheme.textMedium),
                 ),
               ],
@@ -1927,7 +1927,7 @@ class _AddTreatmentDialogState extends State<AddTreatmentDialog>
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Cancel',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
@@ -2096,8 +2096,8 @@ class _AddTreatmentDialogState extends State<AddTreatmentDialog>
           prefixIcon: Icon(icon, color: HospitalTheme.primary),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.all(16),
-          labelStyle: TextStyle(color: HospitalTheme.textMedium),
-          hintStyle: TextStyle(color: HospitalTheme.textLight),
+          labelStyle: const TextStyle(color: HospitalTheme.textMedium),
+          hintStyle: const TextStyle(color: HospitalTheme.textLight),
         ),
       ),
     );
@@ -2123,13 +2123,13 @@ class _AddTreatmentDialogState extends State<AddTreatmentDialog>
             .map((item) => DropdownMenuItem(value: item, child: Text(item)))
             .toList(),
         onChanged: onChanged,
-        style: TextStyle(color: HospitalTheme.textDark),
+        style: const TextStyle(color: HospitalTheme.textDark),
         decoration: InputDecoration(
           labelText: label,
           prefixIcon: Icon(icon, color: HospitalTheme.primary),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.all(16),
-          labelStyle: TextStyle(color: HospitalTheme.textMedium),
+          labelStyle: const TextStyle(color: HospitalTheme.textMedium),
         ),
       ),
     );

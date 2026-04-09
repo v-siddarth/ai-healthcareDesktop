@@ -626,7 +626,7 @@ class IpdBillNotifier extends StateNotifier<IpdBillState> {
       final invalidItems =
           chargesWithoutRate.map((c) => c.displayName).take(3).join(', ');
       final additionalCount = chargesWithoutRate.length - 3;
-      return 'Selected charges must have valid rates. Items without rates: $invalidItems${additionalCount > 0 ? ' and ${additionalCount} more' : ''}';
+      return 'Selected charges must have valid rates. Items without rates: $invalidItems${additionalCount > 0 ? ' and $additionalCount more' : ''}';
     }
 
     final invalidCustomCharges = state.customCharges
@@ -669,7 +669,7 @@ class IpdBillNotifier extends StateNotifier<IpdBillState> {
       };
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/generateIpdBill/${state.patientId}'),
+        Uri.parse('$KVM_URL/reception/generateIpdBill/${state.patientId}'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );
@@ -719,7 +719,7 @@ class IpdBillNotifier extends StateNotifier<IpdBillState> {
       };
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/storeIpdBill'),
+        Uri.parse('$KVM_URL/reception/storeIpdBill'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );
@@ -775,7 +775,7 @@ class IpdBillNotifier extends StateNotifier<IpdBillState> {
       };
 
       final response = await http.post(
-        Uri.parse('${KVM_URL}/reception/generateOpdReceipt'),
+        Uri.parse('$KVM_URL/reception/generateOpdReceipt'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestBody),
       );
@@ -993,7 +993,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
             'Medical Charges',
             trailing: Text(
               'Active: ${state.charges.where((c) => c.isActive).length}/${state.charges.length} + ${state.customCharges.where((c) => c.description.isNotEmpty && c.rate > 0).length} custom',
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontSize: 14,
               ),
@@ -1007,9 +1007,9 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                   // Header
                   Container(
                     padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: HospitalTheme.surfaceLight,
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(12),
                         topRight: Radius.circular(12),
                       ),
@@ -1077,11 +1077,11 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                                       BorderSide(color: HospitalTheme.border),
                                 ),
                               ),
-                              child: Row(
+                              child: const Row(
                                 children: [
                                   Icon(Icons.add_circle,
                                       color: HospitalTheme.info, size: 16),
-                                  const SizedBox(width: 8),
+                                  SizedBox(width: 8),
                                   Text(
                                     'Custom Charges',
                                     style: TextStyle(
@@ -1119,7 +1119,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                                 style: OutlinedButton.styleFrom(
                                   foregroundColor: HospitalTheme.primary,
                                   side:
-                                      BorderSide(color: HospitalTheme.primary),
+                                      const BorderSide(color: HospitalTheme.primary),
                                 ),
                               ),
                             ),
@@ -1333,7 +1333,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
           SizedBox(
             width: 40,
             child: IconButton(
-              icon: Icon(Icons.delete, color: HospitalTheme.error, size: 18),
+              icon: const Icon(Icons.delete, color: HospitalTheme.error, size: 18),
               onPressed: () => _removeCustomCharge(index),
               tooltip: 'Remove custom charge',
             ),
@@ -1369,15 +1369,15 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
               const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
-            borderSide: BorderSide(color: HospitalTheme.border),
+            borderSide: const BorderSide(color: HospitalTheme.border),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
-            borderSide: BorderSide(color: HospitalTheme.border),
+            borderSide: const BorderSide(color: HospitalTheme.border),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
-            borderSide: BorderSide(color: HospitalTheme.primary),
+            borderSide: const BorderSide(color: HospitalTheme.primary),
           ),
         ),
         onChanged: (text) {
@@ -1511,7 +1511,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: HospitalTheme.info.withOpacity(0.3)),
             ),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -1522,7 +1522,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                     fontSize: 12,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   'Ctrl+P: Preview\nCtrl+S: Generate Bill\nCtrl+R: Generate Receipt\nCtrl+F: Store Final Bill\nF5: Reset',
                   style: TextStyle(
@@ -1545,13 +1545,13 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.error_outline,
+                  const Icon(Icons.error_outline,
                       color: HospitalTheme.error, size: 16),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       state.error!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.error,
                         fontSize: 12,
                       ),
@@ -1560,7 +1560,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                   IconButton(
                     onPressed: () => notifier.clearError(),
                     icon:
-                        Icon(Icons.close, size: 16, color: HospitalTheme.error),
+                        const Icon(Icons.close, size: 16, color: HospitalTheme.error),
                   ),
                 ],
               ),
@@ -1666,14 +1666,14 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.receipt_long,
+                                  const Icon(Icons.receipt_long,
                                       color: HospitalTheme.primary, size: 28),
                                   const SizedBox(width: 12),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
+                                      const Text(
                                         'IPD Discharge Bill',
                                         style: TextStyle(
                                           fontSize: 20,
@@ -1683,7 +1683,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                                       ),
                                       Text(
                                         'Patient ID: ${state.patientId}',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: HospitalTheme.textMedium,
                                           fontSize: 14,
                                         ),
@@ -1693,7 +1693,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                                   const Spacer(),
                                   Text(
                                     'Date: ${DateTime.now().toString().split(' ')[0]}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: HospitalTheme.textMedium,
                                       fontSize: 12,
                                     ),
@@ -1711,7 +1711,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   'Medical Charges',
                                   style: TextStyle(
                                     fontSize: 16,
@@ -1826,7 +1826,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                                                 flex: 3,
                                                 child: Row(
                                                   children: [
-                                                    Icon(Icons.star,
+                                                    const Icon(Icons.star,
                                                         color: HospitalTheme
                                                             .success,
                                                         size: 16),
@@ -1834,7 +1834,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                                                     Expanded(
                                                       child: Text(
                                                           charge.description,
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontSize: 14,
                                                               color:
                                                                   HospitalTheme
@@ -1866,7 +1866,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                                                 child: Text(
                                                   '₹${charge.total.toStringAsFixed(2)}',
                                                   textAlign: TextAlign.right,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w600,
@@ -1901,7 +1901,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Bill Summary',
                               style: TextStyle(
                                 fontSize: 16,
@@ -1928,7 +1928,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Charges Summary',
                               style: TextStyle(
                                 fontSize: 16,
@@ -1940,7 +1940,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Regular Items:',
+                                const Text('Regular Items:',
                                     style: TextStyle(
                                         color: HospitalTheme.textMedium)),
                                 Text('${activeCharges.length}',
@@ -1952,11 +1952,11 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Custom Items:',
+                                const Text('Custom Items:',
                                     style: TextStyle(
                                         color: HospitalTheme.textMedium)),
                                 Text('${validCustomCharges.length}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         color: HospitalTheme.success)),
                               ],
@@ -1965,7 +1965,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Total Services:',
+                                const Text('Total Services:',
                                     style: TextStyle(
                                         color: HospitalTheme.textMedium)),
                                 Text(
@@ -1988,13 +1988,13 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                           ),
                           child: Row(
                             children: [
-                              Icon(Icons.error_outline,
+                              const Icon(Icons.error_outline,
                                   color: HospitalTheme.error, size: 16),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
                                   state.error!,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: HospitalTheme.error,
                                     fontSize: 12,
                                   ),
@@ -2002,7 +2002,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                               ),
                               IconButton(
                                 onPressed: () => notifier.clearError(),
-                                icon: Icon(Icons.close,
+                                icon: const Icon(Icons.close,
                                     size: 16, color: HospitalTheme.error),
                               ),
                             ],
@@ -2058,9 +2058,9 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.check_circle, color: HospitalTheme.success, size: 28),
+              const Icon(Icons.check_circle, color: HospitalTheme.success, size: 28),
               const SizedBox(width: 12),
-              Text(
+              const Text(
                 'Bill Generated Successfully',
                 style: TextStyle(
                   fontSize: 24,
@@ -2092,14 +2092,14 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.receipt_long,
+                      const Icon(Icons.receipt_long,
                           color: HospitalTheme.success, size: 32),
                       const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Bill Generated',
                               style: TextStyle(
                                 fontSize: 20,
@@ -2110,14 +2110,14 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                             const SizedBox(height: 4),
                             Text(
                               'File: ${bill.fileName}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: HospitalTheme.textMedium,
                                 fontSize: 12,
                               ),
                             ),
                             Text(
                               'Generated: ${bill.generatedAt.toString().split('.')[0]}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: HospitalTheme.textMedium,
                                 fontSize: 12,
                               ),
@@ -2135,7 +2135,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                         ),
                         child: Text(
                           '${(bill.pdfSize / 1024).toStringAsFixed(1)} KB',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: HospitalTheme.info,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -2189,11 +2189,11 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                         ),
                         child: Column(
                           children: [
-                            Row(
+                            const Row(
                               children: [
                                 Icon(Icons.cloud_download,
                                     color: HospitalTheme.primary),
-                                const SizedBox(width: 12),
+                                SizedBox(width: 12),
                                 Text(
                                   'Download Bill',
                                   style: TextStyle(
@@ -2323,7 +2323,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Amount Due',
                       style: TextStyle(
                         fontSize: 16,
@@ -2333,7 +2333,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                     ),
                     Text(
                       '₹${bill.billSummary.finalAmount.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: HospitalTheme.success,
@@ -2359,11 +2359,11 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.check_circle, color: HospitalTheme.success),
-                  const SizedBox(width: 8),
-                  const Text(
+                  SizedBox(width: 8),
+                  Text(
                     'Bill Generated Successfully!',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -2422,11 +2422,11 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.save, color: HospitalTheme.primary),
-                  const SizedBox(width: 8),
-                  const Text(
+                  SizedBox(width: 8),
+                  Text(
                     'Store Bill in Database',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -2450,14 +2450,14 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                     color: HospitalTheme.surfaceLight,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Text(
                         'Storing bill in database, please wait...',
                         style: TextStyle(
@@ -2494,7 +2494,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
+              const Text(
                 'Note: Once stored, the bill cannot be modified.',
                 style: TextStyle(
                   color: HospitalTheme.warning,
@@ -2519,11 +2519,11 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.check_circle, color: HospitalTheme.success),
-                  const SizedBox(width: 8),
-                  const Expanded(
+                  SizedBox(width: 8),
+                  Expanded(
                     child: Text(
                       'Bill Stored in Database!',
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -2566,11 +2566,11 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                   color: HospitalTheme.info.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(Icons.info, color: HospitalTheme.info, size: 16),
-                    const SizedBox(width: 8),
-                    const Expanded(
+                    SizedBox(width: 8),
+                    Expanded(
                       child: Text(
                         'Bill has been permanently stored in the database. You can now generate receipt for payment processing.',
                         style: TextStyle(fontSize: 12),
@@ -2656,7 +2656,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  Text(
+                  const Text(
                     'Balance: ',
                     style: TextStyle(
                       color: HospitalTheme.textMedium,
@@ -2685,14 +2685,14 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                     color: HospitalTheme.surfaceLight,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Text(
                         'Generating receipt, please wait...',
                         style: TextStyle(
@@ -2745,11 +2745,11 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.check_circle, color: HospitalTheme.success),
-                  const SizedBox(width: 8),
-                  const Expanded(
+                  SizedBox(width: 8),
+                  Expanded(
                     child: Text(
                       'Receipt Generated Successfully!',
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -2760,7 +2760,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
               const SizedBox(height: 16),
               Text(
                 state.generatedReceipt!.message,
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textMedium,
                   fontSize: 14,
                 ),
@@ -2857,7 +2857,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textMedium,
               fontSize: 14,
             ),
@@ -2880,7 +2880,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
       children: [
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: HospitalTheme.textDark,
@@ -2894,7 +2894,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                   Container(
                     width: 4,
                     height: 4,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: HospitalTheme.primary,
                       shape: BoxShape.circle,
                     ),
@@ -2902,7 +2902,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
                   const SizedBox(width: 8),
                   Text(
                     item,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.textMedium,
                       fontSize: 14,
                     ),
@@ -2928,7 +2928,7 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        icon: Icon(
+        icon: const Icon(
           Icons.check_circle,
           color: HospitalTheme.success,
           size: 48,
@@ -3012,8 +3012,8 @@ class _GenerateIpdBillScreenState extends ConsumerState<GenerateIpdBillScreen> {
 
     if (state.receiptAmount <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Please enter a valid billing amount'),
+        const SnackBar(
+          content: Text('Please enter a valid billing amount'),
           backgroundColor: HospitalTheme.warning,
         ),
       );

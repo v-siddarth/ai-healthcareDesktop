@@ -3,6 +3,8 @@ import 'package:doctordesktop/Lab/LabScreen.dart';
 import 'package:flutter/material.dart';
 
 class LabAuthDialog extends StatefulWidget {
+  const LabAuthDialog({super.key});
+
   @override
   _LabAuthDialogState createState() => _LabAuthDialogState();
 }
@@ -28,11 +30,11 @@ class _LabAuthDialogState extends State<LabAuthDialog> {
       Navigator.pop(context); // Close the dialog box
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LabPatientsScreen()),
+        MaterialPageRoute(builder: (context) => const LabPatientsScreen()),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Invalid User ID or Password'),
           backgroundColor: Colors.red,
         ),
@@ -43,18 +45,18 @@ class _LabAuthDialogState extends State<LabAuthDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Lab Login'),
+      title: const Text('Lab Login'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             controller: _userIdController,
-            decoration: InputDecoration(labelText: 'User ID'),
+            decoration: const InputDecoration(labelText: 'User ID'),
           ),
           TextField(
             controller: _passwordController,
             obscureText: true,
-            decoration: InputDecoration(labelText: 'Password'),
+            decoration: const InputDecoration(labelText: 'Password'),
           ),
         ],
       ),
@@ -63,17 +65,17 @@ class _LabAuthDialogState extends State<LabAuthDialog> {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         TextButton(
           onPressed: () {
             // _authenticate(context);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LabDashBoardScreen()),
+              MaterialPageRoute(builder: (context) => const LabDashBoardScreen()),
             );
           },
-          child: Text('Login'),
+          child: const Text('Login'),
         ),
       ],
     );

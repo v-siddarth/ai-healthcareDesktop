@@ -393,7 +393,7 @@ class DepositsNotifier extends StateNotifier<AsyncValue<List<DepositRecord>>> {
     try {
       state = const AsyncValue.loading();
       final response = await http.get(
-        Uri.parse('${KVM_URL}/reception/getAllDeposits'),
+        Uri.parse('$KVM_URL/reception/getAllDeposits'),
         headers: {'Content-Type': 'application/json'},
       );
 
@@ -425,7 +425,7 @@ class DepositSummaryNotifier extends StateNotifier<AsyncValue<DepositSummary>> {
     try {
       state = const AsyncValue.loading();
       final response = await http.get(
-        Uri.parse('${KVM_URL}/reception/getDepositSummaryDashboard'),
+        Uri.parse('$KVM_URL/reception/getDepositSummaryDashboard'),
         headers: {'Content-Type': 'application/json'},
       );
 
@@ -752,15 +752,15 @@ class _DepositsTrackingScreenState
                     labelText: 'Payment Method',
                     prefixIcon: Icon(Icons.payment),
                   ),
-                  items: [
-                    const DropdownMenuItem(
+                  items: const [
+                    DropdownMenuItem(
                         value: null, child: Text('All Methods')),
-                    const DropdownMenuItem(value: 'Cash', child: Text('Cash')),
-                    const DropdownMenuItem(value: 'Card', child: Text('Card')),
-                    const DropdownMenuItem(value: 'UPI', child: Text('UPI')),
-                    const DropdownMenuItem(
+                    DropdownMenuItem(value: 'Cash', child: Text('Cash')),
+                    DropdownMenuItem(value: 'Card', child: Text('Card')),
+                    DropdownMenuItem(value: 'UPI', child: Text('UPI')),
+                    DropdownMenuItem(
                         value: 'Cheque', child: Text('Cheque')),
-                    const DropdownMenuItem(
+                    DropdownMenuItem(
                         value: 'Bank Transfer', child: Text('Bank Transfer')),
                   ],
                   onChanged: (value) {
@@ -865,13 +865,13 @@ class _DepositsTrackingScreenState
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    items: [
-                      const DropdownMenuItem(value: null, child: Text('All')),
-                      const DropdownMenuItem(
+                    items: const [
+                      DropdownMenuItem(value: null, child: Text('All')),
+                      DropdownMenuItem(
                           value: 'Cash', child: Text('Cash')),
-                      const DropdownMenuItem(
+                      DropdownMenuItem(
                           value: 'Card', child: Text('Card')),
-                      const DropdownMenuItem(value: 'UPI', child: Text('UPI')),
+                      DropdownMenuItem(value: 'UPI', child: Text('UPI')),
                     ],
                     onChanged: (value) {
                       ref
@@ -977,9 +977,9 @@ class _DepositsTrackingScreenState
           // Table Header
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
-              borderRadius: const BorderRadius.only(
+              borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
@@ -1028,7 +1028,7 @@ class _DepositsTrackingScreenState
                   child: DataTable(
                     showCheckboxColumn: false,
                     headingRowColor:
-                        MaterialStateProperty.all(HospitalTheme.surfaceLight),
+                        WidgetStateProperty.all(HospitalTheme.surfaceLight),
                     dataRowMinHeight: 60,
                     dataRowMaxHeight: 80,
                     columns: const [
@@ -1079,9 +1079,9 @@ class _DepositsTrackingScreenState
 
     return DataRow(
       selected: isSelected,
-      color: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.selected)) {
+      color: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
           return HospitalTheme.primary.withOpacity(0.1);
         }
         return null;
@@ -1105,7 +1105,7 @@ class _DepositsTrackingScreenState
             ),
             child: Text(
               deposit.receiptId,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'monospace',
                 color: HospitalTheme.primary,
                 fontWeight: FontWeight.bold,
@@ -1124,7 +1124,7 @@ class _DepositsTrackingScreenState
               ),
               Text(
                 'ID: ${deposit.patientId}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   color: HospitalTheme.textMedium,
                 ),
@@ -1135,7 +1135,7 @@ class _DepositsTrackingScreenState
         DataCell(
           Text(
             '₹${NumberFormat('#,##,##0.00').format(deposit.depositDetails.depositAmount)}',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: HospitalTheme.success,
               fontSize: 16,
@@ -1170,7 +1170,7 @@ class _DepositsTrackingScreenState
               Text(
                 DateFormat('hh:mm a')
                     .format(deposit.receiptDetails.generatedAt),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   color: HospitalTheme.textMedium,
                 ),
@@ -1277,7 +1277,7 @@ class _DepositsTrackingScreenState
         }
 
         return Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             border: Border(
               left: BorderSide(color: HospitalTheme.border, width: 1),
             ),
@@ -1598,7 +1598,7 @@ class _DepositsTrackingScreenState
             width: 120,
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontWeight: FontWeight.w500,
               ),

@@ -38,13 +38,13 @@ import 'package:doctordesktop/Doctor/da.dart';
 import 'package:doctordesktop/Doctor/doctornote.dart';
 import 'package:doctordesktop/Doctor/sub.dart';
 import 'package:doctordesktop/Nurse/EmergencyMedicationScreen.dart';
-import 'package:doctordesktop/StateProvider.dart';
+import 'package:doctordesktop/providers/medical_state_provider.dart';
 import 'package:doctordesktop/authProvider/auth_provider.dart';
 import 'package:doctordesktop/constants/Assets.dart';
 import 'package:doctordesktop/constants/HospitalTheme.dart';
 import 'package:doctordesktop/constants/Methods.dart';
 import 'package:doctordesktop/constants/colors.dart';
-import 'package:doctordesktop/karnudstelecomservice.dart';
+import 'package:doctordesktop/services/connectivity_status_service.dart';
 import 'package:doctordesktop/repositories/doctor_repository.dart';
 import 'package:doctordesktop/constants/Url.dart';
 import 'package:doctordesktop/model/getNewPatientModel.dart';
@@ -89,7 +89,7 @@ BoxDecoration _boxDecoration() {
   return BoxDecoration(
     color: Colors.white,
     borderRadius: BorderRadius.circular(12),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         color: Colors.black12,
         blurRadius: 6,
@@ -115,8 +115,7 @@ class SubmenuItem {
 class PatientDetailScreen4 extends StatefulWidget {
   final Patient1 patient;
 
-  const PatientDetailScreen4({Key? key, required this.patient})
-      : super(key: key);
+  const PatientDetailScreen4({super.key, required this.patient});
 
   @override
   _PatientDetailScreen2State createState() => _PatientDetailScreen2State();
@@ -187,7 +186,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
   Future<void> _addConsultant(
       String patientId, String admissionId, String consultant) async {
-    final url = Uri.parse('${VERCEL_URL}/doctors/addConsultant');
+    final url = Uri.parse('$VERCEL_URL/doctors/addConsultant');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('auth_token');
 
@@ -210,7 +209,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
       if (response.statusCode == 200) {
         // Prescription added successfully
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Prescription added successfully!')),
+          const SnackBar(content: Text('Prescription added successfully!')),
         );
 
         // Refresh the prescriptions
@@ -357,7 +356,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         errorMessage = e;
       }
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Patient already admitted '),
           backgroundColor: Colors.red,
         ),
@@ -366,7 +365,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
   }
 
   void _openAddSymptomsByDoctorDialog(String admissionId) {
-    final TextEditingController _symptomsController = TextEditingController();
+    final TextEditingController symptomsController = TextEditingController();
 
     showDialog(
       context: context,
@@ -374,7 +373,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         return AlertDialog(
           title: const Text('Add Symptoms by Doctor'),
           content: TextField(
-            controller: _symptomsController,
+            controller: symptomsController,
             decoration: const InputDecoration(
               labelText: 'Enter symptom',
               border: OutlineInputBorder(),
@@ -387,7 +386,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             ),
             ElevatedButton(
               onPressed: () async {
-                final newSymptom = _symptomsController.text.trim();
+                final newSymptom = symptomsController.text.trim();
                 if (newSymptom.isNotEmpty) {
                   // Get current date
                   final String currentDateTime =
@@ -883,7 +882,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DoctorHomeScreen(),
+                      builder: (context) => const DoctorHomeScreen(),
                     ),
                   );
                   return null;
@@ -905,11 +904,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   children: [
                     // ENHANCED MODERN SIDEBAR
                     AnimatedContainer(
-                      duration: Duration(milliseconds: 400),
+                      duration: const Duration(milliseconds: 400),
                       curve: Curves.easeInOutCubic,
                       width: _isSidebarCollapsed ? 80 : 320,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
@@ -924,18 +923,18 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             color: Colors.black.withOpacity(0.3),
                             blurRadius: 25,
                             spreadRadius: 5,
-                            offset: Offset(5, 0),
+                            offset: const Offset(5, 0),
                           ),
                           BoxShadow(
                             color: HospitalTheme.primary.withOpacity(0.1),
                             blurRadius: 15,
                             spreadRadius: 2,
-                            offset: Offset(3, 0),
+                            offset: const Offset(3, 0),
                           ),
                         ],
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(24),
                           bottomRight: Radius.circular(24),
                         ),
@@ -998,11 +997,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
-                                                          AssignedPatientsScreen(),
+                                                          const AssignedPatientsScreen(),
                                                     ),
                                                   );
                                                 },
-                                                child: Row(
+                                                child: const Row(
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: [
@@ -1028,7 +1027,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                             ),
 
                                           if (!_isSidebarCollapsed)
-                                            SizedBox(width: 12),
+                                            const SizedBox(width: 12),
 
                                           // Modern Toggle Button
                                           Container(
@@ -1071,9 +1070,9 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                   });
                                                 },
                                                 child: Padding(
-                                                  padding: EdgeInsets.all(12),
+                                                  padding: const EdgeInsets.all(12),
                                                   child: AnimatedRotation(
-                                                    duration: Duration(
+                                                    duration: const Duration(
                                                         milliseconds: 300),
                                                     turns: _isSidebarCollapsed
                                                         ? 0.5
@@ -1094,7 +1093,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                         ],
                                       ),
 
-                                      SizedBox(height: 24),
+                                      const SizedBox(height: 24),
 
                                       // Patient Avatar and Info Section
                                       Row(
@@ -1120,7 +1119,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                 ),
                                               ],
                                             ),
-                                            padding: EdgeInsets.all(3),
+                                            padding: const EdgeInsets.all(3),
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
@@ -1137,14 +1136,14 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                 backgroundColor: Colors.white
                                                     .withOpacity(0.1),
                                                 child: AnimatedScale(
-                                                  duration: Duration(
+                                                  duration: const Duration(
                                                       milliseconds: 300),
                                                   scale: _isSidebarCollapsed
                                                       ? 0.8
                                                       : 1.0,
                                                   child: ClipOval(
                                                     child: Image.asset(
-                                                      '${AppImages.logo}',
+                                                      AppImages.logo,
                                                       width: _isSidebarCollapsed
                                                           ? 40
                                                           : 60,
@@ -1162,14 +1161,14 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
                                           // Patient Details (only when expanded)
                                           if (!_isSidebarCollapsed) ...[
-                                            SizedBox(width: 16),
+                                            const SizedBox(width: 16),
                                             Expanded(
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   AnimatedOpacity(
-                                                    duration: Duration(
+                                                    duration: const Duration(
                                                         milliseconds: 300),
                                                     opacity: _isSidebarCollapsed
                                                         ? 0
@@ -1185,7 +1184,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                         shadows: [
                                                           Shadow(
                                                             offset:
-                                                                Offset(0, 1),
+                                                                const Offset(0, 1),
                                                             blurRadius: 3,
                                                             color: Colors.black
                                                                 .withOpacity(
@@ -1197,16 +1196,16 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                           TextOverflow.ellipsis,
                                                     ),
                                                   ),
-                                                  SizedBox(height: 6),
+                                                  const SizedBox(height: 6),
                                                   AnimatedOpacity(
-                                                    duration: Duration(
+                                                    duration: const Duration(
                                                         milliseconds: 300),
                                                     opacity: _isSidebarCollapsed
                                                         ? 0
                                                         : 1,
                                                     child: Container(
                                                       padding:
-                                                          EdgeInsets.symmetric(
+                                                          const EdgeInsets.symmetric(
                                                         horizontal: 8,
                                                         vertical: 3,
                                                       ),
@@ -1260,7 +1259,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                           index: 0,
                                           icon: Icons.dashboard_rounded,
                                           label: 'Overview',
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               HospitalTheme.primary,
                                               HospitalTheme.primaryLight,
@@ -1268,7 +1267,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                           ),
                                         ),
 
-                                        SizedBox(height: 8),
+                                        const SizedBox(height: 8),
 
                                         // Monitoring Section
                                         _buildEnhancedNavItem(
@@ -1276,7 +1275,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                           icon: Icons.monitor_heart_rounded,
                                           label: 'Monitoring',
                                           hasSubmenu: !_isSidebarCollapsed,
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
                                               HospitalTheme.medical,
                                               HospitalTheme.accent,
@@ -1350,7 +1349,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                           ],
                                         ),
 
-                                        SizedBox(height: 8),
+                                        const SizedBox(height: 8),
 
                                         // Treatment
                                         _buildEnhancedNavItem(
@@ -1451,7 +1450,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                         // Divider with glow
                                         Container(
                                           height: 1,
-                                          margin: EdgeInsets.symmetric(
+                                          margin: const EdgeInsets.symmetric(
                                               horizontal: 16),
                                           decoration: BoxDecoration(
                                             gradient: LinearGradient(
@@ -1464,7 +1463,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                           ),
                                         ),
 
-                                        SizedBox(height: 16),
+                                        const SizedBox(height: 16),
 
                                         // Additional Actions
                                         _buildEnhancedNavItem(
@@ -1496,7 +1495,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                           },
                                         ),
 
-                                        SizedBox(height: 8),
+                                        const SizedBox(height: 8),
 
                                         _buildEnhancedNavItem(
                                           index: 10,
@@ -1513,7 +1512,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    AssignedPatientsScreen(),
+                                                    const AssignedPatientsScreen(),
                                               ),
                                             );
                                           },
@@ -1554,7 +1553,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                 // Enhanced Footer with System Status
                                 if (!_isSidebarCollapsed)
                                   Container(
-                                    padding: EdgeInsets.all(20),
+                                    padding: const EdgeInsets.all(20),
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
                                         begin: Alignment.topLeft,
@@ -1584,7 +1583,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                   _showSystemStatusDialog(
                                                       context, ref),
                                               child: Container(
-                                                padding: EdgeInsets.symmetric(
+                                                padding: const EdgeInsets.symmetric(
                                                     horizontal: 12,
                                                     vertical: 8),
                                                 decoration: BoxDecoration(
@@ -1639,7 +1638,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                         ],
                                                       ),
                                                     ),
-                                                    SizedBox(width: 12),
+                                                    const SizedBox(width: 12),
                                                     Expanded(
                                                       child: Column(
                                                         crossAxisAlignment:
@@ -1656,7 +1655,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                                         .isConnected
                                                                     ? 'Network Issues'
                                                                     : 'System Offline',
-                                                            style: TextStyle(
+                                                            style: const TextStyle(
                                                               color:
                                                                   Colors.white,
                                                               fontSize: 12,
@@ -1689,7 +1688,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                               ),
                                             ),
 
-                                            SizedBox(height: 8),
+                                            const SizedBox(height: 8),
 
                                             // Quick Actions Row
                                             Row(
@@ -1737,7 +1736,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     // Main Content Area
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20),
@@ -1756,7 +1755,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                     color: Colors.grey.withOpacity(0.2),
                                     blurRadius: 15,
                                     spreadRadius: 2,
-                                    offset: Offset(0, 4),
+                                    offset: const Offset(0, 4),
                                   )
                                 ],
                                 borderRadius: BorderRadius.circular(12),
@@ -1772,22 +1771,22 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                         // Optional Patient Avatar
                                         CircleAvatar(
                                           radius: 20,
-                                          backgroundColor: Color(0xFF1E2843)
+                                          backgroundColor: const Color(0xFF1E2843)
                                               .withOpacity(0.1),
                                           child: Text(
                                             widget.patient.name
                                                 .substring(0, 1)
                                                 .toUpperCase(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Color(0xFF1E2843),
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
-                                        SizedBox(width: 15),
+                                        const SizedBox(width: 15),
                                         Text(
                                           '${widget.patient.name} - Patient Details',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 22,
                                             fontWeight: FontWeight.w600,
                                             color: Color(0xFF1E2843),
@@ -1797,31 +1796,31 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                       ],
                                     ),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
 
                                   // Advanced Action Buttons with Hover Effects
                                   Row(
                                     children: [
-                                      SizedBox(width: 10),
-                                      SizedBox(width: 20),
+                                      const SizedBox(width: 10),
+                                      const SizedBox(width: 20),
 
                                       // User Profile Section
                                       Row(
                                         children: [
-                                          CircleAvatar(
+                                          const CircleAvatar(
                                             radius: 18,
                                             backgroundImage: NetworkImage(
                                               'https://t4.ftcdn.net/jpg/06/44/40/73/360_F_644407316_3aGuf15OnNGTbCRxRB7rWa7lIkfLqE4L.jpg',
                                             ),
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
+                                              const Text(
                                                 'DocNex',
                                                 style: TextStyle(
                                                   fontSize: 14,
@@ -1838,7 +1837,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                               ),
                                             ],
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           // Dropdown for user actions
                                           PopupMenuButton<String>(
                                             icon: Icon(
@@ -1847,7 +1846,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                             ),
                                             itemBuilder:
                                                 (BuildContext context) => [
-                                              PopupMenuItem(
+                                              const PopupMenuItem(
                                                 value: 'profile',
                                                 child: Text('Profile'),
                                               ),
@@ -1859,7 +1858,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            DoctorProfileScreen(),
+                                                            const DoctorProfileScreen(),
                                                       ));
                                                   break;
                                               }
@@ -1867,7 +1866,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                           ),
                                         ],
                                       ),
-                                      SizedBox(width: 20),
+                                      const SizedBox(width: 20),
                                     ],
                                   ),
                                 ],
@@ -2131,7 +2130,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ChatListScreen(),
+                              builder: (context) => const ChatListScreen(),
                             ),
                           );
                         },
@@ -2235,7 +2234,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.1),
             borderRadius: BorderRadius.circular(6),
@@ -2263,11 +2262,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Container(
           width: 450,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
+              const Row(
                 children: [
                   Icon(Icons.computer, color: HospitalTheme.primary, size: 24),
                   SizedBox(width: 12),
@@ -2281,11 +2280,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Connection Status Grid
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade50,
                   borderRadius: BorderRadius.circular(8),
@@ -2322,7 +2321,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                 ),
               ),
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // Quick Stats
               Row(
@@ -2336,19 +2335,19 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                 ],
               ),
 
-              SizedBox(height: 16),
-              Divider(),
-              SizedBox(height: 8),
+              const SizedBox(height: 16),
+              const Divider(),
+              const SizedBox(height: 8),
 
               Text(
                 'Last checked: ${DateFormat('HH:mm:ss').format(internetStatus.lastChecked)}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textMedium,
                   fontSize: 12,
                 ),
               ),
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -2359,22 +2358,22 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           .read(internetStatusProvider.notifier)
                           .forceQuickCheck();
                     },
-                    icon: Icon(Icons.network_check),
-                    label: Text('Quick Check'),
+                    icon: const Icon(Icons.network_check),
+                    label: const Text('Quick Check'),
                   ),
                   TextButton.icon(
                     onPressed: () {
                       ref.read(internetStatusProvider.notifier).forceCheck();
                     },
-                    icon: Icon(Icons.refresh),
-                    label: Text('Full Check'),
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Full Check'),
                   ),
                   ElevatedButton(
                     onPressed: () => Navigator.pop(context),
-                    child: Text('Close'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: HospitalTheme.primary,
                     ),
+                    child: Text('Close'),
                   ),
                 ],
               ),
@@ -2392,7 +2391,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
     required IconData icon,
   }) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
           Icon(
@@ -2400,7 +2399,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             size: 20,
             color: status ? HospitalTheme.success : HospitalTheme.error,
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Container(
             width: 12,
             height: 12,
@@ -2409,16 +2408,16 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               color: status ? HospitalTheme.success : HospitalTheme.error,
             ),
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Text(
               label,
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: const TextStyle(fontWeight: FontWeight.w500),
             ),
           ),
           Text(
             details,
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textMedium,
               fontSize: 12,
             ),
@@ -2433,7 +2432,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
       children: [
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: HospitalTheme.primary,
@@ -2441,7 +2440,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         ),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12,
             color: HospitalTheme.textMedium,
           ),
@@ -2452,7 +2451,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
   Widget _buildStatusRow(String label, bool status, String details) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
           Container(
@@ -2463,16 +2462,16 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               color: status ? HospitalTheme.success : HospitalTheme.error,
             ),
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Text(
               label,
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: const TextStyle(fontWeight: FontWeight.w500),
             ),
           ),
           Text(
             details,
-            style: TextStyle(
+            style: const TextStyle(
               color: HospitalTheme.textMedium,
               fontSize: 12,
             ),
@@ -2489,11 +2488,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Container(
           width: 500,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'Keyboard Shortcuts',
                 style: TextStyle(
                   fontSize: 20,
@@ -2501,20 +2500,20 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   color: HospitalTheme.primary,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildShortcutRow('Ctrl + I', 'Check Internet Status'),
               _buildShortcutRow('Ctrl + T', 'System Status'),
               _buildShortcutRow('Ctrl + D', 'Add Diagnosis'),
               _buildShortcutRow('Ctrl + P', 'Add Prescription'),
               _buildShortcutRow('Ctrl + V', 'Add Vitals'),
               _buildShortcutRow('Shift + H', 'Go to Home'),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Close'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: HospitalTheme.primary,
                 ),
+                child: Text('Close'),
               ),
             ],
           ),
@@ -2525,24 +2524,24 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
   Widget _buildShortcutRow(String shortcut, String description) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(4),
             ),
             child: Text(
               shortcut,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'monospace',
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(child: Text(description)),
         ],
       ),
@@ -2573,7 +2572,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
       children: [
         // Main Navigation Item
         AnimatedContainer(
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOutCubic,
           margin: EdgeInsets.symmetric(
             horizontal: _isSidebarCollapsed ? 0 : 8,
@@ -2582,7 +2581,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           decoration: BoxDecoration(
             gradient: isSelected || isSubmenuOpen
                 ? (gradient ??
-                    LinearGradient(
+                    const LinearGradient(
                       colors: [
                         HospitalTheme.primary,
                         HospitalTheme.primaryLight,
@@ -2597,7 +2596,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           .withOpacity(0.4),
                       blurRadius: 12,
                       spreadRadius: 2,
-                      offset: Offset(0, 4),
+                      offset: const Offset(0, 4),
                     ),
                   ]
                 : null,
@@ -2661,10 +2660,10 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
                     // Label and Trailing Icon (only when expanded)
                     if (!_isSidebarCollapsed) ...[
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: AnimatedOpacity(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           opacity: _isSidebarCollapsed ? 0 : 1,
                           child: Text(
                             label,
@@ -2678,7 +2677,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                               shadows: isSelected || isSubmenuOpen
                                   ? [
                                       Shadow(
-                                        offset: Offset(0, 1),
+                                        offset: const Offset(0, 1),
                                         blurRadius: 2,
                                         color: Colors.black.withOpacity(0.3),
                                       ),
@@ -2693,7 +2692,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       // Trailing Icon
                       if (hasSubmenu)
                         AnimatedRotation(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           turns: isSubmenuOpen ? 0.5 : 0,
                           child: Icon(
                             Icons.keyboard_arrow_down_rounded,
@@ -2731,9 +2730,9 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             !_isSidebarCollapsed &&
             submenuItems != null)
           AnimatedContainer(
-            duration: Duration(milliseconds: 400),
+            duration: const Duration(milliseconds: 400),
             curve: Curves.easeOutCubic,
-            margin: EdgeInsets.only(left: 24, right: 8, top: 8),
+            margin: const EdgeInsets.only(left: 24, right: 8, top: 8),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.03),
               borderRadius: BorderRadius.circular(12),
@@ -2745,7 +2744,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             child: Column(
               children: submenuItems.map((item) {
                 return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -2757,7 +2756,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       onTap: item.onTap,
                       child: Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                            const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                         child: Row(
                           children: [
                             Icon(
@@ -2765,7 +2764,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                               color: Colors.white.withOpacity(0.8),
                               size: 18,
                             ),
-                            SizedBox(width: 12),
+                            const SizedBox(width: 12),
                             Expanded(
                               child: Text(
                                 item.label,
@@ -2818,7 +2817,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           splashColor: Colors.white.withOpacity(0.1),
           onTap: onPressed,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: child,
           ),
         ),
@@ -2851,7 +2850,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         children: [
           // Main Nav Item
           AnimatedContainer(
-            duration: Duration(milliseconds: 400),
+            duration: const Duration(milliseconds: 400),
             curve: Curves.easeInOutQuint,
             margin: EdgeInsets.symmetric(
               horizontal: _isSidebarCollapsed ? 10 : 10,
@@ -2859,7 +2858,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             ),
             decoration: BoxDecoration(
               gradient: isSelected || isSubmenuOpen
-                  ? LinearGradient(
+                  ? const LinearGradient(
                       colors: [Colors.white, Colors.white],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -2881,7 +2880,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         color: Colors.white.withOpacity(0.1),
                         spreadRadius: 1,
                         blurRadius: 10,
-                        offset: Offset(0, 4),
+                        offset: const Offset(0, 4),
                       )
                     ]
                   : [],
@@ -2897,7 +2896,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
                   // Leading Icon
                   leading: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     padding: EdgeInsets.all(_isSidebarCollapsed ? 6 : 8),
                     decoration: BoxDecoration(
                       color: isSelected || isSubmenuOpen
@@ -2918,7 +2917,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   title: _isSidebarCollapsed
                       ? null
                       : AnimatedOpacity(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           opacity: _isSidebarCollapsed ? 0 : 1,
                           child: Text(
                             label,
@@ -2993,11 +2992,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   left: 0,
                   right: 0,
                   child: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     height: isSelected || isSubmenuOpen ? 5 : 0,
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.7),
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(15),
                         bottomRight: Radius.circular(15),
                       ),
@@ -3042,14 +3041,14 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               !_isSidebarCollapsed &&
               submenuItems != null)
             AnimatedContainer(
-              duration: Duration(milliseconds: 400),
+              duration: const Duration(milliseconds: 400),
               curve: Curves.easeOutQuad,
-              margin: EdgeInsets.only(left: 20, right: 10),
+              margin: const EdgeInsets.only(left: 20, right: 10),
               child: Column(
                 children: submenuItems
                     .map(
                       (item) => Container(
-                        margin: EdgeInsets.only(top: 4, bottom: 4),
+                        margin: const EdgeInsets.only(top: 4, bottom: 4),
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(12),
@@ -3064,7 +3063,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           ),
                           title: Text(
                             item.label,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 13,
                             ),
@@ -3149,7 +3148,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               borderRadius: HospitalTheme.radiusMedium,
             ),
             elevation: 8,
-            insetPadding: EdgeInsets.symmetric(horizontal: 40, vertical: 24),
+            insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
             child: Container(
               width: MediaQuery.of(context).size.width * 0.85,
               height: MediaQuery.of(context).size.height * 0.75,
@@ -3164,8 +3163,8 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   // Header with gradient background
                   Container(
                     padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
                         colors: [
                           HospitalTheme.primaryDark,
                           HospitalTheme.primary
@@ -3180,10 +3179,10 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.medication,
+                        const Icon(Icons.medication,
                             color: HospitalTheme.textOnPrimary, size: 24),
-                        SizedBox(width: 12),
-                        Expanded(
+                        const SizedBox(width: 12),
+                        const Expanded(
                           child: Text(
                             'Medicine Database',
                             style: TextStyle(
@@ -3194,7 +3193,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           ),
                         ),
                         IconButton(
-                          icon: Icon(Icons.close,
+                          icon: const Icon(Icons.close,
                               color: HospitalTheme.textOnPrimary),
                           onPressed: () => Navigator.of(context).pop(),
                           tooltip: 'Close',
@@ -3218,11 +3217,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                   decoration: InputDecoration(
                                     labelText: 'Search Medicines',
                                     hintText: 'Enter medicine name',
-                                    prefixIcon: Icon(Icons.search,
+                                    prefixIcon: const Icon(Icons.search,
                                         color: HospitalTheme.primary),
                                     suffixIcon: searchQuery.isNotEmpty
                                         ? IconButton(
-                                            icon: Icon(Icons.clear,
+                                            icon: const Icon(Icons.clear,
                                                 color: HospitalTheme.primary),
                                             onPressed: () {
                                               setDialogState(() {
@@ -3233,17 +3232,17 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                         : null,
                                     border: OutlineInputBorder(
                                       borderRadius: HospitalTheme.radiusSmall,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                           color: HospitalTheme.border),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: HospitalTheme.radiusSmall,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                           color: HospitalTheme.border),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: HospitalTheme.radiusSmall,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                           color: HospitalTheme.primary,
                                           width: 2),
                                     ),
@@ -3257,15 +3256,15 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                   },
                                 ),
                               ),
-                              SizedBox(width: 12),
+                              const SizedBox(width: 12),
                               // Button to manage medicines
                               ElevatedButton.icon(
-                                icon: Icon(Icons.add_box_outlined),
-                                label: Text("Add New"),
+                                icon: const Icon(Icons.add_box_outlined),
+                                label: const Text("Add New"),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: HospitalTheme.pharmacy,
                                   foregroundColor: HospitalTheme.textOnPrimary,
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 16, vertical: 15),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: HospitalTheme.radiusSmall,
@@ -3277,7 +3276,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          MedicineManagementScreen(),
+                                          const MedicineManagementScreen(),
                                     ),
                                   );
 
@@ -3289,7 +3288,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
                                   // Small delay to ensure data is refreshed
                                   await Future.delayed(
-                                      Duration(milliseconds: 300));
+                                      const Duration(milliseconds: 300));
 
                                   // Reopen the dialog with fresh data
                                   _showMedicineSelectionDialog();
@@ -3300,8 +3299,8 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
                           // Selection summary with badges and stats
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 16),
-                            padding: EdgeInsets.all(12),
+                            margin: const EdgeInsets.symmetric(vertical: 16),
+                            padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               color:
                                   HospitalTheme.surfaceLight.withOpacity(0.7),
@@ -3324,7 +3323,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                               : HospitalTheme.borderDark,
                                           outline: false,
                                         ),
-                                        SizedBox(width: 8),
+                                        const SizedBox(width: 8),
                                         if (isSearching)
                                           HospitalTheme.buildStatusBadge(
                                             '${filteredMedicines.length} Results',
@@ -3335,10 +3334,10 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                     ),
                                     if (selectedCount > 0)
                                       TextButton.icon(
-                                        icon: Icon(Icons.clear_all,
+                                        icon: const Icon(Icons.clear_all,
                                             size: 18,
                                             color: HospitalTheme.warning),
-                                        label: Text('Clear All',
+                                        label: const Text('Clear All',
                                             style: TextStyle(
                                                 color: HospitalTheme.warning)),
                                         onPressed: () {
@@ -3353,8 +3352,8 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
                                 // Selected medicines display as chips (only inside dialog)
                                 if (localSelectedMedicines.isNotEmpty) ...[
-                                  Divider(height: 16),
-                                  Text(
+                                  const Divider(height: 16),
+                                  const Text(
                                     'Recently Added Medicines:',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
@@ -3362,7 +3361,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                       fontSize: 13,
                                     ),
                                   ),
-                                  SizedBox(height: 8),
+                                  const SizedBox(height: 8),
                                   Wrap(
                                     spacing: 8,
                                     runSpacing: 8,
@@ -3372,7 +3371,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                         .map((med) => Chip(
                                               label: Text(
                                                 med,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: HospitalTheme
                                                       .textOnPrimary,
                                                   fontSize: 12,
@@ -3415,7 +3414,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                 border: Border.all(color: HospitalTheme.border),
                               ),
                               child: _isLoading
-                                  ? Center(
+                                  ? const Center(
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
@@ -3439,27 +3438,27 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Icon(
+                                              const Icon(
                                                 Icons.medication_outlined,
                                                 size: 48,
                                                 color: HospitalTheme.textLight,
                                               ),
-                                              SizedBox(height: 16),
+                                              const SizedBox(height: 16),
                                               Text(
                                                 searchQuery.isEmpty
                                                     ? 'No medicines available in database'
                                                     : 'No medicines matching "$searchQuery"',
                                                 textAlign: TextAlign.center,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color:
                                                       HospitalTheme.textMedium,
                                                   fontSize: 16,
                                                 ),
                                               ),
                                               if (searchQuery.isNotEmpty) ...[
-                                                SizedBox(height: 20),
+                                                const SizedBox(height: 20),
                                                 ElevatedButton.icon(
-                                                  icon: Icon(Icons.add),
+                                                  icon: const Icon(Icons.add),
                                                   label: Text(
                                                       'Add "$searchQuery" to Prescription'),
                                                   style:
@@ -3469,7 +3468,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                     foregroundColor:
                                                         Colors.white,
                                                     padding:
-                                                        EdgeInsets.symmetric(
+                                                        const EdgeInsets.symmetric(
                                                             horizontal: 20,
                                                             vertical: 12),
                                                   ),
@@ -3506,7 +3505,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                         SnackBar(
                                                           content: Text(
                                                               '$searchQuery added to prescription'),
-                                                          duration: Duration(
+                                                          duration: const Duration(
                                                               seconds: 1),
                                                         ),
                                                       );
@@ -3628,7 +3627,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                       SnackBar(
                                                         content: Text(
                                                             '${medicine.name} added to prescription'),
-                                                        duration: Duration(
+                                                        duration: const Duration(
                                                             seconds: 1),
                                                       ),
                                                     );
@@ -3666,7 +3665,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                       .symmetric(vertical: 2.0),
                                                   child: ListTile(
                                                     contentPadding:
-                                                        EdgeInsets.symmetric(
+                                                        const EdgeInsets.symmetric(
                                                             horizontal: 16,
                                                             vertical: 8),
                                                     leading: Container(
@@ -3706,14 +3705,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                       ),
                                                     ),
                                                     subtitle:
-                                                        medicine.comment !=
-                                                                    null &&
-                                                                medicine.comment
+                                                        medicine.comment
                                                                     .isNotEmpty
                                                             ? RichText(
                                                                 text: TextSpan(
                                                                   style:
-                                                                      TextStyle(
+                                                                      const TextStyle(
                                                                     color: HospitalTheme
                                                                         .textMedium,
                                                                     fontSize:
@@ -3736,7 +3733,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                                       text:
                                                                           '${medicine.morning}-${medicine.afternoon}-${medicine.night}',
                                                                     ),
-                                                                    TextSpan(
+                                                                    const TextSpan(
                                                                       text:
                                                                           ' • ',
                                                                     ),
@@ -3744,7 +3741,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                                       text: medicine
                                                                           .comment,
                                                                       style:
-                                                                          TextStyle(
+                                                                          const TextStyle(
                                                                         fontStyle:
                                                                             FontStyle.italic,
                                                                       ),
@@ -3755,7 +3752,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                             : RichText(
                                                                 text: TextSpan(
                                                                   style:
-                                                                      TextStyle(
+                                                                      const TextStyle(
                                                                     color: HospitalTheme
                                                                         .textMedium,
                                                                     fontSize:
@@ -3856,7 +3853,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                                                   content: Text(
                                                                       '${medicine.name} added to prescription'),
                                                                   duration:
-                                                                      Duration(
+                                                                      const Duration(
                                                                           seconds:
                                                                               1),
                                                                 ),
@@ -3920,18 +3917,18 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 TextButton.icon(
-                                  icon: Icon(Icons.cancel_outlined),
-                                  label: Text('Cancel'),
+                                  icon: const Icon(Icons.cancel_outlined),
+                                  label: const Text('Cancel'),
                                   style: TextButton.styleFrom(
                                     foregroundColor: HospitalTheme.textMedium,
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         horizontal: 16, vertical: 12),
                                   ),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
                                 ),
-                                SizedBox(width: 12),
+                                const SizedBox(width: 12),
                                 HospitalTheme.buildGradientButton(
                                   label: 'Done',
                                   onPressed: () {
@@ -3961,14 +3958,14 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 // Helper method for displaying dosage pills in the selection dialog
   Widget _buildDosagePill(String label, String value) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: Color(0xFF1E2843).withOpacity(0.1),
+        color: const Color(0xFF1E2843).withOpacity(0.1),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
         '$label:$value',
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 12,
           color: Color(0xFF1E2843),
         ),
@@ -4058,19 +4055,19 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         keyboardType: keyboardType,
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(color: Color(0xFF005F9E)),
+          labelStyle: const TextStyle(color: Color(0xFF005F9E)),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Color(0xFF00B8D4)),
+            borderSide: const BorderSide(color: Color(0xFF00B8D4)),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: Color(0xFF005F9E), width: 2),
+            borderSide: const BorderSide(color: Color(0xFF005F9E), width: 2),
           ),
           suffixIcon: controller.text.isEmpty
               ? null
               : IconButton(
-                  icon: Icon(Icons.clear, color: Color(0xFF005F9E)),
+                  icon: const Icon(Icons.clear, color: Color(0xFF005F9E)),
                   onPressed: () {
                     controller.clear();
                     _fetchMedicineSuggestions(''); // Add this line
@@ -4123,7 +4120,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         return;
       }
       final response = await http.get(
-        Uri.parse('${KVM_URL}/doctors/getDoctorMedicines'),
+        Uri.parse('$KVM_URL/doctors/getDoctorMedicines'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -4152,7 +4149,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
     }
   }
 
-  List<Medicine> _medicines = [];
+  final List<Medicine> _medicines = [];
   String? _errorMessage;
 
 // Single column layout for narrower views
@@ -4162,7 +4159,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
       children: [
         // Selected Medicines Section
         Container(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.grey.shade50,
             borderRadius: BorderRadius.circular(10),
@@ -4171,7 +4168,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Selected Medicines',
                 style: TextStyle(
                   fontSize: 14,
@@ -4179,7 +4176,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   color: Color(0xFF1E2843),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
               // Selected medicines as chips
               selectedMedicines.isEmpty
@@ -4204,19 +4201,19 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           .map((medicine) => Chip(
                                 label: Text(
                                   medicine,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 12,
                                   ),
                                 ),
-                                backgroundColor: Color(0xFF1E2843),
+                                backgroundColor: const Color(0xFF1E2843),
                                 deleteIconColor: Colors.white,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
                                 visualDensity: VisualDensity.compact,
                                 labelPadding:
-                                    EdgeInsets.symmetric(horizontal: 4),
-                                padding: EdgeInsets.symmetric(horizontal: 4),
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                padding: const EdgeInsets.symmetric(horizontal: 4),
                                 onDeleted: () {
                                   setState(() {
                                     selectedMedicines = selectedMedicines
@@ -4229,16 +4226,16 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           .toList(),
                     ),
 
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
 
               // Medicine Name search field
               TextField(
                 controller: medicineNameController,
                 decoration: InputDecoration(
                   labelText: 'Medicine Name',
-                  labelStyle: TextStyle(color: Color(0xFF1E2843), fontSize: 12),
+                  labelStyle: const TextStyle(color: Color(0xFF1E2843), fontSize: 12),
                   prefixIcon:
-                      Icon(Icons.search, size: 18, color: Color(0xFF1E2843)),
+                      const Icon(Icons.search, size: 18, color: Color(0xFF1E2843)),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide(color: Colors.grey.shade400),
@@ -4246,10 +4243,10 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide:
-                        BorderSide(color: Color(0xFF1E2843), width: 1.5),
+                        const BorderSide(color: Color(0xFF1E2843), width: 1.5),
                   ),
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   isDense: true,
                 ),
                 onChanged: _fetchMedicineSuggestions,
@@ -4274,12 +4271,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               if (isLoadingSuggestions)
                 LinearProgressIndicator(
                   backgroundColor: Colors.grey.shade200,
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1E2843)),
+                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF1E2843)),
                 ),
 
               if (medicineSuggestions.isNotEmpty)
                 Container(
-                  constraints: BoxConstraints(maxHeight: 120),
+                  constraints: const BoxConstraints(maxHeight: 120),
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: medicineSuggestions.length,
@@ -4288,7 +4285,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         dense: true,
                         title: Text(
                           medicineSuggestions[index],
-                          style: TextStyle(fontSize: 12),
+                          style: const TextStyle(fontSize: 12),
                         ),
                         onTap: () {
                           setState(() {
@@ -4313,11 +4310,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           ),
         ),
 
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
 
         // Dosage Information
         Container(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.grey.shade50,
             borderRadius: BorderRadius.circular(10),
@@ -4326,7 +4323,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Dosage Information',
                 style: TextStyle(
                   fontSize: 14,
@@ -4334,7 +4331,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   color: Color(0xFF1E2843),
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
 
               // Dosage Fields in compact row
               Row(
@@ -4346,7 +4343,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       tooltip: "Morning",
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Expanded(
                     child: _buildCompactDosageField(
                       controller: afternoonDosageController,
@@ -4354,7 +4351,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       tooltip: "Afternoon",
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Expanded(
                     child: _buildCompactDosageField(
                       controller: nightDosageController,
@@ -4365,14 +4362,14 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                 ],
               ),
 
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
 
               // Comment field
               TextField(
                 controller: commentController,
                 decoration: InputDecoration(
                   labelText: 'Comment',
-                  labelStyle: TextStyle(color: Color(0xFF1E2843), fontSize: 12),
+                  labelStyle: const TextStyle(color: Color(0xFF1E2843), fontSize: 12),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide(color: Colors.grey.shade400),
@@ -4380,14 +4377,14 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide:
-                        BorderSide(color: Color(0xFF1E2843), width: 1.5),
+                        const BorderSide(color: Color(0xFF1E2843), width: 1.5),
                   ),
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                   isDense: true,
                 ),
                 maxLines: 2,
-                style: TextStyle(fontSize: 12),
+                style: const TextStyle(fontSize: 12),
               ),
             ],
           ),
@@ -4404,7 +4401,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         // Left column - Selected Medicines
         Expanded(
           child: Container(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.grey.shade50,
               borderRadius: BorderRadius.circular(10),
@@ -4413,7 +4410,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Selected Medicines',
                   style: TextStyle(
                     fontSize: 14,
@@ -4421,7 +4418,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     color: Color(0xFF1E2843),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
                 // Selected medicines as chips
                 selectedMedicines.isEmpty
@@ -4446,19 +4443,19 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             .map((medicine) => Chip(
                                   label: Text(
                                     medicine,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 12,
                                     ),
                                   ),
-                                  backgroundColor: Color(0xFF1E2843),
+                                  backgroundColor: const Color(0xFF1E2843),
                                   deleteIconColor: Colors.white,
                                   materialTapTargetSize:
                                       MaterialTapTargetSize.shrinkWrap,
                                   visualDensity: VisualDensity.compact,
                                   labelPadding:
-                                      EdgeInsets.symmetric(horizontal: 4),
-                                  padding: EdgeInsets.symmetric(horizontal: 4),
+                                      const EdgeInsets.symmetric(horizontal: 4),
+                                  padding: const EdgeInsets.symmetric(horizontal: 4),
                                   onDeleted: () {
                                     setState(() {
                                       selectedMedicines = selectedMedicines
@@ -4471,7 +4468,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             .toList(),
                       ),
 
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
 
                 // Medicine Name search field
                 TextField(
@@ -4479,9 +4476,9 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   decoration: InputDecoration(
                     labelText: 'Medicine Name',
                     labelStyle:
-                        TextStyle(color: Color(0xFF1E2843), fontSize: 12),
+                        const TextStyle(color: Color(0xFF1E2843), fontSize: 12),
                     prefixIcon:
-                        Icon(Icons.search, size: 18, color: Color(0xFF1E2843)),
+                        const Icon(Icons.search, size: 18, color: Color(0xFF1E2843)),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: Colors.grey.shade400),
@@ -4489,10 +4486,10 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide:
-                          BorderSide(color: Color(0xFF1E2843), width: 1.5),
+                          const BorderSide(color: Color(0xFF1E2843), width: 1.5),
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                     isDense: true,
                   ),
                   onChanged: _fetchMedicineSuggestions,
@@ -4518,12 +4515,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   LinearProgressIndicator(
                     backgroundColor: Colors.grey.shade200,
                     valueColor:
-                        AlwaysStoppedAnimation<Color>(Color(0xFF1E2843)),
+                        const AlwaysStoppedAnimation<Color>(Color(0xFF1E2843)),
                   ),
 
                 if (medicineSuggestions.isNotEmpty)
                   Container(
-                    constraints: BoxConstraints(maxHeight: 120),
+                    constraints: const BoxConstraints(maxHeight: 120),
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: medicineSuggestions.length,
@@ -4532,7 +4529,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           dense: true,
                           title: Text(
                             medicineSuggestions[index],
-                            style: TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 12),
                           ),
                           onTap: () {
                             setState(() {
@@ -4558,12 +4555,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           ),
         ),
 
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
 
         // Right column - Dosage Information
         Expanded(
           child: Container(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.grey.shade50,
               borderRadius: BorderRadius.circular(10),
@@ -4572,7 +4569,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Dosage Information',
                   style: TextStyle(
                     fontSize: 14,
@@ -4580,7 +4577,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     color: Color(0xFF1E2843),
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
 
                 // Dosage Fields
                 Row(
@@ -4592,7 +4589,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         tooltip: "Morning",
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: _buildCompactDosageField(
                         controller: afternoonDosageController,
@@ -4600,7 +4597,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         tooltip: "Afternoon",
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: _buildCompactDosageField(
                         controller: nightDosageController,
@@ -4611,7 +4608,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   ],
                 ),
 
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
 
                 // Comment field
                 TextField(
@@ -4619,7 +4616,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   decoration: InputDecoration(
                     labelText: 'Comment',
                     labelStyle:
-                        TextStyle(color: Color(0xFF1E2843), fontSize: 12),
+                        const TextStyle(color: Color(0xFF1E2843), fontSize: 12),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: Colors.grey.shade400),
@@ -4627,14 +4624,14 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide:
-                          BorderSide(color: Color(0xFF1E2843), width: 1.5),
+                          const BorderSide(color: Color(0xFF1E2843), width: 1.5),
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                     isDense: true,
                   ),
                   maxLines: 3,
-                  style: TextStyle(fontSize: 12),
+                  style: const TextStyle(fontSize: 12),
                 ),
               ],
             ),
@@ -4657,30 +4654,30 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: Colors.grey.shade400),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
                 color: Color(0xFF1E2843),
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             TextField(
               controller: controller,
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(vertical: 4),
+                contentPadding: const EdgeInsets.symmetric(vertical: 4),
                 border: InputBorder.none,
                 isDense: true,
                 hintText: '0',
@@ -4699,14 +4696,14 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 // Compact dosage pill for prescription list
   Widget _buildCompactDosagePill(String label, String value) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: Color(0xFF1E2843).withOpacity(0.1),
+        color: const Color(0xFF1E2843).withOpacity(0.1),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
         '$label:$value',
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 10,
           fontWeight: FontWeight.w500,
           color: Color(0xFF1E2843),
@@ -4766,7 +4763,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
       ref.read(isLoadingProvider.notifier).state = true;
       try {
         final response = await http
-            .get(Uri.parse('${KVM_URL}/doctors/getDiagnosis/$patientId'));
+            .get(Uri.parse('$KVM_URL/doctors/getDiagnosis/$patientId'));
         if (response.statusCode == 200) {
           final data = json.decode(response.body) as Map<String, dynamic>;
           ref.read(diagnosisSuggestionsProvider.notifier).state =
@@ -4796,7 +4793,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           // Check if we have anything to add
           if (selectedDiagnoses.isEmpty && manualDiagnosis.isEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
+              const SnackBar(
                   content: Text(
                       'Please enter a diagnosis or select from suggestions')),
             );
@@ -4804,11 +4801,10 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           }
 
           // Combine selected and manual diagnoses
-          final combinedDiagnoses = [
+          final combinedDiagnoses = '${[
                 ...selectedDiagnoses,
                 if (manualDiagnosis.isNotEmpty) manualDiagnosis,
-              ].join(', ') +
-              ' Date: $currentDateTime';
+              ].join(', ')} Date: $currentDateTime';
 
           // Send to backend
           await addDoctorDiagnosis(admissionId, combinedDiagnoses, patientId);
@@ -4822,7 +4818,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
           // Show success message
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Diagnosis added successfully'),
               backgroundColor: Colors.green,
             ),
@@ -4841,7 +4837,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Title and header section with space for the floating button
-                    Row(
+                    const Row(
                       children: [
                         Expanded(
                           child: Text(
@@ -4857,20 +4853,20 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         SizedBox(width: 170),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
                     // Selected diagnoses chips
                     if (selectedDiagnoses.isNotEmpty) ...[
-                      Text(
+                      const Text(
                         'Selected Diagnoses:',
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           color: Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(8),
@@ -4882,8 +4878,8 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           children: selectedDiagnoses.map((diagnosis) {
                             return Chip(
                               label: Text(diagnosis),
-                              backgroundColor: Color(0xFF005F9E),
-                              labelStyle: TextStyle(color: Colors.white),
+                              backgroundColor: const Color(0xFF005F9E),
+                              labelStyle: const TextStyle(color: Colors.white),
                               deleteIconColor: Colors.white70,
                               onDeleted: () {
                                 ref
@@ -4897,17 +4893,17 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       ),
                     ],
 
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
                     // Manual diagnosis input
-                    Text(
+                    const Text(
                       'Enter Manual Diagnosis:',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     TextField(
                       controller: symptomsController,
                       decoration: InputDecoration(
@@ -4918,42 +4914,42 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                           borderSide:
-                              BorderSide(color: Color(0xFF005F9E), width: 2),
+                              const BorderSide(color: Color(0xFF005F9E), width: 2),
                         ),
                       ),
                       maxLines: 2,
                     ),
 
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
                     // AI Suggestions button
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           'AI Diagnosis Suggestions:',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         ElevatedButton.icon(
                           onPressed: () => fetchDiagnosisSuggestions(ref),
-                          icon: Icon(Icons.psychology),
-                          label: Text('Load Suggestions'),
+                          icon: const Icon(Icons.psychology),
+                          label: const Text('Load Suggestions'),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF005F9E),
+                            backgroundColor: const Color(0xFF005F9E),
                             foregroundColor: Colors.white,
                           ),
                         ),
                       ],
                     ),
 
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
 
                     // AI Suggestions loading or content
                     if (isLoading)
-                      Center(
+                      const Center(
                         child: Column(
                           children: [
                             SizedBox(height: 16),
@@ -4975,10 +4971,10 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: ListView.separated(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           itemCount: diagnosisSuggestions.length,
                           separatorBuilder: (context, index) =>
-                              Divider(height: 1),
+                              const Divider(height: 1),
                           itemBuilder: (context, index) {
                             final diagnosis = diagnosisSuggestions[index];
                             return CheckboxListTile(
@@ -4986,7 +4982,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                               value: selectedDiagnoses.contains(diagnosis),
                               dense: true,
                               controlAffinity: ListTileControlAffinity.leading,
-                              activeColor: Color(0xFF005F9E),
+                              activeColor: const Color(0xFF005F9E),
                               onChanged: (bool? value) {
                                 final updatedList =
                                     List.from(selectedDiagnoses);
@@ -5006,7 +5002,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     else
                       Container(
                         width: double.infinity,
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           color: Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(8),
@@ -5031,18 +5027,18 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0xFF00B8D4).withOpacity(0.4),
+                      color: const Color(0xFF00B8D4).withOpacity(0.4),
                       blurRadius: 10,
-                      offset: Offset(0, 4),
+                      offset: const Offset(0, 4),
                     ),
                   ],
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: FloatingActionButton.extended(
                   onPressed: addDiagnosis,
-                  label: Text('ADD DIAGNOSIS'),
-                  icon: Icon(Icons.add_circle_outline),
-                  backgroundColor: Color(0xFF00B8D4),
+                  label: const Text('ADD DIAGNOSIS'),
+                  icon: const Icon(Icons.add_circle_outline),
+                  backgroundColor: const Color(0xFF00B8D4),
                   foregroundColor: Colors.white,
                   elevation: 4,
                   shape: RoundedRectangleBorder(
@@ -5076,7 +5072,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/search?q=$query'),
+        Uri.parse('$KVM_URL/search?q=$query'),
       );
 
       if (response.statusCode == 200) {
@@ -5119,7 +5115,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             color: Colors.grey.withOpacity(0.1),
             spreadRadius: 1,
             blurRadius: 3,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -5131,9 +5127,9 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             dense: true,
             title: Text(
               suggestion,
-              style: TextStyle(fontSize: 13),
+              style: const TextStyle(fontSize: 13),
             ),
-            leading: Icon(Icons.medication_outlined,
+            leading: const Icon(Icons.medication_outlined,
                 size: 16, color: Color(0xFF1E2843)),
             onTap: () {
               setState(() {
@@ -5204,7 +5200,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                 ElevatedButton(
                   onPressed: _addVitals,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF00B8D4),
+                    backgroundColor: const Color(0xFF00B8D4),
                     foregroundColor: Colors.black,
                     elevation: 4,
                     padding: const EdgeInsets.symmetric(
@@ -5217,13 +5213,13 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black)),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 12,
                 ),
                 ElevatedButton(
                   onPressed: _clearVitalsFields,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 212, 0, 0),
+                    backgroundColor: const Color.fromARGB(255, 212, 0, 0),
                     foregroundColor: Colors.white,
                     elevation: 4,
                     padding: const EdgeInsets.symmetric(
@@ -5339,12 +5335,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           children: [
             // Main content area
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFF8FBFD), // Light background
               ),
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -5366,7 +5362,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                     icon: Icons.person_outline,
                                     maxHeight: leftColumnSectionHeight,
                                   ),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
 
                                   // Vitals
                                   _buildStyledSectionContainer(
@@ -5376,7 +5372,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                     icon: Icons.monitor_heart_outlined,
                                     maxHeight: leftColumnSectionHeight,
                                   ),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
 
                                   // Symptoms
                                   _buildStyledSectionContainer(
@@ -5391,7 +5387,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                               ),
                             ),
 
-                            SizedBox(width: 16),
+                            const SizedBox(width: 16),
 
                             // RIGHT COLUMN: Prescription with increased height
                             Expanded(
@@ -5425,7 +5421,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                     icon: Icons.person_outline,
                                   ),
                                 ),
-                                SizedBox(width: 16),
+                                const SizedBox(width: 16),
                                 // Prescription
                                 Expanded(
                                   flex: 55,
@@ -5438,7 +5434,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                 ),
                               ],
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             // Second row: Vitals, Symptoms, Diagnosis
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -5452,7 +5448,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                     icon: Icons.monitor_heart_outlined,
                                   ),
                                 ),
-                                SizedBox(width: 16),
+                                const SizedBox(width: 16),
                                 // Symptoms
                                 Expanded(
                                   child: _buildStyledSectionContainer(
@@ -5463,7 +5459,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                     icon: Icons.medical_services_outlined,
                                   ),
                                 ),
-                                SizedBox(width: 16),
+                                const SizedBox(width: 16),
                                 // Diagnosis
                                 Expanded(
                                   child: _buildStyledSectionContainer(
@@ -5494,21 +5490,21 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                               title: 'Patient Overview',
                               icon: Icons.person_outline,
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             _buildStyledSectionContainer(
                               context,
                               child: _buildPrescriptionLayout(),
                               title: 'Prescription Management',
                               icon: Icons.medication_outlined,
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             _buildStyledSectionContainer(
                               context,
                               child: _buildVitalsLayout(),
                               title: 'Vitals Monitoring',
                               icon: Icons.monitor_heart_outlined,
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             _buildStyledSectionContainer(
                               context,
                               child: _buildSymptomsLayout(
@@ -5516,7 +5512,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                               title: 'Symptoms',
                               icon: Icons.medical_services_outlined,
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             _buildStyledSectionContainer(
                               context,
                               child: buildDiagnosisLayout(
@@ -5568,17 +5564,17 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     });
                   },
                   child: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     width: _showFloatingNotes ? 150 : 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         colors: [Color(0xFF1E2843), Color(0xFF2C3E50)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.black26,
                           blurRadius: 10,
@@ -5589,13 +5585,13 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.note_alt_outlined,
                           color: Colors.white,
                         ),
                         if (_showFloatingNotes)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 8.0),
                             child: Text(
                               "Doctor Notes",
                               style: TextStyle(
@@ -5613,12 +5609,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
             // Floating Doctor Notes Panel
             AnimatedPositioned(
-              duration: Duration(milliseconds: 400),
+              duration: const Duration(milliseconds: 400),
               curve: Curves.easeOutQuad,
               right: _showFloatingNotes ? 30 : -350,
               top: 80,
               child: AnimatedOpacity(
-                duration: Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 300),
                 opacity: _showFloatingNotes ? 1.0 : 0.0,
                 child: GestureDetector(
                   onHorizontalDragEnd: (details) {
@@ -5635,7 +5631,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.black12,
                           blurRadius: 20,
@@ -5660,9 +5656,9 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             children: [
                               // Doctor Notes Header
                               Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     vertical: 16, horizontal: 20),
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
                                       Color(0xFF1E2843),
@@ -5680,7 +5676,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
                                         Icon(
                                           Icons.note_alt_outlined,
@@ -5700,7 +5696,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                     Row(
                                       children: [
                                         IconButton(
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.minimize,
                                             color: Colors.white,
                                           ),
@@ -5725,7 +5721,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                           },
                                         ),
                                         IconButton(
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.close,
                                             color: Colors.white,
                                           ),
@@ -5771,7 +5767,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Colors.black26,
                             blurRadius: 20,
@@ -5783,9 +5779,9 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         children: [
                           // Expanded Notes Header
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 16, horizontal: 20),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
                                   Color(0xFF1E2843),
@@ -5802,7 +5798,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
+                                const Row(
                                   children: [
                                     Icon(
                                       Icons.note_alt_outlined,
@@ -5822,7 +5818,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                 Row(
                                   children: [
                                     IconButton(
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.fullscreen_exit,
                                         color: Colors.white,
                                       ),
@@ -5833,7 +5829,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                       },
                                     ),
                                     IconButton(
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.close,
                                         color: Colors.white,
                                       ),
@@ -5870,15 +5866,15 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               right: 30,
               bottom: 100,
               child: AnimatedOpacity(
-                duration: Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 300),
                 opacity: _showFloatingNotes ? 1.0 : 0.0,
                 child: FloatingActionButton(
-                  backgroundColor: Color(0xFF005F9E),
-                  child: Icon(Icons.add, color: Colors.white),
+                  backgroundColor: const Color(0xFF005F9E),
                   onPressed: () {
                     _showAddNoteDialog(context, patientId, admissionId);
                   },
                   tooltip: 'Quick Add Note',
+                  child: Icon(Icons.add, color: Colors.white),
                 ),
               ),
             ),
@@ -5920,7 +5916,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: Colors.blue.shade50,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
@@ -5994,7 +5990,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   icon: Icons.person_outline,
                 ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               // Prescription section - 60% width (larger as requested)
               Expanded(
                 flex: 6,
@@ -6007,7 +6003,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               ),
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           // Second row: Vitals, Symptoms, and Diagnosis in equal columns
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -6021,7 +6017,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   icon: Icons.monitor_heart_outlined,
                 ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               // Symptoms section
               Expanded(
                 child: _buildStyledSectionContainer(
@@ -6041,7 +6037,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   icon: Icons.medical_services_outlined,
                 ),
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               // Diagnosis section
               Expanded(
                 child: _buildStyledSectionContainer(
@@ -6071,17 +6067,17 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           // Quick Access Medicine Database Banner
           Container(
             width: double.infinity,
-            margin: EdgeInsets.only(bottom: 16),
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+            margin: const EdgeInsets.only(bottom: 16),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
             decoration: BoxDecoration(
               color: Colors.blue.shade50,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
               children: [
-                Icon(Icons.medication_outlined, color: Colors.black, size: 20),
-                SizedBox(width: 12),
-                Expanded(
+                const Icon(Icons.medication_outlined, color: Colors.black, size: 20),
+                const SizedBox(width: 12),
+                const Expanded(
                   child: Text(
                     'Quick Access to Your Medicine Database',
                     style: TextStyle(
@@ -6095,9 +6091,8 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   onPressed: () {
                     _showMedicineSelectionDialog();
                   },
-                  child: Text('Open Database'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF00B8D4),
+                    backgroundColor: const Color(0xFF00B8D4),
                     foregroundColor: Colors.black,
                     elevation: 4,
                     padding: const EdgeInsets.symmetric(
@@ -6106,12 +6101,13 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       borderRadius: BorderRadius.circular(24),
                     ),
                   ),
+                  child: Text('Open Database'),
                 ),
               ],
             ),
           ),
 
-          Text(
+          const Text(
             'Prescription Detail',
             style: TextStyle(
               fontSize: 18,
@@ -6119,11 +6115,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               color: Color(0xFF1E2843),
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Selected Medicines
           Container(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.grey.shade50,
               borderRadius: BorderRadius.circular(10),
@@ -6132,7 +6128,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Selected Medicines',
                   style: TextStyle(
                     fontSize: 14,
@@ -6140,7 +6136,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     color: Color(0xFF1E2843),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
                 selectedMedicines.isEmpty
                     ? Center(
@@ -6164,19 +6160,19 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             .map((medicine) => Chip(
                                   label: Text(
                                     medicine,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 12,
                                     ),
                                   ),
-                                  backgroundColor: Color(0xFF1E2843),
+                                  backgroundColor: const Color(0xFF1E2843),
                                   deleteIconColor: Colors.white,
                                   materialTapTargetSize:
                                       MaterialTapTargetSize.shrinkWrap,
                                   visualDensity: VisualDensity.compact,
                                   labelPadding:
-                                      EdgeInsets.symmetric(horizontal: 4),
-                                  padding: EdgeInsets.symmetric(horizontal: 4),
+                                      const EdgeInsets.symmetric(horizontal: 4),
+                                  padding: const EdgeInsets.symmetric(horizontal: 4),
                                   onDeleted: () {
                                     setState(() {
                                       selectedMedicines = selectedMedicines
@@ -6189,7 +6185,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             .toList(),
                       ),
 
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
 
                 // Medicine Name search field - simplified
                 TextField(
@@ -6197,9 +6193,9 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   decoration: InputDecoration(
                     labelText: 'Medicine Name',
                     labelStyle:
-                        TextStyle(color: Color(0xFF1E2843), fontSize: 12),
+                        const TextStyle(color: Color(0xFF1E2843), fontSize: 12),
                     prefixIcon:
-                        Icon(Icons.search, size: 18, color: Color(0xFF1E2843)),
+                        const Icon(Icons.search, size: 18, color: Color(0xFF1E2843)),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: Colors.grey.shade400),
@@ -6207,10 +6203,10 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide:
-                          BorderSide(color: Color(0xFF1E2843), width: 1.5),
+                          const BorderSide(color: Color(0xFF1E2843), width: 1.5),
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                     isDense: true,
                   ),
                   onChanged: _fetchMedicineSuggestions,
@@ -6236,9 +6232,9 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                 // Display loading indicator or suggestions
                 if (isLoadingSuggestions)
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     alignment: Alignment.center,
-                    child: CircularProgressIndicator(strokeWidth: 2),
+                    child: const CircularProgressIndicator(strokeWidth: 2),
                   )
                 else if (medicineSuggestions.isNotEmpty)
                   _buildSuggestionsList(),
@@ -6246,11 +6242,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             ),
           ),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Dosage Information
           Container(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.grey.shade50,
               borderRadius: BorderRadius.circular(10),
@@ -6259,7 +6255,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Dosage Information',
                   style: TextStyle(
                     fontSize: 14,
@@ -6267,7 +6263,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     color: Color(0xFF1E2843),
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
 
                 // Dosage Fields in compact row
                 Row(
@@ -6279,7 +6275,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         tooltip: "Morning",
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: _buildCompactDosageField(
                         controller: afternoonDosageController,
@@ -6287,7 +6283,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         tooltip: "Afternoon",
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: _buildCompactDosageField(
                         controller: nightDosageController,
@@ -6298,7 +6294,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   ],
                 ),
 
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
 
                 // Comment field
                 TextField(
@@ -6306,7 +6302,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   decoration: InputDecoration(
                     labelText: 'Comment',
                     labelStyle:
-                        TextStyle(color: Color(0xFF1E2843), fontSize: 12),
+                        const TextStyle(color: Color(0xFF1E2843), fontSize: 12),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(color: Colors.grey.shade400),
@@ -6314,30 +6310,30 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide:
-                          BorderSide(color: Color(0xFF1E2843), width: 1.5),
+                          const BorderSide(color: Color(0xFF1E2843), width: 1.5),
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                     isDense: true,
                   ),
                   maxLines: 2,
-                  style: TextStyle(fontSize: 12),
+                  style: const TextStyle(fontSize: 12),
                 ),
               ],
             ),
           ),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Add button centered
           Center(
             child: ElevatedButton.icon(
               onPressed: _addPrescription,
-              icon: Icon(Icons.add_circle_outline),
-              label: Text('Add Prescription'),
+              icon: const Icon(Icons.add_circle_outline),
+              label: const Text('Add Prescription'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF00B8D4),
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                backgroundColor: const Color(0xFF00B8D4),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -6345,11 +6341,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             ),
           ),
 
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
 
           // Current Prescriptions
           Container(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Colors.grey.shade50,
               borderRadius: BorderRadius.circular(10),
@@ -6358,7 +6354,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Current Prescriptions',
                   style: TextStyle(
                     fontSize: 14,
@@ -6367,7 +6363,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   ),
                 ),
 
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
 
                 // Simple ListView for prescriptions to avoid scroll conflicts
                 _prescriptions.isEmpty
@@ -6381,7 +6377,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                 size: 32,
                                 color: Colors.grey.shade400,
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Text(
                                 'No prescriptions added yet',
                                 style: TextStyle(
@@ -6396,7 +6392,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     : Column(
                         children: _prescriptions.map((prescription) {
                           return Card(
-                            margin: EdgeInsets.only(bottom: 8),
+                            margin: const EdgeInsets.only(bottom: 8),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -6404,13 +6400,13 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             ),
                             child: ListTile(
                               dense: true,
-                              contentPadding: EdgeInsets.symmetric(
+                              contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 4),
                               leading: CircleAvatar(
                                 radius: 16,
                                 backgroundColor:
-                                    Color(0xFF1E2843).withOpacity(0.1),
-                                child: Icon(
+                                    const Color(0xFF1E2843).withOpacity(0.1),
+                                child: const Icon(
                                   Icons.medication,
                                   size: 16,
                                   color: Color(0xFF1E2843),
@@ -6418,7 +6414,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                               ),
                               title: Text(
                                 prescription.medicine.name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF1E2843),
@@ -6438,17 +6434,17 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                 children: [
                                   _buildCompactDosagePill(
                                       'M', prescription.medicine.morning),
-                                  SizedBox(width: 4),
+                                  const SizedBox(width: 4),
                                   _buildCompactDosagePill(
                                       'A', prescription.medicine.afternoon),
-                                  SizedBox(width: 4),
+                                  const SizedBox(width: 4),
                                   _buildCompactDosagePill(
                                       'N', prescription.medicine.night),
                                   IconButton(
-                                    icon: Icon(Icons.delete_outline,
+                                    icon: const Icon(Icons.delete_outline,
                                         size: 18, color: Colors.red),
                                     padding: EdgeInsets.zero,
-                                    constraints: BoxConstraints(),
+                                    constraints: const BoxConstraints(),
                                     visualDensity: VisualDensity.compact,
                                     onPressed: () => _deletePrescription(
                                         prescription.medicine.id!),
@@ -6519,8 +6515,8 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           LayoutBuilder(
             builder: (context, constraints) {
               // Determine how many buttons per row based on available width
-              final buttonWidth = 85.0;
-              final spacing = 8.0;
+              const buttonWidth = 85.0;
+              const spacing = 8.0;
               final buttonsPerRow =
                   ((constraints.maxWidth + spacing) / (buttonWidth + spacing))
                       .floor();
@@ -6647,12 +6643,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         isMediumScreen ? 320 : min(constraints.maxWidth * 0.85, 280);
 
     return AnimatedPositioned(
-      duration: Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 400),
       curve: Curves.easeOutQuad,
       right: isMediumScreen ? 30 : 15,
       top: isMediumScreen ? 80 : 60,
       child: AnimatedOpacity(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         opacity: 1.0,
         child: GestureDetector(
           onHorizontalDragEnd: (details) {
@@ -6669,7 +6665,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black12,
                   blurRadius: 20,
@@ -6695,8 +6691,8 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       // Doctor Notes Header
                       Container(
                         padding:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                        decoration: BoxDecoration(
+                            const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                        decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
                               Color(0xFF1E2843),
@@ -6713,7 +6709,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Expanded(
+                            const Expanded(
                               child: Row(
                                 children: [
                                   Icon(
@@ -6748,7 +6744,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                   },
                                 ),
                                 IconButton(
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.close,
                                     color: Colors.white,
                                   ),
@@ -6796,7 +6792,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black26,
                   blurRadius: 20,
@@ -6808,8 +6804,8 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               children: [
                 // Expanded Notes Header
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
                         Color(0xFF1E2843),
@@ -6826,7 +6822,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(
                             Icons.note_alt_outlined,
@@ -6846,7 +6842,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       Row(
                         children: [
                           IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.fullscreen_exit,
                               color: Colors.white,
                             ),
@@ -6857,7 +6853,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             },
                           ),
                           IconButton(
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.close,
                               color: Colors.white,
                             ),
@@ -6919,7 +6915,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                 padding: EdgeInsets.symmetric(
                     vertical: constraints.maxWidth > 900 ? 16 : 12,
                     horizontal: constraints.maxWidth > 900 ? 20 : 16),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Color(0xFF1E2843), Color(0xFF2C3E50)],
                     begin: Alignment.topLeft,
@@ -6936,8 +6932,8 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     Expanded(
                       child: Row(
                         children: [
-                          Icon(Icons.note_alt_outlined, color: Colors.white),
-                          SizedBox(width: 12),
+                          const Icon(Icons.note_alt_outlined, color: Colors.white),
+                          const SizedBox(width: 12),
                           Text(
                             "Notes",
                             style: TextStyle(
@@ -6952,7 +6948,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     Row(
                       children: [
                         IconButton(
-                          icon: Icon(Icons.minimize, color: Colors.white),
+                          icon: const Icon(Icons.minimize, color: Colors.white),
                           onPressed: () {
                             setState(() {
                               _isNotesExpanded = false;
@@ -6961,7 +6957,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           iconSize: constraints.maxWidth > 900 ? 24 : 20,
                           padding: EdgeInsets.all(
                               constraints.maxWidth > 900 ? 8 : 4),
-                          constraints: BoxConstraints(),
+                          constraints: const BoxConstraints(),
                         ),
                         IconButton(
                           icon: Icon(
@@ -6978,10 +6974,10 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           iconSize: constraints.maxWidth > 900 ? 24 : 20,
                           padding: EdgeInsets.all(
                               constraints.maxWidth > 900 ? 8 : 4),
-                          constraints: BoxConstraints(),
+                          constraints: const BoxConstraints(),
                         ),
                         IconButton(
-                          icon: Icon(Icons.close, color: Colors.white),
+                          icon: const Icon(Icons.close, color: Colors.white),
                           onPressed: () {
                             setState(() {
                               _showFloatingNotes = false;
@@ -6990,7 +6986,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           iconSize: constraints.maxWidth > 900 ? 24 : 20,
                           padding: EdgeInsets.all(
                               constraints.maxWidth > 900 ? 8 : 4),
-                          constraints: BoxConstraints(),
+                          constraints: const BoxConstraints(),
                         ),
                       ],
                     ),
@@ -7126,7 +7122,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
       future: _fetchDoctorNotes(patientId, admissionId),
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -7155,24 +7151,24 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline, color: Colors.red, size: 48),
-                SizedBox(height: 16),
+                const Icon(Icons.error_outline, color: Colors.red, size: 48),
+                const SizedBox(height: 16),
                 Text(
                   'Error: ${snapshot.error}',
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton.icon(
                   onPressed: () {
                     setState(() {
                       _futureBuilderKey = UniqueKey();
                     });
                   },
-                  icon: Icon(Icons.refresh),
-                  label: Text('Retry'),
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('Retry'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF005F9E),
+                    backgroundColor: const Color(0xFF005F9E),
                   ),
                 ),
               ],
@@ -7188,7 +7184,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   size: 64,
                   color: Colors.grey.shade400,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   'No notes available',
                   style: TextStyle(
@@ -7197,7 +7193,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   'Add your first note to keep track of important observations',
                   style: TextStyle(
@@ -7206,15 +7202,15 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 ElevatedButton.icon(
                   onPressed: () =>
                       _showAddNoteDialog(context, patientId, admissionId),
-                  icon: Icon(Icons.add),
-                  label: Text('Add Note'),
+                  icon: const Icon(Icons.add),
+                  label: const Text('Add Note'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF005F9E),
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    backgroundColor: const Color(0xFF005F9E),
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   ),
                 ),
               ],
@@ -7236,7 +7232,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                   children: [
                     Text(
                       '${snapshot.data!.length} Notes',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF1E2843),
@@ -7245,12 +7241,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                     ElevatedButton.icon(
                       onPressed: () =>
                           _showAddNoteDialog(context, patientId, admissionId),
-                      icon: Icon(Icons.add, size: 18),
-                      label: Text('Add'),
+                      icon: const Icon(Icons.add, size: 18),
+                      label: const Text('Add'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       ),
                     ),
                   ],
@@ -7290,7 +7286,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
     required Function onDelete,
   }) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -7299,7 +7295,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
             color: Colors.grey.withOpacity(0.1),
             spreadRadius: 1,
             blurRadius: 6,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
         border: Border.all(
@@ -7312,10 +7308,10 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         children: [
           // Header with date and doctor name
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: Colors.grey.shade50,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
@@ -7331,12 +7327,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               children: [
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.event_note,
                       size: 16,
                       color: Color(0xFF005F9E),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Text(
                       date,
                       style: TextStyle(
@@ -7349,26 +7345,26 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                 ),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.person,
                       size: 16,
                       color: Color(0xFF005F9E),
                     ),
-                    SizedBox(width: 4),
+                    const SizedBox(width: 4),
                     Text(
                       doctor,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 13,
                         color: Color(0xFF005F9E),
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     InkWell(
                       onTap: () => onDelete(),
                       borderRadius: BorderRadius.circular(4),
                       child: Padding(
-                        padding: EdgeInsets.all(4),
+                        padding: const EdgeInsets.all(4),
                         child: Icon(
                           Icons.delete_outline,
                           size: 18,
@@ -7384,7 +7380,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
           // Note content
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Text(
               note,
               style: TextStyle(
@@ -7415,15 +7411,15 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               borderRadius: BorderRadius.circular(16),
             ),
             contentPadding: EdgeInsets.zero,
-            content: Container(
+            content: SizedBox(
               width: 500,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   // Dialog header
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         colors: [Color(0xFF005F9E), Color(0xFF00B8D4)],
                         begin: Alignment.topLeft,
@@ -7434,7 +7430,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         topRight: Radius.circular(16),
                       ),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(
                           Icons.note_add,
@@ -7455,11 +7451,11 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
                   // Dialog content
                   Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Note Content',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
@@ -7467,7 +7463,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             color: Color(0xFF1E2843),
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.grey.shade50,
@@ -7478,7 +7474,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                           ),
                           child: TextField(
                             controller: textController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: 'Enter your note here',
                               border: InputBorder.none,
                               contentPadding: EdgeInsets.all(16),
@@ -7492,7 +7488,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
                   // Dialog actions
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -7507,7 +7503,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                             ),
                           ),
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         ElevatedButton(
                           onPressed: isSubmitting
                               ? null
@@ -7542,7 +7538,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                       // Show success message
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
-                                        SnackBar(
+                                        const SnackBar(
                                           content:
                                               Text('Note added successfully!'),
                                           backgroundColor: Colors.green,
@@ -7561,22 +7557,22 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                           content:
                                               Text('Error adding note: $e'),
                                           backgroundColor: Colors.red,
-                                          duration: Duration(seconds: 2),
+                                          duration: const Duration(seconds: 2),
                                         ),
                                       );
                                     }
                                   }
                                 },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF005F9E),
-                            padding: EdgeInsets.symmetric(
+                            backgroundColor: const Color(0xFF005F9E),
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 24, vertical: 12),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                           child: isSubmitting
-                              ? SizedBox(
+                              ? const SizedBox(
                                   width: 20,
                                   height: 20,
                                   child: CircularProgressIndicator(
@@ -7585,7 +7581,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                                         Colors.white),
                                   ),
                                 )
-                              : Text('Save Note'),
+                              : const Text('Save Note'),
                         ),
                       ],
                     ),
@@ -7609,26 +7605,26 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           borderRadius: BorderRadius.circular(16),
         ),
         contentPadding: EdgeInsets.zero,
-        content: Container(
+        content: SizedBox(
           width: 400,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               // Dialog header
               Container(
-                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Colors.red.shade400, Colors.red.shade700],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
                   ),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(
                       Icons.warning_amber_rounded,
@@ -7649,7 +7645,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
               // Dialog content
               Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Text(
                   'Are you sure you want to delete this note? This action cannot be undone.',
                   style: TextStyle(
@@ -7661,7 +7657,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
               // Dialog actions
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -7674,7 +7670,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         ),
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     ElevatedButton(
                       onPressed: () async {
                         // Close the dialog first
@@ -7685,12 +7681,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red.shade600,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text('Delete'),
+                      child: const Text('Delete'),
                     ),
                   ],
                 ),
@@ -7719,7 +7715,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
       // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Note deleted successfully!'),
           backgroundColor: Colors.green,
           duration: Duration(seconds: 2),
@@ -7731,7 +7727,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         SnackBar(
           content: Text('Error deleting note: $e'),
           backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
+          duration: const Duration(seconds: 2),
         ),
       );
     }
@@ -7751,7 +7747,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
     } catch (e) {
       print("Error adding note: $e");
       // Re-throw the error so it can be handled in the UI
-      throw e;
+      rethrow;
     }
   }
 
@@ -7759,7 +7755,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
   Future<List<dynamic>> _fetchDoctorNotes(
       String patientId, String admissionId) async {
     final url =
-        Uri.parse('${KVM_URL}/doctors/fetchNotes/$patientId/$admissionId');
+        Uri.parse('$KVM_URL/doctors/fetchNotes/$patientId/$admissionId');
     print(url);
     try {
       final response = await http.get(
@@ -8053,13 +8049,13 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: _sectionGradient,
               borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
             ),
             child: Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -8141,7 +8137,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
     bool isLoadingSuggestions = false;
     String selectedSymptoms = '';
 
-    Future<void> _fetchSymptomSuggestions(String query) async {
+    Future<void> fetchSymptomSuggestions(String query) async {
       if (query.isEmpty) {
         return;
       }
@@ -8150,7 +8146,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
       try {
         final response = await http.get(
-          Uri.parse('${VERCEL_URL}/search?q=$query'),
+          Uri.parse('$VERCEL_URL/search?q=$query'),
         );
 
         if (response.statusCode == 200) {
@@ -8166,7 +8162,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
       }
     }
 
-    Future<void> _addSymptom() async {
+    Future<void> addSymptom() async {
       if (symptomController.text.isEmpty) return;
 
       final newSymptom = symptomSuggestions.contains(symptomController.text)
@@ -8249,7 +8245,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                 borderSide: const BorderSide(color: Colors.teal, width: 2),
               ),
             ),
-            onChanged: _fetchSymptomSuggestions,
+            onChanged: fetchSymptomSuggestions,
           ),
           const SizedBox(height: 10),
 
@@ -8279,9 +8275,9 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
           // Add Symptom button
           ElevatedButton(
-            onPressed: _addSymptom,
+            onPressed: addSymptom,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF00B8D4),
+              backgroundColor: const Color(0xFF00B8D4),
               foregroundColor: Colors.black,
               elevation: 4,
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
@@ -8450,7 +8446,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             isLoading
-                ? SizedBox(
+                ? const SizedBox(
                     height: 36, // Same height as the icon
                     width: 36, // Same width as the icon
                     child: CustomLoadingAnimation(),
@@ -8531,7 +8527,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
     try {
       final url =
-          '${KVM_URL}/reception/getDoctorAdvice/${patientId}/${admissionId}';
+          '$KVM_URL/reception/getDoctorAdvice/$patientId/$admissionId';
 
       final response = await http.get(Uri.parse(url));
       final data = jsonDecode(response.body);
@@ -8541,7 +8537,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         Methods().openPdf(fileLink);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('No file link found in the response')),
+          const SnackBar(content: Text('No file link found in the response')),
         );
       }
     } catch (e) {
@@ -8560,8 +8556,8 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
           position: Tween<Offset>(
-            begin: Offset(0, -1), // Starts from the top
-            end: Offset(0, 0), // Ends at the normal position
+            begin: const Offset(0, -1), // Starts from the top
+            end: const Offset(0, 0), // Ends at the normal position
           ).animate(CurvedAnimation(
             parent: animation,
             curve: Curves.easeOut, // Smooth falling effect
@@ -8603,7 +8599,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Header: Patient Info Title
-                  Text(
+                  const Text(
                     'Patient Information',
                     style: TextStyle(
                       fontSize: 16,
@@ -8649,13 +8645,13 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
   Widget _buildPatientDetail(String label, String value) {
     return Container(
-      constraints: BoxConstraints(maxWidth: 150), // Controls the maximum width
+      constraints: const BoxConstraints(maxWidth: 150), // Controls the maximum width
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '$label:',
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
               color: Color(0xFF2A79B4),
@@ -8664,7 +8660,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           const SizedBox(height: 4),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 13,
               color: Colors.black,
@@ -8712,7 +8708,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
           children: [
             Row(
               children: [
-                Icon(Icons.local_hospital, color: Colors.teal, size: 24),
+                const Icon(Icons.local_hospital, color: Colors.teal, size: 24),
                 const SizedBox(width: 8),
                 Text(
                   'Reason: ${record.reasonForAdmission}',
@@ -8787,7 +8783,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
       future: doctor.fetchFollowUps(recordId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: Text(''),
           );
         }
@@ -8890,7 +8886,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
   }
 
   Widget _buildExpandableSection(DoctorConsulting doctorConsult) {
-    bool _isExpanded = false; // Local state for each section.
+    bool isExpanded = false; // Local state for each section.
 
     return StatefulBuilder(
       builder: (context, setState) {
@@ -8907,12 +8903,12 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    _isExpanded = !_isExpanded;
+                    isExpanded = !isExpanded;
                   });
                 },
                 child: Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.teal,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(12),
@@ -8930,14 +8926,14 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
                         ),
                       ),
                       Icon(
-                        _isExpanded ? Icons.expand_less : Icons.expand_more,
+                        isExpanded ? Icons.expand_less : Icons.expand_more,
                         color: Colors.white,
                       ),
                     ],
                   ),
                 ),
               ),
-              if (_isExpanded)
+              if (isExpanded)
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: _buildTable(doctorConsult),
@@ -8955,9 +8951,9 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
         color: Colors.teal.withOpacity(0.3),
         width: 1,
       ),
-      columnWidths: {
-        0: FixedColumnWidth(200),
-        1: FlexColumnWidth(),
+      columnWidths: const {
+        0: const FixedColumnWidth(200),
+        1: const FlexColumnWidth(),
       },
       children: [
         _buildTableRow('Date Added', doctorConsult.date),
@@ -9012,7 +9008,7 @@ class _PatientDetailScreen2State extends State<PatientDetailScreen4>
 
 @override
 Widget _buildFollowUpTable(FollowUp followUp) {
-  ScrollController _scrollController = ScrollController();
+  ScrollController scrollController = ScrollController();
 
   return Card(
     shape: RoundedRectangleBorder(
@@ -9033,18 +9029,18 @@ Widget _buildFollowUpTable(FollowUp followUp) {
           SizedBox(
             height: 150, // Set a height to ensure visibility
             child: Scrollbar(
-              controller: _scrollController,
+              controller: scrollController,
               thumbVisibility: true, // Makes scrollbar always visible
               trackVisibility: true,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                controller: _scrollController,
+                controller: scrollController,
                 child: DataTable(
                   columnSpacing: 30,
                   dataRowHeight: 60,
                   headingRowHeight: 50,
                   border: TableBorder.all(color: Colors.grey.shade300),
-                  headingRowColor: MaterialStateProperty.all(Colors.cyan),
+                  headingRowColor: WidgetStateProperty.all(Colors.cyan),
                   columns: const [
                     DataColumn(
                         label: Text('Type',
@@ -9079,7 +9075,7 @@ Widget _buildFollowUpTable(FollowUp followUp) {
                   ],
                   rows: [
                     DataRow(cells: [
-                      DataCell(Text('4-Hour Follow-Up')),
+                      const DataCell(Text('4-Hour Follow-Up')),
                       DataCell(Text(followUp.date)),
                       DataCell(Text(followUp.fourhrTemperature)),
                       DataCell(Text(followUp.fourhrpulse)),
@@ -9118,7 +9114,7 @@ Widget _buildFollowUpTable(FollowUp followUp) {
 }
 
 Widget _build2hrFollowUpTable(FollowUp followUp) {
-  ScrollController _scrollController = ScrollController();
+  ScrollController scrollController = ScrollController();
 
   return Card(
     shape: RoundedRectangleBorder(
@@ -9139,18 +9135,18 @@ Widget _build2hrFollowUpTable(FollowUp followUp) {
           SizedBox(
             height: 150, // Ensures visibility and proper scrolling
             child: Scrollbar(
-              controller: _scrollController,
+              controller: scrollController,
               thumbVisibility: true,
               trackVisibility: true,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                controller: _scrollController,
+                controller: scrollController,
                 child: DataTable(
                   columnSpacing: 30,
                   dataRowHeight: 60,
                   headingRowHeight: 50,
                   border: TableBorder.all(color: Colors.grey.shade300),
-                  headingRowColor: MaterialStateProperty.all(Colors.cyan),
+                  headingRowColor: WidgetStateProperty.all(Colors.cyan),
                   columns: const [
                     DataColumn(
                         label: Text('Type',
@@ -9185,7 +9181,7 @@ Widget _build2hrFollowUpTable(FollowUp followUp) {
                   ],
                   rows: [
                     DataRow(cells: [
-                      DataCell(Text('2-Hour Follow-Up')),
+                      const DataCell(Text('2-Hour Follow-Up')),
                       DataCell(Text(followUp.date)),
                       DataCell(Text(followUp.temperature.toString())),
                       DataCell(Text(followUp.pulse.toString())),
@@ -9258,6 +9254,8 @@ class ViewMonitoringIntent extends Intent {}
 class ViewInvestigationIntent extends Intent {}
 
 class AssignLabDialog extends StatefulWidget {
+  const AssignLabDialog({super.key});
+
   @override
   _AssignLabDialogState createState() => _AssignLabDialogState();
 }

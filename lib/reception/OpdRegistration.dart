@@ -118,7 +118,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
     final name = _searchController.text.trim();
     if (name.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text("Please enter a name to search."),
           backgroundColor: HospitalTheme.error,
         ),
@@ -128,7 +128,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/reception/info?name=$name'),
+        Uri.parse('$KVM_URL/reception/info?name=$name'),
       );
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -145,7 +145,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
           _patientIdResult = null;
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text("No patient found with that name."),
             backgroundColor: HospitalTheme.warning,
           ),
@@ -153,7 +153,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text("An error occurred. Please try again."),
           backgroundColor: HospitalTheme.error,
         ),
@@ -168,7 +168,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
     }
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/reception/suggestions?name=$query'),
+        Uri.parse('$KVM_URL/reception/suggestions?name=$query'),
       );
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as List;
@@ -315,7 +315,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
               ),
             ],
           ),
-          child: Icon(
+          child: const Icon(
             Icons.local_hospital_outlined,
             color: HospitalTheme.primary,
             size: 48,
@@ -333,7 +333,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
           shaderCallback: (bounds) => const LinearGradient(
             colors: [Colors.white, Color(0xFFe0e0e0)],
           ).createShader(bounds),
-          child: Text(
+          child: const Text(
             "OPD Patient Registration",
             style: TextStyle(
               fontSize: 28,
@@ -417,9 +417,9 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
   Widget _buildPremiumSearchSection(bool isSmallScreen) {
     return Container(
       padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white, // Clean white background
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24),
           topRight: Radius.circular(24),
         ),
@@ -478,7 +478,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
         const SizedBox(width: 12),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: HospitalTheme.textDark,
@@ -508,7 +508,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "Search Patient",
           style: TextStyle(
             fontWeight: FontWeight.w600,
@@ -558,14 +558,14 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                       ),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.search,
                       color: Colors.white,
                     ),
                   ),
                   suffixIcon: IconButton(
                     onPressed: _fetchPatientId,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.send,
                       color: HospitalTheme.primary,
                     ),
@@ -576,14 +576,14 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: HospitalTheme.border,
                       width: 2,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: HospitalTheme.primary,
                       width: 2,
                     ),
@@ -607,7 +607,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "Patient ID Result",
           style: TextStyle(
             fontWeight: FontWeight.w600,
@@ -626,7 +626,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                       HospitalTheme.primary.withOpacity(0.05),
                     ],
                   )
-                : LinearGradient(
+                : const LinearGradient(
                     colors: [
                       HospitalTheme.surfaceLight,
                       Colors.white,
@@ -665,12 +665,12 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
               ),
               if (_patientIdResult != null)
                 IconButton(
-                  icon: Icon(Icons.copy, color: HospitalTheme.primary),
+                  icon: const Icon(Icons.copy, color: HospitalTheme.primary),
                   onPressed: () {
                     Clipboard.setData(ClipboardData(text: _patientIdResult!));
                     if (mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text("Patient ID copied to clipboard!"),
                           backgroundColor: HospitalTheme.primary,
                         ),
@@ -875,7 +875,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w600,
             color: HospitalTheme.textDark,
             fontSize: 16,
@@ -922,28 +922,28 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: HospitalTheme.border,
                   width: 2,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: HospitalTheme.primary,
                   width: 2,
                 ),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: HospitalTheme.error,
                   width: 2,
                 ),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: HospitalTheme.error,
                   width: 2,
                 ),
@@ -965,7 +965,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           "Gender",
           style: TextStyle(
             fontWeight: FontWeight.w600,
@@ -1103,14 +1103,14 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                               ),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.rotate_left,
                               color: Colors.white,
                               size: 20,
                             ),
                           ),
                           const SizedBox(width: 12),
-                          Expanded(
+                          const Expanded(
                             child: Text(
                               "Is this a return visit?",
                               style: TextStyle(
@@ -1253,14 +1253,14 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                     ),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.add_a_photo,
                     color: HospitalTheme.primary,
                     size: 32,
                   ),
                 ),
                 const SizedBox(height: 12),
-                Text(
+                const Text(
                   "No image selected",
                   style: TextStyle(
                     color: HospitalTheme.textMedium,
@@ -1274,7 +1274,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
   }
 
   Widget _buildPhotoInstructions() {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -1285,7 +1285,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
             color: HospitalTheme.textDark,
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           "Please upload a clear photo of the patient's face for identification purposes. The image should be well-lit and show the patient's full face clearly.",
           style: TextStyle(
@@ -1322,8 +1322,8 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
           Expanded(
             child: TextButton.icon(
               onPressed: () => setState(() => _selectedImage = null),
-              icon: Icon(Icons.delete, color: HospitalTheme.error),
-              label: Text(
+              icon: const Icon(Icons.delete, color: HospitalTheme.error),
+              label: const Text(
                 "Remove",
                 style: TextStyle(color: HospitalTheme.error),
               ),
@@ -1332,7 +1332,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
-                  side: BorderSide(color: HospitalTheme.error),
+                  side: const BorderSide(color: HospitalTheme.error),
                 ),
               ),
             ),
@@ -1345,9 +1345,9 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
   Widget _buildPremiumSubmitSection() {
     return Container(
       padding: const EdgeInsets.all(32),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white, // Clean white background
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(24),
           bottomRight: Radius.circular(24),
         ),
@@ -1378,7 +1378,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                         }
                       },
                 icon: _isSubmitting
-                    ? SizedBox(
+                    ? const SizedBox(
                         width: 24,
                         height: 24,
                         child: CircularProgressIndicator(
@@ -1428,7 +1428,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
           ),
         ),
         Divider(color: color.withOpacity(0.5)),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
       ],
     );
   }
@@ -1443,7 +1443,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
             flex: 2,
             child: Text(
               "$label:",
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.textDark,
               ),
@@ -1453,7 +1453,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
             flex: 3,
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textDark,
               ),
             ),
@@ -1471,7 +1471,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
     });
 
     try {
-      final uri = Uri.parse('${KVM_URL}/reception/addPatient');
+      final uri = Uri.parse('$KVM_URL/reception/addPatient');
       print("OPD Request URL: $uri");
       final request = http.MultipartRequest('POST', uri);
 
@@ -1593,7 +1593,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
     final isReturnVisit = _isReturnVisit;
     final patientId = _patientIdController.text;
 
-    final themeColor = HospitalTheme.primary;
+    const themeColor = HospitalTheme.primary;
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 768;
 
@@ -1619,12 +1619,12 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
             children: [
               // Enhanced Header
               Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [themeColor, themeColor.withOpacity(0.8)],
                   ),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
@@ -1632,19 +1632,19 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                 child: Row(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.medical_information,
                         color: Colors.white,
                         size: 24,
                       ),
                     ),
-                    SizedBox(width: 12),
-                    Text(
+                    const SizedBox(width: 12),
+                    const Text(
                       "Confirm Patient Details",
                       style: TextStyle(
                         color: Colors.white,
@@ -1658,7 +1658,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
               // Content
               Flexible(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -1675,7 +1675,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                                 BoxShadow(
                                   color: themeColor.withOpacity(0.3),
                                   blurRadius: 10,
-                                  offset: Offset(0, 4),
+                                  offset: const Offset(0, 4),
                                 ),
                               ],
                               image: DecorationImage(
@@ -1685,7 +1685,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                             ),
                           ),
                         ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       _buildConfirmationSectionHeader(
                           "Personal Information", themeColor),
                       _buildConfirmationRow("Full Name", name),
@@ -1694,7 +1694,7 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                       _buildConfirmationRow("Phone", contact),
                       _buildConfirmationRow("Address", address),
                       _buildConfirmationRow("Weight", "$weight kg"),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       _buildConfirmationSectionHeader(
                           "Visit Information", themeColor),
                       _buildConfirmationRow(
@@ -1707,10 +1707,10 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
               ),
               // Enhanced Footer
               Container(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade50,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20),
                   ),
@@ -1722,12 +1722,12 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                       onPressed: () => Navigator.pop(dialogContext),
                       style: TextButton.styleFrom(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Edit",
                         style: TextStyle(
                           color: HospitalTheme.textMedium,
@@ -1735,11 +1735,11 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                         ),
                       ),
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pop(dialogContext);
-                        Future.delayed(Duration(milliseconds: 100), () {
+                        Future.delayed(const Duration(milliseconds: 100), () {
                           _addOPDPatient(context);
                         });
                       },
@@ -1747,13 +1747,13 @@ class _OPDRegistrationScreenState extends State<OPDRegistrationScreen>
                         backgroundColor: themeColor,
                         foregroundColor: Colors.white,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                         elevation: 3,
                       ),
-                      child: Text(
+                      child: const Text(
                         "Confirm & Register",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),

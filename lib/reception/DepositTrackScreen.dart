@@ -223,7 +223,7 @@ class DepositFilters {
 // Providers
 final depositsProvider = FutureProvider<DepositsResponse>((ref) async {
   final response = await http.get(
-    Uri.parse('${KVM_URL}/reception/getAllPatientsDeposits'),
+    Uri.parse('$KVM_URL/reception/getAllPatientsDeposits'),
     headers: {'Content-Type': 'application/json'},
   );
 
@@ -398,14 +398,14 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
   Widget _buildMobileLayout() {
     return Semantics(
       label: 'Mobile view notice',
-      child: Center(
+      child: const Center(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: EdgeInsets.all(24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.tablet_mac, size: 64, color: HospitalTheme.textMedium),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Text(
                 'Please use a tablet or desktop for the full experience',
                 style: TextStyle(
@@ -458,10 +458,10 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
   Widget _buildScrollInstructions() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
+      child: const Row(
         children: [
           Icon(Icons.info_outline, size: 14, color: HospitalTheme.textLight),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
           Text(
             'Tip: Use mouse wheel to scroll vertically, Shift + mouse wheel for horizontal scrolling',
             style: TextStyle(
@@ -542,7 +542,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
               Expanded(
                   child: _buildCompactStatItem(
                 'Avg/Patient',
-                '${summary.averageDepositsPerPatient.toStringAsFixed(1)}',
+                summary.averageDepositsPerPatient.toStringAsFixed(1),
                 Icons.person_pin_outlined,
                 HospitalTheme.warning,
               )),
@@ -567,7 +567,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
               Flexible(
                 child: Text(
                   value,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.textDark,
@@ -580,7 +580,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
           const SizedBox(height: 2),
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 11,
               color: HospitalTheme.textMedium,
             ),
@@ -620,10 +620,10 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.filter_list,
+                      const Icon(Icons.filter_list,
                           size: 16, color: HospitalTheme.textMedium),
                       const SizedBox(width: 8),
-                      Text(
+                      const Text(
                         'Filters',
                         style: TextStyle(
                           fontSize: 14,
@@ -920,9 +920,9 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
       ),
       child: Row(
         children: [
-          Icon(Icons.error_outline, color: HospitalTheme.error, size: 20),
+          const Icon(Icons.error_outline, color: HospitalTheme.error, size: 20),
           const SizedBox(width: 12),
-          Expanded(
+          const Expanded(
             child: Text(
               'Unable to load summary data. Please check your connection and try again.',
               style: TextStyle(
@@ -1008,9 +1008,9 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline, size: 48, color: HospitalTheme.error),
+                const Icon(Icons.error_outline, size: 48, color: HospitalTheme.error),
                 const SizedBox(height: 16),
-                Text(
+                const Text(
                   'Failed to load deposit data',
                   style: TextStyle(
                     fontSize: 18,
@@ -1019,7 +1019,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Text(
+                const Text(
                   'Please check your internet connection and try again.',
                   style: TextStyle(color: HospitalTheme.textMedium),
                   textAlign: TextAlign.center,
@@ -1100,7 +1100,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(
                 'Showing $filteredCount of $totalCount patients',
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.textMedium,
                   fontSize: 14,
                 ),
@@ -1117,7 +1117,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
                       _getSortColumnIndex(ref.watch(sortColumnProvider)),
                   sortAscending: ref.watch(sortAscendingProvider),
                   showCheckboxColumn: false,
-                  headingRowColor: MaterialStateProperty.all(
+                  headingRowColor: WidgetStateProperty.all(
                     HospitalTheme.surfaceLight,
                   ),
                   dataRowMinHeight: 56,
@@ -1199,7 +1199,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
             label: 'Patient ID ${patient.id}',
             child: SelectableText(
               patient.id,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.primary,
               ),
@@ -1273,7 +1273,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
             label: 'Total amount ${patient.formattedTotalAmount}',
             child: Text(
               patient.formattedTotalAmount,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.success,
               ),
@@ -1285,7 +1285,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
             label: 'Last deposit on ${_formatDate(patient.lastDepositDate)}',
             child: Text(
               _formatDate(patient.lastDepositDate),
-              style: TextStyle(color: HospitalTheme.textMedium),
+              style: const TextStyle(color: HospitalTheme.textMedium),
             ),
           ),
         ),
@@ -1354,7 +1354,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
           // Header
           Container(
             padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: HospitalTheme.surfaceLight,
               border: Border(bottom: BorderSide(color: HospitalTheme.border)),
             ),
@@ -1374,7 +1374,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
                       const SizedBox(height: 4),
                       Text(
                         'ID: ${patient.id}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: HospitalTheme.textMedium,
                           fontSize: 16,
                         ),
@@ -1463,7 +1463,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             color: HospitalTheme.textMedium,
             fontSize: 12,
             fontWeight: FontWeight.w500,
@@ -1494,7 +1494,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
               children: [
                 Text(
                   '₹${deposit.amount.toStringAsFixed(2)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.success,
@@ -1510,7 +1510,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
                     ),
                     child: Text(
                       '#${deposit.sequenceNumber}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.primary,
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -1522,7 +1522,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
             const SizedBox(height: 8),
             SelectableText(
               'Receipt ID: ${deposit.receiptId}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontSize: 12,
               ),
@@ -1530,7 +1530,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
             const SizedBox(height: 4),
             Text(
               'Payment: ${deposit.paymentMethod}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontSize: 12,
               ),
@@ -1538,7 +1538,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
             const SizedBox(height: 4),
             Text(
               'Date: ${_formatDateTime(deposit.generatedAt)}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontSize: 12,
               ),
@@ -1601,7 +1601,7 @@ class _PatientDepositsScreenState extends ConsumerState<PatientDepositsScreen> {
           width: 400,
           height: 300,
           child: patient.deposits.isEmpty
-              ? Center(
+              ? const Center(
                   child: Text(
                     'No receipts found',
                     style: TextStyle(color: HospitalTheme.textMedium),

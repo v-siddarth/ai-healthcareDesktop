@@ -3,7 +3,7 @@ import 'package:doctordesktop/Doctor/Animate.dart';
 import 'package:doctordesktop/Doctor/DoctorAdmittedPatientScreen.dart';
 import 'package:doctordesktop/Doctor/DoctorMainScreen.dart';
 import 'package:doctordesktop/Doctor/DoctorPatientDetailScreen.dart';
-import 'package:doctordesktop/StateProvider.dart';
+import 'package:doctordesktop/providers/medical_state_provider.dart';
 import 'package:doctordesktop/authProvider/auth_provider.dart';
 import 'package:doctordesktop/constants/HospitalTheme.dart';
 import 'package:doctordesktop/constants/Methods.dart';
@@ -34,7 +34,7 @@ final assignedPatientsProvider =
 );
 
 class AssignedPatientsScreen extends ConsumerStatefulWidget {
-  const AssignedPatientsScreen({Key? key}) : super(key: key);
+  const AssignedPatientsScreen({super.key});
 
   @override
   _AssignedPatientsScreenState createState() => _AssignedPatientsScreenState();
@@ -134,7 +134,7 @@ class _AssignedPatientsScreenState extends ConsumerState<AssignedPatientsScreen>
                 context,
                 PageRouteBuilder(
                   pageBuilder: (context, animation, secondaryAnimation) =>
-                      DoctorMainScreen(),
+                      const DoctorMainScreen(),
                   transitionsBuilder:
                       (context, animation, secondaryAnimation, child) {
                     return SlideTransition(
@@ -183,7 +183,7 @@ class _AssignedPatientsScreenState extends ConsumerState<AssignedPatientsScreen>
                       ),
                       child: IconButton(
                         icon: isRefreshing
-                            ? SizedBox(
+                            ? const SizedBox(
                                 width: 18,
                                 height: 18,
                                 child: CircularProgressIndicator(
@@ -232,11 +232,11 @@ class _AssignedPatientsScreenState extends ConsumerState<AssignedPatientsScreen>
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
-                      child: Row(
+                      child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.people_outline_rounded, size: 16),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text('Assigned Patients'),
                         ],
                       ),
@@ -246,11 +246,11 @@ class _AssignedPatientsScreenState extends ConsumerState<AssignedPatientsScreen>
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
-                      child: Row(
+                      child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.local_hospital_outlined, size: 16),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text('Admitted Patients'),
                         ],
                       ),
@@ -261,7 +261,7 @@ class _AssignedPatientsScreenState extends ConsumerState<AssignedPatientsScreen>
             ),
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             AssignedPatientsView(),
             AdmittedPatientsScreen(),
@@ -273,7 +273,7 @@ class _AssignedPatientsScreenState extends ConsumerState<AssignedPatientsScreen>
 }
 
 class AssignedPatientsView extends ConsumerStatefulWidget {
-  const AssignedPatientsView({Key? key}) : super(key: key);
+  const AssignedPatientsView({super.key});
 
   @override
   ConsumerState<AssignedPatientsView> createState() =>
@@ -381,20 +381,20 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                       },
                       decoration: InputDecoration(
                         hintText: 'Search patients by name, ID, or gender...',
-                        hintStyle: TextStyle(
-                          color: const Color(0xFF9CA3AF),
+                        hintStyle: const TextStyle(
+                          color: Color(0xFF9CA3AF),
                           fontSize: 14,
                         ),
-                        prefixIcon: Icon(
+                        prefixIcon: const Icon(
                           Icons.search_rounded,
-                          color: const Color(0xFF6B7280),
+                          color: Color(0xFF6B7280),
                           size: 20,
                         ),
                         suffixIcon: _searchQuery.isNotEmpty
                             ? IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.clear_rounded,
-                                  color: const Color(0xFF6B7280),
+                                  color: Color(0xFF6B7280),
                                   size: 18,
                                 ),
                                 onPressed: () {
@@ -430,7 +430,7 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                   child: IconButton(
                     onPressed: isRefreshing ? null : _refreshData,
                     icon: isRefreshing
-                        ? SizedBox(
+                        ? const SizedBox(
                             width: 18,
                             height: 18,
                             child: CircularProgressIndicator(
@@ -492,47 +492,47 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
           // Header
           Container(
             padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF8FAFC),
+            decoration: const BoxDecoration(
+              color: Color(0xFFF8FAFC),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
                 topRight: Radius.circular(16),
               ),
               border: Border(
-                bottom: BorderSide(color: const Color(0xFFE5E7EB), width: 1),
+                bottom: BorderSide(color: Color(0xFFE5E7EB), width: 1),
               ),
             ),
             child: Row(
               children: [
-                Icon(Icons.people_outline_rounded,
-                    color: const Color(0xFF374151), size: 20),
+                const Icon(Icons.people_outline_rounded,
+                    color: Color(0xFF374151), size: 20),
                 const SizedBox(width: 12),
                 Text(
                   'Assigned Patients (${patients.length})',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFF1F2937),
+                    color: Color(0xFF1F2937),
                   ),
                 ),
                 const Spacer(),
                 if (isRefreshing)
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(
                         width: 16,
                         height: 16,
                         child: CircularProgressIndicator(
-                          color: const Color(0xFF3B82F6),
+                          color: Color(0xFF3B82F6),
                           strokeWidth: 2,
                         ),
                       ),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text(
                         'Updating...',
                         style: TextStyle(
                           fontSize: 12,
-                          color: const Color(0xFF6B7280),
+                          color: Color(0xFF6B7280),
                         ),
                       ),
                     ],
@@ -544,13 +544,13 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
           // Table Header
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF9FAFB),
+            decoration: const BoxDecoration(
+              color: Color(0xFFF9FAFB),
               border: Border(
-                bottom: BorderSide(color: const Color(0xFFE5E7EB), width: 1),
+                bottom: BorderSide(color: Color(0xFFE5E7EB), width: 1),
               ),
             ),
-            child: Row(
+            child: const Row(
               children: [
                 Expanded(
                   flex: 3,
@@ -559,7 +559,7 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF6B7280),
+                      color: Color(0xFF6B7280),
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -571,7 +571,7 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF6B7280),
+                      color: Color(0xFF6B7280),
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -583,7 +583,7 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF6B7280),
+                      color: Color(0xFF6B7280),
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -595,7 +595,7 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFF6B7280),
+                      color: Color(0xFF6B7280),
                       letterSpacing: 0.5,
                     ),
                     textAlign: TextAlign.center,
@@ -649,8 +649,8 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
           color: index % 2 == 0 ? Colors.white : const Color(0xFFFAFAFA),
-          border: Border(
-            bottom: BorderSide(color: const Color(0xFFF3F4F6), width: 1),
+          border: const Border(
+            bottom: BorderSide(color: Color(0xFFF3F4F6), width: 1),
           ),
         ),
         child: Row(
@@ -672,10 +672,10 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                         patient.name.isNotEmpty
                             ? patient.name[0].toUpperCase()
                             : '?',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: const Color(0xFF3B82F6),
+                          color: Color(0xFF3B82F6),
                         ),
                       ),
                     ),
@@ -687,18 +687,18 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                       children: [
                         Text(
                           patient.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: const Color(0xFF1F2937),
+                            color: Color(0xFF1F2937),
                           ),
                         ),
                         const SizedBox(height: 2),
                         Text(
                           'ID: ${patient.patientId}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
-                            color: const Color(0xFF6B7280),
+                            color: Color(0xFF6B7280),
                           ),
                         ),
                       ],
@@ -716,14 +716,14 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.cake_outlined,
-                          size: 14, color: const Color(0xFF6B7280)),
+                      const Icon(Icons.cake_outlined,
+                          size: 14, color: Color(0xFF6B7280)),
                       const SizedBox(width: 4),
                       Text(
                         '${patient.age} years',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
-                          color: const Color(0xFF374151),
+                          color: Color(0xFF374151),
                         ),
                       ),
                     ],
@@ -741,9 +741,9 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                       const SizedBox(width: 4),
                       Text(
                         patient.gender,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 13,
-                          color: const Color(0xFF374151),
+                          color: Color(0xFF374151),
                         ),
                       ),
                     ],
@@ -830,12 +830,12 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
     required bool isLoading,
     required VoidCallback? onPressed,
   }) {
-    return Container(
+    return SizedBox(
       height: 32,
       child: ElevatedButton.icon(
         onPressed: onPressed,
         icon: isLoading
-            ? SizedBox(
+            ? const SizedBox(
                 width: 12,
                 height: 12,
                 child: CircularProgressIndicator(
@@ -846,7 +846,7 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
             : Icon(icon, size: 14, color: Colors.white),
         label: Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w600,
             color: Colors.white,
@@ -877,35 +877,35 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                 color: const Color(0xFF3B82F6).withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.people_outline_rounded,
                 size: 48,
-                color: const Color(0xFF3B82F6),
+                color: Color(0xFF3B82F6),
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'No Assigned Patients',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                color: const Color(0xFF1F2937),
+                color: Color(0xFF1F2937),
               ),
             ),
             const SizedBox(height: 8),
-            Text(
+            const Text(
               'There are currently no patients assigned to you.',
               style: TextStyle(
                 fontSize: 14,
-                color: const Color(0xFF6B7280),
+                color: Color(0xFF6B7280),
               ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: _refreshData,
-              icon: Icon(Icons.refresh_rounded, size: 18),
-              label: Text('Refresh'),
+              icon: const Icon(Icons.refresh_rounded, size: 18),
+              label: const Text('Refresh'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF3B82F6),
                 foregroundColor: Colors.white,
@@ -926,29 +926,29 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
     return Center(
       child: Container(
         padding: const EdgeInsets.all(48),
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.search_off_rounded,
               size: 48,
-              color: const Color(0xFF9CA3AF),
+              color: Color(0xFF9CA3AF),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
               'No patients found',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: const Color(0xFF374151),
+                color: Color(0xFF374151),
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               'Try adjusting your search criteria',
               style: TextStyle(
                 fontSize: 14,
-                color: const Color(0xFF6B7280),
+                color: Color(0xFF6B7280),
               ),
             ),
           ],
@@ -958,19 +958,19 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
   }
 
   Widget _buildLoadingState() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircularProgressIndicator(
-            color: const Color(0xFF3B82F6),
+            color: Color(0xFF3B82F6),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'Loading patients...',
             style: TextStyle(
               fontSize: 14,
-              color: const Color(0xFF6B7280),
+              color: Color(0xFF6B7280),
             ),
           ),
         ],
@@ -991,35 +991,35 @@ class _AssignedPatientsViewState extends ConsumerState<AssignedPatientsView>
                 color: const Color(0xFFEF4444).withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.error_outline_rounded,
                 size: 48,
-                color: const Color(0xFFEF4444),
+                color: Color(0xFFEF4444),
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'Something went wrong',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                color: const Color(0xFF1F2937),
+                color: Color(0xFF1F2937),
               ),
             ),
             const SizedBox(height: 8),
             Text(
               error.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
-                color: const Color(0xFF6B7280),
+                color: Color(0xFF6B7280),
               ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: _refreshData,
-              icon: Icon(Icons.refresh_rounded, size: 18),
-              label: Text('Try Again'),
+              icon: const Icon(Icons.refresh_rounded, size: 18),
+              label: const Text('Try Again'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFEF4444),
                 foregroundColor: Colors.white,
@@ -1104,16 +1104,16 @@ Future<void> _showDischargeDialog(
                 color: const Color(0xFFEF4444).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(Icons.logout_rounded,
-                  color: const Color(0xFFEF4444), size: 20),
+              child: const Icon(Icons.logout_rounded,
+                  color: Color(0xFFEF4444), size: 20),
             ),
             const SizedBox(width: 12),
-            Text(
+            const Text(
               'Confirm Discharge',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: const Color(0xFF1F2937),
+                color: Color(0xFF1F2937),
               ),
             ),
           ],
@@ -1132,15 +1132,15 @@ Future<void> _showDischargeDialog(
               ),
               child: Row(
                 children: [
-                  Icon(Icons.warning_amber_rounded,
-                      color: const Color(0xFFF59E0B), size: 20),
+                  const Icon(Icons.warning_amber_rounded,
+                      color: Color(0xFFF59E0B), size: 20),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       'Are you sure you want to discharge ${patient.name}?',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
-                        color: const Color(0xFF92400E),
+                        color: Color(0xFF92400E),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -1151,17 +1151,17 @@ Future<void> _showDischargeDialog(
             const SizedBox(height: 16),
             Text(
               'Condition: $selectedCondition',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
-                color: const Color(0xFF374151),
+                color: Color(0xFF374151),
               ),
             ),
             const SizedBox(height: 8),
             Text(
               'Amount: ₹$amount',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
-                color: const Color(0xFF374151),
+                color: Color(0xFF374151),
               ),
             ),
           ],
@@ -1169,10 +1169,10 @@ Future<void> _showDischargeDialog(
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text(
+            child: const Text(
               'Cancel',
               style: TextStyle(
-                color: const Color(0xFF6B7280),
+                color: Color(0xFF6B7280),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -1186,7 +1186,7 @@ Future<void> _showDischargeDialog(
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: Text('Confirm Discharge'),
+            child: const Text('Confirm Discharge'),
           ),
         ],
       );
@@ -1285,16 +1285,16 @@ Future<void> _showConditionDialog(BuildContext context, String admissionId,
                     color: const Color(0xFF3B82F6).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(Icons.medical_information_rounded,
-                      color: const Color(0xFF3B82F6), size: 20),
+                  child: const Icon(Icons.medical_information_rounded,
+                      color: Color(0xFF3B82F6), size: 20),
                 ),
                 const SizedBox(width: 12),
-                Text(
+                const Text(
                   'Discharge Details',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFF1F2937),
+                    color: Color(0xFF1F2937),
                   ),
                 ),
               ],
@@ -1307,12 +1307,12 @@ Future<void> _showConditionDialog(BuildContext context, String admissionId,
                   _buildModernFormField(
                     child: DropdownButtonFormField<String>(
                       value: selectedCondition,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Condition at Discharge',
                         prefixIcon: Icon(Icons.assignment_turned_in_rounded,
-                            color: const Color(0xFF3B82F6)),
+                            color: Color(0xFF3B82F6)),
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(
+                        contentPadding: EdgeInsets.symmetric(
                             horizontal: 16, vertical: 16),
                       ),
                       items: [
@@ -1342,12 +1342,12 @@ Future<void> _showConditionDialog(BuildContext context, String admissionId,
                       onChanged: (text) {
                         additionalInfo = text;
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Additional Information (Optional)',
                         prefixIcon: Icon(Icons.notes_rounded,
-                            color: const Color(0xFF3B82F6)),
+                            color: Color(0xFF3B82F6)),
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(
+                        contentPadding: EdgeInsets.symmetric(
                             horizontal: 16, vertical: 16),
                       ),
                       maxLines: 3,
@@ -1360,12 +1360,12 @@ Future<void> _showConditionDialog(BuildContext context, String admissionId,
                         amountToBePayed = text;
                       },
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Amount to be Paid',
                         prefixIcon: Icon(Icons.currency_rupee_rounded,
-                            color: const Color(0xFF3B82F6)),
+                            color: Color(0xFF3B82F6)),
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(
+                        contentPadding: EdgeInsets.symmetric(
                             horizontal: 16, vertical: 16),
                       ),
                     ),
@@ -1376,10 +1376,10 @@ Future<void> _showConditionDialog(BuildContext context, String admissionId,
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: Text(
+                child: const Text(
                   'Cancel',
                   style: TextStyle(
-                    color: const Color(0xFF6B7280),
+                    color: Color(0xFF6B7280),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -1433,7 +1433,7 @@ Future<void> _showConditionDialog(BuildContext context, String admissionId,
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: Text('Next'),
+                child: const Text('Next'),
               ),
             ],
           );

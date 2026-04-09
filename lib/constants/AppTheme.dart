@@ -40,7 +40,7 @@ class AppTheme {
 
   static final ButtonStyle outlinedButtonStyle = OutlinedButton.styleFrom(
     foregroundColor: accentColor,
-    side: BorderSide(color: accentColor),
+    side: const BorderSide(color: accentColor),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
   );
 
@@ -49,7 +49,7 @@ class AppTheme {
   );
 
   // Text themes
-  static final TextTheme textTheme = TextTheme(
+  static final TextTheme textTheme = const TextTheme(
     displayLarge:
         TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: textColor),
     titleMedium:
@@ -64,7 +64,7 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: primaryColor,
     primaryColor: primaryColor,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: primaryColor,
       secondary: secondaryColor,
       error: errorColor,
@@ -76,7 +76,7 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(style: elevatedButtonStyle),
     outlinedButtonTheme: OutlinedButtonThemeData(style: outlinedButtonStyle),
     textButtonTheme: TextButtonThemeData(style: textButtonStyle),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: accentColor,
       titleTextStyle:
           TextStyle(fontFamily: 'Poppins', fontSize: 20, color: Colors.white),
@@ -87,11 +87,11 @@ class AppTheme {
       filled: true,
       fillColor: Colors.white,
       border: OutlineInputBorder(
-        borderSide: BorderSide(color: borderColor),
+        borderSide: const BorderSide(color: borderColor),
         borderRadius: BorderRadius.circular(8),
       ),
     ),
     dividerColor: dividerColor,
-    iconTheme: IconThemeData(color: iconColor),
+    iconTheme: const IconThemeData(color: iconColor),
   );
 }

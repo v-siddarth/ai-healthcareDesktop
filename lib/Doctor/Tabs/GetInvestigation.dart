@@ -9,7 +9,7 @@ import 'package:doctordesktop/constants/Methods.dart';
 import 'package:doctordesktop/model/getInvestigationModel.dart';
 
 class InvestigationScreen1 extends StatefulWidget {
-  const InvestigationScreen1({Key? key}) : super(key: key);
+  const InvestigationScreen1({super.key});
 
   @override
   _InvestigationScreenState createState() => _InvestigationScreenState();
@@ -134,7 +134,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
 
     try {
       final response = await http.get(
-        Uri.parse('${KVM_URL}/investigate/getAllInvestigations'),
+        Uri.parse('$KVM_URL/investigate/getAllInvestigations'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -462,7 +462,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
   }
 
   Widget _buildLoadingState() {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -474,7 +474,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
               strokeWidth: 4,
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Text(
             'Loading investigations...',
             style: TextStyle(
@@ -483,7 +483,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(
             'Please wait while we fetch the latest data',
             style: TextStyle(
@@ -510,14 +510,14 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 color: HospitalTheme.error.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.error_outline_rounded,
                 color: HospitalTheme.error,
                 size: 48,
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'Unable to Load Data',
               style: TextStyle(
                 color: HospitalTheme.textDark,
@@ -528,7 +528,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
             const SizedBox(height: 12),
             Text(
               _errorMessage,
-              style: TextStyle(
+              style: const TextStyle(
                 color: HospitalTheme.textMedium,
                 fontSize: 14,
                 height: 1.5,
@@ -576,18 +576,18 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
           children: [
             Container(
               padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: HospitalTheme.surfaceLight,
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.science_outlined,
                 color: HospitalTheme.primary,
                 size: 64,
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'No Investigations Found',
               style: TextStyle(
                 color: HospitalTheme.textDark,
@@ -596,7 +596,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
               ),
             ),
             const SizedBox(height: 12),
-            Text(
+            const Text(
               'There are no valid investigations to display.\nTry adjusting your filters or refresh the data.',
               style: TextStyle(
                 color: HospitalTheme.textMedium,
@@ -634,7 +634,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Investigations Overview',
                       style: TextStyle(
                         fontSize: 18,
@@ -645,7 +645,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                     const SizedBox(height: 4),
                     Text(
                       'Showing ${_filteredInvestigations.length} of ${_investigations.length} investigations',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: HospitalTheme.textMedium,
                         fontSize: 14,
                       ),
@@ -782,21 +782,21 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
     return TextField(
       decoration: InputDecoration(
         hintText: 'Search patients, tests, doctors, or ID numbers...',
-        prefixIcon: Icon(Icons.search_rounded, color: HospitalTheme.primary),
+        prefixIcon: const Icon(Icons.search_rounded, color: HospitalTheme.primary),
         suffixIcon: _searchQuery.isNotEmpty
             ? IconButton(
                 icon:
-                    Icon(Icons.clear_rounded, color: HospitalTheme.textMedium),
+                    const Icon(Icons.clear_rounded, color: HospitalTheme.textMedium),
                 onPressed: () => setState(() => _searchQuery = ''),
               )
             : null,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: HospitalTheme.border),
+          borderSide: const BorderSide(color: HospitalTheme.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+          borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
         ),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
@@ -812,7 +812,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
       decoration: InputDecoration(
         labelText: 'Status',
         prefixIcon:
-            Icon(Icons.assignment_outlined, color: HospitalTheme.primary),
+            const Icon(Icons.assignment_outlined, color: HospitalTheme.primary),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -834,7 +834,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
       decoration: InputDecoration(
         labelText: 'Priority',
         prefixIcon:
-            Icon(Icons.priority_high_rounded, color: HospitalTheme.primary),
+            const Icon(Icons.priority_high_rounded, color: HospitalTheme.primary),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -855,7 +855,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
       isExpanded: true,
       decoration: InputDecoration(
         labelText: 'Sort By',
-        prefixIcon: Icon(Icons.sort_rounded, color: HospitalTheme.primary),
+        prefixIcon: const Icon(Icons.sort_rounded, color: HospitalTheme.primary),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -943,11 +943,11 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
 
   Widget _buildAdvancedFilterDialog() {
     return AlertDialog(
-      title: Row(
+      title: const Row(
         children: [
           Icon(Icons.tune_rounded, color: HospitalTheme.primary),
-          const SizedBox(width: 8),
-          const Text('Advanced Filters'),
+          SizedBox(width: 8),
+          Text('Advanced Filters'),
         ],
       ),
       content: SizedBox(
@@ -1007,12 +1007,12 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
             ),
             child: Row(
               children: [
-                Icon(Icons.science_rounded,
+                const Icon(Icons.science_rounded,
                     color: HospitalTheme.primary, size: 20),
                 const SizedBox(width: 8),
                 Text(
                   'Investigation Results (${_filteredInvestigations.length})',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.primary,
@@ -1027,7 +1027,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                       color: HospitalTheme.info.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Filtered',
                       style: TextStyle(
                         fontSize: 12,
@@ -1061,14 +1061,14 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
 
   Widget _buildDataTable() {
     return DataTable(
-      headingRowColor: MaterialStateProperty.all(
+      headingRowColor: WidgetStateProperty.all(
         HospitalTheme.primaryLight.withOpacity(0.08),
       ),
       dataRowMinHeight: 72,
       dataRowMaxHeight: 72,
       columnSpacing: 20,
       showCheckboxColumn: false,
-      headingTextStyle: TextStyle(
+      headingTextStyle: const TextStyle(
         fontWeight: FontWeight.bold,
         color: HospitalTheme.primary,
         fontSize: 14,
@@ -1102,7 +1102,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
   }
 
   Widget _buildPatientInfo(Investigation investigation) {
-    return Container(
+    return SizedBox(
       width: 200,
       child: Row(
         children: [
@@ -1118,7 +1118,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 investigation.patient.name.isNotEmpty
                     ? investigation.patient.name[0].toUpperCase()
                     : '?',
-                style: TextStyle(
+                style: const TextStyle(
                   color: HospitalTheme.medical,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -1143,7 +1143,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 const SizedBox(height: 2),
                 Text(
                   'ID: ${investigation.patientIdNumber}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.textMedium,
                   ),
@@ -1158,7 +1158,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
   }
 
   Widget _buildInvestigationInfo(Investigation investigation) {
-    return Container(
+    return SizedBox(
       width: 160,
       child: Row(
         children: [
@@ -1191,7 +1191,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 const SizedBox(height: 2),
                 Text(
                   'Dr. ${investigation.doctorName}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
                     color: HospitalTheme.textMedium,
                   ),
@@ -1206,13 +1206,13 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
   }
 
   Widget _buildReasonInfo(Investigation investigation) {
-    return Container(
+    return SizedBox(
       width: 180,
       child: Tooltip(
         message: investigation.reasonForInvestigation,
         child: Text(
           investigation.reasonForInvestigation,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 13,
             color: HospitalTheme.textDark,
           ),
@@ -1282,7 +1282,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
   }
 
   Widget _buildDateInfo(DateTime date) {
-    return Container(
+    return SizedBox(
       width: 110,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1298,7 +1298,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
           const SizedBox(height: 2),
           Text(
             _formatTimeShort(date),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 11,
               color: HospitalTheme.textMedium,
             ),
@@ -1309,7 +1309,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
   }
 
   Widget _buildActionButtons(Investigation investigation) {
-    return Container(
+    return SizedBox(
       width: 160,
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -1318,7 +1318,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
             message: 'View Details',
             child: IconButton(
               icon:
-                  Icon(Icons.visibility_outlined, color: HospitalTheme.primary),
+                  const Icon(Icons.visibility_outlined, color: HospitalTheme.primary),
               onPressed: () => _viewInvestigationDetails(investigation),
               visualDensity: VisualDensity.compact,
             ),
@@ -1328,7 +1328,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
               message: 'View Report',
               child: IconButton(
                 icon:
-                    Icon(Icons.description_outlined, color: HospitalTheme.info),
+                    const Icon(Icons.description_outlined, color: HospitalTheme.info),
                 onPressed: () =>
                     _openAttachment(investigation.attachments.first.fileUrl),
                 visualDensity: VisualDensity.compact,
@@ -1337,7 +1337,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
           Tooltip(
             message: 'Upload Report',
             child: IconButton(
-              icon: Icon(Icons.upload_file_outlined,
+              icon: const Icon(Icons.upload_file_outlined,
                   color: HospitalTheme.success),
               onPressed: () => _navigateToUploadReport(investigation.id),
               visualDensity: VisualDensity.compact,
@@ -1354,7 +1354,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
         // Enhanced header
         Container(
           padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [HospitalTheme.primary, HospitalTheme.primaryLight],
               begin: Alignment.topLeft,
@@ -1609,7 +1609,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
           const SizedBox(height: 4),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: HospitalTheme.textMedium,
             ),
@@ -1655,7 +1655,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 const SizedBox(width: 8),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.primary,
@@ -1697,7 +1697,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
               children: [
                 Text(
                   label,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 13,
                     color: HospitalTheme.textMedium,
                     fontWeight: FontWeight.w500,
@@ -1706,7 +1706,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 const SizedBox(height: 4),
                 Text(
                   value,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textDark,
                     fontWeight: FontWeight.w500,
@@ -1737,10 +1737,10 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
               Icon(Icons.label_rounded, color: HospitalTheme.primary, size: 20),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 'Tags',
                 style: TextStyle(
@@ -1767,7 +1767,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 ),
                 child: Text(
                   tag,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.primary,
                     fontWeight: FontWeight.w600,
@@ -1978,7 +1978,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
               children: [
                 Text(
                   attachment.fileName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: HospitalTheme.primary,
                     fontSize: 14,
@@ -1987,7 +1987,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 const SizedBox(height: 4),
                 Text(
                   'Uploaded: ${_formatDateShort(attachment.uploadDate)}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: HospitalTheme.textMedium,
                   ),
@@ -1996,7 +1996,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                   const SizedBox(height: 4),
                   Text(
                     attachment.description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: HospitalTheme.textMedium,
                     ),
@@ -2010,13 +2010,13 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                icon: Icon(Icons.visibility_rounded, color: HospitalTheme.info),
+                icon: const Icon(Icons.visibility_rounded, color: HospitalTheme.info),
                 onPressed: () => _openAttachment(attachment.fileUrl),
                 tooltip: 'View',
               ),
               IconButton(
                 icon:
-                    Icon(Icons.download_rounded, color: HospitalTheme.success),
+                    const Icon(Icons.download_rounded, color: HospitalTheme.success),
                 onPressed: () => _openAttachment(attachment.fileUrl),
                 tooltip: 'Download',
               ),
@@ -2098,7 +2098,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                     note.addedBy.name.isNotEmpty
                         ? note.addedBy.name[0].toUpperCase()
                         : '?',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: HospitalTheme.primary,
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
@@ -2113,7 +2113,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                   children: [
                     Text(
                       '${note.addedBy.name} (${note.addedBy.userType})',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
                         color: HospitalTheme.primary,
@@ -2121,7 +2121,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                     ),
                     Text(
                       _formatDate(note.dateAdded),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: HospitalTheme.textMedium,
                       ),
@@ -2140,7 +2140,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
             ),
             child: Text(
               note.text,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: HospitalTheme.textDark,
                 height: 1.4,
@@ -2223,11 +2223,11 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
 
         // Numerical Results
         if (results.numericalResults.isNotEmpty) ...[
-          Row(
+          const Row(
             children: [
               Icon(Icons.analytics_rounded,
                   color: HospitalTheme.primary, size: 20),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 'Test Parameters',
                 style: TextStyle(
@@ -2255,7 +2255,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
             const SizedBox(width: 8),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: HospitalTheme.primary,
@@ -2274,7 +2274,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
           ),
           child: Text(
             content,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               color: HospitalTheme.textDark,
               height: 1.5,
@@ -2305,7 +2305,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 topRight: Radius.circular(12),
               ),
             ),
-            child: Row(
+            child: const Row(
               children: [
                 Expanded(
                   flex: 2,
@@ -2415,7 +2415,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                   Expanded(
                     child: Text(
                       range.toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 13,
                         color: HospitalTheme.textMedium,
                       ),
@@ -2449,7 +2449,7 @@ class _InvestigationScreenState extends State<InvestigationScreen1>
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );

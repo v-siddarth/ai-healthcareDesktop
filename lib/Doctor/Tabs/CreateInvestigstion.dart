@@ -12,10 +12,10 @@ class CreateInvestigationScreen extends StatefulWidget {
   final String? admissionId; // Optional - if coming from admission screen
 
   const CreateInvestigationScreen({
-    Key? key,
+    super.key,
     this.patientId,
     this.admissionId,
-  }) : super(key: key);
+  });
 
   @override
   _CreateInvestigationScreenState createState() =>
@@ -40,7 +40,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
   // Form values
   String _selectedInvestigationType = 'CT Scan';
   String _selectedPriority = 'Routine';
-  DateTime _scheduledDateTime = DateTime.now().add(Duration(days: 1));
+  DateTime _scheduledDateTime = DateTime.now().add(const Duration(days: 1));
   List<String> _tags = [];
 
   // State variables
@@ -138,7 +138,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
 
       // Show success message and close screen
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Investigation created successfully'),
           backgroundColor: HospitalTheme.success,
         ),
@@ -177,15 +177,15 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(24),
+              padding: const EdgeInsets.all(24),
               child: Center(
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 800),
+                  constraints: const BoxConstraints(maxWidth: 800),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Title and description
-                      Text(
+                      const Text(
                         'New Investigation Request',
                         style: TextStyle(
                           fontSize: 24,
@@ -193,15 +193,15 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                           color: HospitalTheme.primary,
                         ),
                       ),
-                      SizedBox(height: 8),
-                      Text(
+                      const SizedBox(height: 8),
+                      const Text(
                         'Fill in the details below to create a new investigation request',
                         style: TextStyle(
                           color: HospitalTheme.textMedium,
                           fontSize: 16,
                         ),
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
 
                       // Patient and Admission IDs
                       Row(
@@ -221,7 +221,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                               },
                             ),
                           ),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           Expanded(
                             child: _buildTextField(
                               controller: _admissionIdController,
@@ -238,7 +238,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
                       // Investigation Type and Priority
                       Row(
@@ -260,7 +260,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                               prefixIcon: Icons.science,
                             ),
                           ),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           Expanded(
                             child: _buildDropdown(
                               label: 'Priority',
@@ -276,7 +276,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
                       // Other investigation type field (conditional)
                       if (_isOtherType) ...[
@@ -293,7 +293,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                       ],
 
                       // Scheduled Date and Time
@@ -306,7 +306,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                           });
                         },
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
                       // Reason for Investigation
                       _buildTextField(
@@ -322,7 +322,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
                       // Clinical History
                       _buildTextField(
@@ -338,7 +338,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
                       // Investigation Details
                       _buildTextField(
@@ -354,7 +354,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
 
                       // Tags
                       _buildTextField(
@@ -364,7 +364,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                         prefixIcon: Icons.tag,
                         onChanged: _updateTags,
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
 
                       // Tags preview
                       if (_tags.isNotEmpty) ...[
@@ -373,7 +373,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                           runSpacing: 8,
                           children: _tags.map((tag) {
                             return Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
                                 color: HospitalTheme.surfaceLight,
@@ -382,7 +382,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                               ),
                               child: Text(
                                 tag,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   color: HospitalTheme.primary,
                                 ),
@@ -390,13 +390,13 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                             );
                           }).toList(),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                       ],
 
                       // Error message (if any)
                       if (_errorMessage != null) ...[
                         Container(
-                          padding: EdgeInsets.all(16),
+                          padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
                             color: HospitalTheme.error.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(8),
@@ -405,19 +405,19 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                           ),
                           child: Row(
                             children: [
-                              Icon(Icons.error_outline,
+                              const Icon(Icons.error_outline,
                                   color: HospitalTheme.error),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
                                   _errorMessage!,
-                                  style: TextStyle(color: HospitalTheme.error),
+                                  style: const TextStyle(color: HospitalTheme.error),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        SizedBox(height: 24),
+                        const SizedBox(height: 24),
                       ],
 
                       // Submit and Cancel buttons
@@ -429,22 +429,22 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                                 ? null
                                 : () => Navigator.pop(context),
                             style: OutlinedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 24, vertical: 16),
-                              side: BorderSide(color: HospitalTheme.primary),
+                              side: const BorderSide(color: HospitalTheme.primary),
                             ),
-                            child: Text('Cancel'),
+                            child: const Text('Cancel'),
                           ),
-                          SizedBox(width: 24),
+                          const SizedBox(width: 24),
                           ElevatedButton(
                             onPressed: _isSubmitting ? null : _submitForm,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: HospitalTheme.primary,
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 24, vertical: 16),
                             ),
                             child: _isSubmitting
-                                ? Row(
+                                ? const Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       SizedBox(
@@ -461,11 +461,11 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                                       Text('Creating...'),
                                     ],
                                   )
-                                : Text('Create Investigation'),
+                                : const Text('Create Investigation'),
                           ),
                         ],
                       ),
-                      SizedBox(height: 32),
+                      const SizedBox(height: 32),
                     ],
                   ),
                 ),
@@ -491,12 +491,12 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         TextFormField(
           controller: controller,
           decoration: InputDecoration(
@@ -504,15 +504,15 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
             prefixIcon: Icon(prefixIcon, color: HospitalTheme.primary),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: HospitalTheme.border),
+              borderSide: const BorderSide(color: HospitalTheme.border),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: HospitalTheme.primary, width: 2),
+              borderSide: const BorderSide(color: HospitalTheme.primary, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: HospitalTheme.error),
+              borderSide: const BorderSide(color: HospitalTheme.error),
             ),
             filled: true,
             fillColor: Colors.white,
@@ -537,12 +537,12 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -551,15 +551,15 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
           ),
           child: Row(
             children: [
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Icon(prefixIcon, color: HospitalTheme.primary),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Expanded(
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     value: value,
                     isExpanded: true,
-                    icon: Icon(Icons.arrow_drop_down,
+                    icon: const Icon(Icons.arrow_drop_down,
                         color: HospitalTheme.primary),
                     items: items.map((String item) {
                       return DropdownMenuItem<String>(
@@ -588,12 +588,12 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: HospitalTheme.textDark,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         GestureDetector(
           onTap: () async {
             // Show date picker
@@ -601,11 +601,11 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
               context: context,
               initialDate: value,
               firstDate: DateTime.now(),
-              lastDate: DateTime.now().add(Duration(days: 365)),
+              lastDate: DateTime.now().add(const Duration(days: 365)),
               builder: (context, child) {
                 return Theme(
                   data: Theme.of(context).copyWith(
-                    colorScheme: ColorScheme.light(
+                    colorScheme: const ColorScheme.light(
                       primary: HospitalTheme.primary,
                       onPrimary: HospitalTheme.textOnPrimary,
                       onSurface: HospitalTheme.textDark,
@@ -624,7 +624,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
                 builder: (context, child) {
                   return Theme(
                     data: Theme.of(context).copyWith(
-                      colorScheme: ColorScheme.light(
+                      colorScheme: const ColorScheme.light(
                         primary: HospitalTheme.primary,
                         onPrimary: HospitalTheme.textOnPrimary,
                         onSurface: HospitalTheme.textDark,
@@ -650,7 +650,7 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
             }
           },
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: HospitalTheme.border),
@@ -658,17 +658,17 @@ class _CreateInvestigationScreenState extends State<CreateInvestigationScreen> {
             ),
             child: Row(
               children: [
-                Icon(Icons.calendar_today, color: HospitalTheme.primary),
-                SizedBox(width: 12),
+                const Icon(Icons.calendar_today, color: HospitalTheme.primary),
+                const SizedBox(width: 12),
                 Text(
                   DateFormat('MMM dd, yyyy - hh:mm a').format(value),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: HospitalTheme.textDark,
                   ),
                 ),
-                Spacer(),
-                Icon(Icons.arrow_drop_down, color: HospitalTheme.primary),
+                const Spacer(),
+                const Icon(Icons.arrow_drop_down, color: HospitalTheme.primary),
               ],
             ),
           ),

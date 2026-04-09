@@ -1,5 +1,5 @@
 // auth_splash_screen.dart
-import 'package:doctordesktop/Check.dart';
+import 'package:doctordesktop/app/home_page.dart';
 import 'package:doctordesktop/Doctor/DoctorMainScreen.dart';
 import 'package:doctordesktop/authProvider/auth_provider.dart';
 import 'package:doctordesktop/constants/Assets.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthSplashScreen extends ConsumerStatefulWidget {
-  const AuthSplashScreen({Key? key}) : super(key: key);
+  const AuthSplashScreen({super.key});
 
   @override
   ConsumerState<AuthSplashScreen> createState() => _AuthSplashScreenState();
@@ -43,7 +43,7 @@ class _AuthSplashScreenState extends ConsumerState<AuthSplashScreen> {
     if (token != null && (userType == 'doctor' || userType == 'external')) {
       // User is already logged in as a doctor, navigate directly to doctor screen
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => DoctorMainScreen()),
+        MaterialPageRoute(builder: (context) => const DoctorMainScreen()),
       );
     } else {
       // Navigate to home page where user can choose which module to access
@@ -70,7 +70,7 @@ class _AuthSplashScreenState extends ConsumerState<AuthSplashScreen> {
                 return Transform.scale(
                   scale: value,
                   child: Image.asset(
-                    '${AppImages.logo}',
+                    AppImages.logo,
                     width: 180,
                     height: 180,
                   ),

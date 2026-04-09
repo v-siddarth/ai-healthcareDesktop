@@ -210,7 +210,7 @@ class PatientListNotifier
     try {
       state = const AsyncValue.loading();
 
-      final uri = Uri.parse('${KVM_URL}/doctors/getPatientsList')
+      final uri = Uri.parse('$KVM_URL/doctors/getPatientsList')
           .replace(queryParameters: {
         if (search.isNotEmpty) 'search': search,
         'filterType': filterType,
@@ -338,7 +338,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
     final selectedPatient = ref.watch(selectedPatientProvider);
 
     // Force master-detail for debugging (remove this line once working)
-    final isMasterDetail = true; // Change this back to: availableWidth > 1000
+    const isMasterDetail = true; // Change this back to: availableWidth > 1000
 
     print(
         'Screen width: ${screenSize.width}, Available width: $availableWidth, Master-detail: $isMasterDetail');
@@ -791,7 +791,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.error_outline,
                   size: 64,
                   color: HospitalTheme.error,
@@ -853,7 +853,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
               constraints.maxWidth - 48; // Account for padding
 
           return SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               width: availableWidth,
               child: DataTable(
                 columnSpacing: 16,
@@ -966,7 +966,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
       onSelectChanged: (_) => _selectPatient(patient),
       cells: [
         DataCell(
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Row(
               children: [
@@ -977,7 +977,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
                       ? NetworkImage(patient.imageUrl!)
                       : null,
                   child: patient.imageUrl == null
-                      ? Icon(Icons.person,
+                      ? const Icon(Icons.person,
                           color: HospitalTheme.primary, size: 18)
                       : null,
                 ),
@@ -998,7 +998,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
                       const SizedBox(height: 2),
                       Text(
                         'ID: ${patient.patientId}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: HospitalTheme.textMedium,
                         ),
@@ -1007,7 +1007,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
                       const SizedBox(height: 2),
                       Text(
                         '${patient.age}/${patient.gender} • ${patient.contact}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 11,
                           color: HospitalTheme.textMedium,
                         ),
@@ -1074,7 +1074,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
                     ? NetworkImage(patient.imageUrl!)
                     : null,
                 child: patient.imageUrl == null
-                    ? Icon(Icons.person, color: HospitalTheme.primary, size: 18)
+                    ? const Icon(Icons.person, color: HospitalTheme.primary, size: 18)
                     : null,
               ),
               const SizedBox(width: 12),
@@ -1091,7 +1091,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
                     const SizedBox(height: 2),
                     Text(
                       'ID: ${patient.patientId} • ${patient.age}/${patient.gender}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: HospitalTheme.textMedium,
                       ),
@@ -1151,7 +1151,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
                     ? NetworkImage(patient.imageUrl!)
                     : null,
                 child: patient.imageUrl == null
-                    ? Icon(Icons.person, color: HospitalTheme.primary)
+                    ? const Icon(Icons.person, color: HospitalTheme.primary)
                     : null,
               ),
               const SizedBox(width: 12),
@@ -1168,7 +1168,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
                     if (patient.lastDischargeDoctor != null)
                       Text(
                         'Dr. ${patient.lastDischargeDoctor!.name}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: HospitalTheme.textMedium,
                         ),
@@ -1227,7 +1227,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.people_outline,
             size: 64,
             color: HospitalTheme.textLight,
@@ -1264,7 +1264,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
   Widget _buildPagination(PaginationData pagination) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(top: BorderSide(color: HospitalTheme.border)),
       ),
       child: Row(
@@ -1272,7 +1272,7 @@ class _PatientListScreen1State extends ConsumerState<PatientListScreen1> {
         children: [
           Text(
             'Showing ${pagination.skip + 1}-${(pagination.skip + pagination.limit).clamp(0, pagination.totalCount)} of ${pagination.totalCount}',
-            style: TextStyle(color: HospitalTheme.textMedium),
+            style: const TextStyle(color: HospitalTheme.textMedium),
           ),
           Row(
             children: [
@@ -1350,7 +1350,7 @@ class _EmptyDetailPane extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.person_search,
               size: 64,
               color: HospitalTheme.textLight,
@@ -1391,7 +1391,7 @@ class _PatientDetailPane extends StatelessWidget {
           // Header with close button
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               border: Border(
                 bottom: BorderSide(color: HospitalTheme.border),
@@ -1457,7 +1457,7 @@ class _PatientDetailPane extends StatelessWidget {
                 ? NetworkImage(patient.imageUrl!)
                 : null,
             child: patient.imageUrl == null
-                ? Icon(Icons.person, size: 42, color: HospitalTheme.primary)
+                ? const Icon(Icons.person, size: 42, color: HospitalTheme.primary)
                 : null,
           ),
           const SizedBox(width: 16),
@@ -1475,7 +1475,7 @@ class _PatientDetailPane extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   'ID: ${patient.patientId}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: HospitalTheme.textMedium,
                   ),
@@ -1581,7 +1581,7 @@ class _PatientDetailPane extends StatelessWidget {
             width: 100,
             child: Text(
               '$label:',
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 color: HospitalTheme.textMedium,
                 fontSize: 13,
